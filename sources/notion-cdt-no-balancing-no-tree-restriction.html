@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Meeting Notes &amp; Collaborative Discussions – Criticality of DeMorgan Formulae</title>
+<title>Notion: CDT No balancing No tree restriction – Criticality of DeMorgan Formulae</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -310,7 +310,7 @@ window.Quarto = {
 <span class="menu-text">Working Manuscript</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../meetings/index.html" aria-current="page"> 
+    <a class="nav-link" href="../meetings/index.html"> 
 <span class="menu-text">Meeting Notes</span></a>
   </li>  
 </ul>
@@ -330,15 +330,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#meeting-with-ph-september-27-2026" id="toc-meeting-with-ph-september-27-2026" class="nav-link active" data-scroll-target="#meeting-with-ph-september-27-2026"><span class="header-section-number">1</span> 1. Meeting with PH (September 27, 2026)</a>
-  <ul class="collapse">
-  <li><a href="#agenda-key-points" id="toc-agenda-key-points" class="nav-link" data-scroll-target="#agenda-key-points"><span class="header-section-number">1.1</span> Agenda &amp; Key Points:</a></li>
-  </ul></li>
-  <li><a href="#criticality-meeting-july-28" id="toc-criticality-meeting-july-28" class="nav-link" data-scroll-target="#criticality-meeting-july-28"><span class="header-section-number">2</span> 2. Criticality Meeting (July 28)</a>
-  <ul class="collapse">
-  <li><a href="#key-takeaway-subformula-simplification-vs.-cdt-depth" id="toc-key-takeaway-subformula-simplification-vs.-cdt-depth" class="nav-link" data-scroll-target="#key-takeaway-subformula-simplification-vs.-cdt-depth"><span class="header-section-number">2.1</span> Key Takeaway: Subformula Simplification vs.&nbsp;CDT Depth</a></li>
-  </ul></li>
-  <li><a href="#discussion-on-random-projections-shrinkage" id="toc-discussion-on-random-projections-shrinkage" class="nav-link" data-scroll-target="#discussion-on-random-projections-shrinkage"><span class="header-section-number">3</span> 3. Discussion on Random Projections &amp; Shrinkage</a></li>
+  <li><a href="#cdt-no-balancing-no-tree-restriction" id="toc-cdt-no-balancing-no-tree-restriction" class="nav-link active" data-scroll-target="#cdt-no-balancing-no-tree-restriction"><span class="header-section-number">1</span> CDT No balancing No tree restriction</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/tulasimohan/criticality-demorgan-notes/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -348,8 +340,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Meeting Notes &amp; Collaborative Discussions</h1>
-<p class="subtitle lead">Chronology of discussions, insights, and action items</p>
+<h1 class="title">Notion: CDT No balancing No tree restriction</h1>
+<p class="subtitle lead">Raw source mirrored from Notion workspace</p>
 </div>
 
 
@@ -366,47 +358,37 @@ window.Quarto = {
 </header>
 
 
-<section id="meeting-with-ph-september-27-2026" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="meeting-with-ph-september-27-2026"><span class="header-section-number">1</span> 1. Meeting with PH (September 27, 2026)</h2>
-<p><strong>Context</strong>: Latest review session on status of DeMorgan Criticality proof approaches.</p>
-<section id="agenda-key-points" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="agenda-key-points"><span class="header-section-number">1.1</span> Agenda &amp; Key Points:</h3>
-<ol type="1">
-<li><strong>Compilation of Approaches</strong>: Unifying fragmented notes across Overleaf, Notion, and Obsidian into a single accessible reference.</li>
-<li><strong>Current Status of Non-Inductive Proof</strong>:
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Original Source</strong>: Notion workspace (<code>tulasi.notion.site</code>)<br>
+<strong>File</strong>: <code>CDT No balancing No tree restriction.md</code></p>
+</div>
+</div>
+</div>
+<section id="cdt-no-balancing-no-tree-restriction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> CDT No balancing No tree restriction</h1>
+<p>Let <span class="math inline">\(F = F_1 \vee F_2\)</span> be a DeMorgan Formula, <span class="math inline">\(\rho\)</span> be a random restriction.</p>
+<p>Canonical decision tree constructor</p>
+<p>If <span class="math inline">\(F|_\rho \equiv constant\)</span> :</p>
+<p>Otherwise:</p>
+<p>Returns the next variable to query. Recursively finds the left most child which is not set to a constant by <span class="math inline">\(\rho\)</span>.</p>
+<p>If <span class="math inline">\(F\)</span> is a leaf node:</p>
+<p>Otherwise:</p>
+<p>returns a node with that constant</p>
+<p>returns then node <span class="math inline">\(F\)</span>.</p>
 <ul>
-<li>Leaf-branching tree decomposition remains the most promising path forward.</li>
-<li>Need to rigorously resolve the sum over topologies <span class="math inline">\(\sum_{T} \sqrt{\Pr[\mathcal{A}(T,b)]}\)</span>.</li>
-</ul></li>
-<li><strong>Action Items</strong>:
-<ul>
-<li>Establish live web documentation accessible by collaborators.</li>
-<li>Tag all prior failed attempts with clear explanations of their failure modes (e.g., Jaikumar’s counterexample, conditioning dependence).</li>
-</ul></li>
-</ol>
-<hr>
-</section>
-</section>
-<section id="criticality-meeting-july-28" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="criticality-meeting-july-28"><span class="header-section-number">2</span> 2. Criticality Meeting (July 28)</h2>
-<p><strong>Source</strong>: Obsidian (<code>July 28 Criticality Meeting.md</code>).</p>
-<section id="key-takeaway-subformula-simplification-vs.-cdt-depth" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="key-takeaway-subformula-simplification-vs.-cdt-depth"><span class="header-section-number">2.1</span> Key Takeaway: Subformula Simplification vs.&nbsp;CDT Depth</h3>
-<ul>
-<li>A subformula simplifying to a single literal and its CDT having depth 1 are <strong>not the same thing</strong>.</li>
-<li>Consider: <span class="math display">\[F = (x_1 \vee x_2) \wedge (x_3 \vee x_4)\]</span> If <span class="math inline">\(x_2 = 0\)</span>, the subformula <span class="math inline">\(F_1 = (x_1 \vee x_2)\)</span> becomes <span class="math inline">\(x_1\)</span>. Its CDT has depth 1. But for the full formula <span class="math inline">\(F\)</span>, evaluating <span class="math inline">\(x_1\)</span> does not terminate evaluation if <span class="math inline">\(x_1 = 1\)</span>; it forces exploration into <span class="math inline">\(F_2\)</span>.</li>
-<li><strong>Impact</strong>: Any inductive hypothesis that assumes depth scales additively with subformula depth must account for the gate connective and whether the subformula’s value determines the parent gate.</li>
+<li><p>Let <span class="math inline">\(x = Survivor(F, \rho)\)</span></p></li>
+<li><p>Creates <span class="math inline">\(T_1= CDT(F_1,\rho \cdot \langle x \to 0\rangle)\)</span> and <span class="math inline">\(T_2 = CDT(F,\rho \cdot \langle x \to 1\rangle)\)</span></p></li>
+<li><p>returns a tree with the root labelled by <span class="math inline">\(x\)</span> and has children <span class="math inline">\(T_1, T_2\)</span>.</p></li>
 </ul>
-<hr>
-</section>
-</section>
-<section id="discussion-on-random-projections-shrinkage" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="discussion-on-random-projections-shrinkage"><span class="header-section-number">3</span> 3. Discussion on Random Projections &amp; Shrinkage</h2>
-<p><strong>Source</strong>: Obsidian (<code>Shrinkage under random projections.md</code>).</p>
-<ul>
-<li><strong>Håstad [1998]</strong>: Established <span class="math inline">\(O(p^2)\)</span> shrinkage under random restrictions for DeMorgan formulae, proving an <span class="math inline">\(\tilde{\Omega}(n^3)\)</span> formula size lower bound for Andreev’s function.</li>
-<li><strong>Connection to Criticality</strong>: Proving <span class="math inline">\(\Gamma(F) = O(p\sqrt{L})\)</span> would give tight average sensitivity bounds, improving Fourier concentration and learning algorithms for DeMorgan formulae.</li>
-</ul>
+<p>If <span class="math inline">\(F_1|_\rho \not\equiv 0:\)</span></p>
+<p>else if <span class="math inline">\(F_1|_\rho \equiv 0\)</span>:</p>
+<p>return <span class="math inline">\(Survivor(F_1,\rho)\)</span></p>
+<p>returns <span class="math inline">\(Survivor(F_2,\rho)\)</span></p>
 
 
 </section>

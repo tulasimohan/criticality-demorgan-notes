@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Meeting Notes &amp; Collaborative Discussions – Criticality of DeMorgan Formulae</title>
+<title>Obsidian: Criticality proof – Criticality of DeMorgan Formulae</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -310,7 +310,7 @@ window.Quarto = {
 <span class="menu-text">Working Manuscript</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../meetings/index.html" aria-current="page"> 
+    <a class="nav-link" href="../meetings/index.html"> 
 <span class="menu-text">Meeting Notes</span></a>
   </li>  
 </ul>
@@ -330,15 +330,13 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#meeting-with-ph-september-27-2026" id="toc-meeting-with-ph-september-27-2026" class="nav-link active" data-scroll-target="#meeting-with-ph-september-27-2026"><span class="header-section-number">1</span> 1. Meeting with PH (September 27, 2026)</a>
+  <li><a href="#proof-sketch" id="toc-proof-sketch" class="nav-link active" data-scroll-target="#proof-sketch"><span class="header-section-number">1</span> Proof Sketch</a></li>
+  <li><a href="#proof-and-modifications-from-last-time" id="toc-proof-and-modifications-from-last-time" class="nav-link" data-scroll-target="#proof-and-modifications-from-last-time"><span class="header-section-number">2</span> Proof and modifications from last time</a>
   <ul class="collapse">
-  <li><a href="#agenda-key-points" id="toc-agenda-key-points" class="nav-link" data-scroll-target="#agenda-key-points"><span class="header-section-number">1.1</span> Agenda &amp; Key Points:</a></li>
+  <li><a href="#lemma-banyan-decomposition" id="toc-lemma-banyan-decomposition" class="nav-link" data-scroll-target="#lemma-banyan-decomposition"><span class="header-section-number">2.1</span> Lemma: Banyan Decomposition</a></li>
+  <li><a href="#mathcala_frhobarx-mathcalt-b_mathbft" id="toc-mathcala_frhobarx-mathcalt-b_mathbft" class="nav-link" data-scroll-target="#mathcala_frhobarx-mathcalt-b_mathbft"><span class="header-section-number">2.2</span> <strong><span class="math inline">\(\mathcal{A}_F(\rho,\bar{x}, \mathcal{T}, b_\mathbf{T})\)</span>:</strong></a></li>
+  <li><a href="#mathcalb_frhobarx-mathcalt-b_mathbft" id="toc-mathcalb_frhobarx-mathcalt-b_mathbft" class="nav-link" data-scroll-target="#mathcalb_frhobarx-mathcalt-b_mathbft"><span class="header-section-number">2.3</span> <span class="math inline">\(\mathcal{B}_F(\rho,\bar{x}, \mathcal{T}, b_\mathbf{T})\)</span>:</a></li>
   </ul></li>
-  <li><a href="#criticality-meeting-july-28" id="toc-criticality-meeting-july-28" class="nav-link" data-scroll-target="#criticality-meeting-july-28"><span class="header-section-number">2</span> 2. Criticality Meeting (July 28)</a>
-  <ul class="collapse">
-  <li><a href="#key-takeaway-subformula-simplification-vs.-cdt-depth" id="toc-key-takeaway-subformula-simplification-vs.-cdt-depth" class="nav-link" data-scroll-target="#key-takeaway-subformula-simplification-vs.-cdt-depth"><span class="header-section-number">2.1</span> Key Takeaway: Subformula Simplification vs.&nbsp;CDT Depth</a></li>
-  </ul></li>
-  <li><a href="#discussion-on-random-projections-shrinkage" id="toc-discussion-on-random-projections-shrinkage" class="nav-link" data-scroll-target="#discussion-on-random-projections-shrinkage"><span class="header-section-number">3</span> 3. Discussion on Random Projections &amp; Shrinkage</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/tulasimohan/criticality-demorgan-notes/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -348,8 +346,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Meeting Notes &amp; Collaborative Discussions</h1>
-<p class="subtitle lead">Chronology of discussions, insights, and action items</p>
+<h1 class="title">Obsidian: Criticality proof</h1>
+<p class="subtitle lead">Raw source mirrored from Obsidian Vault</p>
 </div>
 
 
@@ -366,49 +364,156 @@ window.Quarto = {
 </header>
 
 
-<section id="meeting-with-ph-september-27-2026" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="meeting-with-ph-september-27-2026"><span class="header-section-number">1</span> 1. Meeting with PH (September 27, 2026)</h2>
-<p><strong>Context</strong>: Latest review session on status of DeMorgan Criticality proof approaches.</p>
-<section id="agenda-key-points" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="agenda-key-points"><span class="header-section-number">1.1</span> Agenda &amp; Key Points:</h3>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Original Source</strong>: Obsidian Vault (<code>02-Work/Research/Complexity-Theory/Criticality/</code>)<br>
+<strong>File</strong>: <code>Criticality proof.md</code></p>
+</div>
+</div>
+</div>
+<p><span class="math inline">\(\newcommand{\CDT}{\mathrm{CDT}} \newcommand{\cA}{\mathcal{A}} \newcommand{\cB}{\mathcal{B}}\)</span></p>
+<section id="proof-sketch" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="proof-sketch"><span class="header-section-number">1</span> Proof Sketch</h2>
+<ul>
+<li><p>Preliminaries</p>
+<ul>
+<li>Trunk, Aerial roots</li>
+<li>Decision Tree, depth</li>
+<li>Restrictions</li>
+<li><span class="math inline">\(p\)</span> - random restrictions</li>
+</ul></li>
+<li><p>Canonical Decision Tree</p>
+<ul>
+<li>Balancing</li>
+</ul></li>
+<li><p>Unpacking</p>
+<ul>
+<li>Unpacking lemma</li>
+<li>Exploration Certificate</li>
+<li>Banyan decomposition lemma</li>
+</ul></li>
+<li><p>Base case proof</p>
+<ul>
+<li>Follows Hastad’s base case proof.</li>
+</ul></li>
+<li><p>Downward closure</p></li>
+<li><p>Claims</p>
+<ul>
+<li>Sub-additivity of smaller events</li>
+<li>Upper bound on smaller events</li>
+</ul></li>
+<li><p>Main Proof</p>
+<ul>
+<li>Puts it all together using convexity and Cauchy-Schwartz.</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="proof-and-modifications-from-last-time" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="proof-and-modifications-from-last-time"><span class="header-section-number">2</span> Proof and modifications from last time</h2>
+<p>Modify the definition of <span class="math inline">\(\cA (\bar{v},T,b_T)\)</span> - <span class="math inline">\(\cA\)</span> only talks about AND becoming 0 and OR becoming 1. (currently <span class="math inline">\(\cA\)</span> talks about <span class="math inline">\(\cA\)</span> becoming both 0 and 1) - <span class="math inline">\(\cB\)</span> talks about the aerial roots becoming literals. This address the issue of <span class="math inline">\(\cB\)</span> being subsumed by <span class="math inline">\(\cA\)</span>.</p>
+<p><strong>Claim 1</strong>: <span class="math inline">\(\cA(\bar{v},T,b_T)\)</span> is Downward closed in all variables.</p>
+<p><strong>Claim</strong> 2: <span class="math inline">\(\sum_{x_i}\Pr[\cB(\bar{v},T,b_T)| \cA(\bar{v},T,b_T)] \le (2p)^t \prod_{i=1}^t \sqrt{L(T_i)}\)</span> where <span class="math inline">\(T_i\)</span> is the sub-formula of <span class="math inline">\(F\)</span> rooted at the <span class="math inline">\(i\)</span>th aerial root of <span class="math inline">\(T\)</span>. - Follows from Hastad’s base case proof and factoring and using downward closure.</p>
+<p><span class="math inline">\(\sum_{x_1, \ldots,  x_i, \ldots , x_t}\Pr[\cB(\bar{v},T,b_T)| \Delta]\)</span></p>
 <ol type="1">
-<li><strong>Compilation of Approaches</strong>: Unifying fragmented notes across Overleaf, Notion, and Obsidian into a single accessible reference.</li>
-<li><strong>Current Status of Non-Inductive Proof</strong>:
-<ul>
-<li>Leaf-branching tree decomposition remains the most promising path forward.</li>
-<li>Need to rigorously resolve the sum over topologies <span class="math inline">\(\sum_{T} \sqrt{\Pr[\mathcal{A}(T,b)]}\)</span>.</li>
-</ul></li>
-<li><strong>Action Items</strong>:
-<ul>
-<li>Establish live web documentation accessible by collaborators.</li>
-<li>Tag all prior failed attempts with clear explanations of their failure modes (e.g., Jaikumar’s counterexample, conditioning dependence).</li>
-</ul></li>
+<li><span class="math inline">\(\cB(\bar{v},T,b_T) = \cB_1 \cap \ldots \cap \cB_t\)</span></li>
 </ol>
+<p><span class="math inline">\(\cB_i := F_{v_i}|_{\rho \circ \eta(v_i)}\)</span> reduces to a literal in the variable <span class="math inline">\(x_i\)</span>.</p>
+<ol type="1">
+<li><p><strong>Claim:</strong> <span class="math inline">\(B_i\)</span> is downward closed in <span class="math inline">\(X \setminus \{x_i\}\)</span></p></li>
+<li><p><strong>Corollary of above Claim:</strong> <span class="math inline">\(B_1 \cap  \cdots \cap B_i\)</span> is downward-closed in <span class="math inline">\(X \setminus \{x_1, \ldots x_i\}\)</span></p></li>
+<li><p><span class="math inline">\(\sum_{x_1, \ldots ,x_t}\Pr[\cB|\Delta] = \sum_{x_1, \ldots, x_t}\prod_{i=1}^t \Pr[B_i|B_1, \ldots, B_{i-1}, \Delta]\)</span><br>
+= <span class="math inline">\(\sum_{x_t} \Pr[B_t|B_1, \ldots, B_{t-1}, \Delta] \cdot (\sum_{x_{t-1}} \Pr[B_{t-1}|B_1, \ldots, B_{t-2}, \Delta] (\sum_{x_{t-2}} \ldots \cdot (\sum_{x_1}\Pr[B_1|\Delta])))\)</span></p></li>
+<li><p><span class="math inline">\(\sum_{x_i}\Pr[B_i|B_1, \ldots, B_{i-1}, \Delta] \le (2p)\sqrt{L(T_i)}\)</span></p></li>
+</ol>
+<p><span class="math inline">\(\rho \in \cA\)</span> <span class="math inline">\(\implies\)</span> <span class="math inline">\(\rho(x \to 1) \in \cA\)</span></p>
+<p><span class="math inline">\(\rho(x_i) =0\)</span></p>
+<p><span class="math inline">\(F|_{\rho \circ (x_i \to 1)}\)</span></p>
+<p><strong>Claim 3:</strong> <span class="math inline">\(\sum_{T,b_t} \Pr[\cA(\bar{x}_{T,b_T},T,b_T)] \le 1\)</span> - <strong>We want</strong>: given <span class="math inline">\(a\)</span>, <span class="math inline">\((T,b_T)\)</span> is determined by <span class="math inline">\(\rho\)</span>. - for every function <span class="math inline">\((T,b_T) \mapsto \bar{x}_{T,b_T}\)</span></p>
 <hr>
-</section>
-</section>
-<section id="criticality-meeting-july-28" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="criticality-meeting-july-28"><span class="header-section-number">2</span> 2. Criticality Meeting (July 28)</h2>
-<p><strong>Source</strong>: Obsidian (<code>July 28 Criticality Meeting.md</code>).</p>
-<section id="key-takeaway-subformula-simplification-vs.-cdt-depth" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="key-takeaway-subformula-simplification-vs.-cdt-depth"><span class="header-section-number">2.1</span> Key Takeaway: Subformula Simplification vs.&nbsp;CDT Depth</h3>
 <ul>
-<li>A subformula simplifying to a single literal and its CDT having depth 1 are <strong>not the same thing</strong>.</li>
-<li>Consider: <span class="math display">\[F = (x_1 \vee x_2) \wedge (x_3 \vee x_4)\]</span> If <span class="math inline">\(x_2 = 0\)</span>, the subformula <span class="math inline">\(F_1 = (x_1 \vee x_2)\)</span> becomes <span class="math inline">\(x_1\)</span>. Its CDT has depth 1. But for the full formula <span class="math inline">\(F\)</span>, evaluating <span class="math inline">\(x_1\)</span> does not terminate evaluation if <span class="math inline">\(x_1 = 1\)</span>; it forces exploration into <span class="math inline">\(F_2\)</span>.</li>
-<li><strong>Impact</strong>: Any inductive hypothesis that assumes depth scales additively with subformula depth must account for the gate connective and whether the subformula’s value determines the parent gate.</li>
+<li><p><span class="math inline">\(\Pr[\CDT(F,\rho) \text{has depth\ } t] = \Pr[\sum_{\bar{x}}\CDT^{(a)}(F,\rho) = (x_1 \to a_1, \dots, x_t \to a_t)]\)</span></p></li>
+<li><p><span class="math inline">\(\Pr[\exists \bar{x} \CDT^{(a)}(F,\rho) = (v_1 \to a_1, \dots, v_t \to a_t)] \le \sum_{\bar{x}}\sum_{T,b_T} \Pr[\cA(\bar{v},T,b_T) \cap \cB(\bar{v},T,b_T)]\)</span> = <span class="math inline">\(\sum_{\bar{x}}\sum_{T,b_T}\Pr[\cA(\bar{v},T,b_T)] \Pr[\cB(\bar{v},T,b_T) | \cA(\bar{v},T,b_T)]\)</span></p></li>
 </ul>
 <hr>
-</section>
-</section>
-<section id="discussion-on-random-projections-shrinkage" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="discussion-on-random-projections-shrinkage"><span class="header-section-number">3</span> 3. Discussion on Random Projections &amp; Shrinkage</h2>
-<p><strong>Source</strong>: Obsidian (<code>Shrinkage under random projections.md</code>).</p>
+<p><span class="math display">\[\newcommand{\E}{\mathbb{E}}\]</span> <span class="math inline">\(\sum_{\bar{x}}\sum_{T,b_T}\Pr[\cA(\bar{x},T,b_T)] \Pr[\cB(\bar{v},T,b_T) | \cA(\bar{v},T,b_T)]\)</span></p>
+<p><span class="math inline">\(\leq \sum_{T,b_T}\Pr[\cA(\bar{x}_{T,b_T}^*,T,b_T)] \sum_{\bar{x}} \Pr[\cB(\bar{x},T,b_T)| \cA(\bar{x},T,b_T)]\)</span> where <span class="math inline">\(\bar{v}^*_{T,b_T}\)</span> is <span class="math inline">\(\arg \max_{\bar{v}}\)</span> of <span class="math inline">\(\Pr[\cA(\bar{v},T,b_T)]\)</span></p>
+<p><strong>ToDo:</strong> don’t take maximizer of all of <span class="math inline">\(\bar{v}\)</span> at once , instead peel off one variable at a time.</p>
+<p><span class="math inline">\(\le  \sum_{T,b_T} \Pr[\cA(\bar{v}^*_{T,b_T},T,b_T)] (2p)^t \prod_{i=1}^t \sqrt{L(T_i)}\)</span> by claim 2</p>
+<p>= <span class="math inline">\((2p)^t\)</span> <span class="math inline">\(\sum_{T} \mu(T)\prod_{i=1}^t \sqrt{L(T_i)}\)</span> , where <span class="math inline">\(\mu(T) := \sum_{b_T} \cA(\bar{v}^*_{T,b_T},T,b_T)\)</span></p>
+<p>= <span class="math inline">\((2p)^t\)</span> <span class="math inline">\((\sum_{T}\mu(T))\)</span> <span class="math inline">\(\cdot\)</span> <span class="math inline">\((\mathbb{E}_{T \sim \mu} \prod_{i=1}^t \sqrt{L(T_i)}\)</span> ),</p>
+<p><span class="math inline">\(\le (2p)^t \cdot (\sum_{T}\mu(T)) \cdot  \sqrt{\E_{T \sim \mu}\prod_{i=1}^t. L(T_i)}\)</span> since <span class="math inline">\(\mathbb{E}[\sqrt{X}] \le \sqrt{\mathbb{E}[X]}\)</span></p>
+<p><span class="math inline">\(\le (2p)^t \cdot (\sqrt{\sum_{T}\mu(T)}) \cdot  \sqrt{\E_{T \sim \mu}\prod_{i=1}^t. L(T_i)}\)</span> by claim 3, Since <span class="math inline">\(\sum_T \mu_T \leq 1\)</span></p>
+<p><span class="math inline">\(= (2p)^t  \cdot  \sqrt{\sum_{T} \mu(T) \prod_{i=1}^t. L(T_i)}\)</span> Since <span class="math inline">\(\mu(T) \le \sum_T \mu(T) \leq 1\)</span></p>
+<p><span class="math inline">\(\le (2p)^t  \cdot  \sqrt{\sum_{T}  \prod_{i=1}^t. L(T_i)}\)</span></p>
+<p><span class="math inline">\(\le (2p)^t\sqrt{L^t} = (2p\sqrt{L})^t\)</span></p>
+<p><strong>Changes to do</strong> - 0-balance -&gt;. <span class="math inline">\(balance_{\to1}\)</span> - Ass. c_0 -&gt; <span class="math inline">\(Assoc_{\to 1}\)</span> —- <span class="math display">\[\newcommand{\T}{\mathsf{T}}\]</span> ## Exploration Certificate</p>
+<p><strong>Definition:</strong> Given a sequence of <span class="math inline">\(t\)</span> variables <span class="math inline">\(\bar{x} = (x_1, \dots , x_t)\)</span>, a Trunk <span class="math inline">\(\mathcal{T}\)</span> and a collection of bit-strings <span class="math inline">\(b_\mathbf{T} = \{b_v\}_{v \in \mathcal{T}}\)</span> for each node <span class="math inline">\(v \in \mathcal{T}\)</span>, we define the <em>Exploration Certificate</em>, denoted by <span class="math inline">\(\text{EC}(\mathcal{T}, \mathbf{T},\bar{x})\)</span>, as the tuple <span class="math inline">\((t_v, X_v, \eta_v, \alpha_v, \beta_v)\)</span>, where all its components defined below are functions of <span class="math inline">\(\bar{x}\)</span>, <span class="math inline">\(\mathcal{T}\)</span>, and <span class="math inline">\(\mathbf{T}\)</span>:</p>
+<ol type="1">
+<li><strong>Length <span class="math inline">\(t_v\)</span>:</strong> <span class="math inline">\(t_v(\mathcal{T})\)</span> is the number of terminal nodes of <span class="math inline">\(\mathcal{T}\)</span> under a node <span class="math inline">\(v\)</span>.</li>
+<li><strong>Sub-sequence of Variables <span class="math inline">\(X_v\)</span>:</strong> Assign the variables of the sequence <span class="math inline">\(\bar{x}\)</span> to the terminal nodes of <span class="math inline">\(\mathcal{T}\)</span> based on the in-order traversal on the nodes of <span class="math inline">\(\mathcal{T}\)</span>. <span class="math inline">\(X_v(\mathcal{T}, \bar{x})\)</span> is the sub-sequence of variables from <span class="math inline">\(\bar{x}\)</span> that are assigned to the terminal nodes of <span class="math inline">\(\mathcal{T}\)</span> under <span class="math inline">\(v\)</span>.</li>
+<li><strong>Pre-restriction <span class="math inline">\(\eta_v\)</span>:</strong> A restriction defined recursively as:
 <ul>
-<li><strong>Håstad [1998]</strong>: Established <span class="math inline">\(O(p^2)\)</span> shrinkage under random restrictions for DeMorgan formulae, proving an <span class="math inline">\(\tilde{\Omega}(n^3)\)</span> formula size lower bound for Andreev’s function.</li>
-<li><strong>Connection to Criticality</strong>: Proving <span class="math inline">\(\Gamma(F) = O(p\sqrt{L})\)</span> would give tight average sensitivity bounds, improving Fourier concentration and learning algorithms for DeMorgan formulae.</li>
+<li>If <span class="math inline">\(v\)</span> is the root of <span class="math inline">\(\mathcal{T}\)</span>, then <span class="math inline">\(\eta_v = \langle \rangle\)</span>.</li>
+<li>For all other nodes of <span class="math inline">\(\mathcal{T}\)</span>, <span class="math inline">\(\eta_v = \eta_{\text{parent}(v)} \circ \alpha_{\text{lsibling}(v)}\)</span> if <span class="math inline">\(v\)</span> has a left sibling <span class="math inline">\(\text{lsibling}(v) \in \mathcal{T}\)</span>, else <span class="math inline">\(\eta_v = \eta_{\text{parent}(v)}\)</span>.<br>
+</li>
+</ul></li>
+<li><strong>Original Path <span class="math inline">\(\beta_v\)</span>:</strong> A path defined as <span class="math inline">\(\beta_v = \langle X_v \gets b_v \rangle\)</span>.</li>
+<li><strong>Inherited Path <span class="math inline">\(\alpha_v\)</span>:</strong> A path defined recursively as <span class="math inline">\(\alpha_v = \beta_{\text{parent}(v)}[1,t(v)]\)</span>, and <span class="math inline">\(\alpha(v) = \beta(v)\)</span> if <span class="math inline">\(v\)</span> is the root.</li>
+</ol>
+<p>The <em>Exploration certificate</em> is the tuple <span class="math inline">\(\text{EC}(\mathcal{T}, b_\mathbf{T}) = (t_v, X_v, \eta_v, \alpha_v, \beta_v)\)</span>.</p>
+<section id="lemma-banyan-decomposition" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="lemma-banyan-decomposition"><span class="header-section-number">2.1</span> Lemma: Banyan Decomposition</h3>
+<p>Let <span class="math inline">\(F\)</span> be a De Morgan formula, and <span class="math inline">\(\rho\)</span> be a restriction. Let <span class="math inline">\(t \in \mathbb{N}\)</span>, let <span class="math inline">\(\alpha = \langle x_1 \gets a_1, \dots, x_t \gets a_t \rangle\)</span> for any bit string <span class="math inline">\(a \in \{0,1\}^t\)</span>, and let <span class="math inline">\(z \in \{0,1\}\)</span>.</p>
+<p>If <span class="math inline">\(\text{CDT}^{(a)}_z(F, \rho) = \alpha\)</span>, then there exist a unique Trunk <span class="math inline">\(\mathcal{T}\)</span> whose aerial roots <span class="math inline">\((v_1, \dots, v_t)\)</span> correspond to variables <span class="math inline">\((x_1, \dots, x_t)\)</span> and a unique collection of bit-strings <span class="math inline">\(\mathbf{T} = \{b_v\}_{v \in \mathcal{T}}\)</span> for each non-root, non-terminal node <span class="math inline">\(v \in \mathcal{T}\)</span> such that their corresponding exploration certificate <span class="math inline">\(\text{EC}(\mathcal{T}, \mathbf{T}) = (t_v, X_v, \eta_v, \alpha_v, \beta_v)\)</span> satisfies the following two conditions:</p>
+</section>
+<section id="mathcala_frhobarx-mathcalt-b_mathbft" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="mathcala_frhobarx-mathcalt-b_mathbft"><span class="header-section-number">2.2</span> <strong><span class="math inline">\(\mathcal{A}_F(\rho,\bar{x}, \mathcal{T}, b_\mathbf{T})\)</span>:</strong></h3>
+<ul>
+<li>For each non-terminal node <span class="math inline">\(v \in \mathcal{T}\)</span>:
+<ul>
+<li>If <span class="math inline">\(F_v = F_{v_1} \lor F_{v_2}\)</span>, then
+<ul>
+<li>for <span class="math inline">\(j \in \{1,2\}\)</span>:
+<ul>
+<li>if <span class="math inline">\(F_{v_j}|_{\rho,\eta_{v_j}} \equiv 0\)</span> then <span class="math inline">\(v_j \notin \mathcal{T}\)</span>.</li>
+<li>Else, if <span class="math inline">\(F_{v_j}|_{\rho,\eta_{v_j}} \not\equiv 0\)</span>,
+<ul>
+<li>it is witnessed by <span class="math inline">\(F_{v_j}|_{\rho,\eta(v_j),\beta(v_j)} \equiv 1\)</span> and <span class="math inline">\(\text{Assoc}_0(F_{v_j}|_{\eta_{v_j}}, \rho, \alpha_{v_j}) = \beta_{v_j}\)</span><br>
+</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>If <span class="math inline">\(F_v = F_{v_1} \land F_{v_2}\)</span>, then
+<ul>
+<li>for <span class="math inline">\(j \in \{1,2\}\)</span>:
+<ul>
+<li>if <span class="math inline">\(F_{v_j}|_{\rho,\eta_{v_j}} \equiv 1\)</span> then <span class="math inline">\(v_j \notin \mathcal{T}\)</span>.</li>
+<li>Else, if <span class="math inline">\(F_{v_j}|_{\rho,\eta_{v_j}} \not\equiv 1\)</span>,
+<ul>
+<li>it is witnessed by <span class="math inline">\(F_{v_j}|_{\rho,\eta(v_j),\beta(v_j)} \equiv 0\)</span> and <span class="math inline">\(\text{Assoc}_1(F_{v_j}|_{\eta_{v_j}}, \rho, \alpha_{v_j}) = \beta_{v_j}\)</span>.</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul></li>
 </ul>
+</section>
+<section id="mathcalb_frhobarx-mathcalt-b_mathbft" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="mathcalb_frhobarx-mathcalt-b_mathbft"><span class="header-section-number">2.3</span> <span class="math inline">\(\mathcal{B}_F(\rho,\bar{x}, \mathcal{T}, b_\mathbf{T})\)</span>:</h3>
+<ul>
+<li>For each aerial root <span class="math inline">\(v\)</span> of the trunk <span class="math inline">\(\mathcal{T}\)</span>,
+<ul>
+<li>the sub-formula <span class="math inline">\(F_v\)</span> simplifies to a literal under the given restriction:<span class="math display">\[F_v|_{\rho \circ \eta_v} \text{ is a literal in the single variable } X_v\]</span></li>
+</ul></li>
+</ul>
+<hr>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

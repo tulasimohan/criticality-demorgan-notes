@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Meeting Notes &amp; Collaborative Discussions – Criticality of DeMorgan Formulae</title>
+<title>Obsidian: New Inductive proof – Criticality of DeMorgan Formulae</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -310,7 +310,7 @@ window.Quarto = {
 <span class="menu-text">Working Manuscript</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../meetings/index.html" aria-current="page"> 
+    <a class="nav-link" href="../meetings/index.html"> 
 <span class="menu-text">Meeting Notes</span></a>
   </li>  
 </ul>
@@ -330,15 +330,17 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#meeting-with-ph-september-27-2026" id="toc-meeting-with-ph-september-27-2026" class="nav-link active" data-scroll-target="#meeting-with-ph-september-27-2026"><span class="header-section-number">1</span> 1. Meeting with PH (September 27, 2026)</a>
+  <li><a href="#canonical-decision-tree" id="toc-canonical-decision-tree" class="nav-link active" data-scroll-target="#canonical-decision-tree"><span class="header-section-number">1</span> Canonical Decision Tree</a></li>
+  <li><a href="#unpacking" id="toc-unpacking" class="nav-link" data-scroll-target="#unpacking"><span class="header-section-number">2</span> Unpacking</a></li>
+  <li><a href="#smapling-restrictions" id="toc-smapling-restrictions" class="nav-link" data-scroll-target="#smapling-restrictions"><span class="header-section-number">3</span> Smapling restrictions</a></li>
+  <li><a href="#the-calculation" id="toc-the-calculation" class="nav-link" data-scroll-target="#the-calculation"><span class="header-section-number">4</span> The Calculation</a>
   <ul class="collapse">
-  <li><a href="#agenda-key-points" id="toc-agenda-key-points" class="nav-link" data-scroll-target="#agenda-key-points"><span class="header-section-number">1.1</span> Agenda &amp; Key Points:</a></li>
+  <li><a href="#the-path-length-decomposition" id="toc-the-path-length-decomposition" class="nav-link" data-scroll-target="#the-path-length-decomposition"><span class="header-section-number">4.1</span> 0. The Path Length Decomposition</a></li>
+  <li><a href="#the-shrinking-path-in-the-base-tree" id="toc-the-shrinking-path-in-the-base-tree" class="nav-link" data-scroll-target="#the-shrinking-path-in-the-base-tree"><span class="header-section-number">4.2</span> 1. The Shrinking Path in the Base Tree</a></li>
+  <li><a href="#the-cost-of-shrinking-and-modification" id="toc-the-cost-of-shrinking-and-modification" class="nav-link" data-scroll-target="#the-cost-of-shrinking-and-modification"><span class="header-section-number">4.3</span> 3. The Cost of Shrinking and Modification</a></li>
+  <li><a href="#summing-over-the-original-lengths" id="toc-summing-over-the-original-lengths" class="nav-link" data-scroll-target="#summing-over-the-original-lengths"><span class="header-section-number">4.4</span> 4. Summing over the Original Lengths</a></li>
+  <li><a href="#closing-the-global-budget" id="toc-closing-the-global-budget" class="nav-link" data-scroll-target="#closing-the-global-budget"><span class="header-section-number">4.5</span> 5. Closing the Global Budget</a></li>
   </ul></li>
-  <li><a href="#criticality-meeting-july-28" id="toc-criticality-meeting-july-28" class="nav-link" data-scroll-target="#criticality-meeting-july-28"><span class="header-section-number">2</span> 2. Criticality Meeting (July 28)</a>
-  <ul class="collapse">
-  <li><a href="#key-takeaway-subformula-simplification-vs.-cdt-depth" id="toc-key-takeaway-subformula-simplification-vs.-cdt-depth" class="nav-link" data-scroll-target="#key-takeaway-subformula-simplification-vs.-cdt-depth"><span class="header-section-number">2.1</span> Key Takeaway: Subformula Simplification vs.&nbsp;CDT Depth</a></li>
-  </ul></li>
-  <li><a href="#discussion-on-random-projections-shrinkage" id="toc-discussion-on-random-projections-shrinkage" class="nav-link" data-scroll-target="#discussion-on-random-projections-shrinkage"><span class="header-section-number">3</span> 3. Discussion on Random Projections &amp; Shrinkage</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/tulasimohan/criticality-demorgan-notes/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -348,8 +350,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Meeting Notes &amp; Collaborative Discussions</h1>
-<p class="subtitle lead">Chronology of discussions, insights, and action items</p>
+<h1 class="title">Obsidian: New Inductive proof</h1>
+<p class="subtitle lead">Raw source mirrored from Obsidian Vault</p>
 </div>
 
 
@@ -366,49 +368,75 @@ window.Quarto = {
 </header>
 
 
-<section id="meeting-with-ph-september-27-2026" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="meeting-with-ph-september-27-2026"><span class="header-section-number">1</span> 1. Meeting with PH (September 27, 2026)</h2>
-<p><strong>Context</strong>: Latest review session on status of DeMorgan Criticality proof approaches.</p>
-<section id="agenda-key-points" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="agenda-key-points"><span class="header-section-number">1.1</span> Agenda &amp; Key Points:</h3>
-<ol type="1">
-<li><strong>Compilation of Approaches</strong>: Unifying fragmented notes across Overleaf, Notion, and Obsidian into a single accessible reference.</li>
-<li><strong>Current Status of Non-Inductive Proof</strong>:
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Original Source</strong>: Obsidian Vault (<code>02-Work/Research/Complexity-Theory/Criticality/</code>)<br>
+<strong>File</strong>: <code>New Inductive proof.md</code></p>
+</div>
+</div>
+</div>
+<p><span class="math display">\[\newcommand{\cA}{\mathcal{A}}\newcommand{\cB}{\mathcal{B}}\newcommand{\cC}{\mathcal{C}}\]</span> - Lemma 3.5 defines of <span class="math inline">\(\cA, \cB, \cC\)</span></p>
+<section id="canonical-decision-tree" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="canonical-decision-tree"><span class="header-section-number">1</span> Canonical Decision Tree</h2>
+<p>Given a De Morgan formula <span class="math inline">\(F\)</span> on variable set <span class="math inline">\(V\)</span> and an associated restriction tree <span class="math inline">\(\tilde{\rho} : \mathcal{T}_F \to \{0, 1, *\}^V\)</span>, <span class="math inline">\(\text{CDT}(F, \tilde{\rho})\)</span> is defined inductively as follows:</p>
+<p><strong>1. Constants and Literals (Base Cases)</strong> * If <span class="math inline">\(F \in \{0, 1\}\)</span>, then <span class="math inline">\(\text{CDT}(F, \tilde{\rho})\)</span> is the unique tree with a single leaf node labelled by the corresponding constant. * If <span class="math inline">\(F \in \{x, \neg x\}\)</span>: * If the underlying variable is set by <span class="math inline">\(\tilde{\rho}(F)\)</span> to a constant, <span class="math inline">\(\text{CDT}(F, \tilde{\rho})\)</span> is the unique tree with a single node labelled by the evaluated constant. * If the underlying variable is unset by <span class="math inline">\(\tilde{\rho}(F)\)</span>, <span class="math inline">\(\text{CDT}(F, \tilde{\rho})\)</span> is the tree with 3 nodes where the root is labelled by the variable and the two children are labelled appropriately by <span class="math inline">\(0\)</span> or <span class="math inline">\(1\)</span>.</p>
+<p><strong>2. Disjunction (<span class="math inline">\(F = F_1 \lor F_2\)</span>)</strong> * If <span class="math inline">\(F_1|_{\tilde{\rho}(F)} \equiv 1\)</span>, then <span class="math inline">\(\text{CDT}(F, \tilde{\rho})\)</span> is the unique tree with a single leaf node labelled <span class="math inline">\(1\)</span>. * If <span class="math inline">\(F_1|_{\tilde{\rho}(F)} \equiv 0\)</span>, then <span class="math inline">\(\text{CDT}(F, \tilde{\rho})\)</span> is <span class="math inline">\(\text{CDT}(F_2, \tilde{\rho})\)</span>. * If <span class="math inline">\(F_1|_{\tilde{\rho}(F)} \not\equiv \text{constant}\)</span>, perform the following steps: 1. Let <span class="math inline">\(\Gamma = \text{CDT}(F_1, \tilde{\rho}|_{F_1})\)</span>. 2. Apply the restriction <span class="math inline">\(\tilde{\rho}(F)\)</span> to <span class="math inline">\(\Gamma\)</span> to get <span class="math inline">\(\Gamma'\)</span> and remove all sub-trees inconsistent with <span class="math inline">\(\tilde{\rho}(F)\)</span>. 3. <span class="math inline">\(0\)</span>-balance <span class="math inline">\(\Gamma'\)</span> to get <span class="math inline">\(\Gamma''\)</span>. 4. For each <span class="math inline">\(0\)</span>-leaf <span class="math inline">\(u\)</span> of <span class="math inline">\(\Gamma''\)</span>, replace <span class="math inline">\(u\)</span> by <span class="math inline">\(\text{CDT}(F_2|_{\alpha_u}, \tilde{\rho})\)</span>, where <span class="math inline">\(\alpha_u\)</span> is the ordered restriction corresponding to <span class="math inline">\(u\)</span> in <span class="math inline">\(\Gamma''\)</span>.</p>
+<p><strong>3. Conjunction (<span class="math inline">\(F = F_1 \land F_2\)</span>)</strong> * If <span class="math inline">\(F_1|_{\tilde{\rho}(F)} \equiv 0\)</span>, then <span class="math inline">\(\text{CDT}(F, \tilde{\rho})\)</span> is the unique tree with a single leaf node labelled <span class="math inline">\(0\)</span>. * If <span class="math inline">\(F_1|_{\tilde{\rho}(F)} \equiv 1\)</span>, then <span class="math inline">\(\text{CDT}(F, \tilde{\rho})\)</span> is <span class="math inline">\(\text{CDT}(F_2, \tilde{\rho})\)</span>. * If <span class="math inline">\(F_1|_{\tilde{\rho}(F)} \not\equiv \text{constant}\)</span>, perform the following steps: 1. Let <span class="math inline">\(\Gamma = \text{CDT}(F_1, \tilde{\rho}|_{F_1})\)</span>. 2. Apply the restriction <span class="math inline">\(\tilde{\rho}(F)\)</span> to <span class="math inline">\(\Gamma\)</span> to get <span class="math inline">\(\Gamma'\)</span> and remove all sub-trees inconsistent with <span class="math inline">\(\tilde{\rho}(F)\)</span>. 3. <span class="math inline">\(1\)</span>-balance <span class="math inline">\(\Gamma'\)</span> to get <span class="math inline">\(\Gamma''\)</span>. 4. For each <span class="math inline">\(1\)</span>-leaf <span class="math inline">\(u\)</span> of <span class="math inline">\(\Gamma''\)</span>, replace <span class="math inline">\(u\)</span> by <span class="math inline">\(\text{CDT}(F_2|_{\alpha_u}, \tilde{\rho})\)</span>, where <span class="math inline">\(\alpha_u\)</span> is the ordered restriction corresponding to <span class="math inline">\(u\)</span> in <span class="math inline">\(\Gamma''\)</span>.</p>
+</section>
+<section id="unpacking" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="unpacking"><span class="header-section-number">2</span> Unpacking</h2>
+<p><strong>Lemma (Unpacking the CDT for De Morgan Formulae - with Discovery Set Q)</strong></p>
+<p>Let <span class="math inline">\(F\)</span> be a De Morgan formula, <span class="math inline">\(\tilde{\rho}\)</span> a restriction tree, and <span class="math inline">\(a \in \{0, 1\}^s\)</span> an instruction string.</p>
+<p>For a disjunction <span class="math inline">\(F = F_1 \lor F_2\)</span>, the event that the path <span class="math inline">\(\text{CDT}_0^{(a)}(F, \tilde{\rho})\)</span> exists is equivalent to the disjoint union of the following two cases:</p>
+<p><strong>Case 1: The Trivial Bypass</strong> <span class="math inline">\(F_1|_{\tilde{\rho}(F)} \equiv 0\)</span> and the path exists entirely in the second sub-formula: * <span class="math inline">\(\text{CDT}_0^{(a)}(F_2, \tilde{\rho})\)</span> exists.</p>
+<p><strong>Case 2: The Active Branching</strong> <span class="math inline">\(F_1|_{\tilde{\rho}(F)} \not\equiv \text{constant}\)</span>, and there exists an index <span class="math inline">\(r\)</span> (<span class="math inline">\(1 \leq r \leq s\)</span>), a valid <span class="math inline">\(1\)</span>-leaf <span class="math inline">\(\beta\)</span> in the decision tree for <span class="math inline">\(F_1\)</span>, a variable index set <span class="math inline">\(Q\)</span>, and a modified ordered restriction <span class="math inline">\(\alpha'\)</span> such that the following three conditions hold simultaneously:</p>
 <ul>
-<li>Leaf-branching tree decomposition remains the most promising path forward.</li>
-<li>Need to rigorously resolve the sum over topologies <span class="math inline">\(\sum_{T} \sqrt{\Pr[\mathcal{A}(T,b)]}\)</span>.</li>
-</ul></li>
-<li><strong>Action Items</strong>:
-<ul>
-<li>Establish live web documentation accessible by collaborators.</li>
-<li>Tag all prior failed attempts with clear explanations of their failure modes (e.g., Jaikumar’s counterexample, conditioning dependence).</li>
-</ul></li>
+<li><strong>Condition <span class="math inline">\(\mathcal{A}(r, \beta)\)</span>:</strong> There exists an instruction string <span class="math inline">\(b \in \{0,1\}^*\)</span> such that <span class="math inline">\(\beta = \text{CDT}_1^{(b)}(F_1, \tilde{\rho}|_{F_1})\)</span>, and the ordered restriction <span class="math inline">\(\beta\)</span> is consistent with <span class="math inline">\(\tilde{\rho}(F)\)</span>.</li>
+<li><strong>Condition <span class="math inline">\(\mathcal{B}(r, \beta, \alpha', Q, a_{\leq r})\)</span>:</strong> The set <span class="math inline">\(Q \subseteq \text{dom}(\beta)\)</span> correctly identifies the star variables of <span class="math inline">\(\tilde{\rho}(F_1)\)</span> within the domain of <span class="math inline">\(\beta\)</span>. The instruction prefix <span class="math inline">\(a_{\leq r}\)</span> dictates the modification of the variables in <span class="math inline">\(Q\)</span>, generating a new ordered restriction <span class="math inline">\(\alpha'\)</span> such that <span class="math inline">\(\alpha' \in \text{ASSOC}_0(F_1, \tilde{\rho}(F), \beta)\)</span>.</li>
+<li><strong>Condition <span class="math inline">\(\mathcal{C}(r, \alpha', a)\)</span>:</strong> The remainder of the canonical decision tree path successfully exists for the second sub-formula under the new restriction: <span class="math inline">\(\text{CDT}_0^{(a_{&gt;r})}(F_2|_{\alpha'}, \tilde{\rho})\)</span> exists.</li>
+</ul>
+</section>
+<section id="smapling-restrictions" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="smapling-restrictions"><span class="header-section-number">3</span> Smapling restrictions</h2>
+<ol start="0" type="1">
+<li>The 3-Stage Sampling Setup Assume WLOG that <span class="math inline">\(F = F_1 \lor F_2\)</span> and <span class="math inline">\(L_1 \leq L_2\)</span>. We define the critical probabilities for the formula and its children as <span class="math inline">\(p = 1/\sqrt{L}\)</span>, <span class="math inline">\(p_1 = 1/\sqrt{L_1}\)</span>, and <span class="math inline">\(p_2 = 1/\sqrt{L_2}\)</span>. Because <span class="math inline">\(p_1 \ge p_2 &gt; p\)</span>, we can sample the final restriction <span class="math inline">\(\rho \sim R_p\)</span> in three stages:</li>
 </ol>
-<hr>
-</section>
-</section>
-<section id="criticality-meeting-july-28" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="criticality-meeting-july-28"><span class="header-section-number">2</span> 2. Criticality Meeting (July 28)</h2>
-<p><strong>Source</strong>: Obsidian (<code>July 28 Criticality Meeting.md</code>).</p>
-<section id="key-takeaway-subformula-simplification-vs.-cdt-depth" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="key-takeaway-subformula-simplification-vs.-cdt-depth"><span class="header-section-number">2.1</span> Key Takeaway: Subformula Simplification vs.&nbsp;CDT Depth</h3>
 <ul>
-<li>A subformula simplifying to a single literal and its CDT having depth 1 are <strong>not the same thing</strong>.</li>
-<li>Consider: <span class="math display">\[F = (x_1 \vee x_2) \wedge (x_3 \vee x_4)\]</span> If <span class="math inline">\(x_2 = 0\)</span>, the subformula <span class="math inline">\(F_1 = (x_1 \vee x_2)\)</span> becomes <span class="math inline">\(x_1\)</span>. Its CDT has depth 1. But for the full formula <span class="math inline">\(F\)</span>, evaluating <span class="math inline">\(x_1\)</span> does not terminate evaluation if <span class="math inline">\(x_1 = 1\)</span>; it forces exploration into <span class="math inline">\(F_2\)</span>.</li>
-<li><strong>Impact</strong>: Any inductive hypothesis that assumes depth scales additively with subformula depth must account for the gate connective and whether the subformula’s value determines the parent gate.</li>
+<li>Stage 1: Sample <span class="math inline">\(\rho_1 \sim R_{p_1}\)</span>.</li>
+<li>Stage 2: Sample <span class="math inline">\(\rho_2 \sim R_{p_2}\)</span> by taking <span class="math inline">\(\rho_1\)</span> and assigning a random value to each of its star variables with probability <span class="math inline">\(1 - (p_2/p_1)\)</span>.</li>
+<li>Stage 3: Sample the final <span class="math inline">\(\rho \sim R_p\)</span> by taking <span class="math inline">\(\rho_2\)</span> and assigning a random value to each of its star variables with probability <span class="math inline">\(1 - (p/p_2)\)</span>.</li>
 </ul>
-<hr>
 </section>
+<section id="the-calculation" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="the-calculation"><span class="header-section-number">4</span> The Calculation</h2>
+<section id="the-path-length-decomposition" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="the-path-length-decomposition"><span class="header-section-number">4.1</span> 0. The Path Length Decomposition</h3>
+<p>We want to bound the probability that <span class="math inline">\(F = F_1 \lor F_2\)</span> has a path of length <span class="math inline">\(s\)</span>. This path must be composed of a contribution of length <span class="math inline">\(s_1\)</span> from <span class="math inline">\(F_1\)</span> and a continuation of length <span class="math inline">\(s_2\)</span> from <span class="math inline">\(F_2\)</span>, such that <span class="math inline">\(s_1 + s_2 = s\)</span>.</p>
 </section>
-<section id="discussion-on-random-projections-shrinkage" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="discussion-on-random-projections-shrinkage"><span class="header-section-number">3</span> 3. Discussion on Random Projections &amp; Shrinkage</h2>
-<p><strong>Source</strong>: Obsidian (<code>Shrinkage under random projections.md</code>).</p>
-<ul>
-<li><strong>Håstad [1998]</strong>: Established <span class="math inline">\(O(p^2)\)</span> shrinkage under random restrictions for DeMorgan formulae, proving an <span class="math inline">\(\tilde{\Omega}(n^3)\)</span> formula size lower bound for Andreev’s function.</li>
-<li><strong>Connection to Criticality</strong>: Proving <span class="math inline">\(\Gamma(F) = O(p\sqrt{L})\)</span> would give tight average sensitivity bounds, improving Fourier concentration and learning algorithms for DeMorgan formulae.</li>
-</ul>
+<section id="the-shrinking-path-in-the-base-tree" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="the-shrinking-path-in-the-base-tree"><span class="header-section-number">4.2</span> 1. The Shrinking Path in the Base Tree</h3>
+<p>The <span class="math inline">\(s_1\)</span> active variables contributed by <span class="math inline">\(F_1\)</span> under the final restriction originate from a path of length <span class="math inline">\(t_1 \ge s_1\)</span> in <span class="math inline">\(\text{CDT}(F_1, \rho_1)\)</span>. By the inductive hypothesis applied at the critical probability <span class="math inline">\(p_1\)</span>, the probability of finding this base path of length <span class="math inline">\(t_1\)</span> is bounded by <span class="math inline">\((1/2)^{t_1}\)</span>.</p>
+</section>
+<section id="the-cost-of-shrinking-and-modification" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="the-cost-of-shrinking-and-modification"><span class="header-section-number">4.3</span> 3. The Cost of Shrinking and Modification</h3>
+<p>When we tighten the restriction from <span class="math inline">\(\rho_1\)</span> to <span class="math inline">\(\rho_2\)</span> (retaining star variables with probability <span class="math inline">\(p_2/p_1\)</span>), two things must happen to the <span class="math inline">\(t_1\)</span> variables: - Exactly <span class="math inline">\(s_1\)</span> variables must survive as stars to form the final path (probability proportional to <span class="math inline">\((p_2/p_1)^{s_1}\)</span>). - The remaining <span class="math inline">\(t_1 - s_1\)</span> variables must be fixed to specific constants that satisfy the <span class="math inline">\(\text{ASSOC}_0\)</span> modification target (this incurs a switching penalty, bounded by some constant <span class="math inline">\(C^{t_1 - s_1}\)</span>). Accounting for the <span class="math inline">\(\binom{t_1}{s_1}\)</span> ways to choose which variables survive, the transition probability is bounded by: <span class="math inline">\(\binom{t_1}{s_1} (p_2/p_1)^{s_1} C^{t_1 - s_1}\)</span>.</p>
+</section>
+<section id="summing-over-the-original-lengths" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="summing-over-the-original-lengths"><span class="header-section-number">4.4</span> 4. Summing over the Original Lengths</h3>
+<p>To find the total probability of getting exactly <span class="math inline">\(s_1\)</span> active variables from <span class="math inline">\(F_1\)</span>, we sum over all possible original lengths <span class="math inline">\(t_1 \ge s_1\)</span>. Using the inductive bound from Step 2 and the transition bound from Step 3: <span class="math inline">\(\Pr[\text{Path of length } s_1 \text{ in } F_1] \leq \sum_{t_1 = s_1}^\infty \left( \frac{1}{2} \right)^{t_1} \binom{t_1}{s_1} \left( \frac{p_2}{p_1} \right)^{s_1} C^{t_1 - s_1}\)</span></p>
+<p>By factoring out the <span class="math inline">\(s_1\)</span> terms, this geometric series evaluates cleanly. Because <span class="math inline">\(C/2 &lt; 1\)</span> for a properly tuned switching constant, the infinite sum over the remaining <span class="math inline">\(t_1 - s_1\)</span> terms converges to a constant <span class="math inline">\(O(1)\)</span>. Thus, the bound simplifies beautifully to: <span class="math inline">\(\Pr[\text{Path of length } s_1 \text{ in } F_1] \leq O(1)^{s_1} \left( \frac{p_2}{p_1} \right)^{s_1}\)</span></p>
+</section>
+<section id="closing-the-global-budget" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="closing-the-global-budget"><span class="header-section-number">4.5</span> 5. Closing the Global Budget</h3>
+<p>Now we combine this with the <span class="math inline">\(s_2\)</span> length continuation in <span class="math inline">\(F_2\)</span>. By induction at probability <span class="math inline">\(p_2\)</span>, the continuation costs <span class="math inline">\((1/2)^{s_2}\)</span>. Summing over all valid splits <span class="math inline">\(s_1 + s_2 = s\)</span>: Total Prob <span class="math inline">\(\leq \sum_{s_1=0}^s \left[ O(1)^{s_1} \left( \frac{p_2}{p_1} \right)^{s_1} \right] \cdot \left( \frac{1}{2} \right)^{s_2}\)</span></p>
+<p>Because <span class="math inline">\(p_2 / p_1 = \sqrt{L_1 / L_2} \leq 1\)</span>, the terms geometrically decay or balance out. With careful tuning of the critical probability parameter (e.g., pulling out the necessary constants into the definition of <span class="math inline">\(p\)</span>), this sum collapses directly to the required <span class="math inline">\((1/2)^s\)</span>, sealing the induction.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Meeting Notes &amp; Collaborative Discussions – Criticality of DeMorgan Formulae</title>
+<title>Obsidian: Indcutive approach – Criticality of DeMorgan Formulae</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -310,7 +310,7 @@ window.Quarto = {
 <span class="menu-text">Working Manuscript</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../meetings/index.html" aria-current="page"> 
+    <a class="nav-link" href="../meetings/index.html"> 
 <span class="menu-text">Meeting Notes</span></a>
   </li>  
 </ul>
@@ -330,15 +330,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#meeting-with-ph-september-27-2026" id="toc-meeting-with-ph-september-27-2026" class="nav-link active" data-scroll-target="#meeting-with-ph-september-27-2026"><span class="header-section-number">1</span> 1. Meeting with PH (September 27, 2026)</a>
-  <ul class="collapse">
-  <li><a href="#agenda-key-points" id="toc-agenda-key-points" class="nav-link" data-scroll-target="#agenda-key-points"><span class="header-section-number">1.1</span> Agenda &amp; Key Points:</a></li>
-  </ul></li>
-  <li><a href="#criticality-meeting-july-28" id="toc-criticality-meeting-july-28" class="nav-link" data-scroll-target="#criticality-meeting-july-28"><span class="header-section-number">2</span> 2. Criticality Meeting (July 28)</a>
-  <ul class="collapse">
-  <li><a href="#key-takeaway-subformula-simplification-vs.-cdt-depth" id="toc-key-takeaway-subformula-simplification-vs.-cdt-depth" class="nav-link" data-scroll-target="#key-takeaway-subformula-simplification-vs.-cdt-depth"><span class="header-section-number">2.1</span> Key Takeaway: Subformula Simplification vs.&nbsp;CDT Depth</a></li>
-  </ul></li>
-  <li><a href="#discussion-on-random-projections-shrinkage" id="toc-discussion-on-random-projections-shrinkage" class="nav-link" data-scroll-target="#discussion-on-random-projections-shrinkage"><span class="header-section-number">3</span> 3. Discussion on Random Projections &amp; Shrinkage</a></li>
+  <li><a href="#inductive-approach-for-criticality-of-demorgan-formulae" id="toc-inductive-approach-for-criticality-of-demorgan-formulae" class="nav-link active" data-scroll-target="#inductive-approach-for-criticality-of-demorgan-formulae"><span class="header-section-number">1</span> Inductive approach for Criticality of DeMorgan Formulae</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/tulasimohan/criticality-demorgan-notes/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -348,8 +340,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Meeting Notes &amp; Collaborative Discussions</h1>
-<p class="subtitle lead">Chronology of discussions, insights, and action items</p>
+<h1 class="title">Obsidian: Indcutive approach</h1>
+<p class="subtitle lead">Raw source mirrored from Obsidian Vault</p>
 </div>
 
 
@@ -366,47 +358,54 @@ window.Quarto = {
 </header>
 
 
-<section id="meeting-with-ph-september-27-2026" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="meeting-with-ph-september-27-2026"><span class="header-section-number">1</span> 1. Meeting with PH (September 27, 2026)</h2>
-<p><strong>Context</strong>: Latest review session on status of DeMorgan Criticality proof approaches.</p>
-<section id="agenda-key-points" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="agenda-key-points"><span class="header-section-number">1.1</span> Agenda &amp; Key Points:</h3>
-<ol type="1">
-<li><strong>Compilation of Approaches</strong>: Unifying fragmented notes across Overleaf, Notion, and Obsidian into a single accessible reference.</li>
-<li><strong>Current Status of Non-Inductive Proof</strong>:
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Original Source</strong>: Obsidian Vault (<code>02-Work/Research/Complexity-Theory/Criticality/</code>)<br>
+<strong>File</strong>: <code>Indcutive approach.md</code></p>
+</div>
+</div>
+</div>
+<section id="inductive-approach-for-criticality-of-demorgan-formulae" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Inductive approach for Criticality of DeMorgan Formulae</h1>
+<p><span class="math display">\[\newcommand{\pv}{\mathrm{PathVars}} \newcommand{\zo}{\{0,1\}} \newcommand{\cR}{\mathcal{R}} \newcommand{\condF}{\pv_0(F,\rho,a) = (x_{i_1}, \dots ,x_{i_t})}\newcommand{\condLeft}{\pv_0(F_1,\rho,b) = (x_{i_1}, \dots ,x_{i_s})}\newcommand{\condRight}{\pv_0(F,\rho,a_{&gt;s}) = x_{i_{s+1}}, \dots x_{i_t}} \newcommand{\condAssoc}{Assoc_1(F_1,\rho,a_{\le s}) = b} \newcommand{\cE}{\mathcal{E}} \newcommand{\varseq}[2]{x_{i_{#1}}, \dots x_{i_{#2}}}\]</span> Date: 22 Aug 2025</p>
+<blockquote class="blockquote">
+<p>[!NOTE] Making this proof inductive, is leading it into require ideas from restriction trees, it might be simpler to do the non-inductive proof.</p>
+</blockquote>
+<p>Because of the above reason this approach in abadoned</p>
+<p>A new inductive proof of Criticality of DeMorgan formulae. - Canonical Decision tree is the same as last time.</p>
+<blockquote class="blockquote">
+<p>[! Claim] Unpacking Let <span class="math inline">\(F\)</span> be a De-Morgan formula, <span class="math inline">\(\rho\)</span> be a restriction and <span class="math inline">\(t \in \mathbb{N}\)</span> and <span class="math inline">\(a \in \zo^t\)</span> . If <span class="math inline">\(\condF\)</span> then <span class="math inline">\(\exists s \in [t]\)</span>, <span class="math inline">\(b \in \zo^s\)</span> such that - <span class="math inline">\(Assoc_1(F_1,\rho,a_{\leq s}) = b\)</span> , - <span class="math inline">\(\condLeft\)</span> - <span class="math inline">\(\condRight\)</span> %% &gt;- <span class="math inline">\(x_{i_1}, \dots x_{i_t} \in Stars\)</span> %%</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>[!Claim] Let <span class="math inline">\(F\)</span> be a De-Morgan formula, <span class="math inline">\(\rho\)</span> be a restriction and <span class="math inline">\(t \in \mathbb{N}\)</span> and <span class="math inline">\(a \in \zo^t\)</span> . Given variables <span class="math inline">\(x_{i_1, \dots, x_{i_t}}\)</span>, let <span class="math inline">\(L(x)\)</span> be the number of leaf nodes labelled with the variable <span class="math inline">\(x\)</span>. Let <span class="math inline">\(\Delta\)</span> be a an arbitrary downward closed set in the <span class="math inline">\(Vars = [n]\)</span> then we have <span class="math display">\[\Pr_{\rho \sim \cR_p}[\condF|\Delta] \le p^t \prod_{k = 1}^t \sqrt{L(x_{i_k})}\mu(\varseq{1}{t})\]</span> where <span class="math inline">\(\mu(\varseq1t) = \sum_{s = 0}^t \sum_{b \in zo^t}\Pr[Assoc_1(F_1,\rho,a_{\le s}) = b]\)</span>.</p>
+</blockquote>
+<p>We proceed with the proof of this claim using inductions on the number <span class="math inline">\(t\)</span>,</p>
+<p><span class="math display">\[\Pr_{\rho \sim \cR_p}[\condF|\Delta] = \sum_{0 \le s \le t, b\in \zo^t} \Pr_\rho[Assoc_1(F_1,\rho,a_{\leq s}) = b \land \condLeft \land \condRight|\Delta]\]</span></p>
 <ul>
-<li>Leaf-branching tree decomposition remains the most promising path forward.</li>
-<li>Need to rigorously resolve the sum over topologies <span class="math inline">\(\sum_{T} \sqrt{\Pr[\mathcal{A}(T,b)]}\)</span>.</li>
-</ul></li>
-<li><strong>Action Items</strong>:
-<ul>
-<li>Establish live web documentation accessible by collaborators.</li>
-<li>Tag all prior failed attempts with clear explanations of their failure modes (e.g., Jaikumar’s counterexample, conditioning dependence).</li>
-</ul></li>
-</ol>
-<hr>
-</section>
-</section>
-<section id="criticality-meeting-july-28" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="criticality-meeting-july-28"><span class="header-section-number">2</span> 2. Criticality Meeting (July 28)</h2>
-<p><strong>Source</strong>: Obsidian (<code>July 28 Criticality Meeting.md</code>).</p>
-<section id="key-takeaway-subformula-simplification-vs.-cdt-depth" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="key-takeaway-subformula-simplification-vs.-cdt-depth"><span class="header-section-number">2.1</span> Key Takeaway: Subformula Simplification vs.&nbsp;CDT Depth</h3>
-<ul>
-<li>A subformula simplifying to a single literal and its CDT having depth 1 are <strong>not the same thing</strong>.</li>
-<li>Consider: <span class="math display">\[F = (x_1 \vee x_2) \wedge (x_3 \vee x_4)\]</span> If <span class="math inline">\(x_2 = 0\)</span>, the subformula <span class="math inline">\(F_1 = (x_1 \vee x_2)\)</span> becomes <span class="math inline">\(x_1\)</span>. Its CDT has depth 1. But for the full formula <span class="math inline">\(F\)</span>, evaluating <span class="math inline">\(x_1\)</span> does not terminate evaluation if <span class="math inline">\(x_1 = 1\)</span>; it forces exploration into <span class="math inline">\(F_2\)</span>.</li>
-<li><strong>Impact</strong>: Any inductive hypothesis that assumes depth scales additively with subformula depth must account for the gate connective and whether the subformula’s value determines the parent gate.</li>
+<li>Claim 1: <span class="math inline">\(\{\rho : Pivot_1(F_1,\rho,a_{\le s})= b\}\)</span> is downward closed in the set of <span class="math inline">\(Vars \setminus \{x_{i_1}, \dots x_{i_s}\}\)</span> .<br>
+</li>
+<li>Claim 2: <span class="math inline">\(\{\rho: \condLeft\}\)</span> is downward closed in the set of Vars —-.</li>
+<li>Claim 3: <span class="math inline">\(\{\rho: \condRight\}\)</span> is downward closed in the set of Vars —–.</li>
+<li>Claim 4:<span class="math inline">\(\sum_{t, b} \Pr_\rho[Assoc_1(F_1,\rho,a_{\le s})] \leq 1\)</span></li>
 </ul>
-<hr>
-</section>
-</section>
-<section id="discussion-on-random-projections-shrinkage" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="discussion-on-random-projections-shrinkage"><span class="header-section-number">3</span> 3. Discussion on Random Projections &amp; Shrinkage</h2>
-<p><strong>Source</strong>: Obsidian (<code>Shrinkage under random projections.md</code>).</p>
-<ul>
-<li><strong>Håstad [1998]</strong>: Established <span class="math inline">\(O(p^2)\)</span> shrinkage under random restrictions for DeMorgan formulae, proving an <span class="math inline">\(\tilde{\Omega}(n^3)\)</span> formula size lower bound for Andreev’s function.</li>
-<li><strong>Connection to Criticality</strong>: Proving <span class="math inline">\(\Gamma(F) = O(p\sqrt{L})\)</span> would give tight average sensitivity bounds, improving Fourier concentration and learning algorithms for DeMorgan formulae.</li>
+<p>Assuming Claims 1-4, we can finish the proof.</p>
+<p>Let <span class="math inline">\(\cE_0 = \condAssoc\)</span>, <span class="math inline">\(\cE_1 = \condLeft\)</span> and <span class="math inline">\(\cE_2 = \condRight\)</span></p>
+<p>We also need <span class="math inline">\(\cE\)</span></p>
+<p><span class="math inline">\(\Pr_\rho[\cE_0, \land \cE_1 \land \cE_2|\Delta] \le\)</span> <span class="math inline">\(\Pr_\rho[\cE_0|\Delta] \cdot \Pr[\cE_1|\Delta,\cE_0] \Pr_\rho[\cE_2|\Delta,\cE_0,\cE_1]\)</span></p>
+<p>Since <span class="math inline">\(\cE_0, \cE_1\)</span> and <span class="math inline">\(\cE_2\)</span> are Downward closed, we have by induction hypothesis that,</p>
+<p><span class="math inline">\(\Pr[\cE_1|\Delta'] \le p^s\prod_{k = 1}^s\sqrt{L(x_{i_k})}\)</span> <span class="math inline">\(\Pr[\cE_2|\Delta''] \le p^{t-s}\prod_{k = s+1}^t \sqrt{L(x_{i_k})}\)</span></p>
+<ul class="task-list">
+<li><label><input type="checkbox">Describe Pivot what are its input and output.</label></li>
+<li><label><input type="checkbox">Define an <span class="math inline">\(X\)</span>- Downward closed set.</label></li>
 </ul>
+<p><span class="math inline">\(\mu(x_{i_1}, \dots ,x_{i_t})\)</span> is not spelt out exaclty here.</p>
+<p>Probability that <span class="math inline">\(CDT(F,\rho)\)</span> there is a exploration certificate for <span class="math inline">\(F_1\)</span> using the variables <span class="math inline">\(x_{i_1}, \dots x_{i_t}\)</span>.</p>
+<p><span class="math inline">\(\sum_{x_{i_1},\dots ,x_{i_t}} \mu(x_{i_1}, \dots, x_{i_t}) \leq 1\)</span></p>
+<p><span class="math inline">\(\sum_{\bar x} \mu(\bar x) \prod_{k=1}^t\sqrt{L(x_{i_k})} \leq \sqrt{\sum_{\bar x} \mu(\bar x) \prod_{i=1}^k L(x_{i_k})} \le \sqrt{\sum_{\bar x}\prod_{i=1}^kL(x_{i_k})} \le L^{t/2}\)</span></p>
 
 
 </section>

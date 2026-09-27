@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Meeting Notes &amp; Collaborative Discussions – Criticality of DeMorgan Formulae</title>
+<title>Notion: Hastads Base case proof – Criticality of DeMorgan Formulae</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -310,7 +310,7 @@ window.Quarto = {
 <span class="menu-text">Working Manuscript</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../meetings/index.html" aria-current="page"> 
+    <a class="nav-link" href="../meetings/index.html"> 
 <span class="menu-text">Meeting Notes</span></a>
   </li>  
 </ul>
@@ -330,15 +330,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#meeting-with-ph-september-27-2026" id="toc-meeting-with-ph-september-27-2026" class="nav-link active" data-scroll-target="#meeting-with-ph-september-27-2026"><span class="header-section-number">1</span> 1. Meeting with PH (September 27, 2026)</a>
-  <ul class="collapse">
-  <li><a href="#agenda-key-points" id="toc-agenda-key-points" class="nav-link" data-scroll-target="#agenda-key-points"><span class="header-section-number">1.1</span> Agenda &amp; Key Points:</a></li>
-  </ul></li>
-  <li><a href="#criticality-meeting-july-28" id="toc-criticality-meeting-july-28" class="nav-link" data-scroll-target="#criticality-meeting-july-28"><span class="header-section-number">2</span> 2. Criticality Meeting (July 28)</a>
-  <ul class="collapse">
-  <li><a href="#key-takeaway-subformula-simplification-vs.-cdt-depth" id="toc-key-takeaway-subformula-simplification-vs.-cdt-depth" class="nav-link" data-scroll-target="#key-takeaway-subformula-simplification-vs.-cdt-depth"><span class="header-section-number">2.1</span> Key Takeaway: Subformula Simplification vs.&nbsp;CDT Depth</a></li>
-  </ul></li>
-  <li><a href="#discussion-on-random-projections-shrinkage" id="toc-discussion-on-random-projections-shrinkage" class="nav-link" data-scroll-target="#discussion-on-random-projections-shrinkage"><span class="header-section-number">3</span> 3. Discussion on Random Projections &amp; Shrinkage</a></li>
+  <li><a href="#hastads-base-case-proof" id="toc-hastads-base-case-proof" class="nav-link active" data-scroll-target="#hastads-base-case-proof"><span class="header-section-number">1</span> Hastads Base case proof</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/tulasimohan/criticality-demorgan-notes/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -348,8 +340,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Meeting Notes &amp; Collaborative Discussions</h1>
-<p class="subtitle lead">Chronology of discussions, insights, and action items</p>
+<h1 class="title">Notion: Hastads Base case proof</h1>
+<p class="subtitle lead">Raw source mirrored from Notion workspace</p>
 </div>
 
 
@@ -366,47 +358,54 @@ window.Quarto = {
 </header>
 
 
-<section id="meeting-with-ph-september-27-2026" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="meeting-with-ph-september-27-2026"><span class="header-section-number">1</span> 1. Meeting with PH (September 27, 2026)</h2>
-<p><strong>Context</strong>: Latest review session on status of DeMorgan Criticality proof approaches.</p>
-<section id="agenda-key-points" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="agenda-key-points"><span class="header-section-number">1.1</span> Agenda &amp; Key Points:</h3>
-<ol type="1">
-<li><strong>Compilation of Approaches</strong>: Unifying fragmented notes across Overleaf, Notion, and Obsidian into a single accessible reference.</li>
-<li><strong>Current Status of Non-Inductive Proof</strong>:
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Original Source</strong>: Notion workspace (<code>tulasi.notion.site</code>)<br>
+<strong>File</strong>: <code>Hastads Base case proof.md</code></p>
+</div>
+</div>
+</div>
+<section id="hastads-base-case-proof" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Hastads Base case proof</h1>
+<p>Let <span class="math inline">\(M_F\)</span> be the communication matrix of the game whose <span class="math inline">\(rows = \{\rho: F|_{\rho} \equiv 0\}\)</span> and <span class="math inline">\(columns = \{\rho: F|_\rho \equiv 1\}\)</span> <span class="math inline">\({}\)</span>.</p>
+<p>For each leaf <span class="math inline">\(\ell \in F\)</span>, let <span class="math inline">\(A_\ell \times B_\ell\)</span> denote the rectangle corresponding to <span class="math inline">\(\ell\)</span> in the usual KW protocol for <span class="math inline">\(F\)</span>.</p>
+<p>Proof:</p>
+<p>Consider the set of “bad” restrictions defined as below</p>
+<p>Define the sets <span class="math inline">\(E^0_{\mathcal{T}}(x,\ell)\)</span> and <span class="math inline">\(E^1_{\mathcal{T}}(x,\ell)\)</span> by extending the restriction in <span class="math inline">\(E_{\mathcal{T}}(x,\ell)\)</span> as follows :</p>
+<p><span class="math display">\[\begin{align*}
+\Pr_{\rho}[CDT(F,\rho) = \ell \wedge \rho \in \mathcal{T}]
+&amp;\leq \Pr_{\rho}[ E_{\mathcal{T}}(x,\ell)] \\
+&amp;\leq \frac{2p}{(1-p)} \sqrt{\Pr[E^0_{\mathcal{T}}(x,\ell) \Pr[E^1_{\mathcal{T}}(x,\ell) ]}\\
+\end{align*}\]</span></p>
+<p>Note that <span class="math inline">\(E^0_{\mathcal{T}}(x,\ell) \subseteq A_\ell(F) \cap \mathcal{T}\)</span> and <span class="math inline">\(E^1_{\mathcal{T}}(x,\ell) \subseteq B_\ell(F) \cap \mathcal{T}\)</span>.</p>
+<p>where $A_(F) B_(F) $ is the rectangle corresponding to the leaf/transcript <span class="math inline">\(\ell\)</span> in the Karchmer wigderson protocol <span class="math inline">\(\Pi(F.)\)</span></p>
+<p>Therefore,</p>
+<p>Therefore, <span class="math inline">\(\Pr_{\rho}[CDT(F,\rho) = \ell |\mathcal{T}] \leq \frac{2p}{1-p} \cdot \sqrt{L}\)</span></p>
+<p>Let <span class="math inline">\(F\)</span> be a De-Morgan formula of size $L $ and let <span class="math inline">\(\ell\)</span> be a leaf in <span class="math inline">\(F\)</span>. Let <span class="math inline">\(\mathcal{T}\)</span> be a downward closed set of restrictions. Then,</p>
+<p><span class="math display">\[\Pr_{\rho}[CDT(F,\rho) = \ell| \rho \in \mathcal{T}] \leq O(p\sqrt{\Pr[A_\ell]\Pr[B_\ell]}). \]</span></p>
+<p>If <span class="math inline">\(CDT_{depth}(F,\rho) = 1\)</span>, there exist a variable <span class="math inline">\(x \in stars(\rho)\)</span> and a leaf <span class="math inline">\(\ell\)</span> in <span class="math inline">\(\Pi_F\)</span> such that <span class="math inline">\(\Pi_F(\rho_0,\rho_1) = \ell\)</span>.</p>
 <ul>
-<li>Leaf-branching tree decomposition remains the most promising path forward.</li>
-<li>Need to rigorously resolve the sum over topologies <span class="math inline">\(\sum_{T} \sqrt{\Pr[\mathcal{A}(T,b)]}\)</span>.</li>
-</ul></li>
-<li><strong>Action Items</strong>:
-<ul>
-<li>Establish live web documentation accessible by collaborators.</li>
-<li>Tag all prior failed attempts with clear explanations of their failure modes (e.g., Jaikumar’s counterexample, conditioning dependence).</li>
-</ul></li>
-</ol>
-<hr>
-</section>
-</section>
-<section id="criticality-meeting-july-28" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="criticality-meeting-july-28"><span class="header-section-number">2</span> 2. Criticality Meeting (July 28)</h2>
-<p><strong>Source</strong>: Obsidian (<code>July 28 Criticality Meeting.md</code>).</p>
-<section id="key-takeaway-subformula-simplification-vs.-cdt-depth" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="key-takeaway-subformula-simplification-vs.-cdt-depth"><span class="header-section-number">2.1</span> Key Takeaway: Subformula Simplification vs.&nbsp;CDT Depth</h3>
-<ul>
-<li>A subformula simplifying to a single literal and its CDT having depth 1 are <strong>not the same thing</strong>.</li>
-<li>Consider: <span class="math display">\[F = (x_1 \vee x_2) \wedge (x_3 \vee x_4)\]</span> If <span class="math inline">\(x_2 = 0\)</span>, the subformula <span class="math inline">\(F_1 = (x_1 \vee x_2)\)</span> becomes <span class="math inline">\(x_1\)</span>. Its CDT has depth 1. But for the full formula <span class="math inline">\(F\)</span>, evaluating <span class="math inline">\(x_1\)</span> does not terminate evaluation if <span class="math inline">\(x_1 = 1\)</span>; it forces exploration into <span class="math inline">\(F_2\)</span>.</li>
-<li><strong>Impact</strong>: Any inductive hypothesis that assumes depth scales additively with subformula depth must account for the gate connective and whether the subformula’s value determines the parent gate.</li>
+<li><p>$a {0,1} F|_{(x a)} = a $,</p></li>
+<li><p><span class="math inline">\(\Pi(\rho(x \to 0), \rho(x \to 1)) = \ell\)</span>,</p></li>
+<li><p><span class="math inline">\(\rho(x) = *\)</span>.</p></li>
+<li><p>$F|<em>{} = 0,&nbsp;F|</em>{(x )} = 1 $,</p></li>
+<li><p><span class="math inline">\(\Pi(\rho, \rho(x \to 1)) = \ell\)</span>,</p></li>
+<li><p><span class="math inline">\(\rho(x) = 0\)</span>.</p></li>
+<li><p>$ F|_{(x )} = 0 $, <span class="math inline">\(F|_\rho \equiv 1\)</span>,</p></li>
+<li><p><span class="math inline">\(\Pi(\rho(x \to 0), \rho) = \ell\)</span>,</p></li>
+<li><p><span class="math inline">\(\rho(x) = 1\)</span>.</p></li>
 </ul>
-<hr>
-</section>
-</section>
-<section id="discussion-on-random-projections-shrinkage" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="discussion-on-random-projections-shrinkage"><span class="header-section-number">3</span> 3. Discussion on Random Projections &amp; Shrinkage</h2>
-<p><strong>Source</strong>: Obsidian (<code>Shrinkage under random projections.md</code>).</p>
-<ul>
-<li><strong>Håstad [1998]</strong>: Established <span class="math inline">\(O(p^2)\)</span> shrinkage under random restrictions for DeMorgan formulae, proving an <span class="math inline">\(\tilde{\Omega}(n^3)\)</span> formula size lower bound for Andreev’s function.</li>
-<li><strong>Connection to Criticality</strong>: Proving <span class="math inline">\(\Gamma(F) = O(p\sqrt{L})\)</span> would give tight average sensitivity bounds, improving Fourier concentration and learning algorithms for DeMorgan formulae.</li>
-</ul>
+<p><span class="math inline">\(\sum_\ell \Pr[A_\ell(F) \cap \mathcal{T}] \Pr[B_\ell(F) \cap \mathcal{T}] \leq \Pr[\mathcal{T}]^2\)</span></p>
+<p><span class="math display">\[\begin{align*}
+\sum_{\ell} \Pr_{\rho}[CDT(F,\rho) = \ell \wedge \rho \in \mathcal{T}]
+&amp;\leq \frac{2p}{1-p} \sum_{\ell} \sqrt{\Pr[A_\ell(F) \cap \mathcal{T}] \Pr[B_\ell(F) \cap \mathcal{T}]}\\
+&amp;\leq \frac{2p}{1-p} \sqrt{\sum_{\ell} 1} \sqrt{\sum_\ell \Pr[A_\ell(F) \cap \mathcal{T}] \Pr[B_\ell(F) \cap \mathcal{T}]}\\
+&amp;\leq \frac{2p}{1-p} \sqrt{L}\sqrt{\Pr[\mathcal{T}]^2}
+\end{align*}\]</span></p>
 
 
 </section>

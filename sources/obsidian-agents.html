@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Meeting Notes &amp; Collaborative Discussions – Criticality of DeMorgan Formulae</title>
+<title>Obsidian: AGENTS – Criticality of DeMorgan Formulae</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,35 +108,6 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 <style>html{ scroll-behavior: smooth; }</style>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="../styles.css">
 </head>
@@ -310,7 +316,7 @@ window.Quarto = {
 <span class="menu-text">Working Manuscript</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../meetings/index.html" aria-current="page"> 
+    <a class="nav-link" href="../meetings/index.html"> 
 <span class="menu-text">Meeting Notes</span></a>
   </li>  
 </ul>
@@ -330,15 +336,27 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#meeting-with-ph-september-27-2026" id="toc-meeting-with-ph-september-27-2026" class="nav-link active" data-scroll-target="#meeting-with-ph-september-27-2026"><span class="header-section-number">1</span> 1. Meeting with PH (September 27, 2026)</a>
+  <li><a href="#criticality-of-demorgan-formulae-project-guide" id="toc-criticality-of-demorgan-formulae-project-guide" class="nav-link active" data-scroll-target="#criticality-of-demorgan-formulae-project-guide"><span class="header-section-number">1</span> Criticality of DeMorgan Formulae — Project Guide</a>
   <ul class="collapse">
-  <li><a href="#agenda-key-points" id="toc-agenda-key-points" class="nav-link" data-scroll-target="#agenda-key-points"><span class="header-section-number">1.1</span> Agenda &amp; Key Points:</a></li>
-  </ul></li>
-  <li><a href="#criticality-meeting-july-28" id="toc-criticality-meeting-july-28" class="nav-link" data-scroll-target="#criticality-meeting-july-28"><span class="header-section-number">2</span> 2. Criticality Meeting (July 28)</a>
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link" data-scroll-target="#project-overview"><span class="header-section-number">1.1</span> Project Overview</a></li>
+  <li><a href="#repository-structure" id="toc-repository-structure" class="nav-link" data-scroll-target="#repository-structure"><span class="header-section-number">1.2</span> Repository Structure</a>
   <ul class="collapse">
-  <li><a href="#key-takeaway-subformula-simplification-vs.-cdt-depth" id="toc-key-takeaway-subformula-simplification-vs.-cdt-depth" class="nav-link" data-scroll-target="#key-takeaway-subformula-simplification-vs.-cdt-depth"><span class="header-section-number">2.1</span> Key Takeaway: Subformula Simplification vs.&nbsp;CDT Depth</a></li>
+  <li><a href="#obsidian-vault-02-workresearchcriticality" id="toc-obsidian-vault-02-workresearchcriticality" class="nav-link" data-scroll-target="#obsidian-vault-02-workresearchcriticality"><span class="header-section-number">1.2.1</span> Obsidian Vault (<code>02-Work/Research/Criticality/</code>)</a></li>
+  <li><a href="#overleaf-latex-source-publicoverleafcriticalitydm" id="toc-overleaf-latex-source-publicoverleafcriticalitydm" class="nav-link" data-scroll-target="#overleaf-latex-source-publicoverleafcriticalitydm"><span class="header-section-number">1.2.2</span> Overleaf LaTeX Source (<code>Public/overleaf/CriticalityDM/</code>)</a></li>
   </ul></li>
-  <li><a href="#discussion-on-random-projections-shrinkage" id="toc-discussion-on-random-projections-shrinkage" class="nav-link" data-scroll-target="#discussion-on-random-projections-shrinkage"><span class="header-section-number">3</span> 3. Discussion on Random Projections &amp; Shrinkage</a></li>
+  <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts"><span class="header-section-number">1.3</span> Key Concepts</a></li>
+  <li><a href="#proof-architecture" id="toc-proof-architecture" class="nav-link" data-scroll-target="#proof-architecture"><span class="header-section-number">1.4</span> Proof Architecture</a></li>
+  <li><a href="#current-status" id="toc-current-status" class="nav-link" data-scroll-target="#current-status"><span class="header-section-number">1.5</span> Current Status</a></li>
+  <li><a href="#key-references" id="toc-key-references" class="nav-link" data-scroll-target="#key-references"><span class="header-section-number">1.6</span> Key References</a></li>
+  <li><a href="#development-workflow" id="toc-development-workflow" class="nav-link" data-scroll-target="#development-workflow"><span class="header-section-number">1.7</span> Development Workflow</a>
+  <ul class="collapse">
+  <li><a href="#compilation" id="toc-compilation" class="nav-link" data-scroll-target="#compilation"><span class="header-section-number">1.7.1</span> Compilation</a></li>
+  <li><a href="#key-shortcuts-antigravityvs-code-latex-workshop" id="toc-key-shortcuts-antigravityvs-code-latex-workshop" class="nav-link" data-scroll-target="#key-shortcuts-antigravityvs-code-latex-workshop"><span class="header-section-number">1.7.2</span> Key Shortcuts (Antigravity/VS Code + LaTeX Workshop)</a></li>
+  <li><a href="#vault-overleaf-sync" id="toc-vault-overleaf-sync" class="nav-link" data-scroll-target="#vault-overleaf-sync"><span class="header-section-number">1.7.3</span> Vault ↔︎ Overleaf Sync</a></li>
+  <li><a href="#binary-hygiene" id="toc-binary-hygiene" class="nav-link" data-scroll-target="#binary-hygiene"><span class="header-section-number">1.7.4</span> Binary Hygiene</a></li>
+  </ul></li>
+  <li><a href="#file-conventions" id="toc-file-conventions" class="nav-link" data-scroll-target="#file-conventions"><span class="header-section-number">1.8</span> File Conventions</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/tulasimohan/criticality-demorgan-notes/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -348,8 +366,8 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Meeting Notes &amp; Collaborative Discussions</h1>
-<p class="subtitle lead">Chronology of discussions, insights, and action items</p>
+<h1 class="title">Obsidian: AGENTS</h1>
+<p class="subtitle lead">Raw source mirrored from Obsidian Vault</p>
 </div>
 
 
@@ -366,49 +384,316 @@ window.Quarto = {
 </header>
 
 
-<section id="meeting-with-ph-september-27-2026" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="meeting-with-ph-september-27-2026"><span class="header-section-number">1</span> 1. Meeting with PH (September 27, 2026)</h2>
-<p><strong>Context</strong>: Latest review session on status of DeMorgan Criticality proof approaches.</p>
-<section id="agenda-key-points" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="agenda-key-points"><span class="header-section-number">1.1</span> Agenda &amp; Key Points:</h3>
-<ol type="1">
-<li><strong>Compilation of Approaches</strong>: Unifying fragmented notes across Overleaf, Notion, and Obsidian into a single accessible reference.</li>
-<li><strong>Current Status of Non-Inductive Proof</strong>:
-<ul>
-<li>Leaf-branching tree decomposition remains the most promising path forward.</li>
-<li>Need to rigorously resolve the sum over topologies <span class="math inline">\(\sum_{T} \sqrt{\Pr[\mathcal{A}(T,b)]}\)</span>.</li>
-</ul></li>
-<li><strong>Action Items</strong>:
-<ul>
-<li>Establish live web documentation accessible by collaborators.</li>
-<li>Tag all prior failed attempts with clear explanations of their failure modes (e.g., Jaikumar’s counterexample, conditioning dependence).</li>
-</ul></li>
-</ol>
-<hr>
+<div class="callout callout-style-simple callout-note">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-body-container">
+<p><strong>Original Source</strong>: Obsidian Vault (<code>02-Work/Research/Complexity-Theory/Criticality/</code>)<br>
+<strong>File</strong>: <code>AGENTS.md</code></p>
+</div>
+</div>
+</div>
+<section id="criticality-of-demorgan-formulae-project-guide" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Criticality of DeMorgan Formulae — Project Guide</h1>
+<section id="project-overview" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="project-overview"><span class="header-section-number">1.1</span> Project Overview</h2>
+<p>Proving that a DeMorgan formula with <code>L</code> leaves has <strong>criticality <code>O(√L)</code></strong> under <code>p</code>-random restrictions:</p>
+<pre class="text"><code>Pr[ DTdepth(F|_ρ) ≥ t ] ≤ (p√L)^t</code></pre>
+<p><strong>Authors:</strong> Prahladh Harsha (TIFR), Tulasimohan Molli (FCUL), Jaikumar Radhakrishnan (ICTS)</p>
+</section>
+<section id="repository-structure" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="repository-structure"><span class="header-section-number">1.2</span> Repository Structure</h2>
+<section id="obsidian-vault-02-workresearchcriticality" class="level3" data-number="1.2.1">
+<h3 data-number="1.2.1" class="anchored" data-anchor-id="obsidian-vault-02-workresearchcriticality"><span class="header-section-number">1.2.1</span> Obsidian Vault (<code>02-Work/Research/Criticality/</code>)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>AGENTS.md</code></td>
+<td>This file — project guide for AI agents</td>
+</tr>
+<tr class="even">
+<td><code>Criticality of DeMorgan formulae thoughts.md</code></td>
+<td>High-level notes: Tal’s conjecture, strategies, obstacles</td>
+</tr>
+<tr class="odd">
+<td><code>Criticality proof.md</code></td>
+<td>Core proof sketch with event definitions A/B, claims, probability chain</td>
+</tr>
+<tr class="even">
+<td><code>Indcutive approach.md</code></td>
+<td>Abandoned inductive approach (note: led to restriction tree complexity)</td>
+</tr>
+<tr class="odd">
+<td><code>July 28 Criticality Meeting.md</code></td>
+<td>Meeting notes — technical discussion of A/B claims, open issues</td>
+</tr>
+<tr class="even">
+<td><code>Shrinkage under random projections.md</code></td>
+<td>Notes on Hastad 98, FMT, Dinur-Meir — related literature</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="overleaf-latex-source-publicoverleafcriticalitydm" class="level3" data-number="1.2.2">
+<h3 data-number="1.2.2" class="anchored" data-anchor-id="overleaf-latex-source-publicoverleafcriticalitydm"><span class="header-section-number">1.2.2</span> Overleaf LaTeX Source (<code>Public/overleaf/CriticalityDM/</code>)</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>File</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>main.tex</code></td>
+<td>Root document — preamble, title, abstract, TOC</td>
+</tr>
+<tr class="even">
+<td><code>contents.tex</code></td>
+<td><strong>Main content</strong> (~800 lines) — all sections: intro, preliminaries, CDT, Unpacking/Banyan, Main Proof, Hastad’s base case, Appendix</td>
+</tr>
+<tr class="odd">
+<td><code>non_inductive_proof.tex</code></td>
+<td>Structural lemma + leaf-branching trees (alternative framing, <strong>not included</strong> in main document)</td>
+</tr>
+<tr class="even">
+<td><code>project_macros.tex</code></td>
+<td>Paper-specific macros: <code>\CDT</code>, <code>\Pivot</code>, <code>\Assoc</code>, <code>\zeroBal</code>, <code>\oneBal</code>, etc.</td>
+</tr>
+<tr class="odd">
+<td><code>tm_macros.sty</code></td>
+<td>Theorem environments + general math macros</td>
+</tr>
+<tr class="even">
+<td><code>references.bib</code></td>
+<td>~905 lines, ~60+ references</td>
+</tr>
+<tr class="odd">
+<td><code>old_proofs/</code></td>
+<td><strong>17 abandoned proof attempts</strong> — useful for ideas but not active</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
-<section id="criticality-meeting-july-28" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="criticality-meeting-july-28"><span class="header-section-number">2</span> 2. Criticality Meeting (July 28)</h2>
-<p><strong>Source</strong>: Obsidian (<code>July 28 Criticality Meeting.md</code>).</p>
-<section id="key-takeaway-subformula-simplification-vs.-cdt-depth" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="key-takeaway-subformula-simplification-vs.-cdt-depth"><span class="header-section-number">2.1</span> Key Takeaway: Subformula Simplification vs.&nbsp;CDT Depth</h3>
+<section id="key-concepts" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="key-concepts"><span class="header-section-number">1.3</span> Key Concepts</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>DeMorgan formula</strong></td>
+<td>Formula tree with AND/OR gates, literals at leaves, fan-out 1, alternating?</td>
+</tr>
+<tr class="even">
+<td><strong>Restriction</strong></td>
+<td>Partial assignment <code>ρ: Vars → {0,1,⋆}</code></td>
+</tr>
+<tr class="odd">
+<td><strong><code>p</code>-random restriction</strong></td>
+<td>Each variable independently: <code>⋆</code> w.p. <code>p</code>, 0 w.p. <code>(1-p)/2</code>, 1 w.p. <code>(1-p)/2</code></td>
+</tr>
+<tr class="even">
+<td><strong>Decision tree depth</strong> <code>DTdepth(F | _ρ)</code></td>
+<td>Minimum depth of a DT computing <code>F | _ρ</code></td>
+</tr>
+<tr class="odd">
+<td><strong>Criticality</strong></td>
+<td>Tail bound on <code>DTdepth(F | _ρ) ≥ t</code> under random restrictions</td>
+</tr>
+<tr class="even">
+<td><strong>Canonical Decision Tree (CDT)</strong></td>
+<td>Algorithmic DT construction for a formula under a restriction</td>
+</tr>
+<tr class="odd">
+<td><strong>Balancing</strong> (<code>Balance_{0→1}</code>, <code>Balance_{1→0}</code>)</td>
+<td>Subroutines that find variables to query, ensuring 0→1 or 1→0 transitions</td>
+</tr>
+<tr class="even">
+<td><strong>Assoc</strong></td>
+<td>Associates a sequence of assignments with a sub-formula</td>
+</tr>
+<tr class="odd">
+<td><strong>Trunk</strong></td>
+<td>Maximal sub-tree of formula that simplifies to 0/1 under restriction</td>
+</tr>
+<tr class="even">
+<td><strong>Aerial roots</strong></td>
+<td>Leaves of the trunk — sub-formulae that become literals</td>
+</tr>
+<tr class="odd">
+<td><strong>Exploration Certificate</strong></td>
+<td>Tuple <code>(t_v, X_v, η_v, α_v, β_v)</code> capturing the trunk’s structure</td>
+</tr>
+<tr class="even">
+<td><strong>Banyan decomposition</strong></td>
+<td>Structural lemma decomposing a CDT path into events on sub-formulae</td>
+</tr>
+<tr class="odd">
+<td><strong>Downward closure</strong></td>
+<td>Property enabling conditional probabilities to factor: if <code>ρ ∈ A</code> and <code>ρ' ≤ ρ</code> (more assignments), then <code>ρ' ∈ A</code></td>
+</tr>
+<tr class="even">
+<td><strong>Karchmer-Wigderson (KW) game</strong></td>
+<td>Communication game used in Hastad’s base case</td>
+</tr>
+<tr class="odd">
+<td><strong>Leaf-branching tree</strong></td>
+<td>Tree where every leaf’s parent has ≥2 children</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="proof-architecture" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="proof-architecture"><span class="header-section-number">1.4</span> Proof Architecture</h2>
+<p>Based on actual <code>contents.tex</code> section structure:</p>
+<pre class="text"><code>Introduction (sec:1)
+  └─ Organization (sec:1.1)
+Preliminaries (sec:2)
+  ├─ Demorgan Formula, Size, Depth
+  ├─ Restrictions, p-Random Restrictions
+  ├─ Decision Trees, Criticality
+  ├─ Downward-Closed Sets
+  └─ Trunks, Dangling Sub-trees, Aerial Roots
+Canonical Decision Tree (sec:3)
+  ├─ CDT for depth 2 formulae (sec:3.1)
+  ├─ Balancing — Balance_{0→1}, Balance_{1→0} (sec:3.2)
+  └─ Finding the original path — findSource, Assoc (sec:3.3)
+Unpacking (sec:4)
+  └─ Banyan Decomposition (sec:4.1)
+      ├─ Exploration Certificate
+      ├─ Event A (trunk structure conditions: Assoc satisfiability)
+      └─ Event B (aerial roots → literals under restriction)
+Proof of the Main Theorem (sec:5)
+  ├─ Thm: Main bound via CDT depth + union bound + geometric series
+  ├─ Thm: Intermediate bound via Banyan decomposition
+  ├─ Claim 1: A is downward closed
+  ├─ Claim 2: Pr[B|A] ≤ p^t ∏ √L(v_i, x_i) (via Hastad base case + downward closure factoring)
+  ├─ Claim 3: Σ Pr[A] ≤ 1 (double counting — proof has \todo{})
+  └─ Cauchy-Schwarz + double counting on trunks → (p√L)^t
+Håstad's Base Case (sec:6)
+  ├─ Lemma: Pr[F_v|_ρ ≡ x | Δ] ≤ (p/2)·√L(v, x)
+  └─ KW game, communication matrix, rectangle mass bound
+Appendix
+  └─ Uniqueness of leaf-splitting trunk (proof by contradiction)</code></pre>
+</section>
+<section id="current-status" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="current-status"><span class="header-section-number">1.5</span> Current Status</h2>
+<p><strong>Active proof:</strong> Banyan decomposition + events A/B in <code>contents.tex</code> <strong>Abandoned:</strong> Inductive approach (led to restriction tree complexity)</p>
+<p><strong>Open issues (from document markers and July 28 meeting):</strong> - <strong>Claim 3 proof</strong> (<code>contents.tex:679-688</code>): <code>\todo{}</code> — the double counting argument for Σ Pr[A] ≤ 1 is not yet fleshed out. Need to ensure Banyan decomposition gives an iff condition so that (T, b_T) is uniquely recoverable from ρ. - <strong>Claim 2 aerial root condition</strong> (<code>contents.tex:661-665</code>): the condition <code>\calB</code> definition uses <code>CDT^{(a)}(F_v|_{\eta_v}, ρ) = (X_v → a)</code> which is a change from the earlier “literal” definition. Proof has <code>\todo{This needs to be modified as per the new aerial root condition}</code>. - <strong>Literal vs CDT depth 1</strong> (<code>July 28 Criticality Meeting.md</code>): sub-formula simplifying to a literal and its CDT having depth 1 are not the same thing. Example: F = (x∧y) ∨ (x∧¬y) ≡ x but CDT(F) has depth 2. - Consider labeling decision tree nodes by leaves instead of variables.</p>
+<p><strong>Not included in main document:</strong> - <code>non_inductive_proof.tex</code> — alternative structural lemma framing with leaf-branching trees (not inputted into contents.tex) - <code>old_proofs/</code> — 17 abandoned attempts (inductive, bottom-up, top-open, etc.)</p>
+</section>
+<section id="key-references" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="key-references"><span class="header-section-number">1.6</span> Key References</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Citation</th>
+<th>Key Idea</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>[Hastad 98]</td>
+<td>Shrinkage exponent of DeMorgan formulae, base case lemma</td>
+</tr>
+<tr class="even">
+<td>[Rossman 2019]</td>
+<td>Criticality of regular formulas, CDT framework</td>
+</tr>
+<tr class="odd">
+<td>[Harsha et al 2023]</td>
+<td>Criticality of AC0 formulae, extension of CDT</td>
+</tr>
+<tr class="even">
+<td>[Filmus et al 2023]</td>
+<td>Shrinkage under random projections (FMT)</td>
+</tr>
+<tr class="odd">
+<td>[Dinur-Meir 2018]</td>
+<td>KRW composition conjecture, Hastad bound via KW games</td>
+</tr>
+<tr class="even">
+<td>[Khrapchenko]</td>
+<td>Method for proving formula size lower bounds</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="development-workflow" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="development-workflow"><span class="header-section-number">1.7</span> Development Workflow</h2>
+<section id="compilation" class="level3" data-number="1.7.1">
+<h3 data-number="1.7.1" class="anchored" data-anchor-id="compilation"><span class="header-section-number">1.7.1</span> Compilation</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build the PDF</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">latexmk</span> <span class="at">-pdf</span> main.tex</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Live preview (auto-rebuild on save)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">latexmk</span> <span class="at">-pvc</span> <span class="at">-pdf</span> main.tex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="key-shortcuts-antigravityvs-code-latex-workshop" class="level3" data-number="1.7.2">
+<h3 data-number="1.7.2" class="anchored" data-anchor-id="key-shortcuts-antigravityvs-code-latex-workshop"><span class="header-section-number">1.7.2</span> Key Shortcuts (Antigravity/VS Code + LaTeX Workshop)</h3>
 <ul>
-<li>A subformula simplifying to a single literal and its CDT having depth 1 are <strong>not the same thing</strong>.</li>
-<li>Consider: <span class="math display">\[F = (x_1 \vee x_2) \wedge (x_3 \vee x_4)\]</span> If <span class="math inline">\(x_2 = 0\)</span>, the subformula <span class="math inline">\(F_1 = (x_1 \vee x_2)\)</span> becomes <span class="math inline">\(x_1\)</span>. Its CDT has depth 1. But for the full formula <span class="math inline">\(F\)</span>, evaluating <span class="math inline">\(x_1\)</span> does not terminate evaluation if <span class="math inline">\(x_1 = 1\)</span>; it forces exploration into <span class="math inline">\(F_2\)</span>.</li>
-<li><strong>Impact</strong>: Any inductive hypothesis that assumes depth scales additively with subformula depth must account for the gate connective and whether the subformula’s value determines the parent gate.</li>
+<li><code>Cmd+Option+B</code> — Build</li>
+<li><code>Cmd+Option+V</code> — View PDF</li>
+<li><code>Cmd+Option+J</code> — SyncTeX (source ↔︎ PDF)</li>
 </ul>
-<hr>
 </section>
-</section>
-<section id="discussion-on-random-projections-shrinkage" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="discussion-on-random-projections-shrinkage"><span class="header-section-number">3</span> 3. Discussion on Random Projections &amp; Shrinkage</h2>
-<p><strong>Source</strong>: Obsidian (<code>Shrinkage under random projections.md</code>).</p>
+<section id="vault-overleaf-sync" class="level3" data-number="1.7.3">
+<h3 data-number="1.7.3" class="anchored" data-anchor-id="vault-overleaf-sync"><span class="header-section-number">1.7.3</span> Vault ↔︎ Overleaf Sync</h3>
 <ul>
-<li><strong>Håstad [1998]</strong>: Established <span class="math inline">\(O(p^2)\)</span> shrinkage under random restrictions for DeMorgan formulae, proving an <span class="math inline">\(\tilde{\Omega}(n^3)\)</span> formula size lower bound for Andreev’s function.</li>
-<li><strong>Connection to Criticality</strong>: Proving <span class="math inline">\(\Gamma(F) = O(p\sqrt{L})\)</span> would give tight average sensitivity bounds, improving Fourier concentration and learning algorithms for DeMorgan formulae.</li>
+<li><strong>LaTeX source</strong> lives in <code>Public/overleaf/CriticalityDM/</code> — edited via Overleaf or locally</li>
+<li><strong>Markdown notes</strong> live in the Obsidian vault — planning, proof sketches, meeting notes</li>
+<li>The vault <strong>references</strong> but does <strong>not duplicate</strong> the LaTeX source</li>
+</ul>
+</section>
+<section id="binary-hygiene" class="level3" data-number="1.7.4">
+<h3 data-number="1.7.4" class="anchored" data-anchor-id="binary-hygiene"><span class="header-section-number">1.7.4</span> Binary Hygiene</h3>
+<ul>
+<li><code>*.pdf</code>, <code>*.aux</code>, <code>*.log</code>, <code>*.bbl</code>, <code>*.blg</code>, <code>*.out</code>, <code>*.fdb_latexmk</code>, <code>*.fls</code>, <code>*.synctex.gz</code> are gitignored</li>
+<li>Build outputs go to <code>build/</code> and <code>tmp_compile/</code> (also gitignored)</li>
+</ul>
+</section>
+</section>
+<section id="file-conventions" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="file-conventions"><span class="header-section-number">1.8</span> File Conventions</h2>
+<ul>
+<li><strong>Theorem environments</strong>: theorem, lemma, proposition, corollary, definition, remark, conjecture, claim, example (all in <code>tm_macros.sty</code>)</li>
+<li><strong>Style</strong>: <code>\demorgan</code>, <code>\hastad</code> for proper names; <code>\Lfunc</code> for leaf count; <code>\calR_p</code> for random restrictions</li>
+<li><strong>Color links</strong>: blue (<code>hyperref</code> with <code>colorlinks</code>)</li>
+<li><strong>Bib style</strong>: <code>alpha</code></li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
