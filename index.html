@@ -9,11 +9,10 @@
     :root {
       --bg: #ffffff;
       --text: #1a1a1a;
-      --text-muted: #555555;
-      --border: #e1e4e8;
+      --text-muted: #57606a;
+      --border: #d0d7de;
       --panel-bg: #f6f8fa;
       --accent: #0969da;
-      --accent-bg: #ddf4ff;
       --tag-active: #dafbe1;
       --tag-active-text: #1a7f37;
       --tag-refuted: #ffebe9;
@@ -35,7 +34,7 @@
     a:hover { text-decoration: underline; }
 
     header {
-      padding: 20px 32px;
+      padding: 18px 32px;
       border-bottom: 1px solid var(--border);
       display: flex;
       flex-wrap: wrap;
@@ -45,27 +44,27 @@
       background: #ffffff;
     }
     .header-title h1 { font-size: 18px; font-weight: 600; color: #111; }
-    .header-title .meta { color: var(--text-muted); font-size: 13px; margin-top: 3px; }
+    .header-title .meta { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
     
     /* Prominent LLM Export Banner */
     .llm-banner {
       background: var(--panel-bg);
       border-bottom: 1px solid var(--border);
-      padding: 16px 32px;
+      padding: 14px 32px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
     }
-    .llm-banner-text { font-size: 13px; color: #333; }
+    .llm-banner-text { font-size: 13px; color: #24292f; }
     .llm-banner-text strong { color: #111; font-weight: 600; }
     .llm-actions { display: flex; gap: 10px; }
     .btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 7px 14px;
+      padding: 6px 14px;
       font-size: 13px;
       font-weight: 500;
       border-radius: 6px;
@@ -76,7 +75,7 @@
       text-decoration: none;
       box-shadow: 0 1px 2px rgba(0,0,0,0.04);
     }
-    .btn:hover { background: #f0f2f5; text-decoration: none; }
+    .btn:hover { background: #f3f4f6; text-decoration: none; }
     .btn-primary {
       background: #0969da;
       color: #ffffff;
@@ -87,15 +86,15 @@
     /* Main Split Layout */
     .container {
       display: flex;
-      height: calc(100vh - 138px);
+      height: calc(100vh - 128px);
     }
     .sidebar {
-      width: 380px;
+      width: 400px;
       border-right: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       flex-shrink: 0;
-      background: #fafbfc;
+      background: #fbfcfd;
     }
     .sidebar-header {
       padding: 12px 16px;
@@ -106,7 +105,7 @@
     }
     .search-box {
       width: 100%;
-      padding: 7px 10px;
+      padding: 6px 10px;
       border: 1px solid var(--border);
       border-radius: 6px;
       background: #ffffff;
@@ -121,7 +120,7 @@
       overflow-x: auto;
     }
     .filter-tab {
-      padding: 4px 8px;
+      padding: 3px 8px;
       font-size: 12px;
       border-radius: 4px;
       background: transparent;
@@ -144,15 +143,15 @@
     }
     .note-item {
       padding: 10px 16px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid #edf0f2;
       cursor: pointer;
-      background: #fafbfc;
+      background: #fbfcfd;
       transition: background 0.1s;
     }
-    .note-item:hover { background: #f0f2f5; }
+    .note-item:hover { background: #f3f4f6; }
     .note-item.active { background: #ffffff; border-left: 3px solid var(--accent); }
     .note-item .title { font-weight: 500; font-size: 13px; display: flex; justify-content: space-between; align-items: baseline; }
-    .note-item .sub { font-size: 11px; color: var(--text-muted); margin-top: 3px; }
+    .note-item .meta-row { font-size: 11px; color: var(--text-muted); margin-top: 3px; display: flex; justify-content: space-between; align-items: center; }
     .badge {
       font-size: 10px;
       padding: 1px 6px;
@@ -181,10 +180,17 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #fafbfc;
+      background: #fbfcfd;
     }
     .viewer-info h2 { font-size: 15px; font-weight: 600; color: #111; }
-    .viewer-info .source-path { font-size: 11px; font-family: monospace; color: var(--text-muted); }
+    .viewer-dates {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      display: flex;
+      gap: 12px;
+    }
+    .viewer-dates span strong { color: #24292f; }
     .viewer-body {
       flex: 1;
       overflow-y: auto;
@@ -229,7 +235,7 @@
   <div class="llm-banner">
     <div class="llm-banner-text">
       <strong>Feed All Notes to LLM:</strong>
-      <span style="color: var(--text-muted);"> Download the complete consolidated context bundle (36 notes, manuscripts, and counterexamples):</span>
+      <span style="color: var(--text-muted);"> Consolidated single-context bundles (36 notes, proofs, and counterexamples):</span>
     </div>
     <div class="llm-actions">
       <a href="llm-context.xml" download class="btn btn-primary" title="Recommended for Claude 3.5, Gemini, GPT-4o">
@@ -249,7 +255,7 @@
     <!-- LEFT LIST OF ALL NOTES -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <input type="text" id="searchInput" class="search-box" placeholder="Filter notes by title or content...">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search notes by keyword, formula, or title...">
         <div class="filter-tabs">
           <button class="filter-tab active" onclick="setOriginFilter('all')">All (<span id="count-all">0</span>)</button>
           <button class="filter-tab" onclick="setOriginFilter('overleaf')">Overleaf (<span id="count-overleaf">0</span>)</button>
@@ -268,7 +274,11 @@
       <div class="viewer-toolbar">
         <div class="viewer-info">
           <h2 id="viewTitle">Select a note to inspect</h2>
-          <div class="source-path" id="viewMeta">Origin &bull; Size</div>
+          <div class="viewer-dates" id="viewMeta">
+            <span id="metaCreated">Created: -</span>
+            <span id="metaModified">Last Edited: -</span>
+            <span id="metaOrigin">Origin: -</span>
+          </div>
         </div>
         <div>
           <button class="btn" id="copyNoteBtn" onclick="copyCurrentNote()">
@@ -297,7 +307,12 @@
         
         allNotes = [];
         for (const [origin, files] of Object.entries(rawData.sources)) {
-          for (const [name, content] of Object.entries(files)) {
+          for (const [name, fileObj] of Object.entries(files)) {
+            // Handle structure whether content is string or object with created/modified
+            const content = typeof fileObj === 'string' ? fileObj : fileObj.content;
+            const created = typeof fileObj === 'object' ? fileObj.created : 'Unknown';
+            const modified = typeof fileObj === 'object' ? fileObj.modified : 'Unknown';
+
             let status = null;
             if (name.includes('counter') || name.includes('No balancing')) status = 'REFUTED';
             else if (name.includes('Indcutive') || name.includes('inductive_proof')) status = 'STUCK';
@@ -309,6 +324,8 @@
               origin: origin,
               name: name,
               content: content,
+              created: created,
+              modified: modified,
               lines: content.trim().split('\n').length,
               chars: content.length,
               status: status
@@ -362,8 +379,9 @@
               <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width: 250px;">${note.name}</span>
               ${badgeHtml}
             </div>
-            <div class="sub">
-              <span class="badge badge-origin">${note.origin.toUpperCase()}</span> &bull; ${note.lines} lines &bull; ${(note.chars/1024).toFixed(1)} KB
+            <div class="meta-row">
+              <span><span class="badge badge-origin">${note.origin.toUpperCase()}</span> &bull; ${note.lines} lines</span>
+              <span>Edited: ${note.modified}</span>
             </div>
           </li>
         `;
@@ -376,7 +394,9 @@
       if (!note) return;
 
       document.getElementById('viewTitle').innerText = note.name;
-      document.getElementById('viewMeta').innerText = `Origin: ${note.origin.toUpperCase()} | Length: ${note.lines} lines (${(note.chars / 1024).toFixed(1)} KB)`;
+      document.getElementById('metaCreated').innerHTML = `Created: <strong>${note.created}</strong>`;
+      document.getElementById('metaModified').innerHTML = `Last Edited: <strong>${note.modified}</strong>`;
+      document.getElementById('metaOrigin').innerHTML = `Origin: <strong>${note.origin.toUpperCase()}</strong> (${note.lines} lines, ${(note.chars / 1024).toFixed(1)} KB)`;
       document.getElementById('viewBody').innerText = note.content;
 
       document.querySelectorAll('.note-item').forEach(el => el.classList.remove('active'));
