@@ -2,51 +2,55 @@
 <?xml-stylesheet type="text/xsl" href="xml-style.xsl"?>
 <research_dossier subject="Criticality of DeMorgan Formulae" authors="JR, PH, TM" date="2026-09-27">
   <system_prompt_instruction>
+    <![CDATA[
     You are an expert theoretical computer scientist specializing in Boolean circuit complexity,
     switching lemmas, and random restrictions. This dossier contains all working proof notes,
     formal manuscript drafts, counterexamples, and meeting records regarding Tal Conjecture on the
     Criticality of DeMorgan Formulae. Analyze the arguments, evaluate active vs refuted approaches,
     and identify rigorous strategies to close the open bottlenecks.
+    ]]>
   </system_prompt_instruction>
   <problem_statement>
     <conjecture name="Tal Conjecture on DeMorgan Criticality">
+      <![CDATA[
       Let F be a DeMorgan formula of size L (number of leaves) computing f: {0,1}^n -> {0,1}.
       Under a p-random restriction rho ~ R_p (where each variable is * with prob p, and 0 or 1 with prob (1-p)/2):
       Pr_{rho ~ R_p}[ DT_{depth}(F|_rho) >= t ] <= (O(p * lambda))^t
       where lambda = O(sqrt{L(F)}). Consequently, the criticality / average sensitivity satisfies:
       Gamma(F) = O(p * sqrt{L}).
+      ]]>
     </conjecture>
   </problem_statement>
   <approaches_summary>
     <approach id="cdt-balancing" status="ACTIVE">
-      <name>Canonical Decision Tree with Simultaneous 0- and 1-Balancing</name>
-      <description>Enforcing symmetry between 0- and 1-paths by immediately pruning non-influential variables (JKR suggestion) and balancing upon subtree creation.</description>
-      <mathematical_mechanism>Let F = F1 \lor F2. For every 0-leaf u of CDT(F1, \rho) with path \pi_u, attach Balance(CDT(F2, \rho \circ \pi_u)). Balance ensures for every 0-path \alpha, there exists an equivalent 1-path \beta on the same variable set.</mathematical_mechanism>
-      <open_hurdle_or_failure>Tracking the preservation of downward closure and establishing that \sum_T \mu(T) \le 1 across nested recursive balancing operations without exponential entropy loss.</open_hurdle_or_failure>
+      <name><![CDATA[Canonical Decision Tree with Simultaneous 0- and 1-Balancing]]></name>
+      <description><![CDATA[Enforcing symmetry between 0- and 1-paths by immediately pruning non-influential variables (JKR suggestion) and balancing upon subtree creation.]]></description>
+      <mathematical_mechanism><![CDATA[Let F = F1 \lor F2. For every 0-leaf u of CDT(F1, \rho) with path \pi_u, attach Balance(CDT(F2, \rho \circ \pi_u)). Balance ensures for every 0-path \alpha, there exists an equivalent 1-path \beta on the same variable set.]]></mathematical_mechanism>
+      <open_hurdle_or_failure><![CDATA[Tracking the preservation of downward closure and establishing that \sum_T \mu(T) \le 1 across nested recursive balancing operations without exponential entropy loss.]]></open_hurdle_or_failure>
     </approach>
     <approach id="non-inductive-structural" status="ACTIVE">
-      <name>Non-Inductive Structural Lemma (Banyan Trunk Decomposition)</name>
-      <description>Blaming high-depth exploration paths on leaf-branching binary trees (Trunks) and decomposing into downward-closed routing (A) and aerial root reduction (B).</description>
-      <mathematical_mechanism>Decompose bad event \mathcal{E} into \mathcal{A}(\mathcal{T}, b_T) \wedge \mathcal{B}(\mathcal{T}, b_T). Peel aerial roots using Hastad base case: \sum_{x_i} \Pr[\mathcal{B}_i | \dots] \le 2p\sqrt{L(T_i)}. Apply Jensen / Cauchy-Schwarz: \Pr[CDT_{depth} \ge t] \le (2p)^t \sqrt{\sum_T \mu(T)} \sqrt{\mathbb{E}[\prod L(T_i)]} \le (2p\sqrt{L})^t.</mathematical_mechanism>
-      <open_hurdle_or_failure>Proving that \sum_{T, b_T} \Pr[\mathcal{A}(\bar{v}^*_{T, b_T}, T, b_T)] \le 1 without global argmax cross-variable correlation. Requires peeling variables sequentially.</open_hurdle_or_failure>
+      <name><![CDATA[Non-Inductive Structural Lemma (Banyan Trunk Decomposition)]]></name>
+      <description><![CDATA[Blaming high-depth exploration paths on leaf-branching binary trees (Trunks) and decomposing into downward-closed routing (A) and aerial root reduction (B).]]></description>
+      <mathematical_mechanism><![CDATA[Decompose bad event \mathcal{E} into \mathcal{A}(\mathcal{T}, b_T) \wedge \mathcal{B}(\mathcal{T}, b_T). Peel aerial roots using Hastad base case: \sum_{x_i} \Pr[\mathcal{B}_i | \dots] \le 2p\sqrt{L(T_i)}. Apply Jensen / Cauchy-Schwarz: \Pr[CDT_{depth} \ge t] \le (2p)^t \sqrt{\sum_T \mu(T)} \sqrt{\mathbb{E}[\prod L(T_i)]} \le (2p\sqrt{L})^t.]]></mathematical_mechanism>
+      <open_hurdle_or_failure><![CDATA[Proving that \sum_{T, b_T} \Pr[\mathcal{A}(\bar{v}^*_{T, b_T}, T, b_T)] \le 1 without global argmax cross-variable correlation. Requires peeling variables sequentially.]]></open_hurdle_or_failure>
     </approach>
     <approach id="naive-cdt" status="REFUTED">
-      <name>Naive Canonical Decision Tree (No Balancing)</name>
-      <description>Standard recursive concatenation of subformula decision trees without balancing.</description>
-      <mathematical_mechanism>On F1 \lor F2, evaluate F1; on 0-leaves, evaluate F2.</mathematical_mechanism>
-      <open_hurdle_or_failure>REFUTED BY JAIKUMAR RADHAKRISHNAN: On F = (X \lor Y) \land \bar{Y}, evaluating X first causes Y to lose influence on branch X=0 (formula simplifies to 0). This branches on irrelevant variables, creating asymmetric paths that violate downward closure.</open_hurdle_or_failure>
+      <name><![CDATA[Naive Canonical Decision Tree (No Balancing)]]></name>
+      <description><![CDATA[Standard recursive concatenation of subformula decision trees without balancing.]]></description>
+      <mathematical_mechanism><![CDATA[On F1 \lor F2, evaluate F1; on 0-leaves, evaluate F2.]]></mathematical_mechanism>
+      <open_hurdle_or_failure><![CDATA[REFUTED BY JAIKUMAR RADHAKRISHNAN: On F = (X \lor Y) \land \bar{Y}, evaluating X first causes Y to lose influence on branch X=0 (formula simplifies to 0). This branches on irrelevant variables, creating asymmetric paths that violate downward closure.]]></open_hurdle_or_failure>
     </approach>
     <approach id="inductive-path-factoring" status="STUCK">
-      <name>Inductive Path-Variable Factoring</name>
-      <description>Attempting to induct on path length t by splitting into left segment (length s) and right segment (length t - s).</description>
-      <mathematical_mechanism>Factor \Pr[\mathcal{E}_0 \land \mathcal{E}_1 \land \mathcal{E}_2 | \Delta] into \Pr[\mathcal{E}_0 | \Delta] \cdot \Pr[\mathcal{E}_1 | \Delta, \mathcal{E}_0] \cdot \Pr[\mathcal{E}_2 | \Delta, \mathcal{E}_0, \mathcal{E}_1].</mathematical_mechanism>
-      <open_hurdle_or_failure>STUCK (22 Aug 2025): Condition \Delta_t depends on (x_{i_1}, \dots, x_{i_t}), while \Delta_{t-1} depends on \ell_t and prior variables. Conditioning introduces statistical dependence across restriction steps, preventing clean product factorization.</open_hurdle_or_failure>
+      <name><![CDATA[Inductive Path-Variable Factoring]]></name>
+      <description><![CDATA[Attempting to induct on path length t by splitting into left segment (length s) and right segment (length t - s).]]></description>
+      <mathematical_mechanism><![CDATA[Factor \Pr[\mathcal{E}_0 \land \mathcal{E}_1 \land \mathcal{E}_2 | \Delta] into \Pr[\mathcal{E}_0 | \Delta] \cdot \Pr[\mathcal{E}_1 | \Delta, \mathcal{E}_0] \cdot \Pr[\mathcal{E}_2 | \Delta, \mathcal{E}_0, \mathcal{E}_1].]]></mathematical_mechanism>
+      <open_hurdle_or_failure><![CDATA[STUCK (22 Aug 2025): Condition \Delta_t depends on (x_{i_1}, \dots, x_{i_t}), while \Delta_{t-1} depends on \ell_t and prior variables. Conditioning introduces statistical dependence across restriction steps, preventing clean product factorization.]]></open_hurdle_or_failure>
     </approach>
     <approach id="bottom-up-top-open-kw" status="PARTIAL">
-      <name>Bottom-Up vs. Top-Open KW Protocol Matrix</name>
-      <description>Matrix game formulation M_F (rows = 0-inputs, cols = 1-inputs) and leaf rectangles A_\ell \times B_\ell.</description>
-      <mathematical_mechanism>Base case t=1 is optimal: \sum_\ell \sqrt{\Pr[A_\ell] \Pr[B_\ell]} \le O(p\sqrt{L}).</mathematical_mechanism>
-      <open_hurdle_or_failure>Extending to t \ge 2 requires sequential rectangle composition. Conditioning on intermediate answers causes combinatorial rectangles to leak non-monochromatic elements.</open_hurdle_or_failure>
+      <name><![CDATA[Bottom-Up vs. Top-Open KW Protocol Matrix]]></name>
+      <description><![CDATA[Matrix game formulation M_F (rows = 0-inputs, cols = 1-inputs) and leaf rectangles A_\ell \times B_\ell.]]></description>
+      <mathematical_mechanism><![CDATA[Base case t=1 is optimal: \sum_\ell \sqrt{\Pr[A_\ell] \Pr[B_\ell]} \le O(p\sqrt{L}).]]></mathematical_mechanism>
+      <open_hurdle_or_failure><![CDATA[Extending to t \ge 2 requires sequential rectangle composition. Conditioning on intermediate answers causes combinatorial rectangles to leak non-monochromatic elements.]]></open_hurdle_or_failure>
     </approach>
   </approaches_summary>
   <primary_sources>
@@ -741,164 +745,6 @@ For all leaf nodes $v \in \rm T$.
       </document>
     </source_origin>
     <source_origin type="obsidian">
-      <document name="AGENTS">
-        <![CDATA[
-# Criticality of DeMorgan Formulae — Project Guide
-
-## Project Overview
-
-Proving that a DeMorgan formula with `L` leaves has **criticality `O(√L)`** under `p`-random restrictions:
-
-``` text
-Pr[ DTdepth(F|_ρ) ≥ t ] ≤ (p√L)^t
-```
-
-**Authors:** Prahladh Harsha (TIFR), Tulasimohan Molli (FCUL), Jaikumar Radhakrishnan (ICTS)
-
-## Repository Structure
-
-### Obsidian Vault (`02-Work/Research/Criticality/`)
-
-| File | Purpose |
-|------------------------------------|------------------------------------|
-| `AGENTS.md` | This file — project guide for AI agents |
-| `Criticality of DeMorgan formulae thoughts.md` | High-level notes: Tal's conjecture, strategies, obstacles |
-| `Criticality proof.md` | Core proof sketch with event definitions A/B, claims, probability chain |
-| `Indcutive approach.md` | Abandoned inductive approach (note: led to restriction tree complexity) |
-| `July 28 Criticality Meeting.md` | Meeting notes — technical discussion of A/B claims, open issues |
-| `Shrinkage under random projections.md` | Notes on Hastad 98, FMT, Dinur-Meir — related literature |
-
-### Overleaf LaTeX Source (`Public/overleaf/CriticalityDM/`)
-
-| File | Purpose |
-|------------------------------------|------------------------------------|
-| `main.tex` | Root document — preamble, title, abstract, TOC |
-| `contents.tex` | **Main content** (\~800 lines) — all sections: intro, preliminaries, CDT, Unpacking/Banyan, Main Proof, Hastad's base case, Appendix |
-| `non_inductive_proof.tex` | Structural lemma + leaf-branching trees (alternative framing, **not included** in main document) |
-| `project_macros.tex` | Paper-specific macros: `\CDT`, `\Pivot`, `\Assoc`, `\zeroBal`, `\oneBal`, etc. |
-| `tm_macros.sty` | Theorem environments + general math macros |
-| `references.bib` | \~905 lines, \~60+ references |
-| `old_proofs/` | **17 abandoned proof attempts** — useful for ideas but not active |
-
-## Key Concepts
-
-| Term | Definition |
-|------------------------------------|------------------------------------|
-| **DeMorgan formula** | Formula tree with AND/OR gates, literals at leaves, fan-out 1, alternating? |
-| **Restriction** | Partial assignment `ρ: Vars → {0,1,⋆}` |
-| **`p`-random restriction** | Each variable independently: `⋆` w.p. `p`, 0 w.p. `(1-p)/2`, 1 w.p. `(1-p)/2` |
-| **Decision tree depth** `DTdepth(F | _ρ)` | Minimum depth of a DT computing `F | _ρ` |
-| **Criticality** | Tail bound on `DTdepth(F | _ρ) ≥ t` under random restrictions |
-| **Canonical Decision Tree (CDT)** | Algorithmic DT construction for a formula under a restriction |
-| **Balancing** (`Balance_{0→1}`, `Balance_{1→0}`) | Subroutines that find variables to query, ensuring 0→1 or 1→0 transitions |
-| **Assoc** | Associates a sequence of assignments with a sub-formula |
-| **Trunk** | Maximal sub-tree of formula that simplifies to 0/1 under restriction |
-| **Aerial roots** | Leaves of the trunk — sub-formulae that become literals |
-| **Exploration Certificate** | Tuple `(t_v, X_v, η_v, α_v, β_v)` capturing the trunk's structure |
-| **Banyan decomposition** | Structural lemma decomposing a CDT path into events on sub-formulae |
-| **Downward closure** | Property enabling conditional probabilities to factor: if `ρ ∈ A` and `ρ' ≤ ρ` (more assignments), then `ρ' ∈ A` |
-| **Karchmer-Wigderson (KW) game** | Communication game used in Hastad's base case |
-| **Leaf-branching tree** | Tree where every leaf's parent has ≥2 children |
-
-## Proof Architecture
-
-Based on actual `contents.tex` section structure:
-
-```text
-Introduction (sec:1)
-  └─ Organization (sec:1.1)
-Preliminaries (sec:2)
-  ├─ Demorgan Formula, Size, Depth
-  ├─ Restrictions, p-Random Restrictions
-  ├─ Decision Trees, Criticality
-  ├─ Downward-Closed Sets
-  └─ Trunks, Dangling Sub-trees, Aerial Roots
-Canonical Decision Tree (sec:3)
-  ├─ CDT for depth 2 formulae (sec:3.1)
-  ├─ Balancing — Balance_{0→1}, Balance_{1→0} (sec:3.2)
-  └─ Finding the original path — findSource, Assoc (sec:3.3)
-Unpacking (sec:4)
-  └─ Banyan Decomposition (sec:4.1)
-      ├─ Exploration Certificate
-      ├─ Event A (trunk structure conditions: Assoc satisfiability)
-      └─ Event B (aerial roots → literals under restriction)
-Proof of the Main Theorem (sec:5)
-  ├─ Thm: Main bound via CDT depth + union bound + geometric series
-  ├─ Thm: Intermediate bound via Banyan decomposition
-  ├─ Claim 1: A is downward closed
-  ├─ Claim 2: Pr[B|A] ≤ p^t ∏ √L(v_i, x_i) (via Hastad base case + downward closure factoring)
-  ├─ Claim 3: Σ Pr[A] ≤ 1 (double counting — proof has \todo{})
-  └─ Cauchy-Schwarz + double counting on trunks → (p√L)^t
-Håstad's Base Case (sec:6)
-  ├─ Lemma: Pr[F_v|_ρ ≡ x | Δ] ≤ (p/2)·√L(v, x)
-  └─ KW game, communication matrix, rectangle mass bound
-Appendix
-  └─ Uniqueness of leaf-splitting trunk (proof by contradiction)
-```
-
-## Current Status
-
-**Active proof:** Banyan decomposition + events A/B in `contents.tex`
-**Abandoned:** Inductive approach (led to restriction tree complexity)
-
-**Open issues (from document \todo{} markers and July 28 meeting):**
-- **Claim 3 proof** (`contents.tex:679-688`): `\todo{}` — the double counting argument for Σ Pr[A] ≤ 1 is not yet fleshed out. Need to ensure Banyan decomposition gives an iff condition so that (T, b_T) is uniquely recoverable from ρ.
-- **Claim 2 aerial root condition** (`contents.tex:661-665`): the condition `\calB` definition uses `CDT^{(a)}(F_v|_{\eta_v}, ρ) = (X_v → a)` which is a change from the earlier "literal" definition. Proof has `\todo{This needs to be modified as per the new aerial root condition}`.
-- **Literal vs CDT depth 1** (`July 28 Criticality Meeting.md`): sub-formula simplifying to a literal and its CDT having depth 1 are not the same thing. Example: F = (x∧y) ∨ (x∧¬y) ≡ x but CDT(F) has depth 2.
-- Consider labeling decision tree nodes by leaves instead of variables.
-
-**Not included in main document:**
-- `non_inductive_proof.tex` — alternative structural lemma framing with leaf-branching trees (not inputted into contents.tex)
-- `old_proofs/` — 17 abandoned attempts (inductive, bottom-up, top-open, etc.)
-
-## Key References
-
-| Citation | Key Idea |
-|------------------------------------|------------------------------------|
-| \[Hastad 98\] | Shrinkage exponent of DeMorgan formulae, base case lemma |
-| \[Rossman 2019\] | Criticality of regular formulas, CDT framework |
-| \[Harsha et al 2023\] | Criticality of AC0 formulae, extension of CDT |
-| \[Filmus et al 2023\] | Shrinkage under random projections (FMT) |
-| \[Dinur-Meir 2018\] | KRW composition conjecture, Hastad bound via KW games |
-| \[Khrapchenko\] | Method for proving formula size lower bounds |
-
-## Development Workflow
-
-### Compilation
-
-``` bash
-# Build the PDF
-latexmk -pdf main.tex
-
-# Live preview (auto-rebuild on save)
-latexmk -pvc -pdf main.tex
-```
-
-### Key Shortcuts (Antigravity/VS Code + LaTeX Workshop)
-
--   `Cmd+Option+B` — Build
--   `Cmd+Option+V` — View PDF
--   `Cmd+Option+J` — SyncTeX (source ↔ PDF)
-
-### Vault ↔ Overleaf Sync
-
--   **LaTeX source** lives in `Public/overleaf/CriticalityDM/` — edited via Overleaf or locally
--   **Markdown notes** live in the Obsidian vault — planning, proof sketches, meeting notes
--   The vault **references** but does **not duplicate** the LaTeX source
-
-### Binary Hygiene
-
--   `*.pdf`, `*.aux`, `*.log`, `*.bbl`, `*.blg`, `*.out`, `*.fdb_latexmk`, `*.fls`, `*.synctex.gz` are gitignored
--   Build outputs go to `build/` and `tmp_compile/` (also gitignored)
-
-## File Conventions
-
--   **Theorem environments**: theorem, lemma, proposition, corollary, definition, remark, conjecture, claim, example (all in `tm_macros.sty`)
--   **Style**: `\demorgan`, `\hastad` for proper names; `\Lfunc` for leaf count; `\calR_p` for random restrictions
--   **Color links**: blue (`hyperref` with `colorlinks`)
--   **Bib style**: `alpha`
-]]>
-      </document>
       <document name="Criticality of DeMorgan formulae thoughts">
         <![CDATA[
 Question: Effect of Random restrictions on DeMorgan formulae
