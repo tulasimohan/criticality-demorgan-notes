@@ -1,0 +1,191 @@
+[
+  {
+    "objectID": "meetings/index.html",
+    "href": "meetings/index.html",
+    "title": "Meeting Notes & Collaborative Discussions",
+    "section": "",
+    "text": "Context: Latest review session on status of DeMorgan Criticality proof approaches.\n\n\n\nCompilation of Approaches: Unifying fragmented notes across Overleaf, Notion, and Obsidian into a single accessible reference.\nCurrent Status of Non-Inductive Proof:\n\nLeaf-branching tree decomposition remains the most promising path forward.\nNeed to rigorously resolve the sum over topologies \\(\\sum_{T} \\sqrt{\\Pr[\\mathcal{A}(T,b)]}\\).\n\nAction Items:\n\nEstablish live web documentation accessible by collaborators.\nTag all prior failed attempts with clear explanations of their failure modes (e.g., Jaikumar’s counterexample, conditioning dependence)."
+  },
+  {
+    "objectID": "meetings/index.html#meeting-with-ph-september-27-2026",
+    "href": "meetings/index.html#meeting-with-ph-september-27-2026",
+    "title": "Meeting Notes & Collaborative Discussions",
+    "section": "",
+    "text": "Context: Latest review session on status of DeMorgan Criticality proof approaches.\n\n\n\nCompilation of Approaches: Unifying fragmented notes across Overleaf, Notion, and Obsidian into a single accessible reference.\nCurrent Status of Non-Inductive Proof:\n\nLeaf-branching tree decomposition remains the most promising path forward.\nNeed to rigorously resolve the sum over topologies \\(\\sum_{T} \\sqrt{\\Pr[\\mathcal{A}(T,b)]}\\).\n\nAction Items:\n\nEstablish live web documentation accessible by collaborators.\nTag all prior failed attempts with clear explanations of their failure modes (e.g., Jaikumar’s counterexample, conditioning dependence)."
+  },
+  {
+    "objectID": "meetings/index.html#criticality-meeting-july-28",
+    "href": "meetings/index.html#criticality-meeting-july-28",
+    "title": "Meeting Notes & Collaborative Discussions",
+    "section": "2 2. Criticality Meeting (July 28)",
+    "text": "2 2. Criticality Meeting (July 28)\nSource: Obsidian (July 28 Criticality Meeting.md).\n\n2.1 Key Takeaway: Subformula Simplification vs. CDT Depth\n\nA subformula simplifying to a single literal and its CDT having depth 1 are not the same thing.\nConsider: \\[F = (x_1 \\vee x_2) \\wedge (x_3 \\vee x_4)\\] If \\(x_2 = 0\\), the subformula \\(F_1 = (x_1 \\vee x_2)\\) becomes \\(x_1\\). Its CDT has depth 1. But for the full formula \\(F\\), evaluating \\(x_1\\) does not terminate evaluation if \\(x_1 = 1\\); it forces exploration into \\(F_2\\).\nImpact: Any inductive hypothesis that assumes depth scales additively with subformula depth must account for the gate connective and whether the subformula’s value determines the parent gate."
+  },
+  {
+    "objectID": "meetings/index.html#discussion-on-random-projections-shrinkage",
+    "href": "meetings/index.html#discussion-on-random-projections-shrinkage",
+    "title": "Meeting Notes & Collaborative Discussions",
+    "section": "3 3. Discussion on Random Projections & Shrinkage",
+    "text": "3 3. Discussion on Random Projections & Shrinkage\nSource: Obsidian (Shrinkage under random projections.md).\n\nHåstad [1998]: Established \\(O(p^2)\\) shrinkage under random restrictions for DeMorgan formulae, proving an \\(\\tilde{\\Omega}(n^3)\\) formula size lower bound for Andreev’s function.\nConnection to Criticality: Proving \\(\\Gamma(F) = O(p\\sqrt{L})\\) would give tight average sensitivity bounds, improving Fourier concentration and learning algorithms for DeMorgan formulae."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Criticality of DeMorgan Formulae: Research Compilation",
+    "section": "",
+    "text": "This repository unifies and categorizes all working notes, proof attempts, counterexamples, and drafts from Obsidian, Notion, and Overleaf regarding the Criticality of DeMorgan Formulae.\nThe primary objective is to prove Tal’s Conjecture on the average sensitivity / decision tree depth of DeMorgan formulae under random restrictions:\n\n\n\n\n\n\nTal’s Conjecture\n\n\n\nLet \\(F\\) be a DeMorgan formula of size \\(L\\) computing a Boolean function \\(f: \\{0,1\\}^n \\to \\{0,1\\}\\). Under a \\(p\\)-random restriction \\(\\rho \\sim \\mathcal{R}_p\\), does the decision tree depth of the restricted formula satisfy: \\[\\Pr_{\\rho \\sim \\mathcal{R}_p} [\\mathrm{DT}_{\\mathrm{depth}}(F|_\\rho) \\ge t] \\le (O(p \\cdot \\lambda))^t\\] for some factor \\(\\lambda\\) depending on formula structure (conjectured \\(\\lambda = O(\\sqrt{L})\\)), implying an average sensitivity / criticality bound of \\(\\Gamma(F) = O(p \\sqrt{L})\\)?"
+  },
+  {
+    "objectID": "index.html#executive-summary-mission",
+    "href": "index.html#executive-summary-mission",
+    "title": "Criticality of DeMorgan Formulae: Research Compilation",
+    "section": "",
+    "text": "This repository unifies and categorizes all working notes, proof attempts, counterexamples, and drafts from Obsidian, Notion, and Overleaf regarding the Criticality of DeMorgan Formulae.\nThe primary objective is to prove Tal’s Conjecture on the average sensitivity / decision tree depth of DeMorgan formulae under random restrictions:\n\n\n\n\n\n\nTal’s Conjecture\n\n\n\nLet \\(F\\) be a DeMorgan formula of size \\(L\\) computing a Boolean function \\(f: \\{0,1\\}^n \\to \\{0,1\\}\\). Under a \\(p\\)-random restriction \\(\\rho \\sim \\mathcal{R}_p\\), does the decision tree depth of the restricted formula satisfy: \\[\\Pr_{\\rho \\sim \\mathcal{R}_p} [\\mathrm{DT}_{\\mathrm{depth}}(F|_\\rho) \\ge t] \\le (O(p \\cdot \\lambda))^t\\] for some factor \\(\\lambda\\) depending on formula structure (conjectured \\(\\lambda = O(\\sqrt{L})\\)), implying an average sensitivity / criticality bound of \\(\\Gamma(F) = O(p \\sqrt{L})\\)?"
+  },
+  {
+    "objectID": "index.html#proof-approaches-taxonomy-status-matrix",
+    "href": "index.html#proof-approaches-taxonomy-status-matrix",
+    "title": "Criticality of DeMorgan Formulae: Research Compilation",
+    "section": "2 Proof Approaches Taxonomy & Status Matrix",
+    "text": "2 Proof Approaches Taxonomy & Status Matrix\nBelow is a bird’s-eye view of every proof technique explored across Notion, Obsidian, and Overleaf, tagged by current status and primary hurdles:\n\n\n\n\n\n\n\n\n\n\nApproach\nNotion / Obsidian Source\nOverleaf Source\nStatus\nCore Bottleneck / Hurdle\n\n\n\n\n1. CDT with Simultaneous Balancing\nNotion New CDT, CDT with balancing\ncontents.tex\nActive\nTracking path variables when balancing transforms tree structure\n\n\n2. Non-Inductive Structural Lemma\nNotion New Proof, Rigorous proof\nnon-inductive proof.tex\nActive\nBlaming high depth on leaf-branching subtrees; Cauchy-Schwarz factor control\n\n\n3. Naive CDT (No Balancing)\nNotion CDT No balancing...\nold proofs/proof_old.tex\nRefuted\nJaikumar’s counterexample: 0-paths with no corresponding 1-paths\n\n\n4. Inductive Path-Variable Factoring\nObsidian Indcutive approach.md\nold proofs/inductive_proof.tex\nStuck\nConditioning breakdown: \\(\\Delta_t\\) depends on \\(x_{i_1}, \\dots, x_{i_t}\\), introducing inter-step correlation\n\n\n5. Bottom-Up / Top-Open Matrix Protocols\nNotion Hastads Base case proof\nold proofs/bottom_open.tex, top_open.tex\nPartial\nBase case solved via KW rectangles (\\(M_F\\)), but composition / concatenation across depth encounters non-monochromatic leakage"
+  },
+  {
+    "objectID": "index.html#directory-navigation",
+    "href": "index.html#directory-navigation",
+    "title": "Criticality of DeMorgan Formulae: Research Compilation",
+    "section": "3 Directory Navigation",
+    "text": "3 Directory Navigation\n\nFoundations & Preliminaries: Definitions of DeMorgan formulae, random restrictions \\(\\mathcal{R}_p\\), Canonical Decision Trees (CDTs), and Håstad’s base case.\nProof Approaches Catalog: Detailed walkthroughs of all explored approaches with mathematical formulations and where the arguments break down.\nCounterexamples & Hurdles: In-depth autopsy of Jaikumar’s counterexample and why subformula simplification \\(\\neq\\) CDT depth 1.\nWorking Manuscript Draft: Compiled synthesis of the master paper draft (contents.tex).\nMeeting Notes & Chronology: Dated notes and transcripts from collaborative discussions."
+  },
+  {
+    "objectID": "manuscript/master-draft.html",
+    "href": "manuscript/master-draft.html",
+    "title": "Working Manuscript Synthesis",
+    "section": "",
+    "text": "This document presents the mathematical exposition synthesized from the latest master Overleaf draft (contents.tex) and the structural proof draft (non-inductive proof.tex)."
+  },
+  {
+    "objectID": "manuscript/master-draft.html#overview",
+    "href": "manuscript/master-draft.html#overview",
+    "title": "Working Manuscript Synthesis",
+    "section": "",
+    "text": "This document presents the mathematical exposition synthesized from the latest master Overleaf draft (contents.tex) and the structural proof draft (non-inductive proof.tex)."
+  },
+  {
+    "objectID": "manuscript/master-draft.html#canonical-decision-tree-construction-with-balancing",
+    "href": "manuscript/master-draft.html#canonical-decision-tree-construction-with-balancing",
+    "title": "Working Manuscript Synthesis",
+    "section": "2 1. Canonical Decision Tree Construction with Balancing",
+    "text": "2 1. Canonical Decision Tree Construction with Balancing\nGiven a DeMorgan formula \\(F\\) over variable set \\(V\\) and a restriction \\(\\rho \\in \\{0, 1, *\\}^V\\), \\(\\mathrm{CDT}(F, \\rho)\\) is defined recursively:\n\n2.1 Base Cases\n\nIf \\(F \\equiv 0\\) or \\(F \\equiv 1\\) under \\(\\rho\\), \\(\\mathrm{CDT}(F, \\rho)\\) is a single leaf node labeled with the corresponding constant.\nIf \\(F = \\ell\\) (a literal) and \\(\\rho(\\mathrm{var}(\\ell)) = *\\), \\(\\mathrm{CDT}(F, \\rho)\\) queries \\(\\mathrm{var}(\\ell)\\) with two child leaves \\(0\\) and \\(1\\).\n\n\n\n2.2 Recursive Merging and Simultaneous Balancing\nLet \\(F = F_1 \\vee F_2\\): 1. Recursively compute \\(T_1 = \\mathrm{CDT}(F_1, \\rho)\\). 2. For each leaf \\(u\\) of \\(T_1\\): - Let \\(\\pi_u\\) denote the partial assignment corresponding to the path from the root of \\(T_1\\) to \\(u\\). - If \\(T_1(u) = 1\\), the OR gate is satisfied: the leaf remains labeled \\(1\\). - If \\(T_1(u) = 0\\), replace leaf \\(u\\) with \\(\\mathrm{Balance}(\\mathrm{CDT}(F_2, \\rho \\circ \\pi_u))\\). 3. Apply global tree balancing \\(\\mathrm{Balance}(T)\\) to ensure symmetry between \\(0\\)-paths and \\(1\\)-paths."
+  },
+  {
+    "objectID": "manuscript/master-draft.html#structural-lemma-blaming-the-event-on-subtrees",
+    "href": "manuscript/master-draft.html#structural-lemma-blaming-the-event-on-subtrees",
+    "title": "Working Manuscript Synthesis",
+    "section": "3 2. Structural Lemma: Blaming the Event on Subtrees",
+    "text": "3 2. Structural Lemma: Blaming the Event on Subtrees\nTheorem (Structural Subtree Blame):\nLet \\(F\\) be a DeMorgan formula and \\(\\rho \\sim \\mathcal{R}_p\\). The bad event that \\(\\mathrm{CDT}_{\\mathrm{depth}}(F|_\\rho) \\ge t\\) can be covered by a union of events indexed by leaf-branching binary trees \\(T\\) with \\(t\\) leaves:\n\\[\\Pr_{\\rho \\sim \\mathcal{R}_p} [\\mathrm{CDT}_{\\mathrm{depth}}(F|_\\rho) \\ge t] \\le \\sum_{T \\in \\mathcal{T}_t} \\sum_{b \\in \\{0,1\\}^t} \\Pr[\\mathcal{E}(T, b)]\\]\nwhere for each pair \\((T,b)\\): \\[\\mathcal{E}(T, b) = \\mathcal{A}(T, b) \\wedge \\mathcal{B}(T, b)\\]\nHere, \\(\\mathcal{A}(T, b)\\) enforces that the internal routing conditions of \\(T\\) are satisfied, and \\(\\mathcal{B}(T, b)\\) enforces that all \\(t\\) leaves simultaneously fall into the active restriction set (\\(*\\)).\n\n3.1 Cauchy-Schwarz Bounding\nBy applying Cauchy-Schwarz: \\[\\Pr[\\mathcal{E}(T, b)] \\le \\sqrt{\\Pr[\\mathcal{A}(T, b)] \\cdot \\Pr[\\mathcal{B}(T, b)]}\\]\nSince \\(\\Pr[\\mathcal{B}(T, b)] \\le p^t\\) (each leaf variable must be unassigned by \\(\\rho\\)), the probability scales as: \\[\\Pr[\\mathrm{CDT}_{\\mathrm{depth}}(F|_\\rho) \\ge t] \\le p^{t/2} \\sum_{T \\in \\mathcal{T}_t} \\sqrt{\\Pr[\\mathcal{A}(T, b)]}\\]\nThe critical challenge is establishing that \\(\\sum_{T} \\sqrt{\\Pr[\\mathcal{A}(T,b)]} \\le (O(\\sqrt{L}))^t\\)."
+  },
+  {
+    "objectID": "approaches/index.html",
+    "href": "approaches/index.html",
+    "title": "Taxonomy of Proof Approaches",
+    "section": "",
+    "text": "This section catalogs every proof approach formulated across your notes, tagged with their mathematical mechanisms, current status, and known failure modes or open bottlenecks."
+  },
+  {
+    "objectID": "approaches/index.html#overview",
+    "href": "approaches/index.html#overview",
+    "title": "Taxonomy of Proof Approaches",
+    "section": "",
+    "text": "This section catalogs every proof approach formulated across your notes, tagged with their mathematical mechanisms, current status, and known failure modes or open bottlenecks."
+  },
+  {
+    "objectID": "approaches/index.html#cdt-with-simultaneous-balancing",
+    "href": "approaches/index.html#cdt-with-simultaneous-balancing",
+    "title": "Taxonomy of Proof Approaches",
+    "section": "2 1. CDT with Simultaneous Balancing",
+    "text": "2 1. CDT with Simultaneous Balancing\nSources: Notion (New CDT.md, CDT with balancing.md), Overleaf (contents.tex, lines 240–350).\nStatus: Active\nKey Idea: A primary flaw of naive Canonical Decision Trees is path asymmetry: a \\(0\\)-path in \\(F_1\\) may explore variables without guaranteeing a corresponding \\(1\\)-path over the same variable set. The Balancing operation ensures that for every explored node, the tree is balanced so that both \\(0\\) and \\(1\\) outcomes explore symmetric sets of variables or terminate simultaneously.\n\n\n\n\n\n\nSimultaneous 0- and 1-Balancing\n\n\n\nGiven a decision tree \\(T\\), \\(\\mathrm{Balance}(T)\\) recursively aligns branches: - If a subformula simplifies to a constant under path \\(\\pi\\), redundant branches are pruned. - When merging \\(\\mathrm{CDT}(F_1, \\rho)\\) with \\(\\mathrm{CDT}(F_2, \\rho \\circ \\pi)\\), balancing is applied immediately at the point of creation rather than lazily when attached.\n\n\nCurrent Hurdle:\nTracking path variables \\(\\mathrm{PathVars}(T)\\) through multiple nested balancing steps complicates the inductive distribution under random restrictions \\(\\mathcal{R}_p\\)."
+  },
+  {
+    "objectID": "approaches/index.html#non-inductive-structural-lemma-blaming-bad-events-on-subtrees",
+    "href": "approaches/index.html#non-inductive-structural-lemma-blaming-bad-events-on-subtrees",
+    "title": "Taxonomy of Proof Approaches",
+    "section": "3 2. Non-Inductive Structural Lemma (Blaming Bad Events on Subtrees)",
+    "text": "3 2. Non-Inductive Structural Lemma (Blaming Bad Events on Subtrees)\nSources: Notion (New Proof.md, Rigorous proof.md), Overleaf (non-inductive proof.tex).\nStatus: Active\nKey Idea: Rather than inducting step-by-step on \\(t\\), we bound \\(\\Pr[\\mathrm{CDT}_{\\mathrm{depth}}(F|_\\rho) \\ge t]\\) globally: 1. Partition the bad event into \\(\\mathcal{E}(\\bar{x}, a) = \\{\\rho : \\mathrm{CDT}^{(a)}(F, \\rho) = (x_{i_1}, \\dots, x_{i_t})\\}\\). 2. Blame each bad sequence on a leaf-branching subtree \\((T, b)\\). 3. Factor the probability into \\(\\mathcal{E}(T, b) = \\mathcal{A}(T, b) \\wedge \\mathcal{B}(T, b)\\), where \\(\\mathcal{A}\\) and \\(\\mathcal{B}\\) represent independent or quasi-independent boundary conditions. 4. Apply Cauchy-Schwarz: \\[\\Pr[\\mathcal{E}(\\bar{x}, a)] \\le \\sum_{(T,b)} \\sqrt{\\Pr[\\mathcal{A}(T,b)] \\cdot \\Pr[\\mathcal{B}(T,b)]}.\\]\nCurrent Hurdle:\nSumming over all possible leaf-branching tree topologies \\((T,b)\\) introduces combinatorial entropy that must be offset by the decay factor \\(p^t\\). Tight control of the constant \\(\\lambda\\) requires bounding overlap between subtrees."
+  },
+  {
+    "objectID": "approaches/index.html#naive-cdt-no-balancing-no-tree-restriction",
+    "href": "approaches/index.html#naive-cdt-no-balancing-no-tree-restriction",
+    "title": "Taxonomy of Proof Approaches",
+    "section": "4 3. Naive CDT (No Balancing, No Tree Restriction)",
+    "text": "4 3. Naive CDT (No Balancing, No Tree Restriction)\nSources: Notion (CDT No balancing No tree restriction.md), Overleaf (old proofs/proof_old.tex).\nStatus: Refuted by Counterexample\nKey Idea:\nConstruct \\(\\mathrm{CDT}(F_1 \\vee F_2, \\rho)\\) by simply evaluating \\(F_1\\), and on every \\(0\\)-leaf, appending \\(\\mathrm{CDT}(F_2, \\rho \\circ \\pi)\\) without balancing.\n\n\n\n\n\n\nWhy It Failed: Jaikumar’s Counterexample\n\n\n\nConsider \\(F = (X \\vee Y) \\wedge \\bar{Y}\\). Under a restriction leaving variables unassigned, the naive construction queries \\(X\\), and upon branches where \\(Y\\) loses influence, the tree creates asymmetric paths that fail downward closure and break Cauchy-Schwarz factorization."
+  },
+  {
+    "objectID": "approaches/index.html#inductive-approach-via-path-variable-factoring",
+    "href": "approaches/index.html#inductive-approach-via-path-variable-factoring",
+    "title": "Taxonomy of Proof Approaches",
+    "section": "5 4. Inductive Approach via Path-Variable Factoring",
+    "text": "5 4. Inductive Approach via Path-Variable Factoring\nSources: Obsidian (Indcutive approach.md, New Inductive proof.md), Overleaf (old proofs/inductive_proof.tex).\nStatus: Stuck / Gap\nKey Idea:\nDecompose path variables into left and right subformula segments: \\[\\mathrm{PathVars}_0(F, \\rho, a) = (x_{i_1}, \\dots, x_{i_s}, x_{i_{s+1}}, \\dots, x_{i_t}).\\] Assume the first \\(s\\) variables come from \\(F_1\\) and the remaining \\(t-s\\) from \\(F_2\\), and factor: \\[\\Pr[\\mathcal{E}_t] = \\sum_s \\Pr[\\mathcal{E}_{\\mathrm{left}}(s)] \\cdot \\Pr[\\mathcal{E}_{\\mathrm{right}}(t-s) \\mid \\mathcal{E}_{\\mathrm{left}}(s)].\\]\nWhy It Got Stuck:\nThe conditioning event \\(\\Delta_t\\) depends on the entire sequence of variables \\(x_{i_1}, \\dots, x_{i_t}\\). When unravelling the conditional probability: \\[\\Delta_{t-1} \\text{ depends on } \\ell_t \\text{ and } x_{i_1}, \\dots, x_{i_t},\\] the conditioning introduces statistical dependence across restriction steps, preventing clean product factorization without an exponential loss."
+  },
+  {
+    "objectID": "approaches/index.html#bottom-up-vs.-top-open-kw-protocol-matrix",
+    "href": "approaches/index.html#bottom-up-vs.-top-open-kw-protocol-matrix",
+    "title": "Taxonomy of Proof Approaches",
+    "section": "6 5. Bottom-Up vs. Top-Open KW Protocol Matrix",
+    "text": "6 5. Bottom-Up vs. Top-Open KW Protocol Matrix\nSources: Notion (Hastads Base case proof.md), Overleaf (old proofs/bottom_open.tex, old proofs/top_open.tex, old proofs/communication_game.tex).\nStatus: Partial Success (Base Case Only)\nKey Idea:\nRepresent the formula as a communication game matrix \\(M_F\\) with monochromatic rectangles \\(A_\\ell \\times B_\\ell\\). - Bottom-Open: Opens the communication protocol starting from the leaves. - Top-Open: Opens the protocol starting from the root gate.\nOutcome:\nProves the base case (\\(t=1\\)) with optimal bound \\(O(p\\sqrt{L})\\). However, extending to \\(t \\ge 2\\) requires composing protocols across sequential queries, where rectangle monochromaticity degrades into non-monochromatic combinatorial mixtures."
+  },
+  {
+    "objectID": "counterexamples-and-hurdles/jaikumar-counterexample.html",
+    "href": "counterexamples-and-hurdles/jaikumar-counterexample.html",
+    "title": "Counterexamples & Theoretical Hurdles",
+    "section": "",
+    "text": "Source: Notion (Jaikumars counter example.md), Correspondence with Jaikumar Radhakrishnan (JKR).\n\n\nConsider the DeMorgan formula: \\[F = (X \\vee Y) \\wedge \\bar{Y}\\]\n\n\n\nWhen evaluating \\(F\\) under a restriction \\(\\rho\\) where variables remain unassigned (\\(*\\)): 1. In a naive CDT construction, one first queries \\(X\\). 2. If \\(X = 0\\), the formula simplifies to \\(Y \\wedge \\bar{Y} \\equiv 0\\). 3. If \\(X = 1\\), the formula becomes \\((1 \\vee Y) \\wedge \\bar{Y} = 1 \\wedge \\bar{Y} = \\bar{Y}\\). 4. Under naive concatenation, a path may branch on a variable that has no remaining influence on the output of the full formula, producing asymmetric paths: - A \\(0\\)-path might explore \\(\\{X, Y\\}\\), while the corresponding \\(1\\)-path explores a completely disjoint or asymmetric set of variables. - This destroys the downward closure property essential for switching lemma style encoding arguments.\n\n\n\n\n“As we build our decision trees, we set variables and consider the remaining formula subject to the setting of variables under the current path. If at some point while building the decision tree, we notice that a variable \\(x\\) has no influence on the final output, then set \\(x\\) to \\(0\\) in the formula. For the rest proceed as before, that is, implement the purple line with no collapsing.”\n\nThis insight motivated the modern simultaneous balancing algorithm developed in New CDT.md and contents.tex."
+  },
+  {
+    "objectID": "counterexamples-and-hurdles/jaikumar-counterexample.html#jaikumars-counterexample",
+    "href": "counterexamples-and-hurdles/jaikumar-counterexample.html#jaikumars-counterexample",
+    "title": "Counterexamples & Theoretical Hurdles",
+    "section": "",
+    "text": "Source: Notion (Jaikumars counter example.md), Correspondence with Jaikumar Radhakrishnan (JKR).\n\n\nConsider the DeMorgan formula: \\[F = (X \\vee Y) \\wedge \\bar{Y}\\]\n\n\n\nWhen evaluating \\(F\\) under a restriction \\(\\rho\\) where variables remain unassigned (\\(*\\)): 1. In a naive CDT construction, one first queries \\(X\\). 2. If \\(X = 0\\), the formula simplifies to \\(Y \\wedge \\bar{Y} \\equiv 0\\). 3. If \\(X = 1\\), the formula becomes \\((1 \\vee Y) \\wedge \\bar{Y} = 1 \\wedge \\bar{Y} = \\bar{Y}\\). 4. Under naive concatenation, a path may branch on a variable that has no remaining influence on the output of the full formula, producing asymmetric paths: - A \\(0\\)-path might explore \\(\\{X, Y\\}\\), while the corresponding \\(1\\)-path explores a completely disjoint or asymmetric set of variables. - This destroys the downward closure property essential for switching lemma style encoding arguments.\n\n\n\n\n“As we build our decision trees, we set variables and consider the remaining formula subject to the setting of variables under the current path. If at some point while building the decision tree, we notice that a variable \\(x\\) has no influence on the final output, then set \\(x\\) to \\(0\\) in the formula. For the rest proceed as before, that is, implement the purple line with no collapsing.”\n\nThis insight motivated the modern simultaneous balancing algorithm developed in New CDT.md and contents.tex."
+  },
+  {
+    "objectID": "counterexamples-and-hurdles/jaikumar-counterexample.html#subformula-simplification-vs.-cdt-depth-1",
+    "href": "counterexamples-and-hurdles/jaikumar-counterexample.html#subformula-simplification-vs.-cdt-depth-1",
+    "title": "Counterexamples & Theoretical Hurdles",
+    "section": "2 2. Subformula Simplification vs. CDT Depth 1",
+    "text": "2 2. Subformula Simplification vs. CDT Depth 1\nSource: Obsidian (July 28 Criticality Meeting.md).\n\n\n\n\n\n\nCrucial Meeting Remark (July 28)\n\n\n\nA subformula simplifying to a single literal and its CDT having depth 1 are not the same thing!\n\n\n\n2.1 Example\nLet: \\[F = (x_1 \\vee x_2) \\wedge (x_3 \\vee x_4)\\] Under a restriction \\(\\rho\\), suppose the subformula \\(F_1 = (x_1 \\vee x_2)\\) simplifies to a literal \\(x_1\\) (e.g., \\(x_2 \\to 0\\)). However, the decision tree for \\(F\\) must still evaluate the relation between \\(F_1\\) and \\(F_2\\): - \\(\\mathrm{CDT}(F_1|_\\rho)\\) has depth 1. - But \\(\\mathrm{CDT}(F|_\\rho)\\) depends on the outcome of \\(F_1\\): if \\(x_1 = 0\\), the AND gate evaluates to \\(0\\) immediately; if \\(x_1 = 1\\), it must proceed to evaluate \\((x_3 \\vee x_4)\\). - Conflating literal reduction with decision tree termination leads to inaccurate depth accounting in inductive steps."
+  },
+  {
+    "objectID": "counterexamples-and-hurdles/jaikumar-counterexample.html#the-inter-step-conditioning-barrier",
+    "href": "counterexamples-and-hurdles/jaikumar-counterexample.html#the-inter-step-conditioning-barrier",
+    "title": "Counterexamples & Theoretical Hurdles",
+    "section": "3 3. The Inter-Step Conditioning Barrier",
+    "text": "3 3. The Inter-Step Conditioning Barrier\nSource: Obsidian (Indcutive approach.md), Notion (Criticality of DeMorgan formulae.md).\nWhen expressing the probability of high CDT depth as a sum over path variables: \\[\\sum_{x_{i_1}, \\dots, x_{i_t}} \\sum_{\\ell_1, \\dots, \\ell_t} \\sqrt{\\Pr[A_{F_{-i}} \\mid \\Delta_i] \\cdot \\Pr[B_{F_{-i}} \\mid \\Delta_i]}\\]\n\nThe condition \\(\\Delta_t\\) depends on \\((x_{i_1}, \\dots, x_{i_t})\\).\nThe prior condition \\(\\Delta_{t-1}\\) depends on \\(\\ell_t\\) and \\((x_{i_1}, \\dots, x_{i_{t-1}})\\).\nBecause \\(\\Delta_t\\) and \\(\\Delta_{t-1}\\) share dependencies through the chosen variables, one cannot factor the expectation \\(\\mathbb{E}[\\cdot \\mid \\Delta_t]\\) without accumulating cross-variable covariance terms."
+  },
+  {
+    "objectID": "foundations/preliminaries.html",
+    "href": "foundations/preliminaries.html",
+    "title": "Preliminaries & Foundations",
+    "section": "",
+    "text": "A DeMorgan formula \\(F\\) over variable set \\(V = \\{x_1, \\dots, x_n\\}\\) is a binary tree where internal nodes are labeled with \\(\\wedge\\) (AND) or \\(\\vee\\) (OR) gates and leaves are labeled with literals from \\(\\{x_1, \\dots, x_n, \\bar{x}_1, \\dots, \\bar{x}_n\\}\\).\nThe size of \\(F\\), denoted \\(L(F)\\), is the number of leaves in \\(F\\).\n\n\nA restriction \\(\\rho \\in \\{0, 1, *\\}^V\\) assigns each variable \\(x_i\\) independently: \\[\\rho(x_i) = \\begin{cases} * & \\text{with probability } p, \\\\ 0 & \\text{with probability } \\frac{1-p}{2}, \\\\ 1 & \\text{with probability } \\frac{1-p}{2}. \\end{cases}\\]\nThe restricted formula \\(F|_\\rho\\) is obtained by substituting values assigned by \\(\\rho\\) and applying standard Boolean simplifications (\\(0 \\wedge y = 0\\), \\(1 \\vee y = 1\\), etc.)."
+  },
+  {
+    "objectID": "foundations/preliminaries.html#demorgan-formulae-random-restrictions",
+    "href": "foundations/preliminaries.html#demorgan-formulae-random-restrictions",
+    "title": "Preliminaries & Foundations",
+    "section": "",
+    "text": "A DeMorgan formula \\(F\\) over variable set \\(V = \\{x_1, \\dots, x_n\\}\\) is a binary tree where internal nodes are labeled with \\(\\wedge\\) (AND) or \\(\\vee\\) (OR) gates and leaves are labeled with literals from \\(\\{x_1, \\dots, x_n, \\bar{x}_1, \\dots, \\bar{x}_n\\}\\).\nThe size of \\(F\\), denoted \\(L(F)\\), is the number of leaves in \\(F\\).\n\n\nA restriction \\(\\rho \\in \\{0, 1, *\\}^V\\) assigns each variable \\(x_i\\) independently: \\[\\rho(x_i) = \\begin{cases} * & \\text{with probability } p, \\\\ 0 & \\text{with probability } \\frac{1-p}{2}, \\\\ 1 & \\text{with probability } \\frac{1-p}{2}. \\end{cases}\\]\nThe restricted formula \\(F|_\\rho\\) is obtained by substituting values assigned by \\(\\rho\\) and applying standard Boolean simplifications (\\(0 \\wedge y = 0\\), \\(1 \\vee y = 1\\), etc.)."
+  },
+  {
+    "objectID": "foundations/preliminaries.html#canonical-decision-trees-cdt",
+    "href": "foundations/preliminaries.html#canonical-decision-trees-cdt",
+    "title": "Preliminaries & Foundations",
+    "section": "2 2. Canonical Decision Trees (CDT)",
+    "text": "2 2. Canonical Decision Trees (CDT)\nGiven a formula \\(F\\) and a restriction \\(\\rho\\), a Decision Tree \\(\\mathrm{DT}(F|_\\rho)\\) deterministically queries variables until the function value is determined.\nA Canonical Decision Tree \\(\\mathrm{CDT}(F, \\rho)\\) provides a canonical exploration order for \\(F|_\\rho\\):\n\nLeaf / Literal base case: If \\(F = x_i\\) and \\(\\rho(x_i) = *\\), the tree queries \\(x_i\\). If \\(\\rho(x_i) \\in \\{0,1\\}\\), it returns a leaf labeled with that constant.\nRecursive combination: For \\(F = F_1 \\vee F_2\\):\n\nFirst construct \\(\\mathrm{CDT}(F_1, \\rho)\\).\nFor every leaf of \\(\\mathrm{CDT}(F_1, \\rho)\\) reaching output \\(0\\), attach \\(\\mathrm{CDT}(F_2, \\rho \\circ \\pi)\\), where \\(\\pi\\) is the path assignment from the root to that leaf.\nFor leaves reaching output \\(1\\), the OR gate is satisfied and evaluation terminates."
+  },
+  {
+    "objectID": "foundations/preliminaries.html#håstads-base-case-proof",
+    "href": "foundations/preliminaries.html#håstads-base-case-proof",
+    "title": "Preliminaries & Foundations",
+    "section": "3 3. Håstad’s Base Case Proof",
+    "text": "3 3. Håstad’s Base Case Proof\nIn Notion (Hastads Base case proof.md), the base case (\\(t=1\\)) is handled via the Karchmer-Wigderson communication matrix:\nLet \\(M_F\\) be the communication matrix of the game where: \\[\\text{Rows} = \\{\\rho : F|_\\rho \\equiv 0\\}, \\quad \\text{Columns} = \\{\\rho : F|_\\rho \\equiv 1\\}.\\]\nFor each leaf \\(\\ell \\in F\\), let \\(A_\\ell \\times B_\\ell\\) denote the monochromatic combinatorial rectangle in the KW protocol for \\(F\\). The set of bad restrictions is bounded by: \\[\\sum_{\\ell \\in \\mathrm{Leaves}(F)} \\sqrt{\\Pr[A_\\ell] \\cdot \\Pr[B_\\ell]} \\le O(p \\sqrt{L(F)}).\\]"
+  }
+]
