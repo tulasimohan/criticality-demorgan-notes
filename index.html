@@ -1,438 +1,433 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Criticality of DeMorgan Formulae — Research Dossier</title>
-  <meta name="description" content="Compilation of proof approaches, counterexamples, and manuscript sources for Tal's Conjecture on DeMorgan formula criticality.">
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            brand: {
-              50: '#f0fdf4',
-              500: '#10b981',
-              600: '#059669',
-              900: '#064e3b',
-            }
-          },
-          fontFamily: {
-            mono: ['JetBrains Mono', 'Menlo', 'monospace'],
-            sans: ['Inter', 'system-ui', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-  <!-- KaTeX for fast client-side math -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+  <title>Criticality of DeMorgan Formulae — Notes & LLM Dossier</title>
+  <meta name="description" content="Research notes compilation on the Criticality of DeMorgan Formulae. Authors: JR, PH, TM.">
   <style>
-    /* Custom scrollbars */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(156, 163, 175, 0.4); border-radius: 3px; }
-    .glass { background: rgba(18, 24, 38, 0.85); backdrop-filter: blur(12px); }
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --text-muted: #57606a;
+      --border: #d0d7de;
+      --panel-bg: #f6f8fa;
+      --accent: #0969da;
+      --tag-active: #dafbe1;
+      --tag-active-text: #1a7f37;
+      --tag-refuted: #ffebe9;
+      --tag-refuted-text: #cf222e;
+      --tag-stuck: #fff8c5;
+      --tag-stuck-text: #9a6700;
+      --tag-partial: #fbefff;
+      --tag-partial-text: #8250df;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      font-size: 14px;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      padding: 18px 32px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      background: #ffffff;
+    }
+    .header-title h1 { font-size: 18px; font-weight: 600; color: #111; }
+    .header-title .meta { color: var(--text-muted); font-size: 13px; margin-top: 2px; }
+    
+    /* Prominent LLM Export Banner */
+    .llm-banner {
+      background: var(--panel-bg);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 32px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .llm-banner-text { font-size: 13px; color: #24292f; }
+    .llm-banner-text strong { color: #111; font-weight: 600; }
+    .llm-actions { display: flex; gap: 10px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      color: var(--text);
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .btn:hover { background: #f3f4f6; text-decoration: none; }
+    .btn-primary {
+      background: #0969da;
+      color: #ffffff;
+      border-color: #0969da;
+    }
+    .btn-primary:hover { background: #0856b3; }
+
+    /* Main Split Layout */
+    .container {
+      display: flex;
+      height: calc(100vh - 128px);
+    }
+    .sidebar {
+      width: 400px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      background: #fbfcfd;
+    }
+    .sidebar-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .search-box {
+      width: 100%;
+      padding: 6px 10px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: #ffffff;
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+    }
+    .search-box:focus { border-color: var(--accent); }
+    .filter-tabs {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+    }
+    .filter-tab {
+      padding: 3px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .filter-tab.active {
+      background: #ffffff;
+      border-color: var(--border);
+      color: #111;
+      font-weight: 600;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .notes-list {
+      flex: 1;
+      overflow-y: auto;
+      list-style: none;
+    }
+    .note-item {
+      padding: 10px 16px;
+      border-bottom: 1px solid #edf0f2;
+      cursor: pointer;
+      background: #fbfcfd;
+      transition: background 0.1s;
+    }
+    .note-item:hover { background: #f3f4f6; }
+    .note-item.active { background: #ffffff; border-left: 3px solid var(--accent); }
+    .note-item .title { font-weight: 500; font-size: 13px; display: flex; justify-content: space-between; align-items: baseline; }
+    .note-item .meta-row { font-size: 11px; color: var(--text-muted); margin-top: 3px; display: flex; justify-content: space-between; align-items: center; }
+    .badge {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-origin { background: #eaeef2; border: 1px solid #d0d7de; color: #57606a; }
+    .badge-active { background: var(--tag-active); color: var(--tag-active-text); }
+    .badge-refuted { background: var(--tag-refuted); color: var(--tag-refuted-text); }
+    .badge-stuck { background: var(--tag-stuck); color: var(--tag-stuck-text); }
+    .badge-partial { background: var(--tag-partial); color: var(--tag-partial-text); }
+
+    /* Content Reader */
+    .content-viewer {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    .viewer-toolbar {
+      padding: 12px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fbfcfd;
+    }
+    .viewer-info h2 { font-size: 15px; font-weight: 600; color: #111; }
+    .viewer-dates {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      display: flex;
+      gap: 12px;
+    }
+    .viewer-dates span strong { color: #24292f; }
+    .viewer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 32px;
+      background: #ffffff;
+    }
+    pre.raw-text {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #24292f;
+    }
+    .empty-state {
+      padding: 48px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+
+    @media (max-width: 800px) {
+      .container { flex-direction: column; height: auto; }
+      .sidebar { width: 100%; height: 350px; }
+      .content-viewer { height: 500px; }
+    }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-emerald-500 selection:text-black">
+<body>
 
-  <!-- Mobile header -->
-  <div class="lg:hidden flex items-center justify-between p-4 border-b border-slate-800 bg-slate-900/90 sticky top-0 z-50">
-    <div class="font-bold text-sm text-emerald-400">Criticality: JR, PH, TM</div>
-    <button id="mobileMenuBtn" class="p-2 text-slate-400 hover:text-white focus:outline-none">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-    </button>
+  <!-- Minimal Light Header -->
+  <header>
+    <div class="header-title">
+      <h1>Criticality of DeMorgan Formulae</h1>
+      <div class="meta">Authors: <strong>JR, PH, TM</strong> &bull; Complete Research Notes &amp; Manuscript Archive</div>
+    </div>
+    <div style="font-size: 12px; color: var(--text-muted);">
+      Target: <code>Tal's Conjecture: Pr[DT_depth(F|_ρ) ≥ t] ≤ (O(p√L))^t</code>
+    </div>
+  </header>
+
+  <!-- PROMINENT LLM EXPORT BAR -->
+  <div class="llm-banner">
+    <div class="llm-banner-text">
+      <strong>Feed All Notes to LLM:</strong>
+      <span style="color: var(--text-muted);"> Consolidated single-context bundles (36 notes, proofs, and counterexamples):</span>
+    </div>
+    <div class="llm-actions">
+      <a href="llm-context.xml" download class="btn btn-primary" title="Recommended for Claude 3.5, Gemini, GPT-4o">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+        Download XML Bundle (.xml)
+      </a>
+      <a href="llm-full-dossier.txt" download class="btn" title="Plain text for direct copy paste">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        Download Plain Text Dossier (.txt)
+      </a>
+    </div>
   </div>
 
-  <div class="flex-1 flex overflow-hidden">
+  <!-- INTERACTIVE SPLIT EXPLORER -->
+  <div class="container">
     
-    <!-- LEFT SIDEBAR -->
-    <aside id="sidebar" class="hidden lg:flex flex-col w-72 border-r border-slate-800 bg-slate-900/50 shrink-0 select-none">
-      <div class="p-5 border-b border-slate-800/80">
-        <div class="flex items-center space-x-2">
-          <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold">Research Dossier</span>
+    <!-- LEFT LIST OF ALL NOTES -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <input type="text" id="searchInput" class="search-box" placeholder="Search notes by keyword, formula, or title...">
+        <div class="filter-tabs">
+          <button class="filter-tab active" onclick="setOriginFilter('all')">All (<span id="count-all">0</span>)</button>
+          <button class="filter-tab" onclick="setOriginFilter('overleaf')">Overleaf (<span id="count-overleaf">0</span>)</button>
+          <button class="filter-tab" onclick="setOriginFilter('notion')">Notion (<span id="count-notion">0</span>)</button>
+          <button class="filter-tab" onclick="setOriginFilter('obsidian')">Obsidian (<span id="count-obsidian">0</span>)</button>
         </div>
-        <h1 class="text-lg font-bold text-slate-100 mt-1">DeMorgan Criticality</h1>
-        <p class="text-xs text-slate-400 mt-0.5">Authors: <span class="text-slate-200 font-medium">JR, PH, TM</span></p>
       </div>
 
-      <!-- Quick Actions for LLM -->
-      <div class="p-4 border-b border-slate-800/60 bg-emerald-950/20">
-        <button id="openLlmModalBtn" class="w-full flex items-center justify-center space-x-2 py-2 px-3 bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-semibold text-xs rounded-lg transition shadow-lg shadow-emerald-900/30">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
-          <span>Feed All Notes to LLM</span>
-        </button>
-      </div>
-
-      <!-- Navigation Tree -->
-      <nav class="flex-1 overflow-y-auto p-4 space-y-6 text-sm">
-        <div>
-          <div class="text-xs font-mono font-medium text-slate-400 uppercase tracking-wider mb-2">Navigation</div>
-          <ul class="space-y-1">
-            <li><a href="#overview" class="flex items-center px-2.5 py-1.5 rounded-md text-slate-300 hover:bg-slate-800 hover:text-white transition">Overview & Mission</a></li>
-            <li><a href="#matrix" class="flex items-center px-2.5 py-1.5 rounded-md text-slate-300 hover:bg-slate-800 hover:text-white transition">Approaches Matrix</a></li>
-            <li><a href="#approaches" class="flex items-center px-2.5 py-1.5 rounded-md text-slate-300 hover:bg-slate-800 hover:text-white transition">Deep Proof Catalog</a></li>
-            <li><a href="#hurdles" class="flex items-center px-2.5 py-1.5 rounded-md text-slate-300 hover:bg-slate-800 hover:text-white transition">Counterexamples & Hurdles</a></li>
-            <li><a href="#sources" class="flex items-center px-2.5 py-1.5 rounded-md text-slate-300 hover:bg-slate-800 hover:text-white transition">Primary Source Explorer</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <div class="text-xs font-mono font-medium text-slate-400 uppercase tracking-wider mb-2">Filter Approaches</div>
-          <div class="space-y-1 text-xs">
-            <button onclick="filterApproaches('ALL')" class="filter-btn w-full text-left px-2.5 py-1.5 rounded bg-slate-800 text-white font-medium">All Approaches (5)</button>
-            <button onclick="filterApproaches('ACTIVE')" class="filter-btn w-full text-left px-2.5 py-1.5 rounded text-emerald-400 hover:bg-slate-800">Active (2)</button>
-            <button onclick="filterApproaches('REFUTED')" class="filter-btn w-full text-left px-2.5 py-1.5 rounded text-rose-400 hover:bg-slate-800">Refuted Counterexamples (1)</button>
-            <button onclick="filterApproaches('STUCK')" class="filter-btn w-full text-left px-2.5 py-1.5 rounded text-amber-400 hover:bg-slate-800">Conditioning Hurdles (1)</button>
-            <button onclick="filterApproaches('PARTIAL')" class="filter-btn w-full text-left px-2.5 py-1.5 rounded text-purple-400 hover:bg-slate-800">Base Case Only (1)</button>
-          </div>
-        </div>
-      </nav>
-
-      <div class="p-3 border-t border-slate-800/80 text-[11px] text-slate-500 flex justify-between items-center">
-        <span>GitHub Pages Deploy</span>
-        <a href="https://github.com/tulasimohan/criticality-demorgan-notes" target="_blank" class="hover:text-slate-300">GitHub Repo &rarr;</a>
-      </div>
+      <ul class="notes-list" id="notesList">
+        <!-- Rendered via JS -->
+      </ul>
     </aside>
 
-    <!-- MAIN SCROLLABLE CONTENT -->
-    <main class="flex-1 overflow-y-auto p-6 lg:p-10 space-y-12 max-w-5xl mx-auto">
-
-      <!-- SECTION 1: PROBLEM OVERVIEW -->
-      <section id="overview" class="space-y-4">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700 text-xs text-emerald-400 font-mono">
-          <span>Target: Tal's Conjecture on Average Sensitivity</span>
-        </div>
-        <h2 class="text-3xl font-extrabold tracking-tight text-white">Criticality of DeMorgan Formulae</h2>
-        <p class="text-slate-400 leading-relaxed">
-          A unified, cross-annotated dossier consolidating all research notes, proof attempts, counterexamples, and LaTeX manuscripts from <strong class="text-slate-200">Notion</strong>, <strong class="text-slate-200">Obsidian</strong>, and <strong class="text-slate-200">Overleaf</strong>.
-        </p>
-
-        <!-- Callout Theorem Box -->
-        <div class="p-5 rounded-xl border border-emerald-500/30 bg-emerald-950/10 space-y-2">
-          <div class="text-xs font-mono uppercase tracking-wider text-emerald-400 font-bold">Conjecture Formulation</div>
-          <p class="text-sm text-slate-200">
-            Let $F$ be a DeMorgan formula of size $L$ computing a Boolean function $f: \{0,1\}^n \to \{0,1\}$. Under a $p$-random restriction $\rho \sim \mathcal{R}_p$:
-          </p>
-          <div class="text-base text-center py-2 font-mono text-emerald-300">
-            $$\Pr_{\rho \sim \mathcal{R}_p} [\mathrm{DT}_{\mathrm{depth}}(F|_\rho) \ge t] \le (O(p \cdot \lambda))^t$$
-          </div>
-          <p class="text-xs text-slate-400">
-            where $\lambda = O(\sqrt{L(F)})$, establishing the average sensitivity / criticality bound $\Gamma(F) = O(p \sqrt{L})$.
-          </p>
-        </div>
-      </section>
-
-      <!-- SECTION 2: APPROACHES MATRIX -->
-      <section id="matrix" class="space-y-4">
-        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-          <span>Approaches & Failure Modes Matrix</span>
-        </h3>
-        <p class="text-xs text-slate-400">Status tags represent verified mathematical states, with explicit reasons for stalled or refuted directions.</p>
-
-        <div class="overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/40">
-          <table class="w-full text-left text-xs border-collapse">
-            <thead>
-              <tr class="border-b border-slate-800 bg-slate-900 text-slate-300 font-mono">
-                <th class="p-3">Approach</th>
-                <th class="p-3">Status</th>
-                <th class="p-3">Sources</th>
-                <th class="p-3">Core Hurdle / Failure Mode</th>
-              </tr>
-            </thead>
-            <tbody id="matrixTableBody" class="divide-y divide-slate-800/60 text-slate-300">
-              <!-- Rendered via JS -->
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <!-- SECTION 3: DEEP PROOF CATALOG -->
-      <section id="approaches" class="space-y-6">
-        <h3 class="text-xl font-bold text-white">Proof Approaches Catalog</h3>
-        <div id="approachesContainer" class="space-y-6">
-          <!-- Rendered via JS -->
-        </div>
-      </section>
-
-      <!-- SECTION 4: COUNTEREXAMPLES & HURDLES -->
-      <section id="hurdles" class="space-y-6">
-        <h3 class="text-xl font-bold text-white">Counterexamples & Theoretical Hurdles</h3>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <!-- Jaikumar Counterexample Card -->
-          <div class="p-5 rounded-xl border border-rose-500/30 bg-rose-950/10 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-rose-900/50 text-rose-300 border border-rose-700/50">Counterexample</span>
-              <span class="text-xs text-slate-400">Jaikumar Radhakrishnan</span>
-            </div>
-            <h4 class="font-bold text-slate-100 text-base">Asymmetric Path Collapse: $(X \vee Y) \wedge \bar{Y}$</h4>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              When querying $X$ first on formula $(X \vee Y) \wedge \bar{Y}$, branch $X=0$ yields $Y \wedge \bar{Y} \equiv 0$, rendering $Y$ completely non-influential. The naive CDT branches on irrelevant variables, creating paths that break downward closure and violate Cauchy-Schwarz factorization.
-            </p>
-            <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800 text-[11px] font-mono text-emerald-400">
-              JKR Repair: Prune variables with zero output influence before branch extension.
-            </div>
-          </div>
-
-          <!-- Conditioning Barrier Card -->
-          <div class="p-5 rounded-xl border border-amber-500/30 bg-amber-950/10 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-mono uppercase px-2 py-0.5 rounded bg-amber-900/50 text-amber-300 border border-amber-700/50">Conditioning Gap</span>
-              <span class="text-xs text-slate-400">22 Aug 2025</span>
-            </div>
-            <h4 class="font-bold text-slate-100 text-base">The $\Delta_t$ vs. $\Delta_{t-1}$ Dependence Barrier</h4>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              When unravelling path probabilities inductively: $\Delta_t$ depends on $(x_{i_1}, \dots, x_{i_t})$, while $\Delta_{t-1}$ depends on $\ell_t$ and prior variables. Because the conditions share variables across restriction steps, conditional independence is destroyed, preventing product factorization.
-            </p>
-            <div class="p-2.5 rounded bg-slate-900/80 border border-slate-800 text-[11px] font-mono text-amber-300">
-              Resolution: Abandon step-by-step induction; use non-inductive global Banyan Trunk decomposition.
-            </div>
+    <!-- RIGHT CONTENT READER -->
+    <main class="content-viewer">
+      <div class="viewer-toolbar">
+        <div class="viewer-info">
+          <h2 id="viewTitle">Select a note to inspect</h2>
+          <div class="viewer-dates" id="viewMeta">
+            <span id="metaCreated">Created: -</span>
+            <span id="metaModified">Last Edited: -</span>
+            <span id="metaOrigin">Origin: -</span>
           </div>
         </div>
-      </section>
-
-      <!-- SECTION 5: PRIMARY SOURCE EXPLORER -->
-      <section id="sources" class="space-y-4">
-        <div class="flex items-center justify-between">
-          <h3 class="text-xl font-bold text-white">Substantive Source Inspector</h3>
-          <span class="text-xs text-slate-400 font-mono" id="sourcesCount">37 files available</span>
-        </div>
-        <p class="text-xs text-slate-400">Click any document to inspect its full mirrored contents with native math and code syntax.</p>
-
-        <!-- Tabs -->
-        <div class="flex border-b border-slate-800 text-xs font-mono">
-          <button onclick="switchSourceTab('notion')" id="tab-notion" class="px-4 py-2 border-b-2 border-emerald-500 text-emerald-400 font-bold">Notion (10)</button>
-          <button onclick="switchSourceTab('obsidian')" id="tab-obsidian" class="px-4 py-2 border-b-2 border-transparent text-slate-400 hover:text-slate-200">Obsidian (7)</button>
-          <button onclick="switchSourceTab('overleaf')" id="tab-overleaf" class="px-4 py-2 border-b-2 border-transparent text-slate-400 hover:text-slate-200">Overleaf TeX (20)</button>
-        </div>
-
-        <div id="sourcesList" class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-          <!-- Rendered via JS -->
-        </div>
-      </section>
-
-    </main>
-  </div>
-
-  <!-- SOURCE VIEWER DRAWER / MODAL -->
-  <div id="sourceViewerModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex justify-end">
-    <div class="bg-slate-900 w-full max-w-3xl h-full border-l border-slate-800 flex flex-col p-6 overflow-hidden">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-4">
         <div>
-          <span id="modalSourceType" class="text-xs font-mono uppercase text-emerald-400">Origin</span>
-          <h3 id="modalSourceTitle" class="text-lg font-bold text-white">Document Name</h3>
+          <button class="btn" id="copyNoteBtn" onclick="copyCurrentNote()">
+            Copy Note Content
+          </button>
         </div>
-        <button onclick="closeSourceModal()" class="p-1 rounded-lg text-slate-400 hover:text-white bg-slate-800 hover:bg-slate-700">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-        </button>
       </div>
-      <div id="modalSourceBody" class="flex-1 overflow-y-auto pt-4 text-xs font-mono text-slate-300 leading-relaxed whitespace-pre-wrap">
+      <div class="viewer-body">
+        <pre class="raw-text" id="viewBody"><div class="empty-state">Select any note from the left sidebar to view its full contents.</div></pre>
       </div>
-    </div>
+    </main>
+
   </div>
 
-  <!-- LLM EXPORT MODAL -->
-  <div id="llmModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-slate-900 w-full max-w-2xl rounded-2xl border border-slate-800 p-6 space-y-4 shadow-2xl">
-      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-        <div class="flex items-center gap-2">
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-          <h3 class="text-base font-bold text-white">Export Complete Context for LLM</h3>
-        </div>
-        <button onclick="closeLlmModal()" class="text-slate-400 hover:text-white">&times;</button>
-      </div>
-      <p class="text-xs text-slate-300 leading-relaxed">
-        This package formats all research notes, formal manuscripts (`contents.tex`, `non-inductive proof.tex`), meeting remarks, and failure analyses into an optimized single-context format designed for LLMs (Claude 3.5 Sonnet, GPT-4o, Gemini Pro).
-      </p>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-        <a href="llm-context.xml" download class="p-4 rounded-xl border border-slate-800 bg-slate-950/60 hover:border-emerald-500/50 transition flex flex-col justify-between">
-          <div>
-            <div class="font-bold text-xs text-emerald-400 font-mono">XML Semantic Bundle (.xml)</div>
-            <p class="text-[11px] text-slate-400 mt-1">Structured with XML tags, system prompts, error analyses, and clean CDATA blocks (Recommended for Claude/Gemini).</p>
-          </div>
-          <span class="text-xs text-emerald-500 font-medium mt-3">Download XML &darr; (258 KB)</span>
-        </a>
-
-        <a href="llm-full-dossier.txt" download class="p-4 rounded-xl border border-slate-800 bg-slate-950/60 hover:border-emerald-500/50 transition flex flex-col justify-between">
-          <div>
-            <div class="font-bold text-xs text-slate-200 font-mono">Plain Text Dossier (.txt)</div>
-            <p class="text-[11px] text-slate-400 mt-1">Linear delimited text file without XML tags, optimal for direct copy-pasting into chat windows.</p>
-          </div>
-          <span class="text-xs text-slate-300 font-medium mt-3">Download TXT &darr; (257 KB)</span>
-        </a>
-      </div>
-
-      <div class="pt-2 flex justify-between items-center border-t border-slate-800">
-        <button id="copyPromptBtn" onclick="copyLlmPrompt()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-slate-950 text-xs font-bold rounded-lg transition">
-          Copy System Prompt & Summary
-        </button>
-        <span id="copyConfirm" class="text-xs text-emerald-400 hidden">Copied to clipboard!</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- APPLICATION DATA & LOGIC -->
   <script>
-    let appData = null;
-    let currentSourceTab = 'notion';
+    let rawData = null;
+    let allNotes = [];
+    let currentFilter = 'all';
+    let currentSearch = '';
+    let selectedNoteId = null;
 
-    async function loadData() {
+    async function init() {
       try {
         const resp = await fetch('data.json');
-        appData = await resp.json();
-        renderMatrix(appData.approaches);
-        renderApproaches(appData.approaches);
-        renderSources(currentSourceTab);
-        if (window.renderMathInElement) {
-          renderMathInElement(document.body, {
-            delimiters: [
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false}
-            ],
-            throwOnError: false
-          });
+        rawData = await resp.json();
+        
+        allNotes = [];
+        for (const [origin, files] of Object.entries(rawData.sources)) {
+          for (const [name, fileObj] of Object.entries(files)) {
+            // Handle structure whether content is string or object with created/modified
+            const content = typeof fileObj === 'string' ? fileObj : fileObj.content;
+            const created = typeof fileObj === 'object' ? fileObj.created : 'Unknown';
+            const modified = typeof fileObj === 'object' ? fileObj.modified : 'Unknown';
+
+            let status = null;
+            if (name.includes('counter') || name.includes('No balancing')) status = 'REFUTED';
+            else if (name.includes('Indcutive') || name.includes('inductive_proof')) status = 'STUCK';
+            else if (name.includes('communication') || name.includes('Base case') || name.includes('bottom_open') || name.includes('top_open')) status = 'PARTIAL';
+            else if (name.includes('contents.tex') || name.includes('New CDT') || name.includes('New Proof') || name.includes('Rigorous') || name.includes('non-inductive')) status = 'ACTIVE';
+
+            allNotes.push({
+              id: `${origin}:${name}`,
+              origin: origin,
+              name: name,
+              content: content,
+              created: created,
+              modified: modified,
+              lines: content.trim().split('\n').length,
+              chars: content.length,
+              status: status
+            });
+          }
         }
-      } catch (e) {
-        console.error("Failed to load data.json:", e);
-      }
-    }
 
-    function renderMatrix(approaches) {
-      const tbody = document.getElementById('matrixTableBody');
-      tbody.innerHTML = approaches.map(a => {
-        let badgeColor = a.status === 'ACTIVE' ? 'bg-emerald-950 text-emerald-400 border-emerald-800' :
-                         a.status === 'REFUTED' ? 'bg-rose-950 text-rose-400 border-rose-800' :
-                         a.status === 'STUCK' ? 'bg-amber-950 text-amber-400 border-amber-800' : 'bg-purple-950 text-purple-400 border-purple-800';
-        return `
-          <tr class="hover:bg-slate-800/40 transition">
-            <td class="p-3 font-medium text-white">${a.name}</td>
-            <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-mono border ${badgeColor}">${a.status}</span></td>
-            <td class="p-3 font-mono text-[11px] text-slate-400">${a.overleaf_sources[0] || a.notion_sources[0]}</td>
-            <td class="p-3 text-slate-300 text-[11px] max-w-xs">${a.open_hurdle}</td>
-          </tr>
-        `;
-      }).join('');
-    }
-
-    function renderApproaches(approaches) {
-      const container = document.getElementById('approachesContainer');
-      container.innerHTML = approaches.map(a => {
-        let badgeClass = a.status === 'ACTIVE' ? 'border-emerald-500/40 bg-emerald-950/10' :
-                         a.status === 'REFUTED' ? 'border-rose-500/40 bg-rose-950/10' :
-                         a.status === 'STUCK' ? 'border-amber-500/40 bg-amber-950/10' : 'border-purple-500/40 bg-purple-950/10';
-        return `
-          <article class="p-6 rounded-2xl border ${badgeClass} space-y-4 bg-slate-900/30">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <div class="flex items-center gap-2">
-                <span class="px-2 py-0.5 rounded text-xs font-mono font-bold tracking-wider ${a.status === 'ACTIVE' ? 'text-emerald-400' : a.status === 'REFUTED' ? 'text-rose-400' : a.status === 'STUCK' ? 'text-amber-400' : 'text-purple-400'}">${a.status}</span>
-                <h4 class="text-lg font-bold text-white">${a.name}</h4>
-              </div>
-            </div>
-
-            <p class="text-xs text-slate-300 leading-relaxed">${a.description}</p>
-
-            <div class="p-3 rounded-xl bg-slate-950/80 border border-slate-800/80 space-y-1">
-              <div class="text-[11px] font-mono text-slate-400 uppercase tracking-wider">Mechanism & Proof Sketch</div>
-              <div class="text-xs font-mono text-emerald-300">${a.mathematical_mechanism}</div>
-            </div>
-
-            <div class="p-3 rounded-xl bg-slate-950/40 border border-slate-800/50 space-y-1">
-              <div class="text-[11px] font-mono text-rose-400 uppercase tracking-wider">Known Hurdle / Gap / Failure Reason</div>
-              <div class="text-xs text-slate-300">${a.open_hurdle}</div>
-            </div>
-          </article>
-        `;
-      }).join('');
-    }
-
-    function filterApproaches(status) {
-      if (!appData) return;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('bg-slate-800', 'font-medium'));
-      event.target.classList.add('bg-slate-800', 'font-medium');
-      if (status === 'ALL') {
-        renderApproaches(appData.approaches);
-      } else {
-        renderApproaches(appData.approaches.filter(a => a.status === status));
-      }
-      if (window.renderMathInElement) {
-        renderMathInElement(document.getElementById('approachesContainer'), {
-          delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}],
-          throwOnError: false
+        allNotes.sort((a, b) => {
+          if (a.name === 'contents.tex') return -1;
+          if (b.name === 'contents.tex') return 1;
+          return a.name.localeCompare(b.name);
         });
+
+        document.getElementById('count-all').innerText = allNotes.length;
+        document.getElementById('count-overleaf').innerText = allNotes.filter(n => n.origin === 'overleaf').length;
+        document.getElementById('count-notion').innerText = allNotes.filter(n => n.origin === 'notion').length;
+        document.getElementById('count-obsidian').innerText = allNotes.filter(n => n.origin === 'obsidian').length;
+
+        renderNotesList();
+
+        if (allNotes.length > 0) {
+          selectNote(allNotes[0].id);
+        }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+          currentSearch = e.target.value.toLowerCase();
+          renderNotesList();
+        });
+
+      } catch (e) {
+        console.error("Error loading data:", e);
       }
     }
 
-    function switchSourceTab(tab) {
-      currentSourceTab = tab;
-      ['notion', 'obsidian', 'overleaf'].forEach(t => {
-        const btn = document.getElementById('tab-' + t);
-        if (t === tab) {
-          btn.className = "px-4 py-2 border-b-2 border-emerald-500 text-emerald-400 font-bold";
-        } else {
-          btn.className = "px-4 py-2 border-b-2 border-transparent text-slate-400 hover:text-slate-200";
-        }
+    function renderNotesList() {
+      const listEl = document.getElementById('notesList');
+      const filtered = allNotes.filter(note => {
+        const matchesOrigin = (currentFilter === 'all' || note.origin === currentFilter);
+        const matchesSearch = !currentSearch || 
+          note.name.toLowerCase().includes(currentSearch) || 
+          note.content.toLowerCase().includes(currentSearch);
+        return matchesOrigin && matchesSearch;
       });
-      renderSources(tab);
-    }
 
-    function renderSources(origin) {
-      if (!appData) return;
-      const list = document.getElementById('sourcesList');
-      const files = appData.sources[origin] || {};
-      list.innerHTML = Object.entries(files).map(([name, content]) => {
-        const lines = content.trim().split('\n').length;
-        const chars = content.length;
+      listEl.innerHTML = filtered.map(note => {
+        const isSelected = note.id === selectedNoteId ? 'active' : '';
+        const badgeHtml = note.status ? `<span class="badge badge-${note.status.toLowerCase()}">${note.status}</span>` : '';
         return `
-          <button onclick="viewSource('${origin}', '${name.replace(/'/g, "\\'")}')" class="text-left p-3.5 rounded-xl border border-slate-800 bg-slate-900/40 hover:bg-slate-800/60 hover:border-slate-700 transition flex flex-col justify-between">
-            <div>
-              <span class="text-[10px] font-mono uppercase text-emerald-400">${origin}</span>
-              <div class="text-xs font-semibold text-slate-200 mt-0.5 truncate">${name}</div>
+          <li class="note-item ${isSelected}" onclick="selectNote('${note.id.replace(/'/g, "\\'")}')">
+            <div class="title">
+              <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width: 250px;">${note.name}</span>
+              ${badgeHtml}
             </div>
-            <div class="text-[11px] font-mono text-slate-400 mt-2">${lines} lines &bull; ${(chars/1024).toFixed(1)} KB</div>
-          </button>
+            <div class="meta-row">
+              <span><span class="badge badge-origin">${note.origin.toUpperCase()}</span> &bull; ${note.lines} lines</span>
+              <span>Edited: ${note.modified}</span>
+            </div>
+          </li>
         `;
       }).join('');
     }
 
-    function viewSource(origin, name) {
-      if (!appData) return;
-      const content = appData.sources[origin][name] || "";
-      document.getElementById('modalSourceType').innerText = origin.toUpperCase();
-      document.getElementById('modalSourceTitle').innerText = name;
-      document.getElementById('modalSourceBody').innerText = content;
-      document.getElementById('sourceViewerModal').classList.remove('hidden');
+    function selectNote(id) {
+      selectedNoteId = id;
+      const note = allNotes.find(n => n.id === id);
+      if (!note) return;
+
+      document.getElementById('viewTitle').innerText = note.name;
+      document.getElementById('metaCreated').innerHTML = `Created: <strong>${note.created}</strong>`;
+      document.getElementById('metaModified').innerHTML = `Last Edited: <strong>${note.modified}</strong>`;
+      document.getElementById('metaOrigin').innerHTML = `Origin: <strong>${note.origin.toUpperCase()}</strong> (${note.lines} lines, ${(note.chars / 1024).toFixed(1)} KB)`;
+      document.getElementById('viewBody').innerText = note.content;
+
+      document.querySelectorAll('.note-item').forEach(el => el.classList.remove('active'));
+      const activeEl = Array.from(document.querySelectorAll('.note-item')).find(el => el.getAttribute('onclick')?.includes(id));
+      if (activeEl) activeEl.classList.add('active');
     }
 
-    function closeSourceModal() {
-      document.getElementById('sourceViewerModal').classList.add('hidden');
+    function setOriginFilter(origin) {
+      currentFilter = origin;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      renderNotesList();
     }
 
-    function openLlmModal() {
-      document.getElementById('llmModal').classList.remove('hidden');
+    async function copyCurrentNote() {
+      const note = allNotes.find(n => n.id === selectedNoteId);
+      if (!note) return;
+      await navigator.clipboard.writeText(note.content);
+      const btn = document.getElementById('copyNoteBtn');
+      const oldText = btn.innerText;
+      btn.innerText = 'Copied!';
+      btn.style.background = '#0969da';
+      btn.style.color = '#ffffff';
+      setTimeout(() => {
+        btn.innerText = oldText;
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 1800);
     }
-    function closeLlmModal() {
-      document.getElementById('llmModal').classList.add('hidden');
-    }
-    document.getElementById('openLlmModalBtn').onclick = openLlmModal;
 
-    async function copyLlmPrompt() {
-      const prompt = `You are an expert theoretical computer scientist analyzing Tal's Conjecture on DeMorgan Formula Criticality.\nDownload the research dossier at https://tulasimohan.github.io/criticality-demorgan-notes/llm-context.xml\nAuthors: JR, PH, TM\nGoal: Analyze the Banyan decomposition lemma in contents.tex and propose a resolution for peeling aerial root variables without cross-variable correlation in sum_T mu(T) <= 1.`;
-      await navigator.clipboard.writeText(prompt);
-      const conf = document.getElementById('copyConfirm');
-      conf.classList.remove('hidden');
-      setTimeout(() => conf.classList.add('hidden'), 2500);
-    }
-
-    document.addEventListener("DOMContentLoaded", loadData);
+    document.addEventListener('DOMContentLoaded', init);
   </script>
 </body>
 </html>
