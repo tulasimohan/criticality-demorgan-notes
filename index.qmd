@@ -1,7 +1,7 @@
 ---
-title: "Criticality of DeMorgan Formulae: Research Compilation"
-subtitle: "Unified synthesis of meeting notes, proof attempts, counterexamples, and manuscript drafts"
-author: "Tulasi Mohan & Collaborators"
+title: "Criticality of DeMorgan Formulae"
+subtitle: "Comprehensive compilation of proof approaches, meeting notes, counterexamples, and manuscript drafts"
+author: "JR, PH, TM"
 date: last-modified
 format: html
 ---
@@ -21,9 +21,39 @@ for some factor $\lambda$ depending on formula structure (conjectured $\lambda =
 
 ---
 
-## Proof Approaches Taxonomy & Status Matrix
+## Direct Links to All Original Substantive Notes & Sources
 
-Below is a bird's-eye view of every proof technique explored across Notion, Obsidian, and Overleaf, tagged by current status and primary hurdles:
+Below is a complete index linking directly to the full mirrored text of each working note across Obsidian, Notion, and Overleaf:
+
+| Note / Source File | Origin | Core Approach / Content | Status | Link to Note |
+| :--- | :--- | :--- | :--- | :--- |
+| **New CDT** | Notion | CDT construction with simultaneous balancing | <span class="badge-status badge-active">Active</span> | [View Note](sources/notion-new-cdt.qmd) |
+| **New Proof** | Notion | Blaming bad events on leaf-branching subtrees | <span class="badge-status badge-active">Active</span> | [View Note](sources/notion-new-proof.qmd) |
+| **Rigorous proof** | Notion | Detailed construction of $\mathcal{T}_\rho(F)$ & $(p\lambda)^t$ | <span class="badge-status badge-active">Active</span> | [View Note](sources/notion-rigorous-proof.qmd) |
+| **Jaikumar's Counter Example** | Notion | Failure of naive CDT on $(X \vee Y) \wedge \bar{Y}$ | <span class="badge-status badge-refuted">Counterexample</span> | [View Note](sources/notion-jaikumars-counter-example.qmd) |
+| **CDT: Yes balancing** | Notion | Algorithm for $\mathrm{CDT}_F(G, \rho)$ with balancing | <span class="badge-status badge-active">Active</span> | [View Note](sources/notion-cdt-yes-balancing-no-tree-restriction.qmd) |
+| **CDT: No balancing** | Notion | Unbalanced recursive CDT construction | <span class="badge-status badge-refuted">Refuted</span> | [View Note](sources/notion-cdt-no-balancing-no-tree-restriction.qmd) |
+| **CDT with balancing** | Notion | Pseudocode for recursive $\mathrm{Balance}(\Gamma)$ | <span class="badge-status badge-active">Active</span> | [View Note](sources/notion-cdt-with-balancing.qmd) |
+| **Håstad's Base case proof** | Notion | Communication matrix $M_F$ and KW rectangles | <span class="badge-status badge-partial">Partial</span> | [View Note](sources/notion-hastads-base-case-proof.qmd) |
+| **Project Guide (AGENTS.md)** | Obsidian | Master roadmap, lemma summaries & notation | <span class="badge-status badge-active">Active</span> | [View Note](sources/obsidian-agents.qmd) |
+| **Criticality proof** | Obsidian | CDT definition, Trunk/Aerial roots, Banyan lemma | <span class="badge-status badge-active">Active</span> | [View Note](sources/obsidian-criticality-proof.qmd) |
+| **New Inductive proof** | Obsidian | Restriction trees $\tilde{\rho} : \mathcal{T}_F \to \{0,1,*\}^V$ | <span class="badge-status badge-active">Active</span> | [View Note](sources/obsidian-new-inductive-proof.qmd) |
+| **Inductive approach** | Obsidian | Path variable conditioning breakdown ($\Delta_t$) | <span class="badge-status badge-stuck">Stuck</span> | [View Note](sources/obsidian-indcutive-approach.qmd) |
+| **July 28 Criticality Meeting** | Obsidian | Subformula literal reduction $\neq$ CDT depth 1 | <span class="badge-status badge-resolved">Insight</span> | [View Note](sources/obsidian-july-28-criticality-meeting.qmd) |
+| **Criticality of DeMorgan thoughts** | Obsidian | Tal's conjecture statement & average sensitivity | <span class="badge-status badge-active">Active</span> | [View Note](sources/obsidian-criticality-of-demorgan-formulae-thoughts.qmd) |
+| **`contents.tex`** | Overleaf | Working master paper draft (786 lines) | <span class="badge-status badge-active">Active Manuscript</span> | [View TeX](sources/overleaf-contents.qmd) |
+| **`non-inductive proof.tex`** | Overleaf | Structural Lemma: Blaming the event on subtrees | <span class="badge-status badge-active">Active</span> | [View TeX](sources/overleaf-non-inductive-proof.qmd) |
+| **`old proofs/inductive_proof.tex`**| Overleaf | Formal inductive path argument (472 lines) | <span class="badge-status badge-stuck">Stuck</span> | [View TeX](sources/overleaf-old-proofs-inductive_proof.qmd) |
+| **`old proofs/canonical_decison_tree.tex`**| Overleaf | CDT construction algorithm writeup | <span class="badge-status badge-active">Active</span> | [View TeX](sources/overleaf-old-proofs-canonical_decison_tree.qmd) |
+| **`old proofs/communication_game.tex`**| Overleaf | KW protocol matrix game representation | <span class="badge-status badge-partial">Partial</span> | [View TeX](sources/overleaf-old-proofs-communication_game.qmd) |
+| **`old proofs/bottom_open.tex`** | Overleaf | Protocol opening from bottom leaves | <span class="badge-status badge-partial">Partial</span> | [View TeX](sources/overleaf-old-proofs-bottom_open.qmd) |
+| **`old proofs/top_open.tex`** | Overleaf | Protocol opening from root gate | <span class="badge-status badge-partial">Partial</span> | [View TeX](sources/overleaf-old-proofs-top_open.qmd) |
+
+*(See the full directory of all substantive notes in the [**Sources Directory**](sources/index.qmd).)*
+
+---
+
+## Proof Approaches Taxonomy & Status Matrix
 
 | Approach | Notion / Obsidian Source | Overleaf Source | Status | Core Bottleneck / Hurdle |
 | :--- | :--- | :--- | :--- | :--- |
@@ -37,6 +67,7 @@ Below is a bird's-eye view of every proof technique explored across Notion, Obsi
 
 ## Directory Navigation
 
+- [**All Original Sources**](sources/index.qmd): Directory with individual links to every note mirrored from Notion, Obsidian, and Overleaf.
 - [**Foundations & Preliminaries**](foundations/preliminaries.qmd): Definitions of DeMorgan formulae, random restrictions $\mathcal{R}_p$, Canonical Decision Trees (CDTs), and Håstad's base case.
 - [**Proof Approaches Catalog**](approaches/index.qmd): Detailed walkthroughs of all explored approaches with mathematical formulations and where the arguments break down.
 - [**Counterexamples & Hurdles**](counterexamples-and-hurdles/jaikumar-counterexample.qmd): In-depth autopsy of Jaikumar's counterexample and why subformula simplification $\neq$ CDT depth 1.

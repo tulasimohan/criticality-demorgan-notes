@@ -1,0 +1,154 @@
+# Criticality of DeMorgan Formulae — Project Guide
+
+## Project Overview
+
+Proving that a DeMorgan formula with `L` leaves has **criticality `O(√L)`** under `p`-random restrictions:
+
+``` text
+Pr[ DTdepth(F|_ρ) ≥ t ] ≤ (p√L)^t
+```
+
+**Authors:** Prahladh Harsha (TIFR), Tulasimohan Molli (FCUL), Jaikumar Radhakrishnan (ICTS)
+
+## Repository Structure
+
+### Obsidian Vault (`02-Work/Research/Criticality/`)
+
+| File | Purpose |
+|------------------------------------|------------------------------------|
+| `AGENTS.md` | This file — project guide for AI agents |
+| `Criticality of DeMorgan formulae thoughts.md` | High-level notes: Tal's conjecture, strategies, obstacles |
+| `Criticality proof.md` | Core proof sketch with event definitions A/B, claims, probability chain |
+| `Indcutive approach.md` | Abandoned inductive approach (note: led to restriction tree complexity) |
+| `July 28 Criticality Meeting.md` | Meeting notes — technical discussion of A/B claims, open issues |
+| `Shrinkage under random projections.md` | Notes on Hastad 98, FMT, Dinur-Meir — related literature |
+
+### Overleaf LaTeX Source (`Public/overleaf/CriticalityDM/`)
+
+| File | Purpose |
+|------------------------------------|------------------------------------|
+| `main.tex` | Root document — preamble, title, abstract, TOC |
+| `contents.tex` | **Main content** (\~800 lines) — all sections: intro, preliminaries, CDT, Unpacking/Banyan, Main Proof, Hastad's base case, Appendix |
+| `non_inductive_proof.tex` | Structural lemma + leaf-branching trees (alternative framing, **not included** in main document) |
+| `project_macros.tex` | Paper-specific macros: `\CDT`, `\Pivot`, `\Assoc`, `\zeroBal`, `\oneBal`, etc. |
+| `tm_macros.sty` | Theorem environments + general math macros |
+| `references.bib` | \~905 lines, \~60+ references |
+| `old_proofs/` | **17 abandoned proof attempts** — useful for ideas but not active |
+
+## Key Concepts
+
+| Term | Definition |
+|------------------------------------|------------------------------------|
+| **DeMorgan formula** | Formula tree with AND/OR gates, literals at leaves, fan-out 1, alternating? |
+| **Restriction** | Partial assignment `ρ: Vars → {0,1,⋆}` |
+| **`p`-random restriction** | Each variable independently: `⋆` w.p. `p`, 0 w.p. `(1-p)/2`, 1 w.p. `(1-p)/2` |
+| **Decision tree depth** `DTdepth(F | _ρ)` | Minimum depth of a DT computing `F | _ρ` |
+| **Criticality** | Tail bound on `DTdepth(F | _ρ) ≥ t` under random restrictions |
+| **Canonical Decision Tree (CDT)** | Algorithmic DT construction for a formula under a restriction |
+| **Balancing** (`Balance_{0→1}`, `Balance_{1→0}`) | Subroutines that find variables to query, ensuring 0→1 or 1→0 transitions |
+| **Assoc** | Associates a sequence of assignments with a sub-formula |
+| **Trunk** | Maximal sub-tree of formula that simplifies to 0/1 under restriction |
+| **Aerial roots** | Leaves of the trunk — sub-formulae that become literals |
+| **Exploration Certificate** | Tuple `(t_v, X_v, η_v, α_v, β_v)` capturing the trunk's structure |
+| **Banyan decomposition** | Structural lemma decomposing a CDT path into events on sub-formulae |
+| **Downward closure** | Property enabling conditional probabilities to factor: if `ρ ∈ A` and `ρ' ≤ ρ` (more assignments), then `ρ' ∈ A` |
+| **Karchmer-Wigderson (KW) game** | Communication game used in Hastad's base case |
+| **Leaf-branching tree** | Tree where every leaf's parent has ≥2 children |
+
+## Proof Architecture
+
+Based on actual `contents.tex` section structure:
+
+```text
+Introduction (sec:1)
+  └─ Organization (sec:1.1)
+Preliminaries (sec:2)
+  ├─ Demorgan Formula, Size, Depth
+  ├─ Restrictions, p-Random Restrictions
+  ├─ Decision Trees, Criticality
+  ├─ Downward-Closed Sets
+  └─ Trunks, Dangling Sub-trees, Aerial Roots
+Canonical Decision Tree (sec:3)
+  ├─ CDT for depth 2 formulae (sec:3.1)
+  ├─ Balancing — Balance_{0→1}, Balance_{1→0} (sec:3.2)
+  └─ Finding the original path — findSource, Assoc (sec:3.3)
+Unpacking (sec:4)
+  └─ Banyan Decomposition (sec:4.1)
+      ├─ Exploration Certificate
+      ├─ Event A (trunk structure conditions: Assoc satisfiability)
+      └─ Event B (aerial roots → literals under restriction)
+Proof of the Main Theorem (sec:5)
+  ├─ Thm: Main bound via CDT depth + union bound + geometric series
+  ├─ Thm: Intermediate bound via Banyan decomposition
+  ├─ Claim 1: A is downward closed
+  ├─ Claim 2: Pr[B|A] ≤ p^t ∏ √L(v_i, x_i) (via Hastad base case + downward closure factoring)
+  ├─ Claim 3: Σ Pr[A] ≤ 1 (double counting — proof has \todo{})
+  └─ Cauchy-Schwarz + double counting on trunks → (p√L)^t
+Håstad's Base Case (sec:6)
+  ├─ Lemma: Pr[F_v|_ρ ≡ x | Δ] ≤ (p/2)·√L(v, x)
+  └─ KW game, communication matrix, rectangle mass bound
+Appendix
+  └─ Uniqueness of leaf-splitting trunk (proof by contradiction)
+```
+
+## Current Status
+
+**Active proof:** Banyan decomposition + events A/B in `contents.tex`
+**Abandoned:** Inductive approach (led to restriction tree complexity)
+
+**Open issues (from document \todo{} markers and July 28 meeting):**
+- **Claim 3 proof** (`contents.tex:679-688`): `\todo{}` — the double counting argument for Σ Pr[A] ≤ 1 is not yet fleshed out. Need to ensure Banyan decomposition gives an iff condition so that (T, b_T) is uniquely recoverable from ρ.
+- **Claim 2 aerial root condition** (`contents.tex:661-665`): the condition `\calB` definition uses `CDT^{(a)}(F_v|_{\eta_v}, ρ) = (X_v → a)` which is a change from the earlier "literal" definition. Proof has `\todo{This needs to be modified as per the new aerial root condition}`.
+- **Literal vs CDT depth 1** (`July 28 Criticality Meeting.md`): sub-formula simplifying to a literal and its CDT having depth 1 are not the same thing. Example: F = (x∧y) ∨ (x∧¬y) ≡ x but CDT(F) has depth 2.
+- Consider labeling decision tree nodes by leaves instead of variables.
+
+**Not included in main document:**
+- `non_inductive_proof.tex` — alternative structural lemma framing with leaf-branching trees (not inputted into contents.tex)
+- `old_proofs/` — 17 abandoned attempts (inductive, bottom-up, top-open, etc.)
+
+## Key References
+
+| Citation | Key Idea |
+|------------------------------------|------------------------------------|
+| \[Hastad 98\] | Shrinkage exponent of DeMorgan formulae, base case lemma |
+| \[Rossman 2019\] | Criticality of regular formulas, CDT framework |
+| \[Harsha et al 2023\] | Criticality of AC0 formulae, extension of CDT |
+| \[Filmus et al 2023\] | Shrinkage under random projections (FMT) |
+| \[Dinur-Meir 2018\] | KRW composition conjecture, Hastad bound via KW games |
+| \[Khrapchenko\] | Method for proving formula size lower bounds |
+
+## Development Workflow
+
+### Compilation
+
+``` bash
+# Build the PDF
+latexmk -pdf main.tex
+
+# Live preview (auto-rebuild on save)
+latexmk -pvc -pdf main.tex
+```
+
+### Key Shortcuts (Antigravity/VS Code + LaTeX Workshop)
+
+-   `Cmd+Option+B` — Build
+-   `Cmd+Option+V` — View PDF
+-   `Cmd+Option+J` — SyncTeX (source ↔ PDF)
+
+### Vault ↔ Overleaf Sync
+
+-   **LaTeX source** lives in `Public/overleaf/CriticalityDM/` — edited via Overleaf or locally
+-   **Markdown notes** live in the Obsidian vault — planning, proof sketches, meeting notes
+-   The vault **references** but does **not duplicate** the LaTeX source
+
+### Binary Hygiene
+
+-   `*.pdf`, `*.aux`, `*.log`, `*.bbl`, `*.blg`, `*.out`, `*.fdb_latexmk`, `*.fls`, `*.synctex.gz` are gitignored
+-   Build outputs go to `build/` and `tmp_compile/` (also gitignored)
+
+## File Conventions
+
+-   **Theorem environments**: theorem, lemma, proposition, corollary, definition, remark, conjecture, claim, example (all in `tm_macros.sty`)
+-   **Style**: `\demorgan`, `\hastad` for proper names; `\Lfunc` for leaf count; `\calR_p` for random restrictions
+-   **Color links**: blue (`hyperref` with `colorlinks`)
+-   **Bib style**: `alpha`

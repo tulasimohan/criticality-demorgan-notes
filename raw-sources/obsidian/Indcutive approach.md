@@ -1,0 +1,68 @@
+# Inductive approach for Criticality of DeMorgan Formulae
+$$\newcommand{\pv}{\mathrm{PathVars}} \newcommand{\zo}{\{0,1\}} \newcommand{\cR}{\mathcal{R}} \newcommand{\condF}{\pv_0(F,\rho,a) = (x_{i_1}, \dots ,x_{i_t})}\newcommand{\condLeft}{\pv_0(F_1,\rho,b) = (x_{i_1}, \dots ,x_{i_s})}\newcommand{\condRight}{\pv_0(F,\rho,a_{>s}) = x_{i_{s+1}}, \dots x_{i_t}} \newcommand{\condAssoc}{Assoc_1(F_1,\rho,a_{\le s}) = b} \newcommand{\cE}{\mathcal{E}} \newcommand{\varseq}[2]{x_{i_{#1}}, \dots x_{i_{#2}}}$$
+Date: 22 Aug 2025
+
+
+>[!NOTE] 
+>Making this proof inductive, is leading it into require ideas from restriction trees, it might be simpler to do the non-inductive proof.  
+
+Because of the above reason this approach in abadoned 
+
+A new inductive proof of Criticality of DeMorgan formulae. 
+- Canonical Decision tree is the same as last time. 
+
+> [! Claim] Unpacking 
+> Let $F$ be a De-Morgan formula, $\rho$ be a restriction and $t \in \mathbb{N}$ and $a \in \zo^t$ . 
+> If $\condF$ then $\exists s \in [t]$, $b \in \zo^s$  such that 
+>- $Assoc_1(F_1,\rho,a_{\leq s}) = b$ , 
+>- $\condLeft$
+>- $\condRight$ 
+%% >- $x_{i_1}, \dots x_{i_t} \in Stars$
+ %%
+
+
+
+>[!Claim] 
+> Let $F$ be a De-Morgan formula, $\rho$ be a restriction and $t \in \mathbb{N}$ and $a \in \zo^t$ . Given variables $x_{i_1, \dots, x_{i_t}}$, let $L(x)$ be the number of leaf nodes labelled with the variable $x$. Let $\Delta$ be a an arbitrary downward closed set in the $Vars = [n]$ then we have 
+>$$\Pr_{\rho \sim \cR_p}[\condF|\Delta] \le p^t \prod_{k = 1}^t \sqrt{L(x_{i_k})}\mu(\varseq{1}{t})$$
+>where $\mu(\varseq1t) = \sum_{s = 0}^t \sum_{b \in zo^t}\Pr[Assoc_1(F_1,\rho,a_{\le s}) = b]$. 
+
+We proceed with the proof of this claim using inductions on the number $t$, 
+
+$$\Pr_{\rho \sim \cR_p}[\condF|\Delta] = \sum_{0 \le s \le t, b\in \zo^t} \Pr_\rho[Assoc_1(F_1,\rho,a_{\leq s}) = b \land \condLeft \land \condRight|\Delta]$$
+
+- Claim 1: $\{\rho : Pivot_1(F_1,\rho,a_{\le s})= b\}$ is downward closed in the set of $Vars \setminus \{x_{i_1}, \dots x_{i_s}\}$ .  
+- Claim 2: $\{\rho: \condLeft\}$ is downward closed in the set of Vars ----. 
+- Claim 3: $\{\rho: \condRight\}$ is downward closed in the set of Vars -----. 
+- Claim 4:$\sum_{t, b} \Pr_\rho[Assoc_1(F_1,\rho,a_{\le s})] \leq 1$ 
+
+
+Assuming Claims 1-4, we can finish the proof. 
+
+Let $\cE_0 = \condAssoc$, $\cE_1 = \condLeft$ and $\cE_2 = \condRight$
+
+We also need $\cE$
+   
+ 
+$\Pr_\rho[\cE_0, \land \cE_1 \land \cE_2|\Delta] \le$ $\Pr_\rho[\cE_0|\Delta] \cdot \Pr[\cE_1|\Delta,\cE_0] \Pr_\rho[\cE_2|\Delta,\cE_0,\cE_1]$
+
+Since $\cE_0, \cE_1$ and $\cE_2$ are Downward closed, we have by induction hypothesis that, 
+
+$\Pr[\cE_1|\Delta'] \le p^s\prod_{k = 1}^s\sqrt{L(x_{i_k})}$
+$\Pr[\cE_2|\Delta''] \le p^{t-s}\prod_{k = s+1}^t \sqrt{L(x_{i_k})}$
+
+
+- [ ] Describe Pivot what are its input and output. 
+- [ ] Define an $X$- Downward closed set.  
+
+$\mu(x_{i_1}, \dots ,x_{i_t})$ is not spelt out exaclty here. 
+
+
+Probability that $CDT(F,\rho)$ there is a exploration certificate for $F_1$ using the variables $x_{i_1}, \dots x_{i_t}$. 
+
+$\sum_{x_{i_1},\dots ,x_{i_t}} \mu(x_{i_1}, \dots, x_{i_t}) \leq 1$
+
+$\sum_{\bar x} \mu(\bar x) \prod_{k=1}^t\sqrt{L(x_{i_k})} \leq \sqrt{\sum_{\bar x} \mu(\bar x) \prod_{i=1}^k L(x_{i_k})} \le \sqrt{\sum_{\bar x}\prod_{i=1}^kL(x_{i_k})} \le L^{t/2}$  
+
+
+

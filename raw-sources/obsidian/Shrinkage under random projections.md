@@ -1,0 +1,17 @@
+
+- [Hastad 98] 
+	- $O(p^2)$ shrinkage under random restrictions. 
+	- gave a $\tilde{\Omega}(n^3)$ lb for Andreev's function.
+- [FMT] extend this result to random projections.
+	- gives a $\tilde{\Omega}(n^3)$ lb for a function in $AC^0$. 
+
+- Dinur,Meir showed Hastad's cubic lower bound using the framework of Karchmer and Wigderson. 
+
+- Top-down techniques can replicate bottom-up techniques. 
+
+
+Techniques:
+- min-entropy Khrapchenko bound. 
+- Parity is replaced by Surjectivity function in the Andreev function construction for $AC^0$ purposes. 
+
+- [ ] 

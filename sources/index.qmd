@@ -1,0 +1,63 @@
+---
+title: "Primary Sources Directory & Direct Links"
+subtitle: "Complete repository index linking directly to substantial, substantive notes from Obsidian, Notion, and Overleaf"
+author: "JR, PH, TM"
+date: last-modified
+format: html
+---
+
+This directory compiles every individual substantive working note, proof write-up, and LaTeX draft across **Obsidian**, **Notion**, and **Overleaf** (empty structural stubs and collapsed header shells have been pruned). Click any link below to view its full text and math rendering.
+
+---
+
+## 1. Notion Notes Source Archive
+
+Substantive research write-ups extracted from the Notion workspace (`tulasi.notion.site`):
+
+| Note / Document Title | Core Topic / Approach | Status | View Source Link |
+| :--- | :--- | :--- | :--- |
+| **New CDT** | CDT with balancing algorithm, hurdles & symmetry repair | <span class="badge-status badge-active">Active</span> | [Open Note](notion-new-cdt.qmd) |
+| **New Proof** | Blaming bad events on leaf-branching subtrees | <span class="badge-status badge-active">Active</span> | [Open Note](notion-new-proof.qmd) |
+| **Rigorous proof** | Detailed construction of $\mathcal{T}_\rho(F)$ & $(p\lambda)^t$ bound | <span class="badge-status badge-active">Active</span> | [Open Note](notion-rigorous-proof.qmd) |
+| **Jaikumar's Counter Example** | Asymmetric path collapse on $(X \vee Y) \wedge \bar{Y}$ and JKR repair | <span class="badge-status badge-refuted">Counterexample</span> | [Open Note](notion-jaikumars-counter-example.qmd) |
+| **CDT: Yes balancing, No tree restriction** | Algorithmic steps for $\mathrm{CDT}_F(G, \rho)$ with balancing | <span class="badge-status badge-active">Active</span> | [Open Note](notion-cdt-yes-balancing-no-tree-restriction.qmd) |
+| **CDT: No balancing, No tree restriction** | Unbalanced recursive CDT construction & failure points | <span class="badge-status badge-refuted">Refuted</span> | [Open Note](notion-cdt-no-balancing-no-tree-restriction.qmd) |
+| **CDT with balancing** | Pseudocode for recursive $\mathrm{Balance}(\Gamma)$ | <span class="badge-status badge-active">Active</span> | [Open Note](notion-cdt-with-balancing.qmd) |
+| **Håstad's Base case proof** | Communication matrix $M_F$ and KW rectangles | <span class="badge-status badge-partial">Partial (Base)</span> | [Open Note](notion-hastads-base-case-proof.qmd) |
+
+---
+
+## 2. Obsidian Notes Source Archive
+
+Substantive notes from your research vault (`02-Work/Research/Complexity-Theory/Criticality/`):
+
+| Note / Document Title | Core Topic / Approach | Status | View Source Link |
+| :--- | :--- | :--- | :--- |
+| **Project Guide (AGENTS.md)** | Master roadmap, lemma summaries & notation | <span class="badge-status badge-active">Active</span> | [Open Note](obsidian-agents.qmd) |
+| **Criticality proof** | CDT definition, Trunk/Aerial roots, Banyan lemma | <span class="badge-status badge-active">Active</span> | [Open Note](obsidian-criticality-proof.qmd) |
+| **New Inductive proof** | Restriction trees $\tilde{\rho} : \mathcal{T}_F \to \{0,1,*\}^V$ | <span class="badge-status badge-active">Active</span> | [Open Note](obsidian-new-inductive-proof.qmd) |
+| **Inductive approach** | Path variable conditioning breakdown ($\Delta_t$ vs $\Delta_{t-1}$) | <span class="badge-status badge-stuck">Stuck</span> | [Open Note](obsidian-indcutive-approach.qmd) |
+| **July 28 Criticality Meeting** | Subformula literal reduction $\neq$ CDT depth 1 | <span class="badge-status badge-resolved">Key Insight</span> | [Open Note](obsidian-july-28-criticality-meeting.qmd) |
+| **Criticality of DeMorgan thoughts** | Tal's conjecture statement & average sensitivity | <span class="badge-status badge-active">Active</span> | [Open Note](obsidian-criticality-of-demorgan-formulae-thoughts.qmd) |
+| **Shrinkage under random projections** | Håstad 98 shrinkage ($O(p^2)$) & Andreev function | <span class="badge-status badge-resolved">Background</span> | [Open Note](obsidian-shrinkage-under-random-projections.qmd) |
+
+---
+
+## 3. Overleaf TeX Source Archive
+
+Formal LaTeX write-ups and manuscript sections from the Overleaf project archive:
+
+| TeX File Path | Section / Focus | Status | View Source Link |
+| :--- | :--- | :--- | :--- |
+| **`contents.tex`** | Working master paper (786 lines): CDT, Balancing, Unpacking | <span class="badge-status badge-active">Active Manuscript</span> | [Open TeX](overleaf-contents.qmd) |
+| **`non-inductive proof.tex`** | Structural Lemma: Blaming the event on subtrees | <span class="badge-status badge-active">Active</span> | [Open TeX](overleaf-non-inductive-proof.qmd) |
+| **`main.tex`** | Document preamble, packages, theorem environments | <span class="badge-status badge-active">Active</span> | [Open TeX](overleaf-main.qmd) |
+| **`old proofs/inductive_proof.tex`** | Formal inductive path argument (472 lines) | <span class="badge-status badge-stuck">Stuck</span> | [Open TeX](overleaf-old-proofs-inductive_proof.qmd) |
+| **`old proofs/canonical_decison_tree.tex`** | CDT construction algorithm writeup | <span class="badge-status badge-active">Active</span> | [Open TeX](overleaf-old-proofs-canonical_decison_tree.qmd) |
+| **`old proofs/communication_game.tex`** | KW protocol matrix game representation | <span class="badge-status badge-partial">Partial</span> | [Open TeX](overleaf-old-proofs-communication_game.qmd) |
+| **`old proofs/bottom_open.tex`** | Protocol opening from bottom leaves | <span class="badge-status badge-partial">Partial</span> | [Open TeX](overleaf-old-proofs-bottom_open.qmd) |
+| **`old proofs/top_open.tex`** | Protocol opening from root gate | <span class="badge-status badge-partial">Partial</span> | [Open TeX](overleaf-old-proofs-top_open.qmd) |
+| **`old proofs/bottom_up_proof.tex`** | Bottom-up inductive proof draft (301 lines) | <span class="badge-status badge-stuck">Stuck</span> | [Open TeX](overleaf-old-proofs-bottom_up_proof.qmd) |
+| **`old proofs/proof_old.tex`** | Early proof draft with protocol definitions (561 lines) | <span class="badge-status badge-stuck">Legacy</span> | [Open TeX](overleaf-old-proofs-proof_old.qmd) |
+| **`old proofs/non_factoring _proof.tex`** | Non-factoring proof attempt using $\phi_a(\rho)$ | <span class="badge-status badge-partial">Partial</span> | [Open TeX](overleaf-old-proofs-non_factoring-_proof.qmd) |
+| **`old proofs/t=2.tex`** | Concrete base induction step for depth $t=2$ | <span class="badge-status badge-partial">Partial</span> | [Open TeX](overleaf-old-proofs-t=2.qmd) |

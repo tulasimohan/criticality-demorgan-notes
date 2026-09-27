@@ -1,0 +1,136 @@
+---
+title: "Overleaf: old proofs/bottom_open.tex"
+subtitle: "Raw TeX source mirrored from Overleaf project"
+format: html
+---
+
+
+::: {.callout-note appearance="simple"}
+**Original Source**: Overleaf Project Archive  
+**Path**: `old proofs/bottom_open.tex`  
+:::
+
+```latex
+\newcommand{\A}{\left\{
+    \rho: \nvf(\rho \circ \sigma_{k-1} = x_{i_k}) \forall1 \leq  k \leq t, \rho(i_j) = * \forall  1\leq j \leq t, F|_{\rho \circ \sigma_t \equiv 0} , F|_{\rho \circ \sigma_t'} \equiv 1
+    \right\}}
+
+\newcommand{\Bk}[1]{\{
+    \rho: \ts(\rho(i_{j+1} = \ldots = i_t = *) ), \rho(i_j \to \bar{a_j}, i_{j+1} = \ldots = i_t = *))= \ts_j,\ 
+    \rho(i_j) = a_j\ \forall #1 \leq j \leq t;\
+    F|_{\rho} \equiv 0,\
+    F|_{\rho(i_t \to \bar{a_t})} \equiv 1  
+    \}}
+
+\newcommand{\Ck}[1]{\{
+    \rho: \ts(\rho, \rho(i_k \to \bar{a_k})= \ts_k;\ts(\rho\circ \sigma_{k+1 \to j}, \rho(i_k \to \bar{a_k})\circ \sigma_{k+1 \to j}')= \ts_j, \rho(i_j) = * \forall #1+1 \leq j \leq t ;
+    \rho(i_k) = a_k ,
+    F|_{\rho\circ \sigma_{k+1 \to t}} \equiv 0,
+    F|_{\rho\circ \sigma_{k+1 \to t}'} \equiv 1  
+    \}}
+\newcommand{\Ckprime}[1]{\{
+    \rho: \ts(\rho(i_k \to a_k), \rho)= \ts_k;\ts(\rho(i_k \to a_k)\circ \sigma_{k+1 \to j}, \rho(i_k \to a_k)\circ \sigma_{k+1 \to j}')= \ts_j, \forall #1+1 \leq j \leq t ;
+    \rho(i_k) = \bar{a_k} ,
+    F|_{\rho\circ(i_k \to a_k) \sigma_{k+1 \to t}} \equiv 0,
+    F|_{\rho\circ(i_k \to a_k) \sigma_{k+1 \to t}'} \equiv 1 
+    \}}
+    
+\newcommand{\calD}{\mathcal{D}}
+
+\newcommand{\Dk}[1]{\{
+    \rho: \ts(\rho(i_j \to a_j)\circ \sigma_{k+1 \to j}, \rho\circ \sigma_{k+1 \to j}')= \ts_j, \forall #1 \leq j \leq t ;
+    \rho(i_k) = a_k ,
+    F|_{\rho\circ \sigma_{k+1 \to t}} \equiv 0,
+    F|_{\rho(i_j \to \bar{a_j})\circ \sigma_{k+1 \to t}'} \equiv 1  
+    \}}
+\newcommand{\Dkprime}[1]{\{
+    \rho: \ts(\rho\circ \sigma_{k+1 \to j}, \rho(i_j \to \bar{a_j})\circ \sigma_{k+1 \to j}')= \ts_j, \forall #1+1 \leq j \leq t ;
+    \rho(i_k) = a_k ,
+    F|_{\rho\circ \sigma_{k+1 \to t}} \equiv 0,
+    F|_{\rho(i_j \to \bar{a_j})\circ \sigma_{k+1 \to t}'} \equiv 1  
+    \}}
+
+
+where $\calA := \A$.
+
+Define the map 
+    $$\phi_a(\rho) = \rho \circ (\nvf(F,\rho) \to a)$$
+
+    \begin{align*}
+        \sum_{\rho \in \calA} Pr[\rho]
+        &= \sum_{\rho \in \calA_t} \prob{}{\rho} \cdot \prod_{k=1}^{t-1} \frac{\sum_{\rho \in \calA_k}\prob{}{\rho}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho}}\\
+        &= \cdot \prod_{k=1}^{t-1} \frac{\sum_{\rho \in \calA_k}\prob{}{\rho}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho}}\\
+    \end{align*}
+
+where 
+$\calA_t = \left\{                        
+            \rho: \nvf(F,\rho \circ \sigma_{t-1} = x_{i_t}), F|_{\rho \circ \sigma_t \equiv 0 , F|_{\rho \circ \sigma_t'} \equiv 1}    
+            \right\}$   \\
+
+$\calA_k = \left\{                        
+            \rho: \nvf(F,\rho \circ \sigma_{j-1} = x_{i_j})\ \forall k \leq j \leq t , F|_{\rho \circ \sigma_t \equiv 0 , F|_{\rho \circ \sigma_t'} \equiv 1}    
+            \right\}$\todo{stars}
+
+  \begin{align*}
+        \sum_{\rho \in \calA_t} \prob{}{\rho} 
+        &= \sum_{\rho \in \calA_t} \sqrt{\prob{}{\rho \circ \sigma_t}}\sqrt{\prob{}{\rho \circ \sigma_t'}}  \\
+        &\leq \sqrt{\sum_{\rho \in \calA_t}\prob{}{\rho \circ \sigma_t}}\sqrt{\sum_{\rho \in \calA_t}\prob{}{\rho \circ \sigma_t'}}\\
+        &= \sqrt{\sum_{\rho \in \calB_t}\prob{}{\rho }}\sqrt{\sum_{\rho \in \calB_t'}\prob{}{\rho}}
+  \end{align*}
+
+
+Where $\calB_t:= \{
+    \rho: \ts^{(t)}(\rho, \rho(i_t \to \bar{a_t}))= \ts_t,\ \rho(i_t) \to a_t,\ 
+    F|_{\rho} \equiv 0,
+    F|_{\rho (i_t \to \bar{a_t})} \equiv 1  
+     \}$ and \\
+     $\calB_t':= \{
+    \rho: \ts^{(t)}(\rho(i_t \to a_t), \rho)= \ts_t,\ 
+    \rho(i_t) = \bar{a_t},\     
+    F|_{\rho(i_t \to a_t)} \equiv 0,
+    F|_{\rho } \equiv 1  
+     \}$.
+Note that $\calB_t$ depends only on $x_{i_t}$.
+
+    \begin{align*}
+        \frac{\sum_{\rho \in \calA_k}\prob{}{\rho}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho}} 
+        &=\frac{\sum_{\rho \in \calA_k} \sqrt{\prob{}{\rho\circ \sigma_k}} \sqrt{\prob{}{\rho\circ \sigma_k'}}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k}}\\
+        &= \sum_{\rho \in \calA_k} \sqrt{\frac{\prob{}{\rho\circ \sigma_k}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k}}} \sqrt{\frac{\prob{}{\rho\circ \sigma_k'}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k}}} \\
+        &\leq \sqrt{\frac{\sum_{\rho \in \calA_k}\prob{}{\rho\circ \sigma_k}}  {\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k}}} \sqrt{\frac{\sum_{\rho \in \calA_k}\prob{}{\rho\circ \sigma_k'}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k}}}\\        
+    \end{align*}
+
+%$\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k} = \sum_{\rho \in \calB_k} \prob{}{\rho}$.
+
+%
+    % \ts^{(j)}(\rho \circ \sigma_{k+1 \to j}, \rho \circ \sigma_{k+1 \to j}')= \ts_j, \rho(i_j) = * \forall k+1 \leq j \leq t  ; 
+    % F|_{\rho\circ \sigma_t} \equiv 0,
+    % F|_{\rho \circ \sigma_t'} \equiv 1  
+       
+       
+    % $\calC_{k}:= \left\{
+    % \rho: \ts(\rho(i_k \to a_k),\rho(i_k \to a_k))= \ts_k;\ts(\rho(i_k \to a_k) \circ \sigma_{k+1 \to j}, \rho(i_k \to a_k) \circ \sigma_{k+1 \to j}')= \ts_j, \rho(i_j) = * \forall k+1 \leq j \leq t  ;
+    % \rho(i_j) = a_j \forall 1 \leq j \leq k-1; \rho(i_k) = \bar{a_k};
+    % F|_{\rho\circ \sigma_t} \equiv 0,
+    % F|_{\rho \circ \sigma_t'} \equiv 1  
+    %  \right\}$
+    
+    % $\calC_{k}':= \left\{
+    % \rho: \ts(\rho(i_k \to a_k) \circ \sigma_{k+1 \to j}, \rho(i_k \to a_k) \circ \sigma_{k+1 \to j}')= \ts_j, \rho(i_j) = * \forall k+1 \leq j \leq t  ;
+    % \rho(i_j) = a_j \forall 1 \leq j \leq k-1;\\
+    % \rho(i_k) = \bar{a_k};
+    % F|_{\rho\circ \sigma_t} \equiv 0,
+    % F|_{\rho \circ \sigma_t'} \equiv 1  
+    %  \right\}$
+     
+    \begin{align*}
+        \frac{\sum_{\rho \in \calA_k}\prob{}{\rho\circ \sigma_k}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k}}
+        &= \frac{\sum_{\rho \in \calB_k} \prob{}{\rho \circ (i_k \to a_k)}}{\sum_{\rho \in \calB_k} \prob{}{\rho \circ \nvf(F,\rho) \to a_k}}\\
+        &= \frac{\sum_{\substack{\rho:\rho \in \calB_k\\ \ts(\rho, \rho(i_k \to \bar{a_k}))= \ts_k }} \prob{}{\rho}}{\sum_{\rho \in \calB_k} \prob{}{\rho}}
+    \end{align*}
+    Similarly,
+    \begin{align*}
+        \frac{\sum_{\rho \in \calA_k}\prob{}{\rho\circ \sigma_k'}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k'}}
+        &= \frac{\sum_{\rho \in \calC_k} \prob{}{\rho \circ {i_k \to \bar{a_k}}}}{\sum_{\rho \in \calC_k'} \prob{}{\rho}}\\
+        &= \frac{\sum_{\substack{\rho:\rho \in \calC_k'\\ \ts(\rho(i_k \to a_k), \rho)= \ts_k }} \prob{}{\rho}}{\sum_{\rho \in \calC_k'} \prob{}{\rho}}
+    \end{align*}
+```

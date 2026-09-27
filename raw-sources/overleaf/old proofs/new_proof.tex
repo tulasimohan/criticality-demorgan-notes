@@ -1,0 +1,34 @@
+\newcommand{\Eone}{
+    \substack{
+        \prot^{(1)}(\phi_{a_1}(\rho),\phi_{\bar{a_1}}(\rho)) = \ell_1,\\
+        F|_{\phi_{a_1,\dots,a_t}(\rho)} \equiv 0,
+        F|_{\phi_{a_1,\dots,\bar{a_t}}(\rho)} \equiv 1
+    }
+}
+
+\newcommand{\Etwo}{
+    \substack{
+        \prot^{(1)}(\rho,\rho(i_t \to a_t)) = \ell_1,\\
+        F|_{\phi_{a_1,\dots,a_t}(\rho)} \equiv 0,
+        F|_{\phi_{a_1,\dots,\bar{a_t}}(\rho)} \equiv 1
+    }
+}
+
+\begin{proof}
+    \begin{align*}
+        \prob{\rho}{\cdt(F,\rho) \text{ has depth t }}
+        &= \sum_{a\in \cube{n}} 
+            \prob{\rho}{
+            \substack{
+                F|_{\phi_{a_1,\dots ,a_t}} \equiv 0,\\ 
+                F|_{\phi_{a_1,\dots ,\bar{a_t}}} \equiv 1
+            }
+            }\\
+        Let\ E_1 =\bra{\rho:\Eone} ,\\    
+        &\leq 2^t \sum_{x_{i_1}, \ell_1} \prob{\rho}{E_1}\\
+        &\leq 2^t  \sum_{x_{i_1},\ell_1} \sum_{\rho \in E_1} \pr{\rho}\\
+        &\leq 2^{t}\cdot p \cdot \sum_{x_{i_1},\ell_1} \sum_{\rho \in E_1} \sqrt{\pr{\phi_{a_1}(\rho)}} \sqrt{\pr{\phi_{\bar{a_1}}(\rho)}}\\
+        &\leq p2^t \sum_{x_{i_1},\ell_1} \sqrt{\sum_{\rho \in E_1} \pr{\phi_{a_1}(\rho)}} \sqrt{\sum_{\rho \in E_1} \pr{\phi_{a_1}(\rho)}} 
+    \end{align*}
+    
+\end{proof}

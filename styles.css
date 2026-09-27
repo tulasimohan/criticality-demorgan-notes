@@ -20,3 +20,19 @@
 .callout-hurdle {
   border-left-color: #fd7e14 !important;
 }
+
+/* Hide any top secondary nav / top header breadcrumb bar */
+#quarto-header,
+.quarto-secondary-nav {
+  display: none !important;
+}
+
+/* Ensure content and docked sidebar align cleanly without top header offset */
+#quarto-content {
+  padding-top: 1rem !important;
+}
+
+#quarto-sidebar {
+  top: 0 !important;
+  height: 100vh !important;
+}

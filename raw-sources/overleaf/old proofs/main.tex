@@ -1,0 +1,96 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1in]{geometry}
+
+\usepackage{amsmath,amsthm,amssymb, color, tikz, mathtools,mathpazo}
+\usepackage[pagebackref,colorlinks=true,linkcolor=black,urlcolor=blue,citecolor=blue,pdfstartview=FitH]{hyperref}
+\usepackage{cleveref}
+
+
+\newcommand{\tulasi}[1]{{\color{teal} [{\bf Tulasi:} #1]}}
+
+\usepackage{nicefrac}
+
+\include{macros.tex}
+\newcommand{\CDT}{\mathrm{CDT}}
+\newcommand{\KW}{\mathrm{KW}}
+\newcommand{\ACP}{\mathrm{ACP}}
+\newcommand{\NVF}{\mathrm{NVF}}
+
+\title{Criticality of De-Morgan formulae}
+
+\begin{document}
+
+\maketitle
+
+\section{Canonical Decision Tree}
+
+We begin by describing an algorithm to construct the canonical decision tree of a De-Morgan formula under a restriction $\rho$. 
+The algorithm is based on the Next Variable Function, a sub-routine specifying the next variable to query in the decision tree. 
+
+\paragraph{Next variable function}
+\begin{definition} $\NVF(F,\rho)$
+Let $F$ be a De-Morgan formula, let $\rho$ be a restriction such that $F|_{\rho}$ is non-constant. 
+$\NVF(F,\rho)$ is a sub-routine which takes as input a formula $F$ and a restriction $\rho$ and returns a leaf of its formula tree. 
+$\NVF(F,\rho)$ is  defined inductively as follows:
+\textbf{Base case}: 
+$F$ is a leaf $\ell$, then return $\ell$. (Since $F|\rho$ is non-constant).
+\textbf{Recursive step}: Let $F = F_1 \vee F_2$, (the case when $F = F_1 \wedge F_2$ is handled similarly.)
+    \begin{itemize}
+        \item   if $F_1|_\rho \equiv 0$:
+	       return $\NVF(F_2,\rho)$. 
+       \item else: 
+		  return $\NVF(F_1,\rho)$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[Canonical Decision Tree $\CDT(F,\rho)$]
+\begin{itemize}
+    \item If $F|_{\rho} \equiv 0/1$, return a single node labelled 0/1.
+\item Else,  let $x_{i_1}$ be the variable corresponding to $\ell_1= \NVF(F,\rho)$, add a node labelled $x_{i_1}$ and for $a \in \{0,1\}$, attach the tree $\CDT(F,\rho(x_{i_1} \to a))$ to this node on the edge labelled $a$ .
+\end{itemize}
+      
+\end{definition}
+
+
+
+ 
+\section{Karchmer-Wigderson Protocol}
+
+\subsection{Karchmer-Wigderson Game} 
+It is a two-player game with two players, Alice and Bob, who are given a function $F$ and private inputs. 
+Alice receives an input $x$ such that $F(x) = 1$.
+Bob receives an input $y$ such that $F(y) = 0$.
+\textbf{The Goal:} Alice and Bob want to find an index $i$ such that $x_i  \neq y_i$ . In other words, they want to find a index  where their inputs differ.
+
+\subsection{The Standard Protocol}
+For a Boolean formula $F$, the players traverse its formula tree to find the index where the inputs to Alice and Bob differ.
+
+\paragraph{Karchmer-Wigderson Protocol for a Boolean Formula:}
+
+Let us assume \(F\) is represented as a Boolean formula using AND, OR, and NOT gates. The protocol is defined recursively:
+
+\begin{itemize}
+    \item \textbf{Leaf Node (Input Variable):} If $F$ is a single variable $x_i$ , Alice simply sends her bit $x_i$  to Bob. Bob can then determine the differing index.
+    \item \textbf{AND Gate:} If $F= G \wedge H$, Alice and Bob first determine which sub-formula ($G$ or $H$) evaluates to 0 on Bob's input $y$. Bob sends a bit to Alice indicating this. They then recursively play the KW game on the chosen sub-formula.
+    \item \textbf{OR Gate:} If $F = G \wedge H$,  Alice and Bob first determine which sub-formula ($G$ or $H$) evaluates to 1 on Alice's input *x*. Alice sends a bit to Bob indicating this. They then recursively play the KW game on the chosen sub-formula.
+\end{itemize}
+
+\section{Unpacking} 
+
+If $\CDT_0^{(a)}(F,\rho) = \ell_1, \dots , \ell_t$,  then 
+$\NVF(F,\rho) = \ell_1$ and 
+$\CDT_0^{(a_2, \dots, a_t)}(F,\rho(x_{i_1} \to a_1)) = \ell_2, \dots , \ell_t$.
+
+\begin{align*}
+    \Pr[\CDT_0^{(a)}(F,\rho) &= \ell_1, \dots , \ell_t|\Delta] = \Pr[\NVF(F,\rho) = \ell_1] \cdot \Pr[\CDT_0^{(a_2, \dots, a_t)}(F,\rho(x_{i_1} \to a_1)) = \ell_2, \dots , \ell_t]
+\end{align*}
+
+
+Does it help to truncate the formula $F$ ?
+
+$F = F_1 \vee F_2$. 
+
+
+\end{document}
+

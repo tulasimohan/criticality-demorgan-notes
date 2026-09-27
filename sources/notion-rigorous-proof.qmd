@@ -1,0 +1,154 @@
+---
+title: "Notion: Rigorous proof"
+subtitle: "Raw source mirrored from Notion workspace"
+format: html
+---
+
+
+::: {.callout-note appearance="simple"}
+**Original Source**: Notion workspace (`tulasi.notion.site`)  
+**File**: `Rigorous proof.md`  
+:::
+
+# Rigorous proof
+
+We define a canonical decision tree for $\rm F|_\rho$, call it $\rm CDT(F,\rho)$ and show that $\Pr[\rm CDT_{depth}(F,\rho) \geq t] \leq (p\lambda)^t$ .
+
+### Canonical   Decision Tree
+
+-  We begin by describing a collection of ordered restrictions  ${\cal T}_\rho(\rm F)$ which corresponds to the root to leaf path  decision tree. 
+
+- ${\cal T}_\rho(\rm F)$ is defined indcutively by induction on the depth $d$ of the formula $\rm F$. 
+
+This defines a collection of ordered restrictions, 
+
+Define $\rm CDT^{(a)}(F,\rho)$. 
+
+Tal’s Conjecture
+
+Let $\rm F$ be a DeMorgan formula with $\rm L$ leaves. Let ${\bf R}_p$ be the $p$-random restriction. Then for any natural number $t \geq 1$, 
+ $\Pr[\rm DT_{depth}(F|_\rho) \geq t] \leq (p \lambda)^t$ for $\lambda = O(\sqrt{\rm L})$.  
+
+Base case: $d = 0$
+
+If $\rm F$ is  a   constant or a literal. 
+
+- ${\cal T}_\rho({\rm F})$  = $\{\langle \rangle\}$ if $\rm F$ is a constant 0 or 1. 
+
+- ${\cal T}_\rho({\rm F})$  = $\{\langle x_i \to 0 \rangle, \langle x_i \to 1\rangle\}$ if $\rm F$ is the literal $x_i$ or $\neg x_i$ such that $x_i \in {\rm Stars}(\rho)$.  
+
+Case $d \geq 1$ : 
+
+If $\rm F = F_1 \vee F_2$, (the AND case is handled similarly).
+
+- If ${\rm F_1}|_\rho \equiv 0$:
+
+- If $\rm F_1|_{\rho} \equiv 1$:
+
+- If $\rm F_1|_{\rho}$ is non-constant, 
+
+-    ${\cal T}_\rho({\rm F_1})$
+
+- $\{ \langle \rangle\}$
+
+- the ${\cal T}_\rho(\rm F)$ is the collection of ordered restrictions $\langle v_1 \to a_1, v_2 \to a_2, \dots v_u \to a_u \rangle $  for $u \geq 1$ such that there exists $t \in [u]$ and $b \in \{0,1\}^t$ such that
+
+-   $\langle v_1 \to b_1, v_2 \to b_2, \dots ,v_t \to b_t \rangle \in {\cal T}_\rho(\rm F_1)$
+
+- $\langle v_{t+1} \to a_{t+1}, v_{t+2} \to a_{t+2}, \dots ,v_u \to a_u \rangle \in {\cal T}_\rho(\rm F_2|_{(v_1 \to a_1, \dots v_t \to a_t)})$
+
+- ${\rm Pivot}(F_1,\rho,(v_1 \to a_1, \dots , v_t \to a_t)) = (b_1,\dots ,b_t)$
+
+${\rm Pivot}_0({\rm F_1},\rho, \langle v_1 \to a_1, \dots ,v_t \to a_t \rangle )$ 
+Inputs: A DeMorgan formula $\rm F_1  $, a restriction $\rho$ and an ordered restriction  $\langle v_1 \to a_1, \dots ,v_t \to a_t \rangle$  such that $(\rm F_1|_\rho)_{v_1 \to a_1, \dots v_t \to a_t} \equiv 0$ and $F|_\rho \not \equiv \rm constant$. 
+
+Outputs $(b_1, \dots ,b_t)$ such that,  for all $i \in [t]$,  or false.
+
+- $b_i = a_i$ if  there  exists  $c_{i+1}, \dots , c_t$ such that $(F_1|\rho)|_{(v_1 \to a_1, \dots , v_i \to a_i, v_{i+1} \to c_{i+1}, \dots , v_t\to c_t)} \equiv 1$   which makes this 1.
+
+- $b_i = 1- a_i$  if  $(F_1|_\rho)|_{(v_1 \to a_1 , \dots , v_i \to a_i)} \equiv 0$
+
+Claim
+
+For all functions $F$, ordered restrictions $\alpha, \beta$,
+
+$\{ \rho : Pivot_0(F,\rho , \alpha) = \beta \}$ is downward closed on $V \setminus vars(\alpha)$. 
+
+Claim
+
+If $ {\cal T}_{\rho}({\rm F})$ is non-empty, each $\langle v_1 \to a_1, \dots , v_u \to a_u\rangle$ in it satisfies: 
+
+- $v_1 , \dots , v_u \in stars (\rho)$
+
+- For all $i \in [u]$, if $\langle v_1 \to a_1, \dots , v_{i-1} \to a_{i-1}, v_i \to 1- a_i \rangle$ is the initial part of some other ordered restriction in $\cal T_\rho(\rm F)$.   
+
+- For all $i \in [u]$ and every variable $v'_i$ if $\langle v_1 \to a_1, \dots , v_{i-1} \to a_{i-1}, v_i' \to a_i' \rangle \in \cal T_\rho(\rm F)$  , then $v'_i = v_i$. 
+
+- The function computed by $\rm (F|_\rho)|_{(v_1 \to a_1, \dots , v_u \to a_u)}$ is constant 0 or 1. 
+
+Claim
+
+If $\cal T$ is a collection of ordered restrictions such each $\alpha \in \cal T$ satisfies conditions 2, 3, 4, from the above claim , then $\cal T$ corresponds to branches of a Decision tree.  
+
+Unpacking Lemma
+
+Suppose $\rm F = F_1 \vee F_2$,  and If  ${\rm CDT}^{(a)}({\rm F}, \rho) = (x_1 \to a_1, \dots , x_t \to a_t)$, then either 
+
+- $\rm F_1|_\rho \equiv 0$ or 
+
+- $\exists 1\leq r \leq t, b \in \{0,1\}^r $ such that
+
+-  ${\rm CDT}_1^{(b)}({\rm F_1}) = $ $\langle x_1 \to b_1, \dots , x_r \to b_r \rangle$  
+
+- ${\rm Pivot}_0(F_1, \rho, \langle x_1 \to a_1, \dots , x_t \to a_t \rangle) = \langle x_1 \to b_1, \dots x_t \to b_t \rangle$
+
+- $\langle x_{r+1} \to a_{r+1}, \dots , x_t \to a_t\rangle \in {\rm CDT}(F_2|_{x_1 \to a_1, \dots x_r \to a_r}, \rho)$
+A similar claim for the case  $\rm F = F_1 \wedge F_2$. 
+
+Proof of the Structural Lemma is by using the Unpacking lemma and induction on depth of the formula. 
+
+Induction step: 
+
+What is the Outline? 
+
+- Define CDT as a collection of ordered restrictions. 
+
+- Define ${\rm CDT}^{(a)}({\rm F},\rho) = (x_1 \to a_1, \dots ,x_t \to a_t)$
+
+- If ${\rm CDT}^{(a)}({\rm F},\rho) = (x_1 \to a_1, \dots ,x_t \to a_t)$, then by Unpacking lemma
+
+- Claim:  ${\cal A}$ is downward closed. 
+
+- $\cal B$ can be bounded inductively. This reduces to $t$ base cases.  
+
+Structural Lemma: 
+
+Suppose $\rm CDT^{(a)}(F,\rho)$ exists and is equal to $\langle x_1 \to a_1, \dots , x_u \to a_u \rangle$, then 
+
+There exists a leaf-splitting sub-tree $\rm T$ of $\rm F$ such that for all $v \in \rm T$, 
+
+- $t(v) \in \mathbb{N}$ such that
+
+- $b(v) \in \{0,1\}^{t(v)}$     
+
+such that 
+
+${\cal A}({\rm T}, t, b, \langle x_1 \to a_1, \dots x_t \to a_t\rangle) :$
+
+- $(F_v|_\rho)|_{(x_1 \to  a_1, \dots x_t(v) \to a_{t(v)})}\equiv 0$ $(F_v|_\rho)|_{(x_1 \to  b_1(v_1), \dots x_t(v) \to b_{t(v_1)})}\equiv 1$  if  the parent of $v$ is an OR gate.  The roles of 0 and 1 reversed if the parent of  $v$ is an AND.   
+
+- ${\rm Pivot}_0$$({\rm F}_v, \rho, (x_1 \to a_1,\dots x_{t(v)} \to a_{t(v)}) ) = b(v)$ if parent of ${\rm F}_v$ is an OR gate and  ${\rm Pivot}_1$$({\rm F}_v, \rho, (x_1 \to a_1,\dots x_{t(v)} \to a_{t(v)}) ) = b(v)$
+
+if the parent of ${\rm F}_v$ is an AND gate.
+
+
+ ${\cal B}({\rm T},t, b, \langle x_1 \to a_1, \dots x_t \to a_t \rangle):$
+
+For all leaf nodes $v \in \rm T$. 
+
+- if $v$ is a leaf of $\rm T$, $t(v) = 1.$ 
+
+- if $v$ is a degree 1 node with a child $u$, $t(v) = t(u)$,
+
+- if $v$ is a degree 2 node node with children $v_1, v_2$,  $t(v) = t(v_1) + t(v_2)$.  
+

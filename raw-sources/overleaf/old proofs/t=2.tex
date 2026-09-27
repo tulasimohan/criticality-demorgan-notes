@@ -1,0 +1,88 @@
+%%%
+
+\newcommand{\sone}{
+    \sum_{
+        \substack{
+            \nvf(F,\rho) = i_1
+            }
+        } 
+    }
+    
+\newcommand{\stwo}{
+    \sum_{
+        \substack{
+            \nvf(F,\rho) = i_1 \\ 
+            \nvf(F,\rho(i_1 \to a_1)) = i_2 \\ 
+            F|_{\rho \circ \sigma_2} = 0, F|_{\rho \circ \sigma_2'} = 1
+            }
+        }  
+    }
+
+\newcommand{\ssone}{ 
+    \sum_{
+        \substack{   
+            \prot(\rho, \rho \circ \sigma_1') = i_1\\
+            \rho(i_1) = a_1
+            }  
+        } 
+    }
+
+\newcommand{\ssoneprime}{ 
+    \sum_{
+        \substack{   
+            \prot(\rho \circ \sigma_1,\rho) = i_1\\
+            \rho(i_1) = \bar{a_1}            
+            }  
+        } 
+    }
+
+\newcommand{\sstwo}[1]{
+    \sum_{
+        \substack{
+            \prot(\rho,\rho(i_1\to a_1)) = i_1\\ 
+            \rho(i_1) = a_1\\
+            \nvf(F,\rho) = i_2 \\ 
+            F|_{\rho(i_2 \to a_2) = 0, F|_{\rho(i_2 \to \bar{a_2})} = 1}
+            } 
+        }  #1
+    }
+
+
+
+
+%\newcommand{\probrhoi}[1]{\prob{}{\rho \circ \sigma_{#1}}}
+\newcommand{\rhoone}{ \rho(i_1\to a_1) }
+\newcommand{\rhotwo}{ \rho(i_1\to a_1,i_2\to a_2) }
+\newcommand{\rhooneprime}{ \rho(i_1 \to \bar{a_1}) }
+\newcommand{\rhotwoprime}{ \rho(i_1\to a_1,i_2 \to \bar{a_2}) }
+
+
+
+\begin{align*}
+    \prob{\rho}{\cdt(F,\rho) \text{has depth} 2} 
+    &\leq  \sum_{x_{i_1},x_{i_2}} 
+    \stwo \pr{\rho}\\    
+    &= \sum_{x_1,x_2} \sone \pr{\rho}  \cdot \frac{\stwo \pr{\rho} }{\sone  \pr{\rho} }
+\end{align*}
+
+
+\begin{align*}
+    \sone \pr{\rho} 
+    &= O(p) \sone \sqrt{ \pr{\rhoone} \pr{\rhooneprime}  }\\
+    &\leq O(p) \sqrt{ \sone \pr{\rhoone}} \sqrt{ \sone \pr{\rhooneprime}}
+    \tag{Cauchy-Schwarz}\\
+    &\leq O(p) \sqrt{\ssone \pr{\rho}} \sqrt{ \ssoneprime \pr{\rho} }
+\end{align*}
+
+\begin{align*}
+    &\frac{ \stwo \pr{\rho} } { \sone \pr{\rho} } \\
+    &= O(p) \frac{ \stwo \sqrt{\pr{\rhotwo} \pr{\rhotwoprime} }}{ \sone  \pr{\rhoone} }\\
+    &\leq O(p) \frac{ \sqrt{\stwo \pr{\rhotwo}} \sqrt{ \stwo \pr{\rhotwoprime}}}{\sone \pr{\rhoone}}\\
+    &\leq O(p) \sqrt{ \frac{  \sstwo \pr{\rho(i_2 \to a_2)} }{  \ssone \pr{\rho}  } } 
+    \cdot \sqrt{ \frac{  \sstwo \pr{\rho(i_2 \to \bar{a_2})} }{  \ssone \pr{\rho}  } }
+\end{align*}
+
+
+% $    = O(p^2)\sum_{x_1,x_2} \tone{\sqrt{\prob{}{\rho(i_1 \to a_1)}}} \frac{ \ttwo { \prob{}{\rho(i_1\to a_1,i_2\to a_2)} }  }{ \tone { \prob{}{\rho(i_1 \to a_1)} }  }$
+
+Let $\calA: = \bra{\rho: \nvf(F,\rho) = i_1}$

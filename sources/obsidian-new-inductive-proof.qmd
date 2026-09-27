@@ -1,0 +1,104 @@
+---
+title: "Obsidian: New Inductive proof"
+subtitle: "Raw source mirrored from Obsidian Vault"
+format: html
+---
+
+
+::: {.callout-note appearance="simple"}
+**Original Source**: Obsidian Vault (`02-Work/Research/Complexity-Theory/Criticality/`)  
+**File**: `New Inductive proof.md`  
+:::
+
+
+$$\newcommand{\cA}{\mathcal{A}}\newcommand{\cB}{\mathcal{B}}\newcommand{\cC}{\mathcal{C}}$$
+- Lemma 3.5 defines of $\cA, \cB, \cC$    
+ 
+
+## Canonical Decision Tree 
+
+Given a De Morgan formula $F$ on variable set $V$ and an associated restriction tree $\tilde{\rho} : \mathcal{T}_F \to \{0, 1, *\}^V$, $\text{CDT}(F, \tilde{\rho})$ is defined inductively as follows:
+
+**1. Constants and Literals (Base Cases)**
+*   If $F \in \{0, 1\}$, then $\text{CDT}(F, \tilde{\rho})$ is the unique tree with a single leaf node labelled by the corresponding constant.
+*   If $F \in \{x, \neg x\}$:
+    *   If the underlying variable is set by $\tilde{\rho}(F)$ to a constant, $\text{CDT}(F, \tilde{\rho})$ is the unique tree with a single node labelled by the evaluated constant.
+    *   If the underlying variable is unset by $\tilde{\rho}(F)$, $\text{CDT}(F, \tilde{\rho})$ is the tree with 3 nodes where the root is labelled by the variable and the two children are labelled appropriately by $0$ or $1$.
+
+**2. Disjunction ($F = F_1 \lor F_2$)**
+*   If $F_1|_{\tilde{\rho}(F)} \equiv 1$, then $\text{CDT}(F, \tilde{\rho})$ is the unique tree with a single leaf node labelled $1$.
+*   If $F_1|_{\tilde{\rho}(F)} \equiv 0$, then $\text{CDT}(F, \tilde{\rho})$ is $\text{CDT}(F_2, \tilde{\rho})$.
+*   If $F_1|_{\tilde{\rho}(F)} \not\equiv \text{constant}$, perform the following steps:
+    1.  Let $\Gamma = \text{CDT}(F_1, \tilde{\rho}|_{F_1})$.
+    2.  Apply the restriction $\tilde{\rho}(F)$ to $\Gamma$ to get $\Gamma'$ and remove all sub-trees inconsistent with $\tilde{\rho}(F)$.
+    3.  $0$-balance $\Gamma'$ to get $\Gamma''$.
+    4.  For each $0$-leaf $u$ of $\Gamma''$, replace $u$ by $\text{CDT}(F_2|_{\alpha_u}, \tilde{\rho})$, where $\alpha_u$ is the ordered restriction corresponding to $u$ in $\Gamma''$.
+
+**3. Conjunction ($F = F_1 \land F_2$)**
+*   If $F_1|_{\tilde{\rho}(F)} \equiv 0$, then $\text{CDT}(F, \tilde{\rho})$ is the unique tree with a single leaf node labelled $0$.
+*   If $F_1|_{\tilde{\rho}(F)} \equiv 1$, then $\text{CDT}(F, \tilde{\rho})$ is $\text{CDT}(F_2, \tilde{\rho})$.
+*   If $F_1|_{\tilde{\rho}(F)} \not\equiv \text{constant}$, perform the following steps:
+    1.  Let $\Gamma = \text{CDT}(F_1, \tilde{\rho}|_{F_1})$.
+    2.  Apply the restriction $\tilde{\rho}(F)$ to $\Gamma$ to get $\Gamma'$ and remove all sub-trees inconsistent with $\tilde{\rho}(F)$.
+    3.  $1$-balance $\Gamma'$ to get $\Gamma''$.
+    4.  For each $1$-leaf $u$ of $\Gamma''$, replace $u$ by $\text{CDT}(F_2|_{\alpha_u}, \tilde{\rho})$, where $\alpha_u$ is the ordered restriction corresponding to $u$ in $\Gamma''$.
+
+
+## Unpacking
+
+**Lemma (Unpacking the CDT for De Morgan Formulae - with Discovery Set Q)**
+
+Let $F$ be a De Morgan formula, $\tilde{\rho}$ a restriction tree, and $a \in \{0, 1\}^s$ an instruction string. 
+
+For a disjunction $F = F_1 \lor F_2$, the event that the path $\text{CDT}_0^{(a)}(F, \tilde{\rho})$ exists is equivalent to the disjoint union of the following two cases:
+
+**Case 1: The Trivial Bypass**
+$F_1|_{\tilde{\rho}(F)} \equiv 0$ and the path exists entirely in the second sub-formula:
+*   $\text{CDT}_0^{(a)}(F_2, \tilde{\rho})$ exists.
+
+**Case 2: The Active Branching**
+$F_1|_{\tilde{\rho}(F)} \not\equiv \text{constant}$, and there exists an index $r$ ($1 \leq r \leq s$), a valid $1$-leaf $\beta$ in the decision tree for $F_1$, a variable index set $Q$, and a modified ordered restriction $\alpha'$ such that the following three conditions hold simultaneously:
+
+*   **Condition $\mathcal{A}(r, \beta)$:** There exists an instruction string $b \in \{0,1\}^*$ such that $\beta = \text{CDT}_1^{(b)}(F_1, \tilde{\rho}|_{F_1})$, and the ordered restriction $\beta$ is consistent with $\tilde{\rho}(F)$.
+*   **Condition $\mathcal{B}(r, \beta, \alpha', Q, a_{\leq r})$:** The set $Q \subseteq \text{dom}(\beta)$ correctly identifies the star variables of $\tilde{\rho}(F_1)$ within the domain of $\beta$. The instruction prefix $a_{\leq r}$ dictates the modification of the variables in $Q$, generating a new ordered restriction $\alpha'$ such that $\alpha' \in \text{ASSOC}_0(F_1, \tilde{\rho}(F), \beta)$.
+*   **Condition $\mathcal{C}(r, \alpha', a)$:** The remainder of the canonical decision tree path successfully exists for the second sub-formula under the new restriction: $\text{CDT}_0^{(a_{>r})}(F_2|_{\alpha'}, \tilde{\rho})$ exists.
+
+## Smapling restrictions
+
+0. The 3-Stage Sampling Setup
+Assume WLOG that $F = F_1 \lor F_2$ and $L_1 \leq L_2$. We define the critical probabilities for the formula and its children as $p = 1/\sqrt{L}$, $p_1 = 1/\sqrt{L_1}$, and $p_2 = 1/\sqrt{L_2}$. 
+Because $p_1 \ge p_2 > p$, we can sample the final restriction $\rho \sim R_p$ in three stages:
+- Stage 1: Sample $\rho_1 \sim R_{p_1}$.
+- Stage 2: Sample $\rho_2 \sim R_{p_2}$ by taking $\rho_1$ and assigning a random value to each of its star variables with probability $1 - (p_2/p_1)$.
+- Stage 3: Sample the final $\rho \sim R_p$ by taking $\rho_2$ and assigning a random value to each of its star variables with probability $1 - (p/p_2)$.
+
+## The Calculation 
+
+### 0. The Path Length Decomposition
+We want to bound the probability that $F = F_1 \lor F_2$ has a path of length $s$. 
+This path must be composed of a contribution of length $s_1$ from $F_1$ and a continuation of length $s_2$ from $F_2$, such that $s_1 + s_2 = s$. 
+
+### 1. The Shrinking Path in the Base Tree
+The $s_1$ active variables contributed by $F_1$ under the final restriction originate from a path of length $t_1 \ge s_1$ in $\text{CDT}(F_1, \rho_1)$. 
+By the inductive hypothesis applied at the critical probability $p_1$, the probability of finding this base path of length $t_1$ is bounded by $(1/2)^{t_1}$.
+
+### 3. The Cost of Shrinking and Modification
+When we tighten the restriction from $\rho_1$ to $\rho_2$ (retaining star variables with probability $p_2/p_1$), two things must happen to the $t_1$ variables:
+- Exactly $s_1$ variables must survive as stars to form the final path (probability proportional to $(p_2/p_1)^{s_1}$).
+- The remaining $t_1 - s_1$ variables must be fixed to specific constants that satisfy the $\text{ASSOC}_0$ modification target (this incurs a switching penalty, bounded by some constant $C^{t_1 - s_1}$).
+Accounting for the $\binom{t_1}{s_1}$ ways to choose which variables survive, the transition probability is bounded by: $\binom{t_1}{s_1} (p_2/p_1)^{s_1} C^{t_1 - s_1}$.
+
+### 4. Summing over the Original Lengths
+To find the total probability of getting exactly $s_1$ active variables from $F_1$, we sum over all possible original lengths $t_1 \ge s_1$. Using the inductive bound from Step 2 and the transition bound from Step 3:
+$\Pr[\text{Path of length } s_1 \text{ in } F_1] \leq \sum_{t_1 = s_1}^\infty \left( \frac{1}{2} \right)^{t_1} \binom{t_1}{s_1} \left( \frac{p_2}{p_1} \right)^{s_1} C^{t_1 - s_1}$
+
+By factoring out the $s_1$ terms, this geometric series evaluates cleanly. Because $C/2 < 1$ for a properly tuned switching constant, the infinite sum over the remaining $t_1 - s_1$ terms converges to a constant $O(1)$. Thus, the bound simplifies beautifully to:
+$\Pr[\text{Path of length } s_1 \text{ in } F_1] \leq O(1)^{s_1} \left( \frac{p_2}{p_1} \right)^{s_1}$
+
+### 5. Closing the Global Budget
+Now we combine this with the $s_2$ length continuation in $F_2$. By induction at probability $p_2$, the continuation costs $(1/2)^{s_2}$. Summing over all valid splits $s_1 + s_2 = s$:
+Total Prob $\leq \sum_{s_1=0}^s \left[ O(1)^{s_1} \left( \frac{p_2}{p_1} \right)^{s_1} \right] \cdot \left( \frac{1}{2} \right)^{s_2}$
+
+Because $p_2 / p_1 = \sqrt{L_1 / L_2} \leq 1$, the terms geometrically decay or balance out. With careful tuning of the critical probability parameter (e.g., pulling out the necessary constants into the definition of $p$), this sum collapses directly to the required $(1/2)^s$, sealing the induction.
+
+

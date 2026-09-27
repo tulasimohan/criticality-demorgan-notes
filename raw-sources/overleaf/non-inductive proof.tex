@@ -1,0 +1,119 @@
+\subsection{Structural Lemma: Blaming the Event on Subtrees}
+\label{sec:structural-lemma-proof}
+The core idea is to "blame" the event $\calE(\seqvar,\seqassign)$ on a specific substructure of the formula tree.
+
+\begin{lemma}[Structural Lemma]
+\label{lem:structural_lemma}
+    If $\PathVars(F,\rho, \seqassign) = (x_{i_1}, \dots , x_{i_t})$, then there exists twin leaved sub-tree $\calT$ of $F$ such that 
+Let for each internal node $v$ of $T$ with two children $v_1$ and $v_2$ in $T$, 
+    \begin{enumerate}
+        \item $\calT$ is a leaf-branching sub-tree of the formula tree of $F$ which has the same root as $F$ and has $t$ leaves. Let $t(v) \in \N$ be the number of leaves of $\calT$ lying under the node $v$ in $\calT$.
+        \item For each internal node $v \in \calT$, let $r(v) = t(v_1)$ where $v_1$ is the left most child of $v$ in $\calT$.  $b(v) \in \{0,1\}^{r(v)}$  to the variables $x_{i_1}, \dots x_{i_{r(v)}}$. 
+    \end{enumerate}
+    such that the following two conditions hold
+    
+    \bf $\calA(\calT,b)$: 
+            \begin{itemize}
+                \item $\Pivot(F_v, \rho, x_v, a(v)) = b(v)$. 
+                \item If $v$ is an OR gate: $F_v|_{\seqvarv \to a(v)}\equiv 0$ and $F_v|_{\seqvarv \to b(v)} \equiv 1$. If $v$ is an AND gate: the roles of $0$ and $1$ are reversed.
+            \end{itemize}
+        \bf $\calB(\calT,b)$
+        \begin{itemize}
+                \item For all leaf nodes $v \in \calT$: $F_v|_{\seqvarv \to a(v)}$ reduces to a literal (in the variable $x(v)$).
+            \end{itemize}
+\end{lemma}
+
+The proof of this lemma is by induction on the structure of $F$ and the $\CDT$ construction.
+
+\subsection{Bounding the Probability}
+The argument for bounding $\Pr[\CDTdepth(F,\rho) = t]$ proceeds as follows:
+
+\begin{enumerate}
+    \item We partition the event $\{\rho \colon \CDTdepth(F,\rho) = t\}$ into events $\calE(\seqvar,\seqassign)$, defined as $$\calE(\seqvar,\seqassign) = \{\rho : \PathVars(F,\rho, \seqassign) = \seqvar\}.$$
+    Therefore, 
+    $$\Pr_\rho [\CDTdepth(F,\rho) = t] \leq \sum_{\seqvar,\seqassign} \Pr[\calE(\seqvar,\seqassign)]$$
+    \item We decompose each event $\calE(\seqvar,\seqassign)$ by finding a corresponding leaf-branching subtree $(\calT, b)$ such that $\calE(\seqvar,\seqassign) = \bigcup_{\calT,b} (\calA(\calT,b) \land \calB(\calT,b))$.
+    This gives:
+    \[
+    \Pr_\rho[\calE(\seqvar,\seqassign)] = \sum_{\calT,b}\Pr[\calA(\calT,b) \land \calB(\calT,b) \land \calE(\seqvar, \seqassign)]
+    \]
+    \item We establish that the set of restrictions satisfying $\calA(\calT,b) \land \calE(\seqvar,\seqassign)$ is downward closed in the variables $X \setminus \{x_{i_1}, \dots , x_{i_t}\}$.
+    \[
+    \sum_{\seqvar,\calT,b} \Pr[\calA(\calT,b) \land \calE(\seqvar,\seqassign)] \leq 1 \quad \text{ (or } \le 2^t \text{ from the initial sum)}
+    \]
+    \item We bound the conditional probability of $\calB(\calT,b)$ given this downward closed set:
+    \[
+    \Pr[\calB(\calT,b)| \Delta] \leq p^t \cdot \sqrt{\prod_{k=1}^t \Lfunc(z_k, x_{i_k})} \quad \text{ for all downward closed sets of restrictions } \Delta.
+    \]
+    This step reduces the problem to $t$ base cases concerning individual leaves.
+    \item The final bound is obtained through a calculation using convexity.
+    \[
+    \Pr_\rho[\CDTdepth(F,\rho) = t] \leq \sum_{\seqvar} \sum_{\seqassign \in \{0,1\}^t} \Pr[\calE(\seqvar,\seqassign)]
+    \]
+    One can fix $\seqassign$ to be $\seqassign^*$ which is the maximizer of $\calE(\seqvar,\seqassign)$, leading to:
+    \[
+    \leq 2^t \sum_{\seqvar} \Pr[\calE(\seqvar,\seqassign^*)]
+    \]
+    Then, for the maximizer $\seqassign^*$:
+    \begin{align*}
+    &\sum_{\seqvar,\calT,b} \Pr[\calA(\calT,b) \land \calB(\calT,b) \land \calE(\seqvar,\seqassign^*)] \\
+    &= \sum_{\seqvar, \calT,b} \Pr[\calA(\calT,b)\land \calE(\seqvar,\seqassign^*)] \cdot \Pr[\calB(\calT,b)| \calA(\calT,b)\land \calE(\seqvar,\seqassign^*)]
+    \end{align*}
+    Applying the conditional probability bound from step 4:
+    \[
+    \leq \sum_{\seqvar, \calT,b} \Pr[\calA(\calT,b)\land \calE(\seqvar,\seqassign^*)] \sqrt{\prod_{k=1}^t \Lfunc(z_k, x_{i_k})}
+    \]
+    Applying Cauchy-Schwarz inequality (or similar convexity argument):
+    \[
+    \leq \sqrt{\sum_{\seqvar,\calT,b} \Pr[\calA(\calT,b)\land \calE(\seqvar,\seqassign^*)]} \cdot \sqrt{\sum_{\seqvar,\calT,b} \prod_{k=1}^t \Lfunc(z_k, x_{i_k})}
+    \]
+    Using the fact that $\sum_{\seqvar, \calT,b} \Pr[\calA(\calT,b)\land \calE(\seqvar,\seqassign^*)] \leq 1$ (or similar total probability argument), and the sum over leaf products:
+    \[
+    \leq \sqrt{1} \cdot \sqrt{\Lfunc^t} = (\Lfunc)^{\frac{t}{2}}  
+    \]
+\end{enumerate}
+The argument for bounding $\sum_{\seqvar, \calT} \Lfunc(z_1, x_{i_1}) \cdots \Lfunc(z_t,x_{i_t})$ follows from a double counting argument. The LHS is the ``number of ways of choosing a leaf-branching tree $\calT$ with $t$ leaves and for each leaf of $\calT$, choosing a leaf of $F$''. This can be achieved by directly choosing $t$ leaves of $F$. Since, for any choice of $\ell_1, \dots , \ell_t$, there is a unique leaf-branching tree that splits it, this sum can be bounded.
+
+\subsection{Properties of Leaf-Branching Trees}
+\label{sec:leaf-branching-trees-proof}
+
+\begin{definition}[Leaf-Branching Tree]
+    A tree $\calT$ is called leaf-branching if the parent of any leaf node in $\calT$ has more than one child.
+\end{definition}
+
+\begin{definition}[Tree Splitting Leaves]
+    A subtree $\calT$ with $t$ leaves splits leaves $\ell_1,\dots ,\ell_t$ of $F$ if:
+    \begin{enumerate}
+        \item Each leaf of $\calT$ has some $\ell_i$ as a descendent.
+        \item No two $\ell_i$, $\ell_j$ such that $i \neq j$ share the same leaf of $\calT$.
+    \end{enumerate}
+\end{definition}
+
+\begin{claim}
+    Let $\ell_1, \dots , \ell_t$ be leaves in a formula tree $F$. There is a unique leaf-branching subtree $\calT$ that splits $\ell_1, \dots , \ell_t$.
+\end{claim}
+\begin{proof}
+    Suppose there exist two distinct leaf-branching subtrees $\calT_1$ and $\calT_2$ that both split $\ell_1, \dots , \ell_t$.
+    Since $\calT_1 \neq \calT_2$, there exists at least one leaf $\ell_k$ such that:
+    \begin{itemize}
+        \item In $\calT_1$, $\ell_k$ is under a leaf $z_1$.
+        \item In $\calT_2$, $\ell_k$ is under a leaf $z_2$.
+        \item $z_1 \neq z_2$.
+    \end{itemize}
+    In the original tree $F$, $z_1$ and $z_2$ are both ancestors of $\ell_k$. So, one must be an ancestor of the other. Without loss of generality, assume $z_1$ is an ancestor of $z_2$ in $F$.
+    In $\calT_2$, $z_2$ is a leaf. Since $\calT_2$ is leaf-branching, the parent of $z_2$ in $\calT_2$ (call it $p$) must have degree $\ge 2$ in $\calT_2$. This means $p$ has at least two children in $\calT_2$, one of which is $z_2$.
+    The other child of $p$ in $\calT_2$ must also contain a leaf in $\calT_2$ (call it $w$). Since $\calT_2$ splits $\ell_1, \dots ,\ell_t$, $w$ must cover some $\ell_j$ for $j \neq k$. However, in $F$, $w$ is a descendant of $z_1$ (because $z_1$ is an ancestor of $z_2$, and $p$ lies on the path from $z_1$ to $z_2$).
+    In $\calT_1$, $z_1$ is a leaf. Thus, all descendants of $z_1$ in $F$ (including $\ell_j$ under $w$) must be assigned to $z_1$ in $\calT_1$. This contradicts the splitting condition, as $z_1$ would cover both $\ell_k$ and $\ell_j$.
+    Therefore, the assumption that $\calT_1$ and $\calT_2$ are distinct leads to a contradiction. The leaf-branching subtree $\calT$ that splits $\ell_1, \dots , \ell_t$ must be unique.
+\end{proof}
+
+\begin{claim}
+    The trees $\calT$ that we get from the Canonical Decision Tree construction are leaf-branching trees.
+\end{claim}
+
+\begin{claim}
+    \[
+    \sum_{\calT \colon \text{leaf-branching with leaves } z_1,\dots , z_t} \Lfunc(z_1) \cdots \Lfunc(z_t) \leq \Lfunc^t
+    \]
+    Here, $\Lfunc(z_k)$ denotes some measure associated with the leaf $z_k$, and $\Lfunc$ is a total measure.
+\end{claim}

@@ -1,0 +1,119 @@
+%september 8
+Notation:
+$\phi_{a}(\rho) := \rho \circ(\nvf(F,\rho) \to a)$, 
+$\phi_{a_1,\dots, a_t} = \phi_{a_2,\dots,a_t}(\phi_{a_1}(\rho))$.
+
+Fix $a \in \cube{t}$.
+Let $R_1 = \bra{\rho:F|_{\phi_{a_1,\dots,a_t}(\rho)} = 0, F|_{\phi_{a_1,\dots,\bar{a_t}}(\rho)} = 1 }$,
+$R_2 = \bra{\rho: F|_{\phi_{a_2,\dots,a_t}(\rho)} = 0, F|_{\phi_{a_2,\dots,\bar{a_t}}(\rho)} = 1}$.
+
+Consider the communication matrix $M$ whose rows and columns are indexed by $X$ and $Y$ respectively. Where $X = \bra{\phi_{a_1}(\rho): \rho \in R_1}$ and $Y = \bra{\rho : \phi_{\bra{a_1}(\rho)}: \rho \in R_1}$. The protocol $\prot$ partitions $M$ into combinatorial rectangles which correspond to transcripts.  Let $A_{\ts_1} \times B_{\ts_1}$ be the rectangle which corresponds to the transcript $\ts_1$. 
+
+\begin{claim}
+    \label{calim: prob rectangles}
+        Let $M$ be the communication matrix whose rows and columns are indexed by $X$ and $Y$ respectively. For each transcript $\ts_1$, let
+        $\pr{A_{\ts_1}} = \sum_{\rho \in A_{\ts_1}}$, $\pr{B_{\ts_1}} = \sum_{\rho \in B_{\ts_1}}$.
+%        $X = \cup_{\ts_1 \in \prot} A_{\ts_1}$, $Y = \cup_{\ts_1 \in \prot} B_{\ts_1}$.
+        \[
+        \sum_{\ts_1 \in \prot} \pr{A_{\ts_1}} \pr{B_{\ts_1}} \leq \pr{X} \pr{Y}
+        \]
+                
+\end{claim}
+
+\begin{claim}
+    \[
+    \pr{\rho: \rho \in R_1} \leq \sqrt{\prot} \sqrt{\pr{X} \pr{Y}} \overset{?}{\leq} \sqrt{|\prot|}\pr{\rho: \rho \in R_2}
+    \]
+\end{claim}
+
+\begin{proof}
+\begin{align*}
+    %\pr{\cdt(F, \rho) has depth =t}
+    \pr{\rho: \rho \in R_1} %&= \sum_{a} \pr{\rho: \rho \in R_1(\bar{a})}\\
+                                    &=  \sum_{x_{i_1}}\pr{\rho: \nvf(F,\rho) = i_1, \rho \in R_1}\\
+                                    &\leq \sum_{x_{i_1}} \sum_{\ts_1}\pr{\rho: \prot(\phi_{a_1}(\rho), \phi_{\bar{a_1}}(\rho)) = \ts_1, \rho \in R_1}\\
+    \text{Let } E :=\bra{\rho \in R_1: \prot(\phi_{a_1}(\rho), \phi_{\bar{a_1}}(\rho)) = \ts_1} \\
+                                    &\leq \sum_{x_{i_1}} \sum_{\ts_1} \sum_{\rho \in E} \pr{\rho}\\
+                                    &\leq O(p) \sum_{x_{i_1}} \sum_{\ell_1}\sum_{\rho \in E} \sqrt{\pr{\phi_{a_1}(\rho)}}\sqrt{\pr{\phi_{\bar{a_1}}(\rho)}}\\
+                                    &\leq O(p) \sum_{x_{i_1}, \ts_1} \sqrt{\sum_{\rho \in E}\pr{\phi_{a_1}(\rho)}} \sqrt{\sum_{\rho \in E}\pr{\phi_{\bar{a_1}}(\rho)}}\\
+                                    &= O(p) \sum_{x_{i_1},\ts_1} \sqrt{\pr{A_{\ts_1}} \pr{B_{\ts_1}}}\\
+                                    &\leq O(p) \sqrt{\sum_{x_{i_1},\ts_1} 1 } \sqrt{\sum_{x_{i_1},\ts_1}\pr{A_{\ts_1}} \pr{B_{\ts_1}}}\\
+                                    &= \sqrt{|\prot|} \sqrt{\pr{X} \pr{Y}}
+\end{align*}
+
+\end{proof}
+
+\subsection{Decision-tree size after random restriction}
+
+Let $R(s) = \bra{\rho: \cdt(F,\rho) \text{ has size } = s}$,\\ 
+$R(s_1,s_2) = \bra{\rho: \cdt(F,\phi_{a_1}(\rho)) \text{ has size } s_1 \text{ and } \cdt(F,\phi_{bar{a}}(\rho)) \text{ has size } = s_2}$.\\
+$X(s_1,s_2) = \bra{\phi_{a_1}(\rho) : \rho \in R(s_1,s_2)}$,\\
+$Y(s_1,s_2) = \bra{\phi_{\bar{a_1}}(\rho): \rho \in R(s_1,s_2)}$.\\
+\begin{claim}
+    $$\prob{\rho}{\cdt(F,\rho) \text{has size = } s} \leq (s \cdot p\sqrt{\prot})^{\log s}$$
+\end{claim}
+\begin{proof}
+\begin{align*}
+   \pr{R} &= \sum_{s_1 = 1}^{s-1}
+                \sum_{x_{i_1}} 
+                    \sum_{\ts_1} \pr{\rho: \nvf(F,\rho) = i_1, \rho \in R(s_1,s_2)}\\
+        &= \sum_{s_1 = 1}^{s-1}
+            \sum_{x_{i_1}} 
+                \sum_{\ts_1} \pr{\rho: \prot( \phi_{a_1}(\rho),                \phi_{\bar{a_1}}(\rho) ) = \ts_1, \rho \in R(s_1,s_2)}\\
+    \text{Let } E :=\bra{\rho \in R(s_1,s_2): \prot(\phi_{a_1}(\rho), \phi_{\bar{a_1}}) = \ts_1}, \\                
+        &= \sum_{s_1 = 1}^{s-1}
+            \sum_{x_{i_1}}        
+                \sum_{\ts_1} \sum_{\rho \in E} \pr{\rho}\\
+        &= O(p) \sum_{s_1 = 1}^{s-1}
+                \sum_{x_{i_1}}
+                \sum_{\ts_1} \sum_{\rho \in E} \sqrt{ \pr{\phi_{a}(\rho)}} \sqrt{\pr{\phi_{\bar{a}}(\rho)} } \\
+        &= O(p) \sum_{s_1 = 1}^{s-1}
+                \sum_{x_{i_1}}
+                \sum_{\ts_1} \sqrt{\sum_{\rho \in E} \pr{\phi_{a}(\rho)}} \sqrt{\sum_{\rho \in E} \pr{\phi_{\bar{a}(\rho)}}}\\
+        &= O(p) \sum_{s_1 = 1}^{s-1}
+            \sum_{x_{i_1}} \sum_{\ts_1} \sqrt{\pr{A_{\ts_1}} \pr{B_{\ts_1}}}\\
+        &\leq O(p) \sum_{s_1 = 1}^{s-1}
+                \sqrt{\sum_{x_{i_1}} \sum_{\ts_1} 1 } \sqrt{\sum_{x_{i_1}} \sum_{\ts_1} \pr{A_{\ts_1}} \pr{B_{\ts_1}}} \\
+        & = O(p \sqrt{|\prot|}) \sum_{s_1 =1}^{s-1}\sqrt{\pr{X(s_1,s_2)} \pr{Y(s_1,s_2)}} \\
+        &= O(p \sqrt{|\prot|}) \sum_{s_1 = 1}^{s -1}\sqrt{\pr{R(s_1)} \pr{R(s -s_1)}}\\
+        &= O\cbra{\cbra{p \sqrt{2s|\prot|}}^{\log s}} \tag*{by Claim \ref{claim: recursion}}
+\end{align*}
+\end{proof}
+
+\begin{claim}
+    \label{claim: recursion}
+    $$f(s) = \alpha \sum_{s_1 = 1}^{s-1} \sqrt{f(s_1) f(s-s_1)}$$
+    $$\Rightarrow f(s) \leq (\alpha \sqrt{2s})^{\log s}$$
+\end{claim}
+
+
+\begin{proof}
+    Suppose $f(s_1) \leq \cbra{\sqrt{2s_1} \cdot \alpha}^{\log s_1}$ for all $s_1 < s$. 
+
+    $f(s_1) f(s-s_1) = \cbra{\sqrt{2s_1} \alpha}^{\log s_1} \cbra{\sqrt{(s -s_1)} \alpha}^{\log (s-s_1)}$\\
+    
+    \begin{align*}
+        \log \cbra{f(s_1) f(s-s_1)} 
+        &= \log s_1(\log \sqrt{2s_1}\alpha) + \log (s-s_1) \cbra{\log \sqrt{2(s-s_1)}\alpha}\\
+        &= \frac{\log^2 s_1 + \log^2 (s-s_1)}{2} + \cbra{\log \sqrt{2}\alpha}                                                   
+        \cbra{\log s_1 + \log (s-s_1)}
+    \end{align*}
+Consider the one variable real function, 
+    $g(x) = \log x (\log \sqrt{2}\alpha) + \frac{\log^2 {x}}{2}$ where $\sqrt{2x}\alpha \leq 1$.\\
+    
+    $g'(x) = \frac{\log \sqrt{2}\alpha}{x} + \frac{\log x}{x}$.
+    
+    
+\end{proof}
+
+
+
+\begin{proof}
+    Let $s$ be even and suppose $f(s_1)(f(s-s_1))$ achieves its maximum at $s_1 = s/2$.We get the following recursion, 
+    \begin{align*}
+        f(s) &\leq \alpha \cdot s \cdot f(s/2)\\
+            &\leq \alpha^{\log s} 2^{(\log s)(1+ \log s)/2}\\
+            &= \alpha^{\log s} \cbra{2^{(1+ \log s)/2}}^{\log s}\\
+            &= (\alpha \sqrt{2s})^{\log s}. 
+    \end{align*}
+\end{proof}

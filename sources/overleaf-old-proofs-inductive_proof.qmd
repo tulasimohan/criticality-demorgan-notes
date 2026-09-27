@@ -1,0 +1,487 @@
+---
+title: "Overleaf: old proofs/inductive_proof.tex"
+subtitle: "Raw TeX source mirrored from Overleaf project"
+format: html
+---
+
+
+::: {.callout-note appearance="simple"}
+**Original Source**: Overleaf Project Archive  
+**Path**: `old proofs/inductive_proof.tex`  
+:::
+
+```latex
+\documentclass[11pt]{article}
+
+% --- Preamble ---
+% Input and Font Encoding
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+% Math packages
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm} % For theorem-like environments
+\usepackage{amsfonts}
+\usepackage{mathtools} % For gather, multline, etc.
+\usepackage{bm} % For bold math symbols
+
+% Font Setup (Choose one of the following font setups)
+% Option 1: Palatino text with Latin Modern Math (classic and common)
+\usepackage{mathpazo} % Palatino font for text and math
+\usepackage{lmodern} % Latin Modern for improved math symbols (recommended with mathpazo)
+
+% Graphics and Figures
+\usepackage{graphicx}
+\usepackage{float} % For better control over floats (e.g., [H] for algorithms)
+\usepackage{subcaption} % For subfigures/subtables (if needed)
+\usepackage{caption} % For better caption formatting
+\usepackage{tikz}
+
+% Hyperlinks
+\usepackage[colorlinks, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref} % Colored links, no boxes
+% For draft, you can use: \usepackage[hidelinks]{hyperref}
+
+% Cross-referencing
+\usepackage[nameinlink]{cleveref} % Must be loaded AFTER hyperref. Adds "Theorem", "Lemma" etc. automatically.
+
+% List customization
+\usepackage{enumitem} % For custom list environments
+
+% Color for comments/notes
+\usepackage[dvipsnames]{xcolor} % Adds more color options
+
+% Code listings and Algorithms
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode} % For pseudocode within algorithm environment
+
+% Page layout
+\usepackage[margin=1in]{geometry}
+\raggedbottom % Helps with vertical spacing, prevents large gaps
+
+% Custom macros and definitions (YOUR macros.tex)
+\input{macros}
+
+% Title and Authors
+\title{Criticality of DeMorgan Formulae}
+\author{
+    Prahladh Harsha \\
+    \small Tata Institute of Fundamental Research \\
+    \small \texttt{prahladh@tifr.res.in}
+    \and
+    Tulasimohan Molli \\
+    \small Faculdade de Ciências da Universidade de Lisboa \\
+    \small \texttt{tmolli@fc.ul.pt}
+    \and
+    Jaikumar Radhakrishnan \\
+    \small International Centre for Theoretical Sciences, TIFR \\
+    \small \texttt{jaikumar.radhakrishnan@icts.res.in}
+}
+\date{} % Removes the date from the title page
+
+% Theorem environments
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+
+% Allow page breaks inside align and other math environments
+\allowdisplaybreaks
+
+% --- Document Start ---
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    Rossman defined the notion of notion of criticality inspired by Switching lemmas and showed that bounds on criticality imply  average case lower bounds, PRGs, Fourier tail bounds, Learning algorithms and satisfiability algorithms. 
+    We study the criticality of DeMorgan formulae and show that a DeMorgan formula with $L$ leaves has criticality $O(\sqrt{L})$. Our approach involves a canonical decision tree construction, Karchmer-Wigderson games, Shrinkage, a notion of leaf-branching subtrees, and an analysis using probabilistic methods combined with convexity arguments. 
+\end{abstract}
+
+% Table of Contents
+\tableofcontents
+
+\newpage
+
+% --- Main Content ---
+\section{Introduction}
+\label{sec:introduction}
+
+In this manuscript, we present a detailed proof demonstrating that the criticality of a DeMorgan formula with $L$ leaves is $O(\sqrt{L})$. This extends previous work on lower bounds for constant-depth circuits. This was posed as an open question by Benjamin Rossman.
+
+Our approach uses the ideas such as a Canonical Decision Tree of DeMorgan formulae, a notion of Downward Closure of restrictions, Karchmer-Wigderson games, and convexity arguments. Håstad in his work on shrinkage has shown a bound on the probability that a random restriction reduces a formula to a variable of its negation. This was our starting point; we define an appropriate notion of canonical decision tree and show that it reduces to a shallow decision tree under random restrictions.
+
+Along the way, we use the notion of Downward-closed sets of restrictions to set up an inductive claim in the spirit of Håstad's multi-switching lemma. Finally, we use Håstad's base case proof and convexity to finish the proof.
+
+\section{Preliminaries}
+\label{sec:preliminaries}
+
+We begin by establishing the necessary foundational definitions.
+
+\subsection{Boolean Formulas and Variables}
+A Boolean formula $F$ is a well-formed expression constructed from variables $x_1, \ldots, x_n$ and the binary operators $\land$ (AND) and $\lor$ (OR), and the unary operator $\neg$ (NOT). We denote the set of variables as $V = \{x_1, \ldots, x_n\}$. A variable $x_i$ can take a value from the set $\{0, 1\}$. A variable is called a literal when it is negated or un-negated. A DeMorgan formula is a boolean formula composed of $\lor$ (OR), $\land$ (AND), and $\neg$ (NOT) gates. NOT gates are only allowed on the leaf variables (literals). Crucially, all internal gates have fan-in 2, which implies that the formula can be represented as a binary tree whose leaves are labelled by literals (variables or their negations).
+
+\subsection{Random Restrictions}
+A restriction $\rho$ is a partial assignment to the variables of a formula $F$. Each variable $x_i$ is assigned a value from $\{0, 1, *\}$, where $*$ denotes an unassigned variable. We denote the set of variables assigned a value by $\rho$ as $\text{Dom}(\rho)$. We consider $p$-random restrictions where each variable is independently set to $\unassigned$ with probability $p$, and to $0$ or $1$ with probability $(1-p)/2$ each.
+
+\subsection{Decision Tree Depth and Criticality}
+For a boolean function $f \colon \{0,1\}^n \to \{0,1\}$, a decision tree computes $f$ by querying variables one by one. Such a tree has internal nodes labeled by the variables queried, and its leaf nodes are labeled by the output value of $f$, which is determined by the assignments to the variables along the path from the root to that leaf. The depth of a decision tree is the maximum number of queries (i.e., the length of the longest path) from the root to any leaf.
+
+\subsection{Criticality}
+The criticality of a Boolean function $f$, as defined by Rossman, is the smallest real number $\lambda$ such that $\Prob_{\rho \sim R_p}[\DTdepth(f|_{\rho}) \geq t] \leq (p\lambda)^t$. We are interested in studying the criticality of DeMorgan formulae. It is conjectured by Tal that the criticality of a DeMorgan formula of size $L$ is $\mathcal{O}(\sqrt{L})$. This paper provides a proof of this conjecture.
+
+\subsection{Downward Closed Set of Restrictions}
+A set of restrictions $\Delta$ is \emph{downward-closed} if for any restriction $\rho \in \Delta$, and any other restriction $\rho'$ that extends $\rho$ (i.e., $\text{Dom}(\rho) \subseteq \text{Dom}(\rho')$ and for all $x \in \text{Dom}(\rho)$, $\rho'(x) = \rho(x)$), then $\rho' \in \Delta$. Informally, if a restriction is in the set, then any "more defined" restriction is also in the set.
+
+\begin{definition}
+\label{def: trunk}
+    Given a tree $F$, a \emph{Trunk} is a sub-tree of $F$ that has the same root as $F$ and whose terminal nodes are internal nodes of the original tree $F$. The sub-trees of $F$ rooted at these terminal nodes are called \emph{Dangling sub-trees}.
+\end{definition}
+
+\section{Canonical Decision Tree (CDT)}
+\label{sec:cdt}
+
+The Canonical Decision Tree (CDT) is a structured representation of a Boolean formula that is central to our analysis.
+Given a De-Morgan formula $F$ and a restriction $\rho$, the following algorithm gives a procedure to construct the Canonical Decision tree of $F$ under $\rho$. The algorithm uses a sub-routine called 0-Balance or 1-Balance. The interesting case of the CDT construction is when $F|_\rho$ is non-constant. In this case, if $F = F_1 \lor F_2$ the algorithm constructs  $\Gamma = \CDT(F_1,\rho)$ if $F_1|\rho$ is non-constant, 1-balances $\Gamma$ to get $\Gamma'$ and for each 0-leaf $\alpha$ of $\Gamma'$, attaches $\CDT(F_2|\alpha, \rho)$. Here is the complete algorithm. 
+
+\begin{algorithm}[H]
+\label{alg: CDT}
+    \caption{$\CDT(F,\rho)$: Canonical Decision Tree Constructor}
+    \label{alg:cdt-algo}
+    \textbf{Input:} A DeMorgan formula $F$, and a restriction $\rho$. \\
+    \textbf{Output:} A decision tree for $F|_{\rho}$.
+    \begin{algorithmic}[1]
+        \State \textbf{Base cases:}
+        \If {$F|_\rho \equiv \text{constant}$}
+            \State returns a node with that constant ($0$ or $1$).
+        \EndIf
+        \If {$F$ is a single literal ($x_i$ or $\neg x_i$)}
+            \State return a node labeled $x_i$ with two leaves, one labeled $0$ and the other labeled $1$.
+        \EndIf
+        \State \textbf{Recursive case:} $F = F_1 \lor F_2$.
+        \If {$F_1|_\rho \equiv 0$}
+            \State return $\CDT(F_2, \rho)$
+        \ElsIf {$F_1|_\rho \equiv 1$}
+            \State return a single node labeled $1$.
+        \Else \Comment{$F_1|_\rho$ is non-constant}
+            \State Construct $\Gamma = \CDT(F_1,\rho)$.
+            \State $\BalanceZero(\Gamma)$ to get $\Gamma'$.
+            \State For each $0$-leaf $\alpha \in \Gamma'$, attach $\CDT(F_2|_\alpha,\rho)$ to it.
+        \EndIf
+        \State The case when $F = F_1 \land F_2$ can be handled similarly, by swapping roles of $0$ and $1$ and using $\BalanceOne$ balancing.
+    \end{algorithmic}
+\end{algorithm}
+
+\subsection{Balancing Procedure}
+
+% %%%% FOR A SINGLE "AND" TERM
+% \begin{figure}
+%     \centering
+%     \begin{subfigure}[h]{0.4\textwidth}
+%         \centering
+%         \begin{tikzpicture}[scale = 0.3, treenode/.style={circle, draw, thick}, leaf/.style={rectangle, draw, thick}]
+        
+%         \node[treenode] at (2, 9) (x1){$x_1$};
+%         \node[leaf] at (0, 6) (leaf1) {0};
+%         \node[treenode] at (4, 6) (x2){$x_2$};
+%         \node[leaf] at (2, 3) (leaf2){0};
+%         \node[treenode] at (6, 3) (x3){$x_3$};
+%         \node[leaf] at (4, 0) (leaf3){0};
+%         \node[leaf] at (8, 0) (leaf4){1};
+        
+%         \draw (x1) -- (leaf1);
+%         \draw (x1) -- (x2);
+%         \draw (x2) -- (leaf2);
+%         \draw (x2) -- (x3);
+%         \draw (x3) -- (leaf3);
+%         \draw (x3) -- (leaf4);   
+%         \end{tikzpicture}
+%         \caption{Optimal $\DT$ for $x_1\wedge x_2 \wedge x_3$}
+%     \end{subfigure}
+%     \hfill
+%     \begin{subfigure}[h]{0.4\textwidth}
+%         \centering
+%         \begin{tikzpicture}[scale = 0.3, treenode/.style={circle, draw, thick}, leaf/.style={rectangle, draw, thick}]
+        
+%         \node[treenode] at (9, 9) (x1){$x_1$};
+
+%         \node[treenode] at (5, 6) (x21) {$x_2$};
+%         \node[treenode] at (13, 6) (x22){$x_2$};
+
+%         \node[treenode] at (3, 3) (x31){$x_3$};
+%         \node[treenode] at (7, 3) (x32){$x_3$};
+%         \node[treenode] at (11, 3) (x33){$x_3$};
+%         \node[treenode] at (15, 3) (x34){$x_3$};
+
+%         \node[leaf] at (2, 0) (leaf1){0};
+%         \node[leaf] at (4, 0) (leaf2){0};
+%         \node[leaf] at (6, 0) (leaf3){0};
+%         \node[leaf] at (8, 0) (leaf4){0};
+%         \node[leaf] at (10, 0) (leaf5){0};
+%         \node[leaf] at (12, 0) (leaf6){0};
+%         \node[leaf] at (14, 0) (leaf7){0};     
+%         \node[leaf] at (16, 0) (leaf8){1};
+        
+%         \draw (x1) -- (x21);
+%         \draw (x1) -- (x22);
+
+%         \draw (x21) -- (x31);
+%         \draw (x21) -- (x32);
+%         \draw (x22) -- (x33);
+%         \draw (x22) -- (x34);
+        
+%         \draw (x31) -- (leaf1);
+%         \draw (x31) -- (leaf2);
+%         \draw (x32) -- (leaf3);
+%         \draw (x32) -- (leaf4); 
+%         \draw (x33) -- (leaf5);
+%         \draw (x33) -- (leaf6); 
+%         \draw (x34) -- (leaf7);
+%         \draw (x34) -- (leaf8);      
+%         \end{tikzpicture}
+%         \caption{Completed balanced $\DT$ for $x_1 \wedge x_2 \wedge x_3$}
+%     \end{subfigure}
+%     \caption{Illustration of $\DT(x_1\wedge x_2\wedge x_3)$ used in the $\CDT$ construction in the proof of \hastad's Switching Lemma.}
+%     \label{fig: term CDT}
+% \end{figure}
+
+Our $\CDT$ construction uses a balancing procedure on the decision tree to modify it to one in which every 0-path has a corresponding 1-path which has the same sequence of variables queried.   
+
+\begin{algorithm}[H]
+    \caption{$\BalanceZero(\Gamma)$}
+    \label{alg:0-balancing}
+    \textbf{Input:} A decision tree $\Gamma$. \\
+    \textbf{Output:} A decision tree $\Gamma'$ such that for every $0$-leaf in $\Gamma'$, there is a $1$-leaf which queries the same sequence of variables.
+    \begin{algorithmic}[1]
+        \For {$d = \text{depth}(\Gamma)$ \textbf{downto} $1$}
+            \State Process leaves at depth $d$:
+            \For {each $0$-leaf $v$ of $\Gamma$ at depth $d$}
+                \If {parent($v$) has a $1$-leaf (sibling of $v$)}
+                    \State Replace $v$ with a copy of its sibling and label all the leaf nodes in this copy to $0$.
+                \Else \Comment{parent($v$) does not have a 1-leaf}
+                    \State Remove the node $v$ and its sibling, and label parent($v$) $0$.
+                \EndIf
+            \EndFor
+        \EndFor
+    \end{algorithmic}
+\end{algorithm}
+
+Similarly, there is a $\BalanceOne$ algorithm where the roles of $0$ and $1$ are reversed. The decision to 0-balance or 1-balance the CDT of a formula is made on the run depending based on whether its parent is an AND or an OR. 
+
+
+At the end of this process, observe that $\Gamma$ is transformed into another decision tree $\Gamma'$ such that the following hold.
+\begin{itemize}
+    \item If $\Gamma$ computes a function $F$ under some restriction $\rho$, so does $\Gamma'$. 
+    \item The 1-leaves in $\Gamma'$ are in 1-1 correspondence with the 1-leaves in $\Gamma$. Furthermore, the two 1-leaves (the one in $\Gamma$ and its associated 1-leaf in $\Gamma'$) correspond to identical ordered restrictions.
+    \item Every 0-leaf $w$ in $\Gamma'$ has an associated 1-leaf in $\Gamma'$ given by $\ass(w)$. Furthermore, the corresponding ordered restrictions (namely $\alpha^{\Gamma'}_w$ and $\alpha^{\Gamma'}_{\ass(w)}$) share the same set of variables which are queried in the same order along both these root-to-leaf paths.
+\end{itemize}
+
+\subsection{Unpacking}
+
+In this section, we unpack the event of $\condF$ in terms of smaller events, this will eventually help us bound the probability of this event using induction.  
+Suppose the $\CDT(F,\rho)$ has path of length $t$, based on the construction of the CDT, there must be $0 \le s \le t$ such that $s$ of these variables are picked from $F_1$ and $t-s$ of them are picked from $F_2$. This is made formal by the following \cref{lem: Unpacking}.
+
+\begin{lemma}[Unpacking]
+\label{lem: Unpacking}
+    Let $F$ be a De-Morgan formula, $\rho$ be a restriction and $t \in \mathbb{N}$ and $a \in \zo^t$. If $\condF$ then $\exists s \in [t]$, $b \in \zo^s$  such that
+    \begin{itemize}
+        \item $\ass(F_1,\rho,a_{\leq s}, (x_{i_1},\dots , x_{i_s})) = b$,
+        \item $\condLeft$
+        \item $\condRight$
+    \end{itemize}
+\end{lemma} %% >- $x_{i_1}, \dots x_{i_t} \in Stars$
+ %%
+The proof of \cref{lem: Unpacking} follows from the definition  of the Canonical Decision Tree $\CDT(F,\rho)$ from ~\cref{alg: CDT}.
+
+
+\section{Downward closure}
+
+In this section, we show that Downward closure of various events. 
+
+
+\begin{lemma}
+    Let $F$ be a De Morgan formula over the set of Variables $X$, let $x_{i_1}, \dots x_{i_t} \in X$, $a,b \in \zo^t$ and  
+    let $\Delta$  be a set of restrictions defined as $\Delta =\{\rho: \ass(F,\rho,a,(x_{i_1}, \dots , x_{i_t})) = b\}$. 
+    Then $\Delta$ is Downward closed in $X \setminus \{x_{i_1},\dots , x_{i_t}\}$. 
+\end{lemma}
+
+
+Given $F,\rho,a$, such that $\PathVars_0(F,\rho, a) = (x_{i_1}, \dots , x_{i_t})$, we give an algorithm called $\Pivot_1$\footnote{similarly there is a $\Pivot_0$} which outputs $s$, the number of variables that were picked from $F_1$ and the $b$, the 1-path. 
+Furthermore the Pivot algorithm discovers $t,b$ in a Downward compatible manner i.e.  $\{\rho: \Pivot_1(F,\rho,a,\varseq{1}t) = (s,b)$\} is a downward closed set of restrictions. 
+
+
+\subsection{Pivot Algorithm}
+Given $F = F_1 \lor F_2,\rho,a$ such that 
+$\PathVars_0(F,\rho, a) = (x_{i_1}, \dots , x_{i_t}),$
+we define an algorithm $\Pivot_0$\footnote{Similarly, there is a $\Pivot_0$.} 
+which outputs $s$, the number of variables picked from $F_1$, and $b$, the $1$-path in $F_1$. Moreover, the Pivot algorithm discovers $t,b$ in a downward compatible manner, 
+i.e., the set
+$\{\rho : \Pivot_1(F,\rho,a,(x_{i_1}, \dots , x_{i_t})) = (s,b)\}$
+is a downward closed set of restrictions.
+\begin{algorithm}[H]
+\caption{$\Pivot_1(F, \rho, a, (\varseq{1}t))$}
+\begin{algorithmic}[1]
+\State {\bf Input:} $F = F_1 \lor F_2, \rho ,a$ such that $\PathVars(F,\rho,a) = \varseq{1}t$. 
+\State {\bf Output:} $(s,b)$ such that $b = \ass_1(F_1,\rho,a_{\le s})$. 
+\If {$F_1|_\rho \equiv 0$}
+    \State \Return (0,$\bot$)
+
+\Else
+    \State {$\alpha' = \abra{x_{i_1} \ot a_1, \dots, x_{i_{t-1}} \ot a_{i-1}, x_{i_t} \ot 1- a_t}$}
+    \If {$F_1|_{\rho\alpha'} \equiv 1$} 
+    \State \Return $(t,(a_1,\dots,a_{t-1}, 1- a_t))$
+    \Else
+        \For{$u \gets t$ down to $1$}
+            \State Check if there exists an assignment $(b_u, \dots, b_t)$ to variables 
+            $(x_{i_t}, \dots, x_{i_u})$ such that
+            $\alpha_t = \{x_{i_1} \mapsto a_1, \dots, x_{i_{t-1}} \mapsto a_{t-1}, \;
+            x_{i_t} \mapsto b_t, \dots, x_{i_u} \mapsto b_u \}$
+        satisfies $F|_{\rho\alpha_t} \equiv 1$.
+        \If{such an assignment exists}
+            \State \Return $\Pivot_1(F,\rho,(a_1, \dots,a_{u-1},b_u, \dots ,b_t), (\varseq{1}t))$
+        \EndIf
+    \EndFor
+\EndIf
+    \EndIf
+\end{algorithmic}
+\end{algorithm}
+
+\noindent
+
+\begin{remark}
+    Note that all that the algorithm ever checks is whether $F_1$ restricted with $\rho$ along with a setting of the variables from $\{\varseq{1}t\}$ becomes the constant function 0 or 1. This is a downward closed condition, i.e. if $F_1$ is becoming a cosntant(0/1) when restricted with $\rho$ and some setting of a subset of variables from $\{\varseq{1}t\}$, then setting more star/un-set variables of $\rho$ does not change that.
+\end{remark}  
+
+
+\begin{lemma}[Downward Closure of the Pivot Algorithm]
+For any Boolean formula $F$ and any variable $x_i$, the set of restrictions $\Delta = \{\rho : \text{Pivot}(F, \rho) = x_i\}$ is a downward-closed set.
+\begin{proof}
+Let $\rho \in \Delta$. By definition, $x_i = \text{Pivot}(F, \rho)$. This implies that $x_i$ was the first variable in the canonical ordering to satisfy both Condition 1 and 2. For any variable $x_j$ before $x_i$, at least one of these conditions was not met.
+
+Consider an extension $\rho'$ of $\rho$. We must show that $\rho' \in \Delta$, i.e., $\text{Pivot}(F, \rho') = x_i$.
+
+Let's run the algorithm on $\rho'$. For any $x_j$ before $x_i$:
+\begin{itemize}
+    \item If $x_j$ failed Condition 1 for $\rho$ (i.e., it was set), it remains set in $\rho'$ and still fails.
+    \item If $x_j$ failed Condition 2 for $\rho$ (i.e., $F|\rho$ was constant on assignments to its remaining variables), then $F|\rho'$ is a further simplification and must also be constant. Thus, $x_j$ still fails Condition 2.
+\end{itemize}
+Therefore, the algorithm will not stop on any variable before $x_i$.
+
+When the algorithm reaches $x_i$, it must still satisfy both conditions:
+\begin{itemize}
+    \item $x_i$ must be unassigned in $\rho'$ (otherwise it would have been assigned in $\rho$ as well, which contradicts our assumption that $x_i$ was the pivot).
+    \item The simplified formula $F|\rho'$ must be non-constant. As $F|\rho$ was non-constant, there exist assignments to its free variables that make it 0 and 1. These assignments are still possible for $F|\rho'$ (or a subset of them). Thus, $F|\rho'$ is also non-constant.
+\end{itemize}
+Since $x_i$ is the first variable in the canonical order to satisfy both conditions for $\rho'$, it is the pivot for $\rho'$. Therefore, $\rho' \in \Delta$, and the set $\Delta$ is downward-closed.
+\end{proof}
+\end{lemma}
+
+
+
+
+\section{Håstad's Base Case Proof}
+
+This section establishes the base case for our inductive proof by adapting Håstad's lemma for Shrinkage to account for downward-closed properties. 
+We will prove that for small formulas, applying a random restriction from a downward-closed set significantly simplifies the formula with high probability. 
+
+\begin{lemma}
+\label{lem: Base_case}
+    Let $F$ be a De Morgan formula $\cR_p$ be a random restriction. Let $x \in Vars$ be a variable.Let $\Delta$ be an arbitrary downward closed set of restrictions. Let $L(x)$ be the number of leaves labeled $x$ in the formula tree $F$. Then, 
+    $$\Pr_{\rho \sim \cR_p}[\PathVars_0(F,\rho) =x|\Delta] \le \frac{p}2\sqrt{L(x)}$$
+\end{lemma}
+
+\begin{proof}
+    Suppose $F|_\rho \equiv x$\footnote{the case of $F|_\rho \equiv \neg x$ can be handled by exchanging the roles of 0 and 1}. For such a restriction, $\rho$, we can set up a Karchmer-Wigderson game ~\cite{KWgame}, where Alice gets the partial input $\rho_0 = \rho \abra{x \to 0}$ and Bob gets the partial input $\rho_1 = \rho \abra{x \to 1}$. Their goal is to find an index where their inputs differ. This game has the following protocol,
+    where both the players set the remaining star variables in their input to 0 and run the KW protocol $\Pi_F$ which follows the formula tree. The protocol in this case ouptuts a leaf $\ell$ of $F$ which is labeled by the variable $x$.   
+
+    Let $M_F$ be the communication matrix of this game where the rows $X$ are labeled by 0-partial inputs of $F$ and the columns $Y$ are labeled by 1-partial inputs of $F$. $X$ and $Y$ are subsets of partial restrictions. The protocol $\Pi_F$ partitions the matrix $M_F$ into mono-chromatic rectangles. 
+
+    The distribution assigns a mass to each of the rows and columns. This induces a product distribution on the cells of the communication matrix. 
+    Given a rectangle $R = A \times B$ such that $A \subseteq X$ and $B \subseteq Y$, define $\Pr[A] := \sum_{\rho \in A} \Pr[\rho]$ and similarly $\Pr[B] = \sum_{\rho \in B} \Pr[\rho]$. Therefore the mass of the rectangle is $\Pr[A]\Pr[B]$. 
+
+    The mass of the Communication matrix can be computed in two ways. In one way it is just $\Pr[X]\Pr[Y]$. 
+    Another way of computing it is by summing the masses each of the rectangles in the partition given by the protocol $\Pi_F$. Therefore we arrive at the following identity,
+    $$\sum_{A \times B \in \Pi_F} \Pr[A] \Pr [B] = \Pr[X] \Pr[Y] \leq \Pr[X](1- \Pr[X]) \leq 1/4$$.
+
+    Given an arbitrary leaf $\ell$ of the formula tree of $F$, define the event 
+    $$E_\Delta(x,\ell):= \{\rho \in \Delta: x \in stars(\rho), \Pi_F(\rho\abra{x \to 0} = \ell,\rho\abra{x \to 1}, F|_{\rho\abra{x \to 0}}=\equiv  0, F|_{\rho\abra{x \to 1}} \equiv 1 \}.$$
+
+    The event that we want to bound, $\Pr_\rho[\PathVars_0(F,\rho,0) = x] \le \sum_{\ell: \ell \text{\ is\ labeled $x$\ }} \Pr[E_\Delta[x,\ell]]$ . 
+    Define the events $E^0_\Delta(x,\ell)$ and $E^1_\Delta(x,\ell)$ as follows, 
+    $$E^0_\Delta(x,\ell) = \{\rho \in \Delta: \rho(x) =0, \Pi_F(\rho, \rho\abra{x \to 1} =\ell, F|_\rho \equiv 0, F|_{\rho\abra{x \to 1}} = 1 \}$$
+    $$E^1_\Delta(F,\rho) = \{\rho \in \Delta: \rho(x) =1, \Pi_F(\rho\abra{x \to 0}, \rho =\ell, F|_{\rho\abra{x \to 1}} \equiv 0, F|_{\rho} = 1 \}$$
+
+    Consider map $\phi_0$ which send $\rho$ to $\rho\abra{x \to 0}$. $\Phi_0$ maps $\Delta$ within $\Delta$ and is injective.
+    Since $\Delta$ is downward closed, $\Phi_0(E_\Delta(x,\ell)) = E^0_\Delta(F,\ell)$. Therefore, we have 
+
+    $$\Pr[E^0_\Delta(F,\rho)] = \Pr[E^1_\Delta(F,\rho)]= p \cdot \Pr[E_\Delta(F,\rho)]$$
+
+    $$\Pr[E_\Delta(x,\ell)] \le p \sqrt{\Pr[E^0_\Delta(x,\ell)] \Pr[E^1_\Delta(x,\ell)]}$$
+    Summing over all $x,\ell$.
+    \begin{align*}
+        \sum_{\ell \in \Leaves(x)} \Pr[E_\Delta(x,\ell)] 
+        &\le \sum_{\ell \in \Leaves(x)}p \sqrt{\Pr[E^0_\Delta(x,\ell)] \Pr[E^1_\Delta(x,\ell)]}\\
+        &\le p \sqrt{L(x)} \sqrt{\sum_{\ell \in \Leaves(x)} \Pr[E^0_\Delta(x,\ell)] \Pr[E^1_\Delta(x,\ell)]} \\
+        &\le p\sqrt{{L(x)}} \sqrt{\sum_{\ell \in \Leaves(x)}\Pr[A_\ell]\cdot \Pr[B_\ell]}\\
+        &\le \frac{p}2\sqrt{L(x)}        
+    \end{align*}
+
+
+    The last inequality follows because, (i)the second term inside the square root in the RHS is nothing but the sum of mass of all rectangles which as we observed earlier is $\le 1/4$ and (ii) the number of summands is the number of leaves of $F$ labelled $x$ which is $L(x)$. 
+\end{proof}
+
+
+
+
+
+\section{Proof}
+
+\begin{lemma}
+    Let $F$ be a De-Morgan formula, $\rho$ be a restriction and $t \in \mathbb{N}$ and $a \in \zo^t$ . Given variables $\varseq{1}{t}$, let $L(x)$ be the number of leaf nodes labelled with the variable $x$. Let $\Delta$ be a an arbitrary downward closed set in the $X$ then we have 
+        $$\Pr_{\rho \sim \cR_p}[\condF|\Delta] \le p^t \prod_{k = 1}^t \sqrt{L(x_{i_k})}\mu(\varseq{1}{t})$$
+    where $\mu(\varseq1t) = \sum_{s = 0}^t \sum_{b \in zo^t}\Pr[Assoc_1(F_1,\rho,a_{\le s}) = b|\Delta]$. 
+\end{lemma}
+\begin{proof}
+    The Proof is by induction of $t$. 
+    Let us begin by giving names to some of the events. Let 
+    \begin{itemize}
+        \item $\cE = \condF$ ,
+        \item $\cE_0 = \condAssoc$, 
+        \item $\cE_1 = \condLeft$ and 
+        \item $\cE_2 = \condRight$
+    \end{itemize}
+
+    By ~\cref{lem: Unpacking}, we have that 
+    $$\Pr[\cE|\Delta] \le \sum_{0 \le s \le t, b \in \zo^s} \Pr[\cE_0 \land \cE_1 \land \cE_2 |\Delta]$$
+    $$\le \sum_{s,b} \Pr[\cE_0 |\Delta] 
+    \cdot \Pr[\cE_1|\Delta ,\cE_0]
+    \cdot \Pr[\cE_2|\Delta,\cE_0, \cE_1]$$
+   
+    Here are a bunch of claims which are useful to continue with our proof. 
+    \begin{itemize}
+        \item The events  $\cE_1$ is Downward closed in variables $X \setminus \{x_{i_1}, \dots , x_{i_s}\}$.
+        \item $\Pr[\cE_1|\Delta] \le p^s\sqrt{L(x_{i_1})} \dots \sqrt{L(x_{i_s})}$
+        \item $\Pr[\cE_2|\Delta,\cE_1] \le p^{t-s}\sqrt{L(x_{i_{s+1}})} \dots \sqrt{L(x_{i_t})}$
+        \item $\sum_{\bar{x}, s ,b} \Pr[\cE_0|\Delta, \cE_1, \cE_2] \le 1$.
+    \end{itemize}
+\end{proof}
+
+\tm{This approach is abandoned because, it is facing Downward clsoure issues and fixes are leading it into Tree restriction ideas. It might be simple and clear to just work with non-inductive proof.}
+
+
+
+
+\section*{Acknowledgements}
+
+% --- Bibliography ---
+\bibliographystyle{plainurl} % Or 'plain', 'abbrv', etc.
+\bibliography{references.bib} % Create a file named references.bib for your citations
+
+\end{document}
+
+```

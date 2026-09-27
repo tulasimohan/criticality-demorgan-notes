@@ -1,0 +1,120 @@
+% tm_macros.sty
+
+% --- Theorem Environments ---
+% These are placed here for easy access, but could also be in your .sty file
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{claim}[theorem]{Claim}
+\newtheorem{example}[theorem]{Example}
+
+% --- Macros ---
+% ---- Common abbreviations and words with accents ----
+\def\etal{\emph{et~al.}}            
+\def\ie{\emph{i.e.}}            
+\def\eg{\emph{e.g.}}            
+\def\vitae{vit\ae{}}
+\def\apriori{\emph{a~priori}}
+\def\aposteriori{\emph{a~posteriori}}
+\def\naive{na\"{\i}ve}
+\def\demorgan{DeMorgan~}
+\def\hastad{H{\aa}stad~}
+
+% ---- PROPER NAMES ----
+\def\Caratheodory{Carath\'eodory}
+\def\Erdos{Erd\H{o}s}
+\def\Gauss{Gau{\ss}}
+\def\Godel{G\"{o}del}
+\def\Komlos{Koml\'os}
+\def\Kovari{K\"ov\'ari}
+\def\Lovasz{Lov\'asz}
+\def\Laszlo{L\'aszl\'o}
+\def\Mobius{M\"obius}
+\def\Matousek{Matou\v{s}ek}
+\def\Jiri{Ji\v{r}\'\i}
+\def\Szemeredi{Szemer\'edi}
+\def\Turan{Tur\'an}
+\def\Voronoi{Vorono\"i}
+
+% ---- Math structures / Number systems ----
+\def\R{\mathbb{R}}
+\def\Proj{\mathbb{P}}
+\def\Hyper{\mathbb{H}}
+\def\Z{\mathbb{Z}}
+\def\N{\mathbb{N}}
+\def\C{\mathbb{C}}
+\def\Q{\mathbb{Q}}
+\def\F{\mathbb{F}}
+
+% ---- DELIMITER PAIRS ----
+\def\floor#1{\left\lfloor #1 \right\rfloor}
+\def\ceil#1{\left\lceil #1 \right\rceil}
+\def\set#1{\left\{ #1 \right\}}
+\def\abs#1{\left| #1 \right|}
+\def\norm#1{\left\| #1 \right\|}
+\def\bra#1{\left( #1 \right)}
+\def\sbra#1{\left[ #1 \right]}
+\def\cbra#1{\left\{ #1 \right\}}
+\def\abra#1{\left\langle #1 \right\rangle}
+\def\pfrac#1#2{\bra{\frac{#1}{#2}}}
+\def\setdef#1#2{\cbra{ #1 \ \colon \ #2}}
+
+% ---- OPERATORS ----
+\DeclareMathOperator{\PrExp}{\mathbb{E}}
+\DeclareMathOperator{\Prob}{\Pr}
+\DeclareMathOperator{\Exp}{\mathbb{E}}
+\DeclareMathOperator{\Var}{\mathrm{Var}}
+\DeclareMathOperator{\ass}{\operatorname{assoc}}
+\DeclareMathOperator{\aff}{aff}
+\DeclareMathOperator{\area}{area}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator{\conv}{conv}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\poly}{poly}
+\DeclareMathOperator{\polylog}{polylog}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\vol}{vol}
+\DeclareMathOperator{\Leaves}{\operatorname{Leaves}}
+
+% ---- Complexity classes and circuit classes ----
+\def\NP{\mathsf{NP}}
+\def\BPP{\mathsf{BPP}}
+\def\P{\mathsf{P}}
+\def\AC{\mathsf{AC}}
+\def\CNF{\mathsf{CNF}}
+\def\DNF{\mathsf{DNF}}
+
+
+% ---- Symbols and Notations ----
+\newcommand{\eps}{\varepsilon}
+\newcommand{\zo}{\{0,1\}}
+\def\union{\cup}
+\def\Union{\mathop{\bigcup}}
+\def\intersection{\cap}
+\def\Intersection{\mathop{\bigcap}}
+
+% ---- Calligraphic for trees and events ----
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calT}{\mathcal{T}}
+
+
+% ---- For comments/notes ----
+\newcommand{\todo}[1]{{\color{red}\textbf{TODO: #1}}}
+\newcommand{\tm}[1]{{\color{blue}[TM: #1]}}
+\newcommand{\ph}[1]{{\color{purple}[PH: #1]}}
+\newcommand{\jr}[1]{{\color{green}[JR: #1]}}
+
+% Define a new color for your comments
+\definecolor{mycommentcolor}{RGB}{100, 0, 200} % Purple
+
+% Create a new command for comments
+\newcommand{\mycomment}[1]{{\color{mycommentcolor}// \emph{#1}}}

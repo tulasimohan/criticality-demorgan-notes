@@ -1,90 +1,147 @@
 ---
-title: "Taxonomy of Proof Approaches"
-subtitle: "In-depth breakdown of all 5 approaches tried across Notion, Obsidian, and Overleaf"
+title: "Taxonomy of Proof Approaches: Deep Mathematical Architecture"
+subtitle: "Rigorous breakdown of all 5 approaches tried across Notion, Obsidian, and Overleaf"
+author: "JR, PH, TM"
+date: last-modified
 format: html
 ---
 
 ## Overview
 
-This section catalogs every proof approach formulated across your notes, tagged with their mathematical mechanisms, current status, and known failure modes or open bottlenecks.
+This section catalogs every proof approach formulated across your notes, preserving the exact definitions, lemma structures, probability factorizations, and the precise hurdles or counterexamples that stalled each direction.
 
 ---
 
 ## 1. CDT with Simultaneous Balancing
 
-**Sources**: Notion (`New CDT.md`, `CDT with balancing.md`), Overleaf (`contents.tex`, lines 240–350).  
+**Primary Sources**: Notion (`New CDT.md`, `CDT with balancing.md`, `Rigorous proof.md`), Overleaf (`contents.tex`, lines 240–420).  
 **Status**: <span class="badge-status badge-active">Active</span>  
-**Key Idea**: 
-A primary flaw of naive Canonical Decision Trees is path asymmetry: a $0$-path in $F_1$ may explore variables without guaranteeing a corresponding $1$-path over the same variable set. The **Balancing** operation ensures that for every explored node, the tree is balanced so that both $0$ and $1$ outcomes explore symmetric sets of variables or terminate simultaneously.
+
+### The Mechanism
+A primary flaw of naive Canonical Decision Trees is path asymmetry: a $0$-path in $F_1$ may explore variables without guaranteeing a corresponding $1$-path over the same variable set. The **Balancing** operation resolves this by enforcing simultaneous symmetry:
 
 ::: {.callout-note icon=true}
-### Simultaneous 0- and 1-Balancing
-Given a decision tree $T$, $\mathrm{Balance}(T)$ recursively aligns branches:
-- If a subformula simplifies to a constant under path $\pi$, redundant branches are pruned.
-- When merging $\mathrm{CDT}(F_1, \rho)$ with $\mathrm{CDT}(F_2, \rho \circ \pi)$, balancing is applied immediately *at the point of creation* rather than lazily when attached.
+### Simultaneous 0- and 1-Balancing Algorithm ($\mathrm{Balance}(\Gamma)$)
+Given a decision tree $\Gamma = \mathrm{CDT}(F, \rho)$:
+1. **Pruning Non-Influential Variables (JKR Principle)**:
+   At any node $v$ querying variable $x$, if $x$ has no influence on the final formula value under the current partial path $\pi$, replace $v$ by pruning redundant branches.
+2. **Recursive Alignment**:
+   When joining $\mathrm{CDT}(F_1, \rho)$ with $\mathrm{CDT}(F_2, \rho \circ \pi_u)$ at a $0$-leaf $u$, balancing is applied **immediately upon construction** rather than lazily upon attachment.
+3. **Properties Ensured**:
+   - For every $0$-path $\alpha$, there exists a corresponding $1$-path with an identical or controlled set of path variables:
+     $$\mathrm{PathVars}(\alpha) \approx \mathrm{PathVars}(\beta)$$
+   - The set of restrictions consistent with any path remains downward-closed.
 :::
 
-**Current Hurdle**:  
-Tracking path variables $\mathrm{PathVars}(T)$ through multiple nested balancing steps complicates the inductive distribution under random restrictions $\mathcal{R}_p$.
+### The Open Bottleneck
+Tracking path variables through nested balancing recursions requires demonstrating that the measure $\mu(T) = \sum_{b_T} \Pr[\mathcal{A}(\bar{v}^*_{T,b_T}, T, b_T)]$ satisfies:
+$$\sum_T \mu(T) \le 1$$
+without losing exponential factors when subtrees undergo non-trivial restructuring under $\mathrm{Balance}$.
 
 ---
 
-## 2. Non-Inductive Structural Lemma (Blaming Bad Events on Subtrees)
+## 2. The Non-Inductive Structural Lemma (Banyan Trunk Decomposition)
 
-**Sources**: Notion (`New Proof.md`, `Rigorous proof.md`), Overleaf (`non-inductive proof.tex`).  
+**Primary Sources**: Obsidian (`Criticality proof.md`), Notion (`New Proof.md`, `Rigorous proof.md`), Overleaf (`non-inductive proof.tex`, `contents.tex` Section 4).  
 **Status**: <span class="badge-status badge-active">Active</span>  
-**Key Idea**: 
-Rather than inducting step-by-step on $t$, we bound $\Pr[\mathrm{CDT}_{\mathrm{depth}}(F|_\rho) \ge t]$ globally:
-1. Partition the bad event into $\mathcal{E}(\bar{x}, a) = \{\rho : \mathrm{CDT}^{(a)}(F, \rho) = (x_{i_1}, \dots, x_{i_t})\}$.
-2. Blame each bad sequence on a **leaf-branching subtree** $(T, b)$.
-3. Factor the probability into $\mathcal{E}(T, b) = \mathcal{A}(T, b) \wedge \mathcal{B}(T, b)$, where $\mathcal{A}$ and $\mathcal{B}$ represent independent or quasi-independent boundary conditions.
-4. Apply Cauchy-Schwarz:
-   $$\Pr[\mathcal{E}(\bar{x}, a)] \le \sum_{(T,b)} \sqrt{\Pr[\mathcal{A}(T,b)] \cdot \Pr[\mathcal{B}(T,b)]}.$$
 
-**Current Hurdle**:  
-Summing over all possible leaf-branching tree topologies $(T,b)$ introduces combinatorial entropy that must be offset by the decay factor $p^t$. Tight control of the constant $\lambda$ requires bounding overlap between subtrees.
+### The Mathematical Framework
+Rather than inducting step-by-step on $t$, this framework bounds the probability globally by decomposing any path of length $t$ into a **Trunk** $\mathcal{T}$ and **Aerial Roots** $(v_1, \dots, v_t)$:
+
+#### Definitions
+- **Trunk $\mathcal{T}$**: A rooted binary tree whose terminal nodes are the *aerial roots* $v_1, \dots, v_t$.
+- **Exploration Certificate $\mathrm{EC}(\mathcal{T}, \mathbf{b}_T, \bar{x})$**: A tuple $(t_v, X_v, \eta_v, \alpha_v, \beta_v)$ assigning sub-sequences of variables $X_v$ and pre-restrictions $\eta_v$ recursively:
+  $$\eta_v = \eta_{\mathrm{parent}(v)} \circ \alpha_{\mathrm{lsibling}(v)}$$
+- **Bad Event Decomposition**:
+  $$\Pr[\exists \bar{x} : \mathrm{CDT}^{(a)}(F, \rho) = (x_1 \to a_1, \dots, x_t \to a_t)] \le \sum_{\bar{x}} \sum_{\mathcal{T}, b_T} \Pr[\mathcal{A}_F(\rho, \bar{x}, \mathcal{T}, b_T) \cap \mathcal{B}_F(\rho, \bar{x}, \mathcal{T}, b_T)]$$
+
+#### Event Roles
+- **$\mathcal{A}_F(\rho, \bar{x}, \mathcal{T}, b_T)$ (Routing / Downward-Closed)**:
+  Enforces gate simplification within the trunk:
+  - For OR nodes $F_v = F_{v_1} \vee F_{v_2}$, if $F_{v_j}|_{\rho,\eta_{v_j}} \not\equiv 0$, it is witnessed by $F_{v_j}|_{\rho,\eta,\beta} \equiv 1$ and $\mathrm{Assoc}_0 = \beta_{v_j}$.
+  - Crucially, $\mathcal{A}$ is downward-closed in all variables.
+- **$\mathcal{B}_F(\rho, \bar{x}, \mathcal{T}, b_T)$ (Aerial Roots Literal Reduction)**:
+  Each aerial root subformula $F_{v_i}$ simplifies to a literal in variable $x_i$:
+  $$\mathcal{B}_i := \left\{ \rho : F_{v_i}|_{\rho \circ \eta(v_i)} \text{ is a literal in } x_i \right\}$$
+
+### Probability Calculation via Convexity & Cauchy-Schwarz
+1. **Peeling Aerial Roots via Håstad's Base Case**:
+   $$\sum_{x_i} \Pr[\mathcal{B}_i \mid \mathcal{B}_1, \dots, \mathcal{B}_{i-1}, \Delta] \le 2p \sqrt{L(T_i)}$$
+   $$\sum_{\bar{x}} \Pr[\mathcal{B}(\bar{x}, \mathcal{T}, b_T) \mid \mathcal{A}] \le (2p)^t \prod_{i=1}^t \sqrt{L(T_i)}$$
+2. **Convexity Upper Bound**:
+   Taking $\bar{v}^*_{T,b_T} = \arg\max_{\bar{v}} \Pr[\mathcal{A}(\bar{v}, T, b_T)]$ and defining $\mu(T) = \sum_{b_T} \Pr[\mathcal{A}(\bar{v}^*, T, b_T)]$:
+   $$\begin{aligned}
+   \Pr[\mathrm{CDT}_{\mathrm{depth}} \ge t] &\le (2p)^t \sum_T \mu(T) \prod_{i=1}^t \sqrt{L(T_i)} \\
+   &\le (2p)^t \left(\sum_T \mu(T)\right) \cdot \mathbb{E}_{T \sim \mu}\left[\prod_{i=1}^t \sqrt{L(T_i)}\right] \\
+   &\le (2p)^t \sqrt{\sum_T \mu(T)} \sqrt{\mathbb{E}_{T \sim \mu}\left[\prod_{i=1}^t L(T_i)\right]} \\
+   &\le (2p)^t \sqrt{\sum_T \prod_{i=1}^t L(T_i)} \le (2p\sqrt{L})^t
+   \end{aligned}$$
+
+### The Open Bottleneck
+In `Criticality proof.md`, the note explicitly flags:
+> **"ToDo**: Don't take the maximizer of all of $\bar{v}$ at once; instead peel off one variable at a time."
+
+When $\bar{v}^*$ is chosen as the joint argmax, $\sum_{T, b_T} \Pr[\mathcal{A}(\bar{v}^*_{T,b_T}, T, b_T)] \le 1$ does not hold automatically without establishing a bijective mapping from $\rho$ to the certificate $(T, b_T, \bar{x})$.
 
 ---
 
 ## 3. Naive CDT (No Balancing, No Tree Restriction)
 
-**Sources**: Notion (`CDT No balancing No tree restriction.md`), Overleaf (`old proofs/proof_old.tex`).  
+**Primary Sources**: Notion (`CDT No balancing No tree restriction.md`), Overleaf (`old proofs/proof_old.tex`).  
 **Status**: <span class="badge-status badge-refuted">Refuted by Counterexample</span>  
-**Key Idea**:  
-Construct $\mathrm{CDT}(F_1 \vee F_2, \rho)$ by simply evaluating $F_1$, and on every $0$-leaf, appending $\mathrm{CDT}(F_2, \rho \circ \pi)$ without balancing.
 
-::: {.callout-important icon=true}
+### The Idea
+Construct $\mathrm{CDT}(F_1 \vee F_2, \rho)$ by standard composition: evaluate $F_1$, and on every leaf outputting $0$, attach $\mathrm{CDT}(F_2, \rho \circ \pi)$.
+
 ### Why It Failed: Jaikumar's Counterexample
-Consider $F = (X \vee Y) \wedge \bar{Y}$. Under a restriction leaving variables unassigned, the naive construction queries $X$, and upon branches where $Y$ loses influence, the tree creates asymmetric paths that fail downward closure and break Cauchy-Schwarz factorization.
-:::
+On the formula $F = (X \vee Y) \wedge \bar{Y}$, querying $X$ first produces:
+- Branch $X=0 \implies Y \wedge \bar{Y} \equiv 0$ (variable $Y$ loses all influence).
+- Branch $X=1 \implies \bar{Y}$.
+The tree branches on variables that have zero influence on the function's output, generating paths that violate downward closure. As a result, standard encoding injections fail.
 
 ---
 
 ## 4. Inductive Approach via Path-Variable Factoring
 
-**Sources**: Obsidian (`Indcutive approach.md`, `New Inductive proof.md`), Overleaf (`old proofs/inductive_proof.tex`).  
-**Status**: <span class="badge-status badge-stuck">Stuck / Gap</span>  
-**Key Idea**:  
-Decompose path variables into left and right subformula segments:
-$$\mathrm{PathVars}_0(F, \rho, a) = (x_{i_1}, \dots, x_{i_s}, x_{i_{s+1}}, \dots, x_{i_t}).$$
-Assume the first $s$ variables come from $F_1$ and the remaining $t-s$ from $F_2$, and factor:
-$$\Pr[\mathcal{E}_t] = \sum_s \Pr[\mathcal{E}_{\mathrm{left}}(s)] \cdot \Pr[\mathcal{E}_{\mathrm{right}}(t-s) \mid \mathcal{E}_{\mathrm{left}}(s)].$$
+**Primary Sources**: Obsidian (`Indcutive approach.md`, `New Inductive proof.md`), Overleaf (`old proofs/inductive_proof.tex`).  
+**Status**: <span class="badge-status badge-stuck">Stuck / Abandoned</span>  
 
-**Why It Got Stuck**:  
-The conditioning event $\Delta_t$ depends on the entire sequence of variables $x_{i_1}, \dots, x_{i_t}$. When unravelling the conditional probability:
-$$\Delta_{t-1} \text{ depends on } \ell_t \text{ and } x_{i_1}, \dots, x_{i_t},$$
-the conditioning introduces statistical dependence across restriction steps, preventing clean product factorization without an exponential loss.
+### The Mathematical Formulation
+Let $\mathrm{PathVars}_0(F, \rho, a) = (x_{i_1}, \dots, x_{i_t})$. Split into left and right subformulas:
+- Left: $\mathrm{PathVars}_0(F_1, \rho, b) = (x_{i_1}, \dots, x_{i_s})$
+- Right: $\mathrm{PathVars}_0(F_2, \rho, a_{>s}) = (x_{i_{s+1}}, \dots, x_{i_t})$
+- Association: $\mathrm{Assoc}_1(F_1, \rho, a_{\le s}) = b$
+
+Attempted induction claim:
+$$\Pr_{\rho \sim \mathcal{R}_p}[\mathrm{PathVars}_0(F, \rho, a) = \bar{x} \mid \Delta] \le p^t \prod_{k=1}^t \sqrt{L(x_{i_k})} \mu(\bar{x})$$
+
+### The Exact Failure Mode (Conditioning Breakdown)
+The note dates this breakdown directly to **22 Aug 2025**:
+> *"Making this proof inductive is leading it into requiring ideas from restriction trees; it might be simpler to do the non-inductive proof. Because of the above reason this approach is abandoned."*
+
+When conditioning on intermediate partial assignments:
+$$\Pr[\mathcal{E}_0 \wedge \mathcal{E}_1 \wedge \mathcal{E}_2 \mid \Delta] = \Pr[\mathcal{E}_0 \mid \Delta] \cdot \Pr[\mathcal{E}_1 \mid \Delta, \mathcal{E}_0] \cdot \Pr[\mathcal{E}_2 \mid \Delta, \mathcal{E}_0, \mathcal{E}_1]$$
+- $\Delta_t$ depends on all variables $(x_{i_1}, \dots, x_{i_t})$.
+- $\Delta_{t-1}$ depends on $\ell_t$ and $(x_{i_1}, \dots, x_{i_{t-1}})$.
+- Because $\Delta_t$ and $\Delta_{t-1}$ share variables, the conditioning events are not mutually independent across stages, introducing covariance terms that break the product $\prod_{k=1}^t \sqrt{L(x_{i_k})}$.
 
 ---
 
-## 5. Bottom-Up vs. Top-Open KW Protocol Matrix
+## 5. Bottom-Up vs. Top-Open KW Communication Protocols
 
-**Sources**: Notion (`Hastads Base case proof.md`), Overleaf (`old proofs/bottom_open.tex`, `old proofs/top_open.tex`, `old proofs/communication_game.tex`).  
+**Primary Sources**: Notion (`Hastads Base case proof.md`), Overleaf (`old proofs/bottom_open.tex`, `old proofs/top_open.tex`, `old proofs/communication_game.tex`).  
 **Status**: <span class="badge-status badge-partial">Partial Success (Base Case Only)</span>  
-**Key Idea**:  
-Represent the formula as a communication game matrix $M_F$ with monochromatic rectangles $A_\ell \times B_\ell$. 
-- **Bottom-Open**: Opens the communication protocol starting from the leaves.
-- **Top-Open**: Opens the protocol starting from the root gate.
 
-**Outcome**:  
-Proves the base case ($t=1$) with optimal bound $O(p\sqrt{L})$. However, extending to $t \ge 2$ requires composing protocols across sequential queries, where rectangle monochromaticity degrades into non-monochromatic combinatorial mixtures.
+### The Formulation
+Represent $F$ as a communication game matrix $M_F$ where:
+$$\text{Rows} = \{\rho : F|_\rho \equiv 0\}, \quad \text{Columns} = \{\rho : F|_\rho \equiv 1\}$$
+For each leaf $\ell \in \mathrm{Leaves}(F)$, let $A_\ell \times B_\ell$ be the monochromatic combinatorial rectangle in the Karchmer-Wigderson protocol.
+
+- **Base Case ($t=1$)**:
+  $$\sum_{\ell \in \mathrm{Leaves}(F)} \sqrt{\Pr[A_\ell] \cdot \Pr[B_\ell]} \le O(p \sqrt{L(F)})$$
+  This works and yields the optimal single-step bound.
+
+- **Why It Stalls for $t \ge 2$**:
+  Extending to sequential queries requires composing protocol rectangles:
+  $$\mathrm{prot}^{(k)}(\rho \circ \sigma_k, \rho \circ \sigma'_k) = \ell_k$$
+  Whether opening **bottom-up** (starting from leaves) or **top-down** (starting from the root), sequential conditioning causes rectangles to lose monochromaticity, leading to cross-rectangle interference.

@@ -1,0 +1,84 @@
+% All \usepackage commands should now be in main.tex
+
+% Probability and Statistics
+\DeclareMathOperator*{\PrExp}{\mathbb{E}} % Operator for expectation (if used this way)
+\DeclareMathOperator{\Prob}{\Pr}           % Probability operator
+\DeclareMathOperator{\Exp}{\mathbb{E}}     % Expectation (often used as \mathbb{E}[X])
+\DeclareMathOperator{\Var}{\mathrm{Var}}   % Variance operator
+\newcommand{\ass}{\operatorname{assoc}}
+
+% Sets and Delimiters
+\newcommand{\set}[1]{\left\{#1\right\}}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\norm}[1]{\left\|#1\right\|}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+
+% Common delimiters with \left and \right
+\newcommand{\bra}[1]{\left(#1\right)}
+\newcommand{\sbra}[1]{\left[#1\right]}
+\newcommand{\cbra}[1]{\left\{#1\right\}}
+\newcommand{\abra}[1]{\left\langle#1\right\rangle}
+
+% Fields/Number Systems
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+
+% Common notations
+\newcommand{\eps}{\varepsilon}
+\newcommand{\poly}{\mathrm{poly}} % for polynomial complexity
+\newcommand{\zo}{\{0,1\}}
+\newcommand{\negl}{\mathrm{negl}} % for negligible functions
+\newcommand{\defeq}{\stackrel{\text{def}}{=}} % Defined as
+
+% Specific to your paper: Algorithms and Functions (using \DeclareMathOperator)
+\DeclareMathOperator{\DTdepth}{DTdepth}
+\DeclareMathOperator{\CDTdepth}{CDTdepth}
+\DeclareMathOperator{\CDT}{CDT}
+\DeclareMathOperator{\Pivot}{Pivot}
+\DeclareMathOperator{\BalanceZero}{0-Balance}
+\DeclareMathOperator{\BalanceOne}{1-Balance}
+\DeclareMathOperator{\PathVars}{PathVars} % Function returning variables on a path
+\DeclareMathOperator{\assoc}{Assoc}
+\newcommand{\DT}{\mathsf{DT}}
+
+% Specific to your paper: Symbols and Structures
+\newcommand{\unassigned}{\star} % For unassigned variables in restrictions (used for rho(x_i) = \star)
+\newcommand{\ot}{\leftarrow}
+
+% Calligraphic for trees and events
+\newcommand{\calE}{\mathcal{E}}
+\newcommand{\calA}{\mathcal{A}}
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\cR}{\mathcal{R}}
+
+% Bold italic for sequences/vectors (to avoid conflict with random variable notation)
+\newcommand{\seqvar}{\bm{x}}         % Sequence of variables (e.g., path in DT)
+\newcommand{\seqassign}{\bm{a}}       % Sequence of assignment bits (e.g., path in DT)
+\newcommand{\seqvarv}{\bm{x}_v}       % Sequence of variables under node v for subformula F_v
+\newcommand{\pv}{\mathrm{PathVars}} 
+\newcommand{\Leaves}{\operatorname{Leaves}}
+
+\newcommand{\condF}{\pv_0(F,\rho,a) = (x_{i_1}, \dots ,x_{i_t})}
+\newcommand{\condLeft}{\pv_0(F_1,\rho,a_{\le s}) = (x_{i_1}, \dots ,x_{i_s})}
+\newcommand{\condRight}{\pv_0(F,\rho,a_{>s}) = x_{i_{s+1}}, \dots x_{i_t}} 
+\newcommand{\condAssoc}{Assoc_1(F_1,\rho,a_{\le s}) = b} 
+\newcommand{\cE}{\mathcal{E}} 
+\newcommand{\varseq}[2]{x_{i_{#1}}, \dots x_{i_{#2}}}
+
+
+% Placeholder for measure function (now defined as mu)
+\newcommand{\Lfunc}{\mathrm{L}} % Using mu for measure. Use as \Lfunc(arg) or \Lfunc_{subscript}
+
+% For comments/notes (xcolor package is loaded in main.tex)
+\newcommand{\todo}[1]{{\color{red}\textbf{TODO: #1}}}
+\newcommand{\tm}[1]{{\color{blue}[TM: #1]}}
+\newcommand{\ph}[1]{{\color{purple}[PH: #1]}} % Changed to purple for distinction
+\newcommand{\jr}[1]{{\color{green}[JR: #1]}}
+\def\hastad{H{\aa}stad}
+
+\def\demorgan{De Morgan}

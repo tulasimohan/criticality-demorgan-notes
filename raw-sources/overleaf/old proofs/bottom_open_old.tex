@@ -1,0 +1,185 @@
+\newcommand{\A}{\left\{
+    \rho: \prot(\rho\circ \sigma_j, \rho \circ \sigma_j')= \ts_j,\ 
+    \rho(i_j) = *\ \forall 1 \leq j \leq t;\
+    F|_{\rho\circ \sigma_t} \equiv 0,\
+    F|_{\rho \circ \sigma_t'} \equiv 1  
+    \right\}}
+
+\newcommand{\Bk}[1]{\{
+    \rho: \prot(\rho(i_{j+1} = \ldots = i_t = *) ), \rho(i_j \to \bar{a_j}, i_{j+1} = \ldots = i_t = *))= \ts_j,\ 
+    \rho(i_j) = a_j\ \forall #1 \leq j \leq t;\
+    F|_{\rho} \equiv 0,\
+    F|_{\rho(i_t \to \bar{a_t})} \equiv 1  
+    \}}
+
+\newcommand{\Ck}[1]{\{
+    \rho: \prot(\rho, \rho(i_k \to \bar{a_k})= \ts_k;\prot(\rho\circ \sigma_{k+1 \to j}, \rho(i_k \to \bar{a_k})\circ \sigma_{k+1 \to j}')= \ts_j, \rho(i_j) = * \forall #1+1 \leq j \leq t ;
+    \rho(i_k) = a_k ,
+    F|_{\rho\circ \sigma_{k+1 \to t}} \equiv 0,
+    F|_{\rho\circ \sigma_{k+1 \to t}'} \equiv 1  
+    \}}
+\newcommand{\Ckprime}[1]{\{
+    \rho: \prot(\rho(i_k \to a_k), \rho)= \ts_k;\prot(\rho(i_k \to a_k)\circ \sigma_{k+1 \to j}, \rho(i_k \to a_k)\circ \sigma_{k+1 \to j}')= \ts_j, \forall #1+1 \leq j \leq t ;
+    \rho(i_k) = \bar{a_k} ,
+    F|_{\rho\circ(i_k \to a_k) \sigma_{k+1 \to t}} \equiv 0,
+    F|_{\rho\circ(i_k \to a_k) \sigma_{k+1 \to t}'} \equiv 1 
+    \}}
+    
+\newcommand{\calD}{\mathcal{D}}
+
+\newcommand{\Dk}[1]{\{
+    \rho: \prot(\rho(i_j \to a_j)\circ \sigma_{k+1 \to j}, \rho\circ \sigma_{k+1 \to j}')= \ts_j, \forall #1 \leq j \leq t ;
+    \rho(i_k) = a_k ,
+    F|_{\rho\circ \sigma_{k+1 \to t}} \equiv 0,
+    F|_{\rho(i_j \to \bar{a_j})\circ \sigma_{k+1 \to t}'} \equiv 1  
+    \}}
+\newcommand{\Dkprime}[1]{\{
+    \rho: \prot(\rho\circ \sigma_{k+1 \to j}, \rho(i_j \to \bar{a_j})\circ \sigma_{k+1 \to j}')= \ts_j, \forall #1+1 \leq j \leq t ;
+    \rho(i_k) = a_k ,
+    F|_{\rho\circ \sigma_{k+1 \to t}} \equiv 0,
+    F|_{\rho(i_j \to \bar{a_j})\circ \sigma_{k+1 \to t}'} \equiv 1  
+    \}}
+
+
+where $\calA := \A$.
+%wite \calA interms of X_k , Y_k A_k B_k
+
+
+\begin{align*}
+        \sum_{\rho \in \calA} \prob{}{\rho} 
+        &= \cbra{\frac{2p}{1-p}}^t \sum_{\rho \in \calA} \prob{}{\rho \circ \sigma_t}\\
+        &= \cbra{\frac{2p}{1-p}}^t  \sum_{\rho \in \calB} \prob{}{\rho} 
+        \\
+\end{align*}        
+
+Where $\calB:= 
+    \left\{ \rho:
+        F|_\rho \equiv 0, F|_{\rho(i_t \to a_t)} \equiv 1;  
+        \rho(i_k) = a_k,\
+        \nvf(F,\rho(i_k, \ldots ,i_t \to *)) = i_k\ \forall 1 \leq k \leq t;        
+    \right\}
+$
+
+Consider the communication games $G_1, \dots , G_t$ 
+
+Where $G_k = \game_{F,\calR_k,a_k}$. 
+
+For example 
+$\calR_t$
+
+
+
+
+where $\calB(i_1,\ldots ,i_k) = \Bk{1}$.
+
+\begin{align*}
+        \sum_{x_{i_1}, \ldots , x_{i_t}}   \sum_{\substack{\ts_1 \in \mathcal{L}_1\\ \vdots \\ \ts_t \in \mathcal{L}_t}}\sum_{\rho \in \calB} \prob{}{\rho}
+        &= \sum_{x_{i_1}, \ldots , x_{i_t}}\sum_{\substack{\ts_1 \in \mathcal{L}_1\\ \vdots \\ \ts_t \in \mathcal{L}_t}}\sum_{\rho \in \calB_t} \prob{}{\rho} \cdot \prod_{k =1}^{t-1} \frac{\sum_{\rho \in \calB_k} \prob{}{\rho}}{\sum_{\rho \in \calB_{k+1}} \prob{}{\rho}}\\
+        &= \sum_{\substack{x_{i_t}\\ \ts_t \in \mathcal{L}_t}} S_t \sum_{\substack{x_{i_{t-1}}\\ \ts_{t-1} \in \mathcal{L}_{t-1}}} S_{t-1} \ldots \sum_{\substack{x_{i_1}\\ \ts_1 \in \mathcal{L}_1}} S_1
+\end{align*}
+\todo{it is not $B_{k+1}$}
+where $\calB_k(i_k, \ldots , i_t) = \Bk{k}$, 
+$S_k(i_k, \ldots , i_t) = \frac{\sum_{\rho \in \calB_k(i_k, \ldots , i_t)} \prob{}{\rho}}{\sum_{\rho \in \calB_{k+1}(i_{k+1}, \ldots ,i_t)}\prob{}{\rho}} \forall 1 \leq k \leq t-1$ and $S_t(i_t) = \sum_{\rho \in \calB_t(i_t)} \prob{}{\rho}$.\\
+Note that $S_k$ depends on the variables $x_{i_t}, \ldots, x_{i_k}$. 
+
+Consider the expression, 
+    \begin{align*}
+        \sum_{\substack{x_{i_k}\\ \ts_k \in \mathcal{L}_k }}S_k(i_t ,\ldots, i_k) 
+        &= \sum_{\substack{x_{i_k}\\ \ts_k \in \mathcal{L}_k }} \frac{\sum_{\rho \in \calB_k(i_k ,\ldots, i_t) \prob{}{\rho}}}{\sum_{\rho \in \calB_{k+1}(i_{k+1} ,\ldots, i_t)}\prob{}{\rho}}\\
+        &= \sum_{\substack{x_{i_k}\\ \ts_k \in \mathcal{L}_k }} \frac{\sum_{\rho \in \calC_k(i_k ,\ldots, i_t)} \prob{}{\rho}}{\sum_{\rho \in \calD_{k+1}(i_{k+1} ,\ldots, i_t)}\prob{}{\rho}}\\
+        &= \sum_{\substack{x_{i_k}\\ \ts_k \in \mathcal{L}_k }} \frac{\sum_{\rho \in \calC_k(i_k ,\ldots, i_t)} \sqrt{\prob{}{\rho}}\sqrt{\prob{}{\rho \circ (x_{i_k \to \bar{a_k})}}}}{\sum_{\rho \in \calD_{k+1}(i_{k+1} ,\ldots, i_t)}\prob{}{\rho}}\\
+        &\leq \sum_{\substack{x_{i_k}\\ \ts_k \in \mathcal{L}_k }} \frac{ \sqrt{\sum_{\rho \in \calC_k(i_k ,\ldots, i_t)}\prob{}{\rho}}\sqrt{\sum_{\rho \in \calC_k(i_k ,\ldots, i_t)}\prob{}{\rho \circ (x_{i_k \to \bar{a_k})}}}}{\sum_{\rho \in \calD_{k+1}(i_{k+1} ,\ldots, i_t)}\prob{}{\rho}}\\
+        &= \sum_{\substack{x_{i_k}\\ \ts_k \in \mathcal{L}_k }} 
+        \sqrt{\frac{\sum_{\rho \in \calC_k}\prob{}{\rho}}{{\sum_{\rho \in \calD_{k+1}}\prob{}{\rho}}}} \sqrt{\frac{\sum_{\rho \in \calC_k'}\prob{}{\rho}}{\sum_{\rho \in \calD_{k+1}}\prob{}{\rho}}}  
+    \end{align*}
+ 
+where $\calC_k = \Ck{k}$,\\ 
+$\calC_k' = \Ckprime{k}$
+
+where $\calD_{k+1} = \Dk{k+1}$
+
+% \begin{align*}
+% \frac{\sum_{\lambda \in \calB_k} \prob{}{\lambda}}{\sum_{\lambda \in \calB_{k+1}} \prob{}{\lambda}}
+%         = \frac{\sum_{\eta \in \calC_k} \prob{}{\eta}}{\sum_{\eta \in \calC_{k+1}} \prob{}{\eta}} \tag{$\eta = \lambda(i_{k+1}= \ldots = i_{t} = *)$}  
+%     \end{align*}
+
+% $\calB_k' = \Bk{k}$
+
+
+% %$\calB_k' = \Bkprime{k}$\\
+
+% $\calC_k' = \Ckprime{k}$\\
+
+% $\calD_k'= \Dkprime{k}$\\
+
+% $\calD_k = \Dk{k}$\\
+
+    
+
+
+% $\sum_{\eta \in \calC_t} \prob{}{\eta} = \sqrt{\sum_{\eta \in \calC_t} \prob{}{\eta}}\sqrt{\sum_{\eta \in \calD_t} \prob{}{\eta}}$\\
+
+% $\frac{\sum_{\eta \in \calC_k} \prob{}{\eta}}{\sum_{\eta \in \calC_{k+1}} \prob{}{\eta}} = \sqrt{\frac{\sum_{\eta \in \calD_k} \prob{}{\eta}}{\sum_{\eta \in \calD_k'} \prob{}{\eta}}} \cdot \sqrt{\frac{\sum_{\eta \in \calC_k} \prob{}{\eta}}{\sum_{\eta \in \calC_k'} \prob{}{\eta}}} $
+
+
+
+%     \begin{align*}
+%         \sum_{\rho \in \calA_1} Pr[\rho]
+%         &= \sum_{\rho \in \calA_t} \prob{}{\rho} \cdot \prod_{k=1}^{t-1} \frac{\sum_{\rho \in \calA_k}\prob{}{\rho}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho}}\\
+%         &= \cdot \prod_{k=1}^{t-1} \frac{\sum_{\rho \in \calA_k}\prob{}{\rho}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho}}\\
+%     \end{align*}
+   
+%   \begin{align*}
+%         \sum_{\rho \in \calA_t} \prob{}{\rho} 
+%         &= \sum_{\rho \in \calA_t} \sqrt{\prob{}{\rho \circ \sigma_t}}\sqrt{\prob{}{\rho \circ \sigma_t'}}  \\
+%         &\leq \sqrt{\sum_{\rho \in \calA_t}\prob{}{\rho \circ \sigma_t}}\sqrt{\sum_{\rho \in \calA_t}\prob{}{\rho \circ \sigma_t'}}
+%   \end{align*}
+
+%     \begin{align*}
+%         \frac{\sum_{\rho \in \calA_k}\prob{}{\rho}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho}} 
+%         &= \sum_{\rho \in \calA_k} \sqrt{\frac{\prob{}{\rho\circ \sigma_k}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k}}} \sqrt{\frac{\prob{}{\rho\circ \sigma_k'}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k'}}} \\
+%         &\leq \sqrt{\frac{\sum_{\rho \in \calA_k}\prob{}{\rho\circ \sigma_k}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k}}} \sqrt{\frac{\sum_{\rho \in \calA_k}\prob{}{\rho\circ \sigma_k'}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k'}}}
+%     \end{align*}
+
+    
+%     $\calB_{k}:= \{
+%     \rho: \prot(\rho, \rho(i_k \to \bar{a_k}))= \ts_k;
+%     \prot(\rho \circ \sigma_{k+1 \to j}, \rho \circ \sigma_{k+1 \to j}')= \ts_j, \rho(i_j) = * \forall k+1 \leq j \leq t  ; 
+%     \rho(i_j) = a_j \forall 1 \leq j \leq k;
+%     F|_{\rho\circ \sigma_t} \equiv 0,
+%     F|_{\rho \circ \sigma_t'} \equiv 1  
+%      \}$
+    
+%     $\calB_{k}':= \left\{
+%     \rho: \prot(\rho \circ \sigma_{k+1 \to j}, \rho \circ \sigma_{k+1 \to j}')= \ts_j, \rho(i_j) = * \forall k+1 \leq j \leq t  ; 
+%     \rho(i_j) = a_j \forall 1 \leq j \leq k;
+%     F|_{\rho\circ \sigma_t} \equiv 0,
+%     F|_{\rho \circ \sigma_t'} \equiv 1  
+%      \right\}$
+    
+%     $\calC_{k}:= \left\{
+%     \rho: \prot(\rho(i_k \to a_k),\rho)= \ts_k;\prot(\rho(i_k \to a_k) \circ \sigma_{k+1 \to j}, \rho(i_k \to a_k) \circ \sigma_{k+1 \to j}')= \ts_j, \rho(i_j) = * \forall k+1 \leq j \leq t  ;
+%     \rho(i_j) = a_j \forall 1 \leq j \leq k-1; \rho(i_k) = \bar{a_k};
+%     F|_{\rho\circ \sigma_t} \equiv 0,
+%     F|_{\rho \circ \sigma_t'} \equiv 1  
+%      \right\}$
+    
+%     $\calC_{k}':= \left\{
+%     \rho: \prot(\rho(i_k \to a_k) \circ \sigma_{k+1 \to j}, \rho(i_k \to a_k) \circ \sigma_{k+1 \to j}')= \ts_j, \rho(i_j) = * \forall k+1 \leq j \leq t  ;
+%     \rho(i_j) = a_j \forall 1 \leq j \leq k-1;\\
+%     \rho(i_k) = \bar{a_k};
+%     F|_{\rho\circ \sigma_t} \equiv 0,
+%     F|_{\rho \circ \sigma_t'} \equiv 1  
+%      \right\}$
+     
+%     \begin{align*}
+%         \frac{\sum_{\rho \in \calA_k}\prob{}{\rho\circ \sigma_k}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k}}
+%         &= \frac{\sum_{\rho \in \calB_k} \prob{}{\rho}}{\sum_{\rho \in \calB_k'} \prob{}{\rho}}\\
+%         &= \frac{\sum_{\substack{\rho:\rho \in \calB_k'\\ \prot(\rho, \rho(i_k \to \bar{a_k}))= \ts_k }} \prob{}{\rho}}{\sum_{\rho \in \calB_k'} \prob{}{\rho}}
+%     \end{align*}
+%     Similarly,
+%     \begin{align*}
+%         \frac{\sum_{\rho \in \calA_k}\prob{}{\rho\circ \sigma_k'}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k'}}
+%         &= \frac{\sum_{\rho \in \calC_k} \prob{}{\rho}}{\sum_{\rho \in \calC_k'} \prob{}{\rho}}\\
+%         &= \frac{\sum_{\substack{\rho:\rho \in \calC_k'\\ \prot(\rho(i_k \to a_k), \rho)= \ts_k }} \prob{}{\rho}}{\sum_{\rho \in \calC_k'} \prob{}{\rho}}
+%     \end{align*}

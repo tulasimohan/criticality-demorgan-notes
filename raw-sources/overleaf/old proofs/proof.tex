@@ -1,0 +1,146 @@
+% we sub $\rho = \rho \circ \sigma_t$
+% use \sum_{\ell} (\sum_{\rho: \in \ell} Pr[])^2
+
+\newcommand{\Eone}{
+    \substack{
+        \forall 1 \le j \le t \hfill\\
+        (i) \prot(\rho(i_{j+1},\ldots , i_t \to *),\rho(i_j \to \bar{a_j})(i_{j+1},\dots,i_t \to *) = \ts_j \hfill \\ 
+        (ii) \rho(i_j) = a_j \hfill\\
+        (iii) F|_\rho \equiv 0, F|_{\rho(i_t \to \bar{a_t})} \equiv 1 \hfill
+        }
+    }
+\newcommand{\Ek}{
+    \substack{
+        \forall k \le j \le t \hfill\\
+        (i) \prot(\rho(i_{j+1},\ldots , i_t \to *),\rho(i_j \to \bar{a_j})(i_{j+1},\dots,i_t \to *) = \ts_j \hfill \\ 
+        (ii) \rho(i_j) = a_j \hfill\\
+        (iii) F|_\rho \equiv 0, F|_{\rho(i_t \to \bar{a_t})} \equiv 1 \hfill
+        }
+    }    
+\newcommand{\Et}{
+    \substack{
+        (i) \prot(\rho,\rho(i_t \to \bar{a_t}) = \ts_t \hfill \\ 
+        (ii) \rho(i_t) = a_t \hfill\\
+        (iii) F|_\rho \equiv 0, F|_{\rho(i_t \to \bar{a_t})} \equiv 1 \hfill
+        }
+    }
+\newcommand{\Rlk}{
+            \substack{
+                            \rho(i_k) = a_k\\
+                            \prot(\rho(i_{k+1},\dots ,i_t \to *),\rho(i_k \to \bar{a_k})(i_{k+1},\dots ,i_t \to *)) = \ts_k
+                        }
+    }    
+    
+\begin{proof}    
+    \begin{align*}
+        \prob{\rho}{\cdt(F,\rho) \mathrm{\ has\ depth\ } t}   
+        &\leq p^t\sum_{x_{i_1}, \dots , x_{i_t}}
+                \sum_{\ts_1, \dots ,\ts_t}
+                    \prob{\rho}{\Eone} \\
+    \text{Let\ } E_k := \bra{\Ek}\\
+        &=\sum_{x_{i_1}, \dots , x_{i_t}} 
+            \sum_{\ts_1, \dots ,\ts_t}
+                \prob{\rho}{E_t}\prod_{k=t-1}^1 \prob{\rho}{E_k|E_{k+1}}\\
+        &= \sum_{x_{i_t}} \sum_{\ts_t} \pr{E_t} \sum_{x_{i_{t-1}}} \sum_{\ts_{t-1}}\pr{E_{t-1}|E_t}\ldots  \sum_{x_{i_1}} \sum_{\ts_1} \pr{E_1|E_2}
+    \end{align*}
+    
+    The last step follows from the observation that for each $k \in [t]$, the event $E_k$ depends on the variables $x_{i_k}, \ldots, x_{i_t}$ and doesn't depend on the variables $x_{i_1}, \ldots , x_{i_{k-1}}$.
+    
+    Let's begin with an upper bound the expression $\sum_{x_{i_t}}\sum_{\ts_t} \pr{E_t}$. Then we move on to upper-bounds on the expressions $\sum_{x_{i_k}} \sum_{\ts_k} \pr{E_k|E_{k+1}}$ which follow a similar line.
+    
+    Recall that $E_t = \bra{\rho: \Et}$.
+%%%%%%%%%%%%%E_t proof    
+        \begin{align*}
+            \sum_{x_{i_t}} \sum_{\ts_t} \prob{\rho}{E_t}
+        &= \sum_{x_{i_t}} 
+            \sum_{\ts_t} 
+                \sum_{\rho \in E_t} 
+                        \pr{\rho}\\                          
+%\text{Let } R_{\ell_k} := \bra{\rho:\Rlk}.\\                
+        &= \sum_{x_{i_t}} 
+            \sum_{\ts_t} 
+                    \sum_{
+                        \rho \in E_t    
+                    } 
+                        \pr{\rho}\\ 
+        &\leq \sqrt{
+                \sum_{x_{i_t}} 
+                    \sum_{\ts_t} 
+                        1
+                } 
+        \sqrt{
+            \sum_{x_{i_t}} 
+                \sum_{\ts_t}
+                    \cbra{
+                            \sum_{\rho \in E_{t}} \pr{\rho}
+                    }^2
+        } \\
+        &\leq \sqrt{L(F)}.
+    \end{align*}
+
+    
+%E_k proof    
+    \begin{align*}
+    \sum_{x_{i_k}} \sum_{\ts_k} \prob{\rho}{E_k|E_k+1}
+        &= \sum_{x_{i_k}} 
+            \sum_{\ts_k} 
+                \frac{
+                    \sum_{\rho \in E_k} 
+                        \pr{\rho}
+                }{
+                \sum_{\rho \in E_{k+1}} 
+                    \pr{\rho}
+                }\\                          
+\text{Let } R_{\ell_k} := \bra{\rho:\Rlk}.\\                
+        &= \sum_{x_{i_k}} 
+            \sum_{\ts_k} 
+                \frac{
+                    \sum_{
+                        \rho \in E_{k+1} \cap R_{\ell_k}    
+                    } 
+                        \pr{\rho}
+                }{
+                \sum_{\rho \in E_{k+1}} 
+                    \pr{\rho}
+                }\\        
+        &\leq \sqrt{
+                \sum_{x_{i_k}} 
+                    \sum_{\ts_k} 
+                        1
+                } 
+        \sqrt{
+            \sum_{x_{i_k}} 
+                \sum_{\ts_k}
+                    \cbra{
+                        \frac{
+                            \sum_{\rho \in E_{k+1} \cap R_{\ell_k}} \pr{\rho}
+                        }{
+                            \sum_{\rho \in E_{k+1}} \pr{\rho}
+                        }    
+                    }^2
+        } \\
+        &\leq \sqrt{L(F)}.
+    \end{align*}
+\end{proof}
+
+\begin{claim}
+        
+\end{claim}
+
+
+\begin{align*}
+    \sum_{x_{i_t}} \sum_{\ts_t} \prob{\rho}{E_t}
+        &= \sum_{x_{i_t}} \sum_{\ts_t} \sum_{\rho \in E_t} \pr{\rho}\\
+        &\leq \sqrt{
+                \sum_{x_{i_t}} 
+                    \sum_{\ts_t} 
+                        1
+                } 
+        \sqrt{
+            \sum_{x_{i_t}} 
+                \sum_{\ts_t}
+                    \cbra{\sum_{\rho \in E_t} \pr{\rho}}^2
+        } 
+        &\leq \sqrt{L(F)}.
+    \end{align*}
+

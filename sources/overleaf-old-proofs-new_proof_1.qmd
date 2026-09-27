@@ -1,0 +1,112 @@
+---
+title: "Overleaf: old proofs/new_proof_1.tex"
+subtitle: "Raw TeX source mirrored from Overleaf project"
+format: html
+---
+
+
+::: {.callout-note appearance="simple"}
+**Original Source**: Overleaf Project Archive  
+**Path**: `old proofs/new_proof_1.tex`  
+:::
+
+```latex
+%new proof
+%$\sigma_t := \rho \circ (i_1 \to a_1, \ldots ,i_t \to a_t)$,
+%$\sigma_t' := \rho \circ (i_1 \to a_1, \ldots , i_{t-1} \to a_{t-1}, i_t \to \bar{a_t})$.
+
+\newcommand{\vars}{i_1, \ldots, i_t}
+
+\newcommand{\eveE}{\substack
+                    {\nvf(\rho \circ \sigma_{j-1}) = i_j \forall 1 \leq j \leq t\\
+                    F|_{\rho \circ \sigma_t} = 0\\
+                    F|_{\rho \circ \sigma_t'} = 1
+                    }
+                }
+\newcommand{\eveF}{\substack{\nvf(\rho \circ \sigma_{j-1}) = i_j \forall 1 \leq j \leq t-1\\
+                            \prot(\phi_{a_t}(\rho \circ \sigma_{t-1}), \phi_{\bar{a_t}(\rho \circ \sigma_{t-1})})\\
+                            F|_{\phi_{a_t}}(\rho \circ \sigma_{t-1}) = 0\\
+                            F|_{\phi_{\bar{a_t}}}(\rho \circ \sigma_{t-1}) = 1
+                        }
+                    }
+
+
+Consider the events, 
+$E(\vars) = \bra{\rho: \eveE}$,\\       
+$F(i_1,\ldots ,i_{t-1}, \ts_t) = \bra{\rho:\eveF}$                            
+\begin{align*}
+    \pr{\cdt(F,\rho) \text{ has depth } = t} 
+    &\leq \sum_{\vars} 
+                \prob{\rho}{E(i_1,\ldots,i_t)}\\
+    &= \sum_{i_1, \ldots i_t} 
+            \sum_{\rho \in E(\vars)} 
+                \pr{\rho}\\
+    &= p^t \cdot \sum_{\vars} 
+                    \sum_{\rho \in E(\vars)} 
+                        \sqrt{\pr{\phi_{a_1,\ldots,a_t}(\rho)} \pr{\phi_{a_1, \ldots ,\bar{a_t}}(\rho)}}\\
+    &\leq p^t \sum_{\vars} 
+                \sum_{\ts_t} 
+                    \sum_{\rho \in F(\vars, \ts_t)} 
+                        \sqrt{\pr{\phi_{a_1,\ldots,a_t}(\rho)} \pr{\phi_{a_1,\ldots,\bar{a_t}}(\rho)}}\\
+    &\leq p^t \sum_{\vars} 
+                \sum_{\ts_t}
+                    \sqrt{\sum_{\rho \in F(\vars, \ts_t)} \pr{\phi_{a_1,\ldots,a_t}}}
+                    \cdot 
+                    \sqrt{\sum_{\rho \in F(\vars, \ts_t)} \pr{\phi_{a_1,\ldots \bar{a_t}}(\rho)}} \\
+    &\leq p^t \sqrt{\sum_{\vars} \sum_{\ell_t} 1} 
+    \cdot 
+    \sqrt{\sum_{\vars} \sum_{\ell_t}  \cbra{\sum_{\rho \in F(\vars, \ts_t)} \pr{\phi_{a_1,\ldots , a_t}(\rho)}} \cdot \cbra{\sum_{\rho \in F(\vars, \ts_t)} \pr{\phi_{a_1,\ldots,\bar{a_t}}(\rho)}}}  \\
+    &\leq p^t \sqrt{(L(F))^t}
+\end{align*}
+
+\begin{claim}
+    $$\sum_{i_1, \ldots , i_t} \sum_{\ell_t} 
+        \cbra{\sum_{\rho \in F(i_1, \ldots , i_t, \ts_t)} \pr{\rho \circ \sigma_t}} \cdot \cbra{\sum_{\rho \in F(i_1, \ldots , i_t, \ts_t)} \pr{\rho \circ \sigma_t'}} \leq 1$$
+\end{claim}
+\begin{proof}
+\begin{align*}
+    &\sum_{i_1, \ldots , i_t} \sum_{\ell_t} 
+        \cbra{\sum_{\rho \in F(i_1, \ldots , i_t, \ts_t)} \pr{\rho \circ \sigma_t}} \cdot \cbra{\sum_{\rho \in F(i_1, \ldots , i_t, \ts_t)} \pr{\rho \circ \sigma_t'}} \\
+        &\leq \sum_{\ts_t} \sum_{i_1,\ldots ,i_{t-1}} \cbra{\sum_{\rho \in F(i_1, \ldots , i_t, \ts_t)} \pr{\rho \circ \sigma_t}} \cdot \cbra{\sum_{\rho \in F(i_1, \ldots , i_t, \ts_t)} \pr{\rho \circ \sigma_t'}}\\
+        &\leq \sum_{\ell_t} \cbra{\sum_{i_1, \ldots ,i_{t-1}} \sum_{\rho \in F(i_1,\ldots ,i_t,\ell_t)} \pr{\rho \circ \sigma_t}} \cbra{\sum_{i_1, \ldots ,i_{t-1}}\sum_{\rho \in F(i_1,\ldots ,i_t,\ell_t)} \pr{\rho \circ \sigma_t'}}\\
+        &\leq \sum_{\ell_t} \cbra{\sum_{\rho: \prot(\rho \circ (i_t \to a_t), \rho\circ (i_t \to \bar{a_t})) = \ell_t} \pr{\rho \circ (i_t \to a_t)}}
+\end{align*}
+
+
+
+
+Let $X(i_1, \ldots , i_{t-1}) = \bra{\phi_{a_t}(\rho \circ \sigma_{t-1})| \nvf(\rho \circ \sigma_{j-1}) = i_j \text{ for } 1 \leq j \leq t-1, F|_{\phi_{a_t}(\rho \circ \sigma_{t-1})} = 0 , F_{\phi_{\bar{a_t}}(\rho \circ \sigma_{t-1})}=1} $,
+
+$Y(i_1, \ldots , i_{t-1}) = \bra{\phi_{\bar{a_t}}(\rho \circ \sigma_{t-1})| \nvf(\rho \circ \sigma_{j-1}) = i_j \text{ for } 1 \leq j \leq t-1, F|_{\phi_{a_t}(\rho \circ \sigma_{t-1})} = 0 , F_{\phi_{\bar{a_t}}(\rho \circ \sigma_{t-1})}=1} $. 
+
+Consider the communication matrix $M(i_1, \ldots , i_{t-1})$ whose rows are indexed by $X(i_1, \ldots , i_{t-1})$ and the columns are indexed by $Y(i_1, \ldots , i_{t-1})$.  
+
+    $$\sum_{i_t} \sum_{\ell_t} \pr{A_{\ell_t}(i_1, \ldots ,i_{t-1})} \cdot \pr{B_{\ell_t}(i_1, \ldots ,i_{t-1})}
+    \leq \pr{G(i_1, \ldots , i_{t-1})}$$
+    %\pr{X(i_1, \ldots , i_{t-1})} \cdot  \pr{Y(i_1, \ldots ,i_{t-1})}$$
+    
+    where 
+    $\pr{A_{\ell_t}(i_1, \ldots, i_{t-1})} = \pr{\rho \circ \sigma_t: \rho \in F(i_1, \ldots , i_{t-1}, \ell_t)}$
+    and\\
+    $\pr{B_{\ell_t}(i_1, \ldots, i_{t-1})} = \pr{\rho \circ \sigma_t': \rho \in F(i_1, \ldots , i_{t-1}, \ell_t)}$.
+    
+    $$\sum_{i_1, \ldots i_{t-1}} G_{i_1, \ldots , i_{t-1}} \leq 1$$
+    
+    
+%     \begin{align*}
+%         \sum_{i_1, \ldots , i_{t-1}} \pr{X(i_1, \ldots , i_{t-1})} \pr{Y(i_1, \ldots ,i_{t-1})}
+% %        &\leq \sum_{i_1 , \ldots , i_{t-1}}\pr{X(i_1 , \ldots , i_{t-1})} \sum_{i_1 , \ldots , i_{t-1}} \pr{Y(i_1, \ldots ,i_{t-1})}\\
+%         &\leq 1
+%     \end{align*}
+    
+     Let $G(i_1, \ldots , i_{t-1}) = \bra{\rho \circ \sigma_{t-1}| \nvf(\rho \circ \sigma_{j-1} ) =  i_j, 1 \leq j \leq t,  F|_{\phi_{a_t}(\rho \circ \sigma_{t-1})} = 0, F|_{\phi_{\bar{a_t}}(\rho \circ \sigma_{t-1})} = 1}$.
+    
+     $X = \bra{\phi_{a_t}(\rho)| \rho \in G}$,
+     $Y = \bra{\phi_{\bar{a_t}}(\rho)| \rho \in G}$.
+    
+    %Therefore $\pr{X} \leq \pr{G}$
+    
+    For all $(i_1, \ldots ,i_{t-1}) \in L(F)^{t-1}$, $G(i_1, \ldots , i_{t-1})$ partition the space of all restrictions, since $\rho$ determines which part it belongs to. Therefore $\sum_{i_1, \ldots, i_{t-1}} G(i_1, \ldots , i_{t-1}) \leq 1$.  
+\end{proof}
+
+```

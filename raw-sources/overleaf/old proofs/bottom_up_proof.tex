@@ -1,0 +1,301 @@
+\newcommand{\protk}[1]{
+    \prot^{(k)}(\rho(i_{#1 +1},\ldots,i_t = *),\rho(i_{#1} \to \bar{a_{#1}},i_{#1 +1},\ldots,i_t = *)) = \ts_#1
+}
+
+%%%%%%%%%%%%%%%%%%%%%
+%E_k
+\newcommand{\Et}{
+    \substack{
+        (i) \nvf(\phi_{a_1,\ldots,a_{t-1}}(\rho)) = i_t \hfill \\ 
+%        (ii) \rho(i_j) = a_j \hfill\\
+        (ii) F|_{\phi_{a_1,\ldots,a_{t}}(\rho)} \equiv 0, F|_{\phi_{a_1,\ldots,\bar{a_t}}(\rho)} \equiv 1 \hfill
+        }
+    }
+
+\newcommand{\eve}[1]{
+    \substack{
+        \forall #1 \leq j \leq t \hfill\\
+        (i) \nvf(\phi_{a_1,\ldots,a_{j-1}}(\rho)) = i_j \hfill \\ 
+%        (ii) \rho(i_j) = a_j \hfill\\
+        (ii) F|_{\phi_{a_1,\ldots,a_{t}}(\rho)} \equiv 0, F|_{\phi_{a_1,\ldots,\bar{a_t}}(\rho)} \equiv 1 \hfill
+        }
+    }
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%
+%Ft
+\newcommand{\Ft}{
+    \substack{
+        (i)\nvf(\rho) = i_t \hfill \\ 
+%        (ii) \rho(i_t) = * \hfill\\
+        (ii) F|_{\rho(i_t \to a_t)} \equiv 0, F|_{\rho(i_t \to \bar{a_t})} \equiv 1 \hfill
+        }
+    }
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Fkplusone}{
+    \substack{
+        \forall k+1 \le j \le t \hfill\\
+        (i) \nvf(\phi_{a_{k,\ldots,a_{j-1}}}(\rho) ) = i_j \footnote{$\sigma_{k \to k-1}$ = ()}\hfill\\
+        (ii) \rho(i_j) = * \hfill\\
+        (iii) F|_{\phi_{a_k,\ldots,a_{t}}(\rho)} \equiv 0, F|_{\phi_{a_k,\ldots,\bar{a_t}}(\rho)} \equiv 1 \hfill
+        }
+    }
+%%%%%%%%%%%%%%%%%%%%%%%%%    
+
+%%%%%%%%%%%%%%%%%%%%%
+%G_t
+\newcommand{\Rlt}{
+    \substack{
+        (i) \prot(\rho(i_t \to a_t),\rho(i_t \to \bar{a_t})) = \ts_t \hfill \\ 
+        (ii) \rho(i_t) = * \hfill\\
+        (iii) F|_{\rho(i_t \to a_t)} \equiv 0, F|_{\rho(i_t \to \bar{a_t})} \equiv 1 \hfill
+        }
+    }
+%%%%%%%%%%%%%%%%%%555
+
+\newcommand{\Rlk}{
+         \prot^{(k)}(\phi_{a_1,\ldots,a_k}(\rho),\phi_{a_1,\ldots ,\bar{a_k}}(\rho)) = \ts_k \hfill 
+    %    (ii) \rho(i_k) = * \hfill\\
+%        (iii) F|_{\rho(i_t \to a_t)} \equiv 0, F|_{\rho(i_t \to \bar{a_t})} \equiv 1 \hfill
+    }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Gk}{
+    \substack{
+        \forall k \le j \le t
+        (i) \prot(\rho,\rho(i_t \to \bar{a_t})) = \ts_t \hfill \\ 
+        (ii) \rho(i_t) = a_t \hfill\\
+        (iii) F|_\rho \equiv 0, F|_{\rho(i_t \to \bar{a_t})} \equiv 1 \hfill
+        }
+    }    
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Gtprime}{
+    \substack{
+        (i) \prot(\rho(i_t\to a_t),\rho) = \ts_t \hfill \\ 
+        (ii) \rho(i_t) = \bar{a_t} \hfill\\
+        (iii) F|_{\rho(i_t \to a_t)} \equiv 0, F|_\rho \equiv 1 \hfill
+        }
+    }
+
+\newcommand{\Gkprime}{
+    \substack{
+        \forall k \le j \le t \hfill\\
+        (i) \prot(\rho(i_k\to a_k),\rho) = \ts_k \hfill \\ 
+        (ii) \rho(i_k) = \bar{a_k} \hfill\\
+        (iii) F|_{\rho(i_t \to a_t)} \equiv 0, F|_\rho \equiv 1 \hfill
+        }
+    }
+%%%%%%%%%%%%%%%%%%%
+\newcommand{\even}[1]{
+    \substack{
+        \forall #1 \leq j \leq t \hfill\\
+        (i) \nvf(F,\rho \circ \sigma_{k+1 \to j}) = i_j  \\ 
+        (ii) \rho(i_j) = a_j \hfill\\
+        (iii) F|_{\rho} \equiv 0, F|_{\rho(i_t \to a_t)} \equiv 1 \hfill
+        }
+    }  
+%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\ans}{}
+
+\begin{lemma} 
+    \label{lem: main lemma}
+    $$\prob{\rho}{\cdt(F,\rho) \mathrm{\ has\ depth\ } t} \leq \ans$$ 
+\end{lemma}
+
+
+% \begin{claim}
+%     \label{label: NVF Game correspondence}
+%     Let $\rho \in R_k$, 
+%     $$\nvf(F,\rho) = x \implies \prot^{(k)}(\rho\circ (x \to a), \rho\circ(x \to \bar{a})) = x\ \mathrm{and}\ \rho(x) = *$$
+% \end{claim}
+    
+\begin{proof} 
+    If $\cdt(F,\rho)$ has depth $t$, then there exist $a \in \cube{t}$
+    and variables $x_{i_1}, \ldots , x_{i_t}$ such that for all $k \in [t]$, $\nvf(F, \phi_{a_1,\ldots,a_{k-1}}(\rho) )= i_k$
+    for all $k \in [t]$\footnote{assume $\phi_{a_0}(\rho) = \rho$}.
+
+\begin{align*}
+    \prob{\rho}{\cdt(F,\rho) \mathrm{\ has\ depth\ } t}   
+    &\leq \sum_{x_{i_1}, \dots , x_{i_t}}  
+            \prob{\rho}{\eve{1}} \\
+\text{Let\ } E_k := \bra{\eve{k}}\\
+    &=\sum_{x_{i_1}, \dots , x_{i_t}} \prob{\rho}{E_t}\prod_{k=t-1}^1 \prob{\rho}{E_k|E_{k+1}}\\
+    &= \sum_{x_{i_t}} \pr{E_t} \sum_{x_{i_{t-1}}} \pr{E_{t-1}|E_t}\ldots  \sum_{x_{i_1}} \pr{E_1|E_2}
+\end{align*}
+
+The last step follows from the observation that for each $k \in [t]$, the event $E_k$ depends on the variables $x_{i_k}, \ldots, x_{i_t}$ and doesn't depend on the variables $x_{i_1}, \ldots , x_{i_{k-1}}$.
+
+Let's begin with an upper bound the expression $\sum_{x_{i_t}} \pr{E_t}$. Then we move on to upper-bounds on the expressions $\sum_{x_{i_k}} \pr{E_k|E_{k+1}}$ which follow a similar line.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+%upperbound on E_t
+
+Recall the definition of the event $E_t = \bra{\rho:\Et}$. 
+\begin{align*}
+    \sum_{x_{i_t}} \prob{\rho}{E_t}
+        &= \sum_{x_{i_t}} \sum_{\rho \in E_t} \pr{\rho}\\
+        &= \cbra{\frac{2p}{1-p}}^t \sum_{x_{i_t}} \sum_{\rho \in E_t} \pr{\phi_{a_1,\ldots, a_t}(\rho)}
+\end{align*}        
+        $\phi_{a_1,\ldots,a_t}(\rho)$ has $t$ more variables set 
+        than $\rho$. Therefore $\pr{\rho}$ = 
+        $\cbra{\frac{2p}{1-p}}^t$ 
+        $\pr{\phi_{a_1,\ldots,a_t}(\rho)}$.\\
+        Let $F_t:= \bra{\rho:\Ft}$.
+\begin{align*}
+    \sum_{\rho \in E_t} \pr{\phi_{a_1,\ldots, a_t}(\rho)}
+    &\le  \sum_{\rho \in F_t} \pr{\rho(i_t \to a_t)} 
+\end{align*}
+ Let 
+$R_{\ell_t} :=\bra{\rho:\Rlt}$. 
+\begin{align*}
+    \sum_{\rho \in F_t} \pr{\rho(i_t \to a_t)}
+        &\leq \sum_{\ell_t} \sum_{\rho \in R_{\ell_t}} \pr{\rho(i_t \to a_t)}\\
+        &= \sum_{\ell_t}\sum_{\rho \in R_{\ell_t}} \pr{\rho(i_t \to \bar{a_t})}\\
+        &=\sum_{\ell_t} \sqrt{\sum_{\rho \in R_{\ell_t}} \pr{\rho(i_t \to a_t)}. \sum_{\rho \in R_{\ell_t}}\pr{\rho(i_t \to \bar{a_t})}}\\
+        &\leq \sum_{\ell_i} \sqrt{ \pr{A_{\ts_t}} \pr{B_{\ts_t}} }
+\end{align*}              
+
+
+Let $U_t = \bra{\rho: F(\phi_{a_t}(\rho)) \equiv 0, F(\phi_{\bar{a_t}(\rho)} \equiv 1) }$.
+Consider the communication game $\game_{F,U_t,a_t}$ as defined in sub-section \ref{sec: game}.
+If $\rho \in U_t$ and $\nvf(\rho) = i_t$, the protocol $\prot^{(t)}$ recovers $i_t$ from $\phi_{a_t}(\rho)$ and $\phi_{\bar{a_t}}(\rho)$. 
+Moreover, there exists a transcript $\ts_t$ of the protocol 
+such that $\prot^{(t)}(\phi_{a_t}(\rho),\phi_{\bar{a_t}}(\rho)) = \ts_t $. Let $A_{\ts_t} \times B_{\ts_t}$
+be the rectangle corresponding to the transcript $\ts_t$
+
+%Let $\prot^{(t)}$ be the protocol for this game described in Lemma \ref{lem: protocol}.
+Let $\prot^{(t)}$ be the Karchmer-Wigderson protocol for $F$. 
+The protocol induces a partition of the communication matrix $M_{F,R_{t+1},a_t}$ into $L(F)$ many rectangles.
+    Consider the following distributions $p_t$ and $q_t$ supported on $X_t = \{\phi_{a_t}(\rho) : \rho \in U_t\}$ and $Y_t = \{\phi_{\bar{a_t}}(\rho): \rho \in U_t\}$ respectively.
+    For all $\rho \in X_t$, 
+            $$p_t[\rho] = \prob{\rho \in R_p}{\rho},$$
+        and for all $\rho \in Y_t$, 
+            $$q_t[\rho] = \prob{\rho \in R_p}{\rho}.$$ 
+        Note that $\sum_{\rho \in X_t} p_t[\rho] \leq 1$ and similarly 
+    $\sum_{\rho \in Y_t} q_t[\rho] \leq 1$.
+    Let 
+    $p_t[A_{\ell_t}] := \sum_{\rho \in R_{\ell_t}} \pr{\phi_{a_t}(\rho)}$ and $p_t[B_{\ell_t}] := \sum_{\rho \in R_{\ell_t}} \pr{\phi_{\bar{a_t}}(\rho)}$.
+    By Lemma \ref{lem: sum of rectangles},
+    $\sum_{x_{i_t}}\sum_{\ts_t \in \prot^{(t)}} p_t[A_{\ts_t}]q_t[B_{\ts_t}] \leq 1$.
+
+\begin{align*}
+    \sum_{x_{i_t}}\sum_{\ts_t} \sqrt{ p_{t}[A_{\ts_t}] q_t
+    [B_{\ts_t}] }
+        &\leq \sqrt{\sum_{x_{i_t},\ts_t} 1} \sqrt{\sum_{x_{i_t},\ts_t}p_t[A_{\ts_t}] q_t[B_{\ts_t}]}\\
+        &\leq \sqrt{|\prot^{(t)}|} \leq \sqrt{L(F)}.
+\end{align*}
+
+Since $\prot^{(t)}$ is the KW protocol which has $L(F)$ many transcripts. 
+%%%%%%%%%%%%%%
+
+%%%%%%%%%%%
+%upperbound on E_k|E_k+1
+We now upper bound $\sum_{x_{i_k}} \prob{\rho}{E_k|E_{k+1}}$.
+Recall the definition of the event $E_k = \bra{\rho:\eve{k}}$.
+Let $\mu$ be the $R_p$ distribution on the set of restrictions.
+\begin{align*}
+    \sum_{x_{i_k}} \prob{\rho}{E_k|E_{k+1}}
+    &= \sum_{x_{i_k}} \frac{\sum_{\rho \in E_k} \mu[\rho]}{\sum_{\rho \in E_{k+1}} \mu[\rho]}\\
+            &= \sum_{x_{i_k}} 
+                \frac{
+                    \sum_{\substack{\rho \in E_{k+1}\\ 
+                            \nvf(\phi_{a_1,\ldots, a_{k-1}}(\rho)) = i_k}
+                    } 
+                    \mu[\phi_{a_1,\ldots, a_k}(\rho)] 
+                }
+                {
+                \sum_{\rho \in E_{k+1}} \mu[\phi_{a_1,\ldots, a_k}(\rho)]
+                }\\
+            &= \sum_{x_{i_k}} 
+                \frac{
+                    \sum_{\substack{\rho \in E_{k+1}\\ 
+                            \nvf(\phi_{a_1,\ldots, a_{k-1}}(\rho)) = i_k}
+                    } 
+                    \sqrt{\mu[\phi_{a_1,\ldots, a_k}(\rho)]} \cdot  \sqrt{\mu[\phi_{a_1,\ldots, \bar{a_k}}(\rho)]}
+                }
+                {
+                \sqrt{\sum_{\rho \in E_{k+1}} \mu[\phi_{a_1,\ldots, a_k}(\rho)]}
+                \sqrt{\sum_{\rho \in E_{k+1}} \mu[\phi_{a_1,\ldots, \bar{a_k}}(\rho)]}
+                }\\
+% \text{Let}\ F_{k+1}:= \bra{\rho:\Fkplusone}\\
+%     &\leq \sum_{x_{i_k}} \frac{\sum_{\substack{\rho \in F_{k+1}\\ \nvf(\rho) = i_k}} \pr{\phi_{a_k}(\rho)}}{\sum_{\rho \in F_{k+1}} \pr{\phi_{a_k}(\rho)}}\\
+\end{align*}
+ Let 
+$R_{\ell_k} :=\bra{\rho:\Rlk}$. 
+\begin{align*}
+    % \frac{\sum_{\substack{\rho \in E_{k+1}\\ \nvf(\phi_{a_1,\ldots,a_{k-1}}(\rho)) = i_k}} \pr{\phi_{a_1,\ldots,
+    % a_k}(\rho)}}{\sum_{\rho \in E_{k+1}} \pr{\phi_{a_k}(\rho)}}
+        &=\sum_{\ell_t} 
+            \sqrt{
+                \frac{
+                    \sum_{\rho \in R_{\ell_k} \cap E_{k+1}} 
+                        \pr{\phi_{a_1,\ldots, a_k}(\rho)}
+                }
+                {
+                \sum_{\rho \in E_{k+1}} 
+                    \pr{\phi_{a_1,\ldots, a_k}(\rho)}
+                }
+            }
+            \sqrt{
+                \frac{
+                    \sum_{\rho \in R_{\ell_k} \cap E_{k+1}} 
+                        \pr{\phi_{\bar{a_k}}(\rho)}
+                }
+                {
+                \sum_{\rho \in E_{k+1}} 
+                    \pr{\phi_{\bar{a_1,\ldots, a_k}}(\rho)}
+                }
+            }\\
+        &\leq \sum_{\ell_i} \sqrt{ \pr{A_{\ts_k}} \pr{B_{\ts_k}} }
+\end{align*}            
+
+Consider the communication game $\game_{F,F_{t+1},a_k}$ as defined in sub-section \ref{sec: game}.
+Let $\prot^{(k)}$ be the protocol for this game described in Lemma \ref{lem: protocol}.
+If $\rho \in F_{k+1}$ and $\nvf(\rho) = i_k$, the protocol $\prot^{(k)}$ recovers $i_k$ from $\phi_{a_k}(\rho)$ and $\phi_{\bar{a_k}}(\rho)$. 
+Moreover, there exists a transcript $\ts_k$ of the protocol 
+such that $\prot^{(k)}(\phi_{a_k}(\rho),\phi_{\bar{a_k}}(\rho)) = \ts_k $. Let $A_{\ts_k} \times B_{\ts_k}$
+be the rectangle corresponding to the transcript $\ts_k$. 
+
+
+The protocol induces a partition of the communication matrix $M_{F,F_{k+1},a_k}$ into $L(F)^2$ many rectangles.
+    Consider the following distributions $p_k$ and $q_k$ supported on $X_k = \bra{\phi_{a_1,\ldots,a_k}(\rho):\rho \in E_{k+1}}$ and $Y_k= \bra{\phi_{a_1,\ldots,\bar{a_k}}(\rho): \rho \in E_{k+1}}$ respectively.
+    For all $\rho \in X_t$, 
+            $$p_k[\phi_{a_k}(\rho)] = \frac{
+                                \pr{\phi_{a_k}(\rho)}
+                            }
+                            {
+                            \sum_{\rho \in F_{k+1}}
+                                \pr{\phi_{a_k}(\rho)}       
+                            },$$
+        and for all $\rho \in Y_t$, 
+            $$q_k[\phi_{\bar{a_k}}(\rho)] = \frac{
+                                \pr{\phi_{\bar{a_k}}(\rho)}
+                            }
+                            {
+                            \sum_{\rho \in F_{k+1}}
+                                \pr{\phi_{\bar{a_k}}(\rho)}               
+                            },$$
+
+        Note that $p_k$ and $q_k$ are distributions on $X_k$ and $Y_k$ respectively i.e. $\sum_{\rho \in X_k} p_k[\rho] = 1$ and $\sum_{\rho \in Y_k} q_k[\rho] = 1$.
+    Let $R_{\ell_k} = A_{\ell_k} \times B_{\ell_k}$ where $A_{\ell_k} \subseteq X_k$ and $B_{\ell_k} \subseteq Y_k$. $p_k[A_{\ell_k}] = \sum_{\rho \in R_{\ell_k} \cap F_{k+1}} p_k[\phi_{a_k}(\rho)] $ and $q_k[B_{\ell_k}] = \sum_{\rho \in R_{\ell_k} \cap F_{k+1}} q_k[\phi_{\bar{a_k}}(\rho)]$. 
+    By Lemma \ref{lem: sum of rectangles},
+    $\sum_{x_{i_k}}\sum_{\ts_k \in \prot^{(k)}} p_k[A_{\ts_k}]q_k[B_{\ts_k}] = 1$. Therefore
+
+\begin{align*}
+    \sum_{x_{i_k}}\sum_{\ts_k} \sqrt{ p_{k}[A_{\ts_k}] q_k
+    [B_{\ts_k}] }
+        &\leq \sqrt{\sum_{\ts_k} 1} \tag*{by Cauchy-Schwarz} \sqrt{\sum_{\ts_k}p_k[A_{\ts_k}] q_k[B_{\ts_k}]}\\
+        &\leq \sqrt{|\prot^{(k)}|} \leq L(F).
+\end{align*}
+    \begin{align*}
+        \prob{\rho}{\cdt(F,\rho) \mathrm{\ has\ depth\ } t} 
+            &= \sum_{x_{i_t}} \pr{E_t} \sum_{x_{i_{t-1}}} \pr{E_{t-1}|E_t}\ldots  \sum_{x_{i_1}} \pr{E_1|E_2}\\
+            &\leq p^t \sqrt{L(F)} L(F)^{t-1}            
+    \end{align*}
+\end{proof}
+
+
+

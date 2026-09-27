@@ -1,0 +1,169 @@
+---
+title: "Overleaf: old proofs/top_open.tex"
+subtitle: "Raw TeX source mirrored from Overleaf project"
+format: html
+---
+
+
+::: {.callout-note appearance="simple"}
+**Original Source**: Overleaf Project Archive  
+**Path**: `old proofs/top_open.tex`  
+:::
+
+```latex
+\newcommand{\nvfconds}{
+    \{\rho| \nvf(F,\rho \circ \sigma_{k-1}) = x_{i_k} \forall 1 \leq k \leq t, F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho \circ \sigma_t'} \equiv 1  \}
+}
+
+\newcommand{\nvfcondsk}[1]{
+\{\rho| \nvf(F,\rho \circ \sigma_{j-1}) = x_{i_j} \forall 1 \leq j \leq #1\}
+}
+
+
+
+\begin{lemma} 
+    $$\prob{\rho}{\cdt(F,\rho) \mathrm{\ has\ depth\ } t} \leq p^t \sqrt{L(F)} {L(F)}^{t-1}$$ 
+\end{lemma}
+
+
+\begin{claim}
+    $\nvf(F,\rho) = x_i \implies \prot(\rho\circ (x_i \to a), \rho\circ(x \to \bar{a})) = x_i$ and $\rho(i) = *$
+\end{claim}
+
+
+\begin{proof}
+If $\cdt(F,\rho)$ has depth $t$, then there exist $a \in \cube{t}$ and variables $x_{i_1}, \ldots , x_{i_t}$ such that for all $k \in [t]$, $\nvf(F, \rho \circ \sigma_{k-1} )= x_{i_k}$,  
+    where, $\sigma_k' = (x_{i_1}\to a_1,\ldots, x_{i_k} \to \bar{a_k})$ $\forall k \in [t]$ and $\sigma_0 = \sigma'_0 = ()$.
+
+    More over, there exists a protocol $\prot$ such that if $\nvf(F, \rho\circ \sigma_{k-1}) = x_{i_k}$,  
+    $\prot(\rho\circ \sigma_k, \sigma_k') = x_{i_k}$. Let $\calL_k$ be collection of transcripts which output $x_{i_k}$.   
+    
+    \begin{align*}
+        \prob{\rho}{\cdt(F,\rho) \mathrm{\ has\ depth\ } t}   
+        &\leq \sum_{x_{i_1}, \dots , x_{i_t}}  
+        \prob{\rho}{\event{t}}    \\
+        % &\leq \sum_{x_{i_1}, \dots , x_{i_t}}  
+        % \prod_{k=1}^t \prob{\rho}{\event{k} \middle|
+        % \event{k-1}}\\
+        % &\leq \sum_{x_{i_1}, \dots , x_{i_t}} \sum_{\rho: (i),(ii) \forall 1\leq j \leq t,(iii)} \prob{}{\rho}
+    \end{align*}
+    
+
+\end{proof}
+
+
+Let $\calA = \nvfconds$
+
+% Let $\calA_k:= \left\{
+%     \rho: \ts(\rho\circ \sigma_j, \rho\circ \sigma_j')= \ts_j, 
+%     \rho(i_j) = * \forall 1 \leq j \leq k ;
+%     F|_{\rho\circ \sigma_k} \not\equiv \const
+%     \right\}$
+     
+    \begin{align*}
+        \sum_{x_{i_1}, \ldots ,x_{i_t}}\sum_{\rho \in \calA} Pr[\rho]
+        &= \sum_{x_{i_1}, \ldots ,x_{i_t}} \prod_{k=1}^{t} \frac{\sum_{\rho \in \calA_{k}}\prob{}{\rho}}{\sum_{\rho \in \calA_{k-1}}\prob{}{\rho}}
+    \end{align*}
+where $\calA_k = \nvfcondsk{k}$ for each $k \in [t]$ and $\calA_0 = \{\rho| \rho: [n] \to \bra{0,1,*} \}$.
+Note that $\calA_{k+1} = \{ \rho| \rho \in \calA_k , \nvf(F,\rho \circ \sigma_k) = x_{k+1} \}$. 
+    \begin{align*}
+        \sum_{x_{i_1}, \ldots ,x_{i_t}} \prod_{k=1}^{t} \frac{\sum_{\rho \in \calA_{k}}\prob{}{\rho}}{\sum_{\rho \in \calA_{k-1}}\prob{}{\rho}}
+        &= \sum_{x_{i_1}} S_1(x_1) \sum_{x_{i_2}} S_2(x_{i_1},x_{i_2}) \ldots \sum_{x_{i_t}}S_t(x_{i_1},\ldots , x_{i_t})
+    \end{align*}
+    where $S_k(x_{i_1}, \ldots , x_{i_k}) = \frac{\sum_{\rho \in \calA_{k}}\prob{}{\rho}}{\sum_{\rho \in \calA_{k-1}}\prob{}{\rho}} $.
+    
+    Consider the expression $\sum_{x_{i_k}} S_k(x_{i_1}, \ldots , x_{i_k})$. Let $\sigma_k = \sigmaj{k}$ and $\sigma_k' = \sigmaprimej{k}$.
+
+
+    \begin{align*}
+        \sum_{x_{i_k}} \frac{\sum_{\rho \in \calA_{k}}\prob{}{\rho}}{\sum_{\rho \in \calA_{k-1}}\prob{}{\rho}}
+        &=\cbra{\frac{2p}{1-p}}\sum_{x_{i_k}} \sum_{\rho \in \calA_k} \sqrt{\frac{\prob{}{\rho\circ \sigma_k}}{\sum_{\rho \in \calA_{k-1}}\prob{}{\rho\circ \sigma_{k-1}}}} \sqrt{\frac{\prob{}{\rho\circ \sigma_k'}}{\sum_{\rho \in \calA_{k-1}}\prob{}{\rho\circ \sigma_{k-1}}}}\\         
+        &= \cbra{\frac{2p}{1-p}}\sum_{x_{i_k}} \sum_{ \substack{\rho \in \calB_{k-1} \\ \nvf(F,\rho) = x_{i_k}} }  \sqrt{\frac{\prob{}{\rho\circ (x_{i_k} \to a_k)}}{\sum_{\rho \in \calB_{k-1}}\prob{}{\rho}}} \sqrt{\frac{\prob{}{\rho\circ (x_{i_k} \to \bar{a_k})}}{\sum_{\rho \in \calB_{k-1}}\prob{}{\rho}}}\\
+        &= \cbra{\frac{2p}{1-p}}\sum_{x_{i_k}} \sum_{ \substack{\rho \in \calB_{k-1} \\ \nvf(F,\rho) = x_{i_k}} }  \sqrt{\frac{\prob{}{\rho\circ (x_{i_k} \to a_k)}}{\sum_{\rho \in \calB_{k-1}}\prob{}{\rho\circ (x_{i_k} \to *)}+\prob{}{\rho\circ (x_{i_k} \to a_k)}+\prob{}{\rho\circ (x_{i_k} \to \bar{a_k})}}} \sqrt{\frac{\prob{}{\rho\circ (x_{i_k} \to \bar{a_k})}}{\sum_{\rho \in \calB_{k-1}}\prob{}{\rho}}}\\
+    \end{align*}
+    where $\calB_k = \{ \rho \circ \sigma_k | \rho \in \calA_k\}$.\\
+
+\newcommand{\calX}{\mathcal{X}} 
+
+    Consider the communication game $\game_{F,\calB_{k-1},a_k}$.
+    The set of inputs for Alice $\calX_k = \{\rho \circ \}$
+    \begin{align*}
+        &\leq \sqrt{\frac{\prob{}{\rho\circ \sigma_k}}{\sum_{\rho \in \calA_{k-1}}\prob{}{\rho\circ \sigma_{k-1}}}} \sqrt{\frac{\prob{}{\rho\circ \sigma_k'}}{\sum_{\rho \in \calA_{k-1}}\prob{}{\rho\circ \sigma_{k-1}}}}
+    \end{align*}
+
+    
+%\sum_{\substack{\rho: \rho \in \calB_{k-1}\\ \ts\cbra{\rho \circ (x_{i_k} \to a_k), \rho \circ(x_{i_k} \to \bar{a_k})} = \ts_k}}
+
+    
+    
+    %Fix variables $x_{i_1}, \ldots , x_{i_t}$ and $a \in \bra{0,1}^t$.
+
+%Define $\calB_{k} = \{\rho \circ (x \to a_k): \rho \in \calB_{k-1} \ \text{and}\ \nvf(F,\rho) = x\}$ and $\calB_0 = \calA_0$.  
+
+%   \begin{align*}
+%         \sum_{\rho \in \calA_1} \prob{}{\rho} 
+%         &= \frac{2p}{1-p} \sum_{\rho \in \calA_1} \sqrt{\prob{}{\rho \circ \sigma_1}}\sqrt{\prob{}{\rho \circ \sigma_1'}}  \\
+%         &\leq \sqrt{\sum_{\rho \in \calA_1}\prob{}{\rho \circ \sigma_1}}\sqrt{\sum_{\rho \in \calA_1}\prob{}{\rho \circ \sigma_1'}}        
+%   \end{align*}
+
+
+%$\calB_{k}:= \{
+    % \rho: \ts(\rho, \rho(i_k \to \bar{a_k}))= \ts_k;
+    % \ts(\rho(i_{j+1}= \ldots = i_k =*) , \rho(i_j \to \bar{a_j})(i_{j+1}= \ldots = i_k=*) )= \ts_j;
+    % \rho(i_j) = a_j \forall 1 \leq j \leq k;
+    % F|_\rho \not\equiv \const
+    %  \}$
+     
+    % $\calB_{k}':= \{
+    % \rho: \ts(\rho, \rho(i_k \to \bar{a_k}))= \ts_k;
+    % \ts(\rho(i_{j+1}= \ldots = i_k =*) , \rho(i_j \to \bar{a_j})(i_{j+1}= \ldots = i_k=*) )= \ts_j;
+    % \rho(i_j) = a_j \forall 1 \leq j \leq k;
+    % F|_\rho \not\equiv \const
+    %  \}$ 
+
+    
+    % $\calC_{k}:= \left\{
+    % \rho: \ts(\rho(i_k \to a_k),\rho)= \ts_k;\ts(\rho(i_k \to a_k) \circ \sigma_{k+1 \to j}, \rho(i_k \to a_k) \circ \sigma_{k+1 \to j}')= \ts_j, \rho(i_j) = * \forall k+1 \leq j \leq t  ;
+    % \rho(i_j) = a_j \forall 1 \leq j \leq k-1; \rho(i_k) = \bar{a_k};
+    % F|_{\rho\circ \sigma_t} \equiv 0,
+    % F|_{\rho \circ \sigma_t'} \equiv 1  
+    %  \right\}$
+    
+    % $\calC_{k}':= \left\{
+    % \rho: \ts(\rho(i_k \to a_k) \circ \sigma_{k+1 \to j}, \rho(i_k \to a_k) \circ \sigma_{k+1 \to j}')= \ts_j, \rho(i_j) = * \forall k+1 \leq j \leq t  ;
+    % \rho(i_j) = a_j \forall 1 \leq j \leq k-1;\\
+    % \rho(i_k) = \bar{a_k};
+    % F|_{\rho\circ \sigma_t} \equiv 0,
+    % F|_{\rho \circ \sigma_t'} \equiv 1  
+    %  \right\}$
+    
+         
+    % \begin{align*}
+    %     \frac{\sum_{\rho \in \calA_k}\prob{}{\rho\circ \sigma_k}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k}}
+    %     &= \frac{\sum_{\rho \in \calB_k} \prob{}{\rho}}{\sum_{\rho \in \calB_k'} \prob{}{\rho}}\\
+    %     &= \frac{\sum_{\substack{\rho:\rho \in \calB_k'\\ \ts(\rho, \rho(i_k \to \bar{a_k}))= \ts_k }} \prob{}{\rho}}{\sum_{\rho \in \calB_k'} \prob{}{\rho}}
+    % \end{align*}
+    % Similarly,
+    % \begin{align*}
+    %     \frac{\sum_{\rho \in \calA_k}\prob{}{\rho\circ \sigma_k'}}{\sum_{\rho \in \calA_{k+1}}\prob{}{\rho\circ \sigma_k'}}
+    %     &= \frac{\sum_{\rho \in \calC_k} \prob{}{\rho}}{\sum_{\rho \in \calC_k'} \prob{}{\rho}}\\
+    %     &= \frac{\sum_{\substack{\rho:\rho \in \calC_k'\\ \ts(\rho(i_k \to a_k), \rho)= \ts_k }} \prob{}{\rho}}{\sum_{\rho \in \calC_k'} \prob{}{\rho}}
+    % \end{align*}
+    
+    % Let,\\
+    % $cond_j(\rho): \condj{j}$ and $\starsj{j}$\\
+    % $cond_\top(\rho) : F|_{\rho \circ \sigma_t} \equiv 1$\\
+    % $cond_\bot(\rho) : F|_{\rho \circ \sigma_t'} \equiv 0$.    
+    
+    
+    % Let $\mathcal{L}_j = set\ of\ leaves\ of\ CC_F^{(j)}$\\
+    % $\mathcal{L}_j(i_j)= subset\ of \mathcal{L}_j \ labelled\ by\ x_{i_j}$.
+    
+    % $S_1:= \sum_{\substack{\rho:cond_1(\rho) \\ F|_{\rho_1} \neq         const}}\sqrt{Pr[\rho_1]\cdot Pr[\rho_1']}$
+    
+    % $S_j:= \frac{\sum_{\substack{\rho:cond_j(\rho):1 \leq j \leq         i\\F|_{\rho_j} \neq const}}\sqrt{Pr[\rho_i]\cdot             Pr[\rho_i']}}{\sum_{cond_j(\rho):1\leq j \leq i-            1}Pr[\rho_{i-1}]} \ \forall 2 \leq j \leq t$
+    
+    % Observe that $S_i$ doesn't depend on $x_{i_j},\ell_j$ for $j >i$.
+    
+    % $\sum_{x_{i_1},\dots ,x_{i_t}}\sum_{\substack{\ell_j \in \mathcal{L}_1(x_{i_1})}\\ \vdots \\ \ell_t \in \mathcal{L}_t(x_{i_t}} \prod_{i=1}^t S(i) = \sum_{\substack{x_{i_1}\\ \ell_1 \in \mathcal{L}_1(x_{i_1})}}S(1) \dots \sum_{\substack{x_{i_t}\\ \ell_t \in \mathcal{L}_t(x_{i_t})}}S_t$
+```

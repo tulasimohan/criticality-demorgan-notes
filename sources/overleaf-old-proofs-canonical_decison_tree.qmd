@@ -1,0 +1,53 @@
+---
+title: "Overleaf: old proofs/canonical_decison_tree.tex"
+subtitle: "Raw TeX source mirrored from Overleaf project"
+format: html
+---
+
+
+::: {.callout-note appearance="simple"}
+**Original Source**: Overleaf Project Archive  
+**Path**: `old proofs/canonical_decison_tree.tex`  
+:::
+
+```latex
+%Canonical decision tee
+In this section, we give an algorithm $\cdt$ for constructing a  canonical decision tree for a DeMorgan formula $F$ w.r.t a restriction $\rho$. %$(F,\rho)$
+
+
+
+We begin with a subroutine called \emph{Next variable function} $\nvf$ which tells us which varible to query next given a formula a restriction
+
+\textbf{$\nvf$}(Next Variable Function)\\
+%\tulasi{try putting it in an algorithm env}\\
+{\bf Input}: De-morgan formulas $F$ and a restrcition $\rho$. \\
+{\bf Output}: a leaf variable of $F$.
+\begin{itemize}
+    \item [1.] If $F|_\rho \equiv 0/1$, return $\perp$.
+    \item [2.] If $F$ is a variable say $x_i$ such that  $\rho(x_i) = *$, return $x_i$.
+    \item [3.] If $F = F_1 \vee F_2$:
+        \begin{itemize}
+            \item If $F_1|_{\rho} \equiv 0$:\\
+                        return NVF $(F_2, \rho)$
+            \item else: \\
+                        return NVF $(F_1, \rho)$
+        \end{itemize}                    
+\end{itemize}
+
+\textbf{$\cdt$}:
+Input: DeMorgan formula $F$ and a restriction $\rho$.
+Output: A decision tree for $F|_{\rho}$.
+\begin{itemize}
+    \item [1] If $F|_\rho \equiv 0/1$, return 0/1 accordingly.
+    \item [2] Otherwise: 
+        call NVF $(F,\rho)$\\ 
+        If NVF $(F,\rho) = x_j$, 
+            query $x_j$ and \\
+            If $x_j$ is 0, \\
+                return CDT $(F, \rho \cup \{x_j \mapsto 0\})$ \\
+            If $x_j$ is 1, \\ 
+                return CDT$(F, \rho \cup \{x_j \mapsto 1\})$.
+\end{itemize}
+ 
+ 
+```

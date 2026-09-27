@@ -1,0 +1,83 @@
+---
+title: "Overleaf: old proofs/communication_game.tex"
+subtitle: "Raw TeX source mirrored from Overleaf project"
+format: html
+---
+
+
+::: {.callout-note appearance="simple"}
+**Original Source**: Overleaf Project Archive  
+**Path**: `old proofs/communication_game.tex`  
+:::
+
+```latex
+%The coomunication game 
+
+Given a DeMorgan formula $F$ and collection of restrictions $\calR$ such that $F|_{\rho} \neq \const$ $\forall \rho \in \calR$ and a bit $a\in \cube{}$, we can define game $\game_{F,\calR,a}$ as follows:
+
+Alice and Bob get the partial inputs $\rho(i \mapsto a)$ and $\rho(i \mapsto \bar{a})$ respectively where, $\rho \in \calR$, $a \in \cube{}$ and $\nvf(F,\rho) = x_i$. Alice and Bob know $F, \calR$ and $a$ but they don't know $\rho$. 
+Their goal is to output the variable where their partial inputs differ.  
+
+\subsubsection{Protocols and Rectangles} 
+    Similar to the Karchmer Wigderson games, a communication protocol can be described using a tree whose internal nodes are labelled Alice or Bob and the leaves are labelled with the input variables of $F$. A \emph{transcript} is a string of messages exchanged between Alice and  Bob an a given set of inputs.
+    
+    We use $\Pi$ to denote the \emph{protocol}, $\Pi(x,y)$ to denote the output of the protocol on inputs $x,y$ and $\Pi_{xy}$ to denote the transcript of the protocol $\Pi$ on inputs $x,y$.  
+    
+    For a the game $\game_{F,\calR,a}$, we study its \emph{communication matrix} denoted by $M_{F,\calR,a}$\footnote{we some times drop the subscripts from $M_{F,\calR,a}$ for aesthetic reasons if $F,\calR,a$ are clear from the context.}.
+    Whose rows are indexed by the set of Alice's inputs $X$ and columns are indexed by the set of Bob's inputs $Y$. For any $x \in X$ and $y \in Y$, $M(x,y) = \Pi(x,y)$.
+
+    $X = \{\rho \circ (\nvf(F,\rho) \to a) | \rho \in R\}$ and 
+    $Y = \{\rho \circ (\nvf(F,\rho) \to \bar{a}) | \rho \in R\}$. 
+    
+    A \emph{Rectangle} is an object of the form $A \times B$ for some $A \in X$ and $B \in Y$. 
+
+    Similar to KW games, a protocol induces a partition of the communication matrix into monochromatic rectangles. Where the rectangles in the partition correspond to leaves of the protocol.
+    
+    \begin{lemma}
+    \label{lem: sum of rectangles}
+        Let $p,q$ be distributions supported on $X,Y$ respectively. For any transcript $\pi$, let $A_\pi \times B_\pi$ be the corresponding mono-chromatic rectangle. Then,         
+            $$\sum_{\pi \in \Pi} p(A_\pi) \cdot q(B_\pi) = 1$$
+    \end{lemma}
+
+
+\section{Protocol}
+\begin{lemma}
+    \label{lem: protocol}
+    For every DeMorgan formula $F$, there exist a protocol that achieves the above guarantee with at most $O(L(F)^2)$ leaves.
+\end{lemma}
+  
+\begin{proof}
+    $\nvf(F,\rho) = x$.
+    Alice gets $\rho_A = \rho(x \to a)$ and Bob gets $\rho_B = \rho(x \to \bar{a})$ and they want figure out the variable where their inputs differ.
+    
+    {\bf$CC_F(\rho_A,\rho_B)$:}\\
+    Suppose $F = F_1 \vee F_2$, ($F_1 \wedge F_2$ case is similar).\\
+    Alice sends 0 if $F_1|_{\rho_A} \equiv 0$ and 1 otherwise.\\ 
+    If Alice sends 1,\\ 
+        *then both of them run $CC_{F_1}(\rho_A,\rho_B)$\\
+    If Alice sends 0, \\
+    * Bob checks if $F_1|{\rho_B} \equiv 0$ and sends a 0 if that is the case and 1 otherwise.\\ 
+    * If Bob sends a 0, \\
+        ** they run $CC_{F_2}(\rho_A,\rho_B)$ and \\
+    * otherwise \\
+%        ** they run $CC_{F_1}(\rho_A,\rho_B)$
+        **Bob arbitrarily extends $\rho_B$ to a 1 input $\rho'$ they run $KW_{F_1}(\rho_j,\rho'))$.\\ 
+    
+%    \tulasi{Need to argue the correctness of the protocol.} 
+    
+    (We can assume that at each node of the formula tree, the left child is smaller than the right child.)\\
+    \begin{claim}[Complexity]
+        The number of transcripts in the above protocol is at most $L(F)^2$.
+    \end{claim}
+    
+    
+    Let $T(F)$ denote the number of transcripts of the protocol on for $F$. We have the recursion,\\
+    \begin{align*}
+        T(F) &\leq T(F_1)+ T(F_2) + L(F_1)\\
+            &\leq T(F_1) + T(F_2) + L(F)/2 
+    \end{align*}        
+    $T(F) = O(L(F)^2)$ satisfies the above recursion.
+\end{proof}
+
+
+```

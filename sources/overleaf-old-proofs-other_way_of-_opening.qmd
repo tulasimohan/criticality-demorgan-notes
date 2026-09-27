@@ -1,0 +1,118 @@
+---
+title: "Overleaf: old proofs/other_way_of _opening.tex"
+subtitle: "Raw TeX source mirrored from Overleaf project"
+format: html
+---
+
+
+::: {.callout-note appearance="simple"}
+**Original Source**: Overleaf Project Archive  
+**Path**: `old proofs/other_way_of _opening.tex`  
+:::
+
+```latex
+where, 
+$$
+S_1 := \underset{\substack{\rho: CC_F^{t}(\rho\circ \sigma_t, \rho \circ \sigma_t')= l_t\\ F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_1}= \dots =x_{i_t} = *}} {\sum}Pr[\rho]
+\hspace{50pt}  \forall 1< j \leq t,\ \ \ 
+S_i := 
+\frac{
+\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i\leq j \leq t\\ F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_1}=\ldots= x_{i_t} = *}} {\sum} Pr[\rho \circ \sigma_{i}]
+}
+{
+\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i+1\leq j \leq t\\F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_{1}}=\ldots= x_{i_t} = *}} {\sum} Pr[\rho\circ \sigma_{i} ]
+}
+$$
+
+\begin{align*}
+    S_i &= \frac{
+            \underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i\leq j \leq t\\ F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_1}=\ldots= x_{i_t} = *}} {\sum} Pr[\rho \circ \sigma_{i}]}
+            {\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i+1\leq j \leq t\\F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_{1}}=\ldots= x_{i_t} = *}} {\sum} Pr[\rho\circ \sigma_{i} ]}\\
+            &=  \frac{\underset{\substack{\rho:             CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i\leq j \leq t\\ F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_1}=\ldots= x_{i_t} = *}} {\sum}\sqrt{Pr[\rho \circ \sigma_{i}]\cdot Pr[\rho \circ \sigma_{i}']}}
+            {\sqrt{
+            \underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i+1\leq j \leq t\\F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_{1}}=\ldots= x_{i_t} = *}} {\sum} Pr[\rho\circ \sigma_{i} ] 
+            \underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i+1\leq j \leq t\\F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_{1}}=\ldots= x_{i_t} = *}} {\sum} Pr[\rho\circ \sigma_{i}' ] }} \\
+        &= 
+            \underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i\leq j \leq t\\ F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_1}=\ldots= x_{i_t} = *}} {\sum}
+            \sqrt{\frac{Pr[\rho \circ \sigma_{i}]}{\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i+1\leq j \leq t\\F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_{1}}=\ldots= x_{i_t} = *}} {\sum} Pr[\rho\circ \sigma_{i} ]}}
+            %%
+            \sqrt{\frac{Pr[\rho \circ \sigma_{i}']}{\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i+1\leq j \leq t\\F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_{1}}=\ldots= x_{i_t} = *}} {\sum} Pr[\rho\circ \sigma_{i}' ]}}
+\end{align*}
+
+Apply Cauchy-Schwartz and consider the two resultant product terms,
+
+\begin{align*}
+\frac{
+\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i\leq j \leq t\\ F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_1}=\ldots= x_{i_t} = *}} {\sum} Pr[\rho \circ \sigma_{i}]
+}
+{
+\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i+1\leq j \leq t\\F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_{1}}=\ldots= x_{i_t} = *}} {\sum} Pr[\rho\circ \sigma_{i} ]
+}
+&= \
+\frac{
+\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_{i \to j}, \rho \circ \sigma_{i \to j}')= l_j\\ \forall i\leq j \leq t\\ F|_{\rho\circ \sigma_{i+1 \to t}} \equiv 0, F|_{\rho\circ \sigma_{i+1 \to t}'}\equiv 1\\x_{i_{i+1}}=\ldots= x_{i_t} = *\\ x_{i_1} = a_1, \dots, x_{i_i}=a_i }} {\sum} Pr[\rho]
+}
+{
+\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_{i+1 \to j}, \rho \circ \sigma_{i+1 \to j}')= l_j\\ \forall i+1\leq j \leq t\\F|_{\rho\circ \sigma_{i+1 \to t}} \equiv 0, F|_{\rho\circ \sigma_{i+1 \to t}'}\equiv 1\\x_{i_{i+1}}=\ldots= x_{i_t} = *\\ x_{i_1} = a_1, \dots, x_{i_i}=a_i }} {\sum} Pr[\rho ]
+}\\
+&= 
+\underset{\substack{\rho: CC_F^{i}(\rho(i_i \mapsto a_i),\rho(i_i \mapsto 1-a_i) )= l_i\\ \rho \in \mathcal{A}_{i+1}}} {\sum} \frac{Pr[\rho]}{\underset{\rho \in \mathcal{A}_{i+1}} {\sum} Pr[\rho]}
+\end{align*}
+
+where 
+$  
+\mathcal{A}_{i+1} := \{\rho: CC_F^{j}(\rho\circ \sigma_{i+1 \to j}, \rho \circ \sigma_{i+1 \to j}')= l_j \ \forall i+1\leq j \leq t; \\
+F|_{\rho\circ \sigma_{i+1 \to t}} \equiv 0, F|_{\rho\circ \sigma_{i+1 \to t}'}\equiv 1\;\\
+x_{i_{i+1}}=\ldots= x_{i_t} = *\\ 
+x_{i_1} = a_1, \dots, x_{i_i}=a_i \}
+$
+
+
+
+
+\begin{align*}
+\frac{
+\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i\leq j \leq t\\ F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_1}=\ldots= x_{i_t} = *}} {\sum} Pr[\rho \circ \sigma_{i}']
+}
+{
+\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall i+1\leq j \leq t\\F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_{1}}=\ldots= x_{i_t} = *}} {\sum} Pr[\rho\circ \sigma_{i}' ]
+}
+&= \
+\frac{
+\underset{\substack{\rho: CC_F^{j}(\rho(i_i \mapsto a_i)\circ \sigma_{i+1 \to j}, \rho(i_i \mapsto a_i) \circ \sigma_{i+1 \to j}')= l_j\\ \forall i+1\leq j \leq t\\ F|_{\rho(i_i \mapsto a_i)\circ \sigma_{i+1 \to t}} \equiv 0, F|_{\rho(i_i \mapsto a_i)\circ \sigma_{i+1 \to t}'}\equiv 1\\x_{i_{i+1}}=\ldots= x_{i_t} = *\\ x_{i_1} = a_1, \dots, x_{i_i}=a_i }} {\sum} Pr[\rho]
+}
+{
+\underset{\substack{\rho: CC_F^{j}(\rho(i_i \mapsto a_i)\circ \sigma_{i+1 \to j}, \rho(i_i \mapsto a_i) \circ \sigma_{i+1 \to j}')= l_j\\ \forall i+1\leq j \leq t\\F|_{\rho\circ \sigma_{i+1 \to t}} \equiv 0, F|_{\rho\circ \sigma_{i+1 \to t}'}\equiv 1\\x_{i_{i+1}}=\ldots= x_{i_t} = *\\ x_{i_1} = a_1, \dots, x_{i_i}=a_i }} {\sum} Pr[\rho ]
+}\\
+&= 
+\underset{\substack{\rho: CC_F^{i}(\rho\circ \sigma_i, \rho \circ \sigma_i')= l_i\\ \rho \in \mathcal{B}_{i+1}}}{\sum} \frac{Pr[\rho]
+}{\underset{\rho \in \mathcal{B}_{i+1}} {\sum} Pr[\rho ]} 
+\end{align*}
+
+where 
+$  
+\mathcal{B}_{i+1} := \{\rho: CC_F^{j}(\rho(i_i \mapsto a_i)\circ \sigma_{i+1 \to j}, \rho(i_i \mapsto 1-a_i) \circ \sigma_{i+1 \to j}')= l_j \ \forall i+1\leq j \leq t; \\
+F|_{\rho\circ \sigma_{i+1 \to t}} \equiv 0, F|_{\rho\circ \sigma_{i+1 \to t}'}\equiv 1\;\\
+x_{i_{i+1}}=\ldots= x_{i_t} = *\\ 
+x_{i_1} = a_1, \dots, x_{i_i}=a_i \}
+$
+
+
+$$
+=\underset{\substack{\rho: CC_F^{t}(\rho\circ \sigma_t, \rho \circ \sigma_t')= l_t\\ F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_1}= \dots =x_{i_t} = *}} {\sum}Pr[\rho] \cdot 
+%
+\frac{\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall t-1\leq j \leq t\\ F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_1}=\dots = x_{i_t} = *}} {\sum}Pr[\rho]}
+{\underset{\substack{\rho: CC_F^{t}(\rho\circ \sigma_t, \rho \circ \sigma_t')= l_j\\ F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\ x_{i_1}= \dots =x_{i_t} = *}} {\sum}Pr[\rho]} \dots
+%
+\frac{\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_j, \rho \circ \sigma_j')= l_j\\ \forall 1\leq j \leq t\\ F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_1}= \dots = x_{i_t} =*}} {\sum}Pr[\rho]}
+{\underset{\substack{\rho: CC_F^{t}(\rho\circ \sigma_t, \rho \circ \sigma_t')= l_j\\ \forall 2\leq j \leq t\\F|_{\rho\circ \sigma_t} \equiv 0, F|_{\rho\circ \sigma_t'}\equiv 1\\x_{i_1}=\dots =x_{i_t} = *}} {\sum}Pr[\rho]}
+$$
+
+
+
+% $$
+% \frac{\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_{i\to j}, \rho \circ \sigma_{i \to j}')= l_j\\ \forall i\leq j \leq t\\ F|_{\rho\circ \sigma_{i \to t}} \equiv 0, F|_{\rho\circ \sigma_{i \to t}'}\equiv 1\\x_{i_1}= a_1\ldots ,x_{i_{i-1}} = a_{i-1}\\
+% x_{i}= \dots = x_{i_t}=*}} {\sum}Pr[\rho]}
+% {\underset{\substack{\rho: CC_F^{j}(\rho\circ \sigma_{i+1 \to j}, \rho \circ \sigma_{i+1 \to j}')= l_j\\ \forall i+1\leq j \leq t\\F|_{\rho\circ \sigma_{i+1 \to t}} \equiv 0, F|_{\rho\circ \sigma_{i+1 \to t}'}\equiv 1\\ x_{i_1}=a_1\ldots , x_{i_i} = a_i\\ x_{i+1}= \dots = x_{i_t}=*}} {\sum}Pr[\rho]}
+% $$
+```

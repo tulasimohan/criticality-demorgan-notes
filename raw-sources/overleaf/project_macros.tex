@@ -1,0 +1,37 @@
+% project_macros.tex
+
+% Specific to your paper: Algorithms and Functions (using \DeclareMathOperator)
+\DeclareMathOperator{\DTdepth}{DTdepth}
+\DeclareMathOperator{\CDTdepth}{CDTdepth}
+\DeclareMathOperator{\DT}{DT}
+\DeclareMathOperator{\CDT}{CDT}
+\DeclareMathOperator{\Pivot}{Pivot}
+\DeclareMathOperator{\zeroBal}{Balance_{0 \to 1}}
+\DeclareMathOperator{\oneBal}{Balance_{1 \to 0}}
+
+\DeclareMathOperator{\assoc}{assoc}
+\DeclareMathOperator{\Assoc}{Assoc}
+\DeclareMathOperator{\findSource}{findSource}
+\DeclareMathOperator{\parent}{\text{parent}}
+\DeclareMathOperator{\lsibling}{\text{left-sibling}}
+
+
+% Specific to your paper: Symbols and Structures
+\newcommand{\unassigned}{\star}
+\newcommand{\ot}{\leftarrow}
+\newcommand{\Lfunc}{\mathrm{L}}
+\def\EC{\mathsf{EC}}
+\def\Ter{\mathrm{Ter}}
+\def\T{\mathsf{T}}
+\def\bT{\mathsf{b_T}}
+\newcommand{\calR}{\mathbf{\mathcal{R}}}
+\def\sfb{\mathsf{b}}
+
+% Specific conditional commands for your paper
+\newcommand{\condF}{\CDT_0^{(a)}(F,\rho) = (v_1 \gets a_1, \dots ,v_t \gets a_t)}
+\newcommand{\condLeft}{\CDT_0^{(a_{\le s})}(F_1,\rho) = (v_1 \gets a_1, \dots ,v_S \gets a_s)}
+\newcommand{\condRight}{\CDT_0^{(a_{>s})}(F,\rho) = (v_{s+1} \gets a_{s+1}, \dots v_t \gets a_t}
+\newcommand{\condAssoc}{Assoc_1(F_1,\rho,a_{\le s}) = b}
+
+
+

@@ -1,29 +1,40 @@
 project:
   type: website
   output-dir: _site
-
+  render:
+  - index.qmd
+  - approaches/index.qmd
+  - foundations/preliminaries.qmd
+  - counterexamples-and-hurdles/jaikumar-counterexample.qmd
+  - manuscript/master-draft.qmd
+  - meetings/index.qmd
+  - sources/*.qmd
 website:
-  title: "Criticality of DeMorgan Formulae"
-  description: "Comprehensive Research Dossier, Proof Approaches, Counterexamples & Notes"
-  site-url: "https://tulasimohan.github.io/criticality-demorgan-notes/"
-  repo-url: "https://github.com/tulasimohan/criticality-demorgan-notes"
-  repo-actions: [issue]
-  navbar:
-    background: primary
-    left:
-      - href: index.qmd
-        text: Overview & Status
-      - href: foundations/preliminaries.qmd
-        text: Foundations
-      - href: approaches/index.qmd
-        text: Proof Approaches
-      - href: counterexamples-and-hurdles/jaikumar-counterexample.qmd
-        text: Counterexamples & Hurdles
-      - href: manuscript/master-draft.qmd
-        text: Working Manuscript
-      - href: meetings/index.qmd
-        text: Meeting Notes
-
+  title: Criticality of DeMorgan Formulae
+  description: Comprehensive Research Dossier, Proof Approaches, Counterexamples &
+    Notes
+  site-url: https://tulasimohan.github.io/criticality-demorgan-notes/
+  repo-url: https://github.com/tulasimohan/criticality-demorgan-notes
+  repo-actions:
+  - issue
+  sidebar:
+    style: docked
+    search: true
+    contents:
+    - href: index.qmd
+      text: Overview & Status
+    - href: sources/index.qmd
+      text: All Original Sources
+    - href: foundations/preliminaries.qmd
+      text: Foundations
+    - href: approaches/index.qmd
+      text: Proof Approaches
+    - href: counterexamples-and-hurdles/jaikumar-counterexample.qmd
+      text: Counterexamples & Hurdles
+    - href: manuscript/master-draft.qmd
+      text: Working Manuscript
+    - href: meetings/index.qmd
+      text: Meeting Notes
 format:
   html:
     theme:

@@ -1,0 +1,80 @@
+\documentclass[11pt]{article}
+
+% ======================================                ==============================
+% Preamble
+% ====================================================================
+
+% --- 1. Encoding and Fonts ---
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{mathpazo} 
+\usepackage{lmodern}
+\usepackage{latexsym,amssymb} % Loaded by tm_macros.sty, so we put it here
+\usepackage{bm}
+
+% --- 2. Standard Packages ---
+\usepackage[fleqn]{amsmath} % Add fleqn option
+\usepackage{amsfonts, mathtools} % amsmath handles amssymb
+\usepackage{amsthm} 
+\usepackage{graphicx, float, subcaption, caption} 
+\usepackage[colorlinks, linkcolor=blue, citecolor=blue, urlcolor=blue]{hyperref}
+\usepackage[nameinlink]{cleveref}
+\usepackage{enumitem}
+\usepackage[dvipsnames,usenames]{xcolor} % Add usenames option
+\usepackage{algorithm, algpseudocode}
+\usepackage[margin=1in]{geometry}
+\usepackage{tikz}
+\usepackage{booktabs}
+% --- 3. Custom Macros and Definitions ---
+% Load your project-specific macros
+\input{tm_macros.sty}
+\input{project_macros.tex}
+
+% --- 4. Document-Specific Settings ---
+\raggedbottom
+\allowdisplaybreaks
+
+% ====================================================================
+% Document Info
+% ====================================================================
+\title{Criticality of \demorgan Formulae}
+\author{
+    Prahladh Harsha \\
+    \small Tata Institute of Fundamental Research \\
+    \small \texttt{prahladh@tifr.res.in}
+    \and
+    Tulasimohan Molli \\
+    \small Faculdade de Ciências da Universidade de Lisboa \\
+    \small \texttt{tmolli@fc.ul.pt}
+    \and
+    Jaikumar Radhakrishnan \\
+    \small International Centre for Theoretical Sciences, TIFR \\
+    \small \texttt{jaikumar.radhakrishnan@icts.ac.in}
+}
+\date{}
+
+
+% ====================================================================
+% Document Body
+% ====================================================================
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+    Rossman defined the notion of criticality inspired by Switching lemmas and showed that bounds on criticality imply  average case lower bounds, PRGs, Fourier tail bounds, Learning algorithms and satisfiability algorithms.   
+    We study the criticality of \demorgan formulae and show that a \demorgan formula with $L$ leaves has criticality $O(\sqrt{L})$. Our approach involves a canonical decision tree construction, Karchmer-Wigderson games, Shrinkage, a new structural lemma for the Formulae under random restrictions which we call as the Banyan decomposition lemma, and an analysis using probabilistic methods combined with convexity arguments.   
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+% Include the actual content from contents.tex
+\input{contents.tex}
+
+% --- Bibliography ---
+\bibliographystyle{alpha}
+\bibliography{references.bib}
+
+\end{document}
