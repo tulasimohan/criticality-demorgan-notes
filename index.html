@@ -333,9 +333,15 @@
           }
         }
 
+        // Sort notes from latest to oldest (by modified date, then created date)
         allNotes.sort((a, b) => {
-          if (a.name === 'contents.tex') return -1;
-          if (b.name === 'contents.tex') return 1;
+          const dateA = a.modified !== 'Unknown' ? a.modified : a.created;
+          const dateB = b.modified !== 'Unknown' ? b.modified : b.created;
+          const cmp = dateB.localeCompare(dateA);
+          if (cmp !== 0) return cmp;
+          // Tie-break by creation date descending
+          const createCmp = (b.created || '').localeCompare(a.created || '');
+          if (createCmp !== 0) return createCmp;
           return a.name.localeCompare(b.name);
         });
 
