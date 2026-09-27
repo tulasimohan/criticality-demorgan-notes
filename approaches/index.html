@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="PH, JR, TM">
+<meta name="dcterms.date" content="2026-09-27">
 
-<title>Taxonomy of Proof Approaches – Criticality of DeMorgan Formulae</title>
+<title>Taxonomy of Proof Approaches: Deep Mathematical Architecture – Criticality of DeMorgan Formulae</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -331,11 +333,31 @@ window.Quarto = {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
-  <li><a href="#cdt-with-simultaneous-balancing" id="toc-cdt-with-simultaneous-balancing" class="nav-link" data-scroll-target="#cdt-with-simultaneous-balancing"><span class="header-section-number">2</span> 1. CDT with Simultaneous Balancing</a></li>
-  <li><a href="#non-inductive-structural-lemma-blaming-bad-events-on-subtrees" id="toc-non-inductive-structural-lemma-blaming-bad-events-on-subtrees" class="nav-link" data-scroll-target="#non-inductive-structural-lemma-blaming-bad-events-on-subtrees"><span class="header-section-number">3</span> 2. Non-Inductive Structural Lemma (Blaming Bad Events on Subtrees)</a></li>
-  <li><a href="#naive-cdt-no-balancing-no-tree-restriction" id="toc-naive-cdt-no-balancing-no-tree-restriction" class="nav-link" data-scroll-target="#naive-cdt-no-balancing-no-tree-restriction"><span class="header-section-number">4</span> 3. Naive CDT (No Balancing, No Tree Restriction)</a></li>
-  <li><a href="#inductive-approach-via-path-variable-factoring" id="toc-inductive-approach-via-path-variable-factoring" class="nav-link" data-scroll-target="#inductive-approach-via-path-variable-factoring"><span class="header-section-number">5</span> 4. Inductive Approach via Path-Variable Factoring</a></li>
-  <li><a href="#bottom-up-vs.-top-open-kw-protocol-matrix" id="toc-bottom-up-vs.-top-open-kw-protocol-matrix" class="nav-link" data-scroll-target="#bottom-up-vs.-top-open-kw-protocol-matrix"><span class="header-section-number">6</span> 5. Bottom-Up vs.&nbsp;Top-Open KW Protocol Matrix</a></li>
+  <li><a href="#cdt-with-simultaneous-balancing" id="toc-cdt-with-simultaneous-balancing" class="nav-link" data-scroll-target="#cdt-with-simultaneous-balancing"><span class="header-section-number">2</span> 1. CDT with Simultaneous Balancing</a>
+  <ul class="collapse">
+  <li><a href="#the-mechanism" id="toc-the-mechanism" class="nav-link" data-scroll-target="#the-mechanism"><span class="header-section-number">2.1</span> The Mechanism</a></li>
+  <li><a href="#the-open-bottleneck" id="toc-the-open-bottleneck" class="nav-link" data-scroll-target="#the-open-bottleneck"><span class="header-section-number">2.2</span> The Open Bottleneck</a></li>
+  </ul></li>
+  <li><a href="#the-non-inductive-structural-lemma-banyan-trunk-decomposition" id="toc-the-non-inductive-structural-lemma-banyan-trunk-decomposition" class="nav-link" data-scroll-target="#the-non-inductive-structural-lemma-banyan-trunk-decomposition"><span class="header-section-number">3</span> 2. The Non-Inductive Structural Lemma (Banyan Trunk Decomposition)</a>
+  <ul class="collapse">
+  <li><a href="#the-mathematical-framework" id="toc-the-mathematical-framework" class="nav-link" data-scroll-target="#the-mathematical-framework"><span class="header-section-number">3.1</span> The Mathematical Framework</a></li>
+  <li><a href="#probability-calculation-via-convexity-cauchy-schwarz" id="toc-probability-calculation-via-convexity-cauchy-schwarz" class="nav-link" data-scroll-target="#probability-calculation-via-convexity-cauchy-schwarz"><span class="header-section-number">3.2</span> Probability Calculation via Convexity &amp; Cauchy-Schwarz</a></li>
+  <li><a href="#the-open-bottleneck-1" id="toc-the-open-bottleneck-1" class="nav-link" data-scroll-target="#the-open-bottleneck-1"><span class="header-section-number">3.3</span> The Open Bottleneck</a></li>
+  </ul></li>
+  <li><a href="#naive-cdt-no-balancing-no-tree-restriction" id="toc-naive-cdt-no-balancing-no-tree-restriction" class="nav-link" data-scroll-target="#naive-cdt-no-balancing-no-tree-restriction"><span class="header-section-number">4</span> 3. Naive CDT (No Balancing, No Tree Restriction)</a>
+  <ul class="collapse">
+  <li><a href="#the-idea" id="toc-the-idea" class="nav-link" data-scroll-target="#the-idea"><span class="header-section-number">4.1</span> The Idea</a></li>
+  <li><a href="#why-it-failed-jaikumars-counterexample" id="toc-why-it-failed-jaikumars-counterexample" class="nav-link" data-scroll-target="#why-it-failed-jaikumars-counterexample"><span class="header-section-number">4.2</span> Why It Failed: Jaikumar’s Counterexample</a></li>
+  </ul></li>
+  <li><a href="#inductive-approach-via-path-variable-factoring" id="toc-inductive-approach-via-path-variable-factoring" class="nav-link" data-scroll-target="#inductive-approach-via-path-variable-factoring"><span class="header-section-number">5</span> 4. Inductive Approach via Path-Variable Factoring</a>
+  <ul class="collapse">
+  <li><a href="#the-mathematical-formulation" id="toc-the-mathematical-formulation" class="nav-link" data-scroll-target="#the-mathematical-formulation"><span class="header-section-number">5.1</span> The Mathematical Formulation</a></li>
+  <li><a href="#the-exact-failure-mode-conditioning-breakdown" id="toc-the-exact-failure-mode-conditioning-breakdown" class="nav-link" data-scroll-target="#the-exact-failure-mode-conditioning-breakdown"><span class="header-section-number">5.2</span> The Exact Failure Mode (Conditioning Breakdown)</a></li>
+  </ul></li>
+  <li><a href="#bottom-up-vs.-top-open-kw-communication-protocols" id="toc-bottom-up-vs.-top-open-kw-communication-protocols" class="nav-link" data-scroll-target="#bottom-up-vs.-top-open-kw-communication-protocols"><span class="header-section-number">6</span> 5. Bottom-Up vs.&nbsp;Top-Open KW Communication Protocols</a>
+  <ul class="collapse">
+  <li><a href="#the-formulation" id="toc-the-formulation" class="nav-link" data-scroll-target="#the-formulation"><span class="header-section-number">6.1</span> The Formulation</a></li>
+  </ul></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/tulasimohan/criticality-demorgan-notes/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -345,15 +367,27 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Taxonomy of Proof Approaches</h1>
-<p class="subtitle lead">In-depth breakdown of all 5 approaches tried across Notion, Obsidian, and Overleaf</p>
+<h1 class="title">Taxonomy of Proof Approaches: Deep Mathematical Architecture</h1>
+<p class="subtitle lead">Rigorous breakdown of all 5 approaches tried across Notion, Obsidian, and Overleaf</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>PH, JR, TM </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 27, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -365,81 +399,126 @@ window.Quarto = {
 
 <section id="overview" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
-<p>This section catalogs every proof approach formulated across your notes, tagged with their mathematical mechanisms, current status, and known failure modes or open bottlenecks.</p>
+<p>This section catalogs every proof approach formulated across your notes, preserving the exact definitions, lemma structures, probability factorizations, and the precise hurdles or counterexamples that stalled each direction.</p>
 <hr>
 </section>
 <section id="cdt-with-simultaneous-balancing" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="cdt-with-simultaneous-balancing"><span class="header-section-number">2</span> 1. CDT with Simultaneous Balancing</h2>
-<p><strong>Sources</strong>: Notion (<code>New CDT.md</code>, <code>CDT with balancing.md</code>), Overleaf (<code>contents.tex</code>, lines 240–350).<br>
-<strong>Status</strong>: <span class="badge-status badge-active">Active</span><br>
-<strong>Key Idea</strong>: A primary flaw of naive Canonical Decision Trees is path asymmetry: a <span class="math inline">\(0\)</span>-path in <span class="math inline">\(F_1\)</span> may explore variables without guaranteeing a corresponding <span class="math inline">\(1\)</span>-path over the same variable set. The <strong>Balancing</strong> operation ensures that for every explored node, the tree is balanced so that both <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span> outcomes explore symmetric sets of variables or terminate simultaneously.</p>
+<p><strong>Primary Sources</strong>: Notion (<code>New CDT.md</code>, <code>CDT with balancing.md</code>, <code>Rigorous proof.md</code>), Overleaf (<code>contents.tex</code>, lines 240–420).<br>
+<strong>Status</strong>: <span class="badge-status badge-active">Active</span></p>
+<section id="the-mechanism" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="the-mechanism"><span class="header-section-number">2.1</span> The Mechanism</h3>
+<p>A primary flaw of naive Canonical Decision Trees is path asymmetry: a <span class="math inline">\(0\)</span>-path in <span class="math inline">\(F_1\)</span> may explore variables without guaranteeing a corresponding <span class="math inline">\(1\)</span>-path over the same variable set. The <strong>Balancing</strong> operation resolves this by enforcing simultaneous symmetry:</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Simultaneous 0- and 1-Balancing
+Simultaneous 0- and 1-Balancing Algorithm (<span class="math inline">\(\mathrm{Balance}(\Gamma)\)</span>)
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Given a decision tree <span class="math inline">\(T\)</span>, <span class="math inline">\(\mathrm{Balance}(T)\)</span> recursively aligns branches: - If a subformula simplifies to a constant under path <span class="math inline">\(\pi\)</span>, redundant branches are pruned. - When merging <span class="math inline">\(\mathrm{CDT}(F_1, \rho)\)</span> with <span class="math inline">\(\mathrm{CDT}(F_2, \rho \circ \pi)\)</span>, balancing is applied immediately <em>at the point of creation</em> rather than lazily when attached.</p>
+<p>Given a decision tree <span class="math inline">\(\Gamma = \mathrm{CDT}(F, \rho)\)</span>: 1. <strong>Pruning Non-Influential Variables (JKR Principle)</strong>: At any node <span class="math inline">\(v\)</span> querying variable <span class="math inline">\(x\)</span>, if <span class="math inline">\(x\)</span> has no influence on the final formula value under the current partial path <span class="math inline">\(\pi\)</span>, replace <span class="math inline">\(v\)</span> by pruning redundant branches. 2. <strong>Recursive Alignment</strong>: When joining <span class="math inline">\(\mathrm{CDT}(F_1, \rho)\)</span> with <span class="math inline">\(\mathrm{CDT}(F_2, \rho \circ \pi_u)\)</span> at a <span class="math inline">\(0\)</span>-leaf <span class="math inline">\(u\)</span>, balancing is applied <strong>immediately upon construction</strong> rather than lazily upon attachment. 3. <strong>Properties Ensured</strong>: - For every <span class="math inline">\(0\)</span>-path <span class="math inline">\(\alpha\)</span>, there exists a corresponding <span class="math inline">\(1\)</span>-path with an identical or controlled set of path variables: <span class="math display">\[\mathrm{PathVars}(\alpha) \approx \mathrm{PathVars}(\beta)\]</span> - The set of restrictions consistent with any path remains downward-closed.</p>
 </div>
 </div>
-<p><strong>Current Hurdle</strong>:<br>
-Tracking path variables <span class="math inline">\(\mathrm{PathVars}(T)\)</span> through multiple nested balancing steps complicates the inductive distribution under random restrictions <span class="math inline">\(\mathcal{R}_p\)</span>.</p>
+</section>
+<section id="the-open-bottleneck" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="the-open-bottleneck"><span class="header-section-number">2.2</span> The Open Bottleneck</h3>
+<p>Tracking path variables through nested balancing recursions requires demonstrating that the measure <span class="math inline">\(\mu(T) = \sum_{b_T} \Pr[\mathcal{A}(\bar{v}^*_{T,b_T}, T, b_T)]\)</span> satisfies: <span class="math display">\[\sum_T \mu(T) \le 1\]</span> without losing exponential factors when subtrees undergo non-trivial restructuring under <span class="math inline">\(\mathrm{Balance}\)</span>.</p>
 <hr>
 </section>
-<section id="non-inductive-structural-lemma-blaming-bad-events-on-subtrees" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="non-inductive-structural-lemma-blaming-bad-events-on-subtrees"><span class="header-section-number">3</span> 2. Non-Inductive Structural Lemma (Blaming Bad Events on Subtrees)</h2>
-<p><strong>Sources</strong>: Notion (<code>New Proof.md</code>, <code>Rigorous proof.md</code>), Overleaf (<code>non-inductive proof.tex</code>).<br>
-<strong>Status</strong>: <span class="badge-status badge-active">Active</span><br>
-<strong>Key Idea</strong>: Rather than inducting step-by-step on <span class="math inline">\(t\)</span>, we bound <span class="math inline">\(\Pr[\mathrm{CDT}_{\mathrm{depth}}(F|_\rho) \ge t]\)</span> globally: 1. Partition the bad event into <span class="math inline">\(\mathcal{E}(\bar{x}, a) = \{\rho : \mathrm{CDT}^{(a)}(F, \rho) = (x_{i_1}, \dots, x_{i_t})\}\)</span>. 2. Blame each bad sequence on a <strong>leaf-branching subtree</strong> <span class="math inline">\((T, b)\)</span>. 3. Factor the probability into <span class="math inline">\(\mathcal{E}(T, b) = \mathcal{A}(T, b) \wedge \mathcal{B}(T, b)\)</span>, where <span class="math inline">\(\mathcal{A}\)</span> and <span class="math inline">\(\mathcal{B}\)</span> represent independent or quasi-independent boundary conditions. 4. Apply Cauchy-Schwarz: <span class="math display">\[\Pr[\mathcal{E}(\bar{x}, a)] \le \sum_{(T,b)} \sqrt{\Pr[\mathcal{A}(T,b)] \cdot \Pr[\mathcal{B}(T,b)]}.\]</span></p>
-<p><strong>Current Hurdle</strong>:<br>
-Summing over all possible leaf-branching tree topologies <span class="math inline">\((T,b)\)</span> introduces combinatorial entropy that must be offset by the decay factor <span class="math inline">\(p^t\)</span>. Tight control of the constant <span class="math inline">\(\lambda\)</span> requires bounding overlap between subtrees.</p>
+</section>
+<section id="the-non-inductive-structural-lemma-banyan-trunk-decomposition" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="the-non-inductive-structural-lemma-banyan-trunk-decomposition"><span class="header-section-number">3</span> 2. The Non-Inductive Structural Lemma (Banyan Trunk Decomposition)</h2>
+<p><strong>Primary Sources</strong>: Obsidian (<code>Criticality proof.md</code>), Notion (<code>New Proof.md</code>, <code>Rigorous proof.md</code>), Overleaf (<code>non-inductive proof.tex</code>, <code>contents.tex</code> Section 4).<br>
+<strong>Status</strong>: <span class="badge-status badge-active">Active</span></p>
+<section id="the-mathematical-framework" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="the-mathematical-framework"><span class="header-section-number">3.1</span> The Mathematical Framework</h3>
+<p>Rather than inducting step-by-step on <span class="math inline">\(t\)</span>, this framework bounds the probability globally by decomposing any path of length <span class="math inline">\(t\)</span> into a <strong>Trunk</strong> <span class="math inline">\(\mathcal{T}\)</span> and <strong>Aerial Roots</strong> <span class="math inline">\((v_1, \dots, v_t)\)</span>:</p>
+<section id="definitions" class="level4" data-number="3.1.1">
+<h4 data-number="3.1.1" class="anchored" data-anchor-id="definitions"><span class="header-section-number">3.1.1</span> Definitions</h4>
+<ul>
+<li><strong>Trunk <span class="math inline">\(\mathcal{T}\)</span></strong>: A rooted binary tree whose terminal nodes are the <em>aerial roots</em> <span class="math inline">\(v_1, \dots, v_t\)</span>.</li>
+<li><strong>Exploration Certificate <span class="math inline">\(\mathrm{EC}(\mathcal{T}, \mathbf{b}_T, \bar{x})\)</span></strong>: A tuple <span class="math inline">\((t_v, X_v, \eta_v, \alpha_v, \beta_v)\)</span> assigning sub-sequences of variables <span class="math inline">\(X_v\)</span> and pre-restrictions <span class="math inline">\(\eta_v\)</span> recursively: <span class="math display">\[\eta_v = \eta_{\mathrm{parent}(v)} \circ \alpha_{\mathrm{lsibling}(v)}\]</span></li>
+<li><strong>Bad Event Decomposition</strong>: <span class="math display">\[\Pr[\exists \bar{x} : \mathrm{CDT}^{(a)}(F, \rho) = (x_1 \to a_1, \dots, x_t \to a_t)] \le \sum_{\bar{x}} \sum_{\mathcal{T}, b_T} \Pr[\mathcal{A}_F(\rho, \bar{x}, \mathcal{T}, b_T) \cap \mathcal{B}_F(\rho, \bar{x}, \mathcal{T}, b_T)]\]</span></li>
+</ul>
+</section>
+<section id="event-roles" class="level4" data-number="3.1.2">
+<h4 data-number="3.1.2" class="anchored" data-anchor-id="event-roles"><span class="header-section-number">3.1.2</span> Event Roles</h4>
+<ul>
+<li><strong><span class="math inline">\(\mathcal{A}_F(\rho, \bar{x}, \mathcal{T}, b_T)\)</span> (Routing / Downward-Closed)</strong>: Enforces gate simplification within the trunk:
+<ul>
+<li>For OR nodes <span class="math inline">\(F_v = F_{v_1} \vee F_{v_2}\)</span>, if <span class="math inline">\(F_{v_j}|_{\rho,\eta_{v_j}} \not\equiv 0\)</span>, it is witnessed by <span class="math inline">\(F_{v_j}|_{\rho,\eta,\beta} \equiv 1\)</span> and <span class="math inline">\(\mathrm{Assoc}_0 = \beta_{v_j}\)</span>.</li>
+<li>Crucially, <span class="math inline">\(\mathcal{A}\)</span> is downward-closed in all variables.</li>
+</ul></li>
+<li><strong><span class="math inline">\(\mathcal{B}_F(\rho, \bar{x}, \mathcal{T}, b_T)\)</span> (Aerial Roots Literal Reduction)</strong>: Each aerial root subformula <span class="math inline">\(F_{v_i}\)</span> simplifies to a literal in variable <span class="math inline">\(x_i\)</span>: <span class="math display">\[\mathcal{B}_i := \left\{ \rho : F_{v_i}|_{\rho \circ \eta(v_i)} \text{ is a literal in } x_i \right\}\]</span></li>
+</ul>
+</section>
+</section>
+<section id="probability-calculation-via-convexity-cauchy-schwarz" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="probability-calculation-via-convexity-cauchy-schwarz"><span class="header-section-number">3.2</span> Probability Calculation via Convexity &amp; Cauchy-Schwarz</h3>
+<ol type="1">
+<li><strong>Peeling Aerial Roots via Håstad’s Base Case</strong>: <span class="math display">\[\sum_{x_i} \Pr[\mathcal{B}_i \mid \mathcal{B}_1, \dots, \mathcal{B}_{i-1}, \Delta] \le 2p \sqrt{L(T_i)}\]</span> <span class="math display">\[\sum_{\bar{x}} \Pr[\mathcal{B}(\bar{x}, \mathcal{T}, b_T) \mid \mathcal{A}] \le (2p)^t \prod_{i=1}^t \sqrt{L(T_i)}\]</span></li>
+<li><strong>Convexity Upper Bound</strong>: Taking <span class="math inline">\(\bar{v}^*_{T,b_T} = \arg\max_{\bar{v}} \Pr[\mathcal{A}(\bar{v}, T, b_T)]\)</span> and defining <span class="math inline">\(\mu(T) = \sum_{b_T} \Pr[\mathcal{A}(\bar{v}^*, T, b_T)]\)</span>: <span class="math display">\[\begin{aligned}
+\Pr[\mathrm{CDT}_{\mathrm{depth}} \ge t] &amp;\le (2p)^t \sum_T \mu(T) \prod_{i=1}^t \sqrt{L(T_i)} \\
+&amp;\le (2p)^t \left(\sum_T \mu(T)\right) \cdot \mathbb{E}_{T \sim \mu}\left[\prod_{i=1}^t \sqrt{L(T_i)}\right] \\
+&amp;\le (2p)^t \sqrt{\sum_T \mu(T)} \sqrt{\mathbb{E}_{T \sim \mu}\left[\prod_{i=1}^t L(T_i)\right]} \\
+&amp;\le (2p)^t \sqrt{\sum_T \prod_{i=1}^t L(T_i)} \le (2p\sqrt{L})^t
+\end{aligned}\]</span></li>
+</ol>
+</section>
+<section id="the-open-bottleneck-1" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="the-open-bottleneck-1"><span class="header-section-number">3.3</span> The Open Bottleneck</h3>
+<p>In <code>Criticality proof.md</code>, the note explicitly flags: &gt; <strong>“ToDo</strong>: Don’t take the maximizer of all of <span class="math inline">\(\bar{v}\)</span> at once; instead peel off one variable at a time.”</p>
+<p>When <span class="math inline">\(\bar{v}^*\)</span> is chosen as the joint argmax, <span class="math inline">\(\sum_{T, b_T} \Pr[\mathcal{A}(\bar{v}^*_{T,b_T}, T, b_T)] \le 1\)</span> does not hold automatically without establishing a bijective mapping from <span class="math inline">\(\rho\)</span> to the certificate <span class="math inline">\((T, b_T, \bar{x})\)</span>.</p>
 <hr>
+</section>
 </section>
 <section id="naive-cdt-no-balancing-no-tree-restriction" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="naive-cdt-no-balancing-no-tree-restriction"><span class="header-section-number">4</span> 3. Naive CDT (No Balancing, No Tree Restriction)</h2>
-<p><strong>Sources</strong>: Notion (<code>CDT No balancing No tree restriction.md</code>), Overleaf (<code>old proofs/proof_old.tex</code>).<br>
-<strong>Status</strong>: <span class="badge-status badge-refuted">Refuted by Counterexample</span><br>
-<strong>Key Idea</strong>:<br>
-Construct <span class="math inline">\(\mathrm{CDT}(F_1 \vee F_2, \rho)\)</span> by simply evaluating <span class="math inline">\(F_1\)</span>, and on every <span class="math inline">\(0\)</span>-leaf, appending <span class="math inline">\(\mathrm{CDT}(F_2, \rho \circ \pi)\)</span> without balancing.</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Why It Failed: Jaikumar’s Counterexample
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Consider <span class="math inline">\(F = (X \vee Y) \wedge \bar{Y}\)</span>. Under a restriction leaving variables unassigned, the naive construction queries <span class="math inline">\(X\)</span>, and upon branches where <span class="math inline">\(Y\)</span> loses influence, the tree creates asymmetric paths that fail downward closure and break Cauchy-Schwarz factorization.</p>
-</div>
-</div>
+<p><strong>Primary Sources</strong>: Notion (<code>CDT No balancing No tree restriction.md</code>), Overleaf (<code>old proofs/proof_old.tex</code>).<br>
+<strong>Status</strong>: <span class="badge-status badge-refuted">Refuted by Counterexample</span></p>
+<section id="the-idea" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="the-idea"><span class="header-section-number">4.1</span> The Idea</h3>
+<p>Construct <span class="math inline">\(\mathrm{CDT}(F_1 \vee F_2, \rho)\)</span> by standard composition: evaluate <span class="math inline">\(F_1\)</span>, and on every leaf outputting <span class="math inline">\(0\)</span>, attach <span class="math inline">\(\mathrm{CDT}(F_2, \rho \circ \pi)\)</span>.</p>
+</section>
+<section id="why-it-failed-jaikumars-counterexample" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="why-it-failed-jaikumars-counterexample"><span class="header-section-number">4.2</span> Why It Failed: Jaikumar’s Counterexample</h3>
+<p>On the formula <span class="math inline">\(F = (X \vee Y) \wedge \bar{Y}\)</span>, querying <span class="math inline">\(X\)</span> first produces: - Branch <span class="math inline">\(X=0 \implies Y \wedge \bar{Y} \equiv 0\)</span> (variable <span class="math inline">\(Y\)</span> loses all influence). - Branch <span class="math inline">\(X=1 \implies \bar{Y}\)</span>. The tree branches on variables that have zero influence on the function’s output, generating paths that violate downward closure. As a result, standard encoding injections fail.</p>
 <hr>
+</section>
 </section>
 <section id="inductive-approach-via-path-variable-factoring" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="inductive-approach-via-path-variable-factoring"><span class="header-section-number">5</span> 4. Inductive Approach via Path-Variable Factoring</h2>
-<p><strong>Sources</strong>: Obsidian (<code>Indcutive approach.md</code>, <code>New Inductive proof.md</code>), Overleaf (<code>old proofs/inductive_proof.tex</code>).<br>
-<strong>Status</strong>: <span class="badge-status badge-stuck">Stuck / Gap</span><br>
-<strong>Key Idea</strong>:<br>
-Decompose path variables into left and right subformula segments: <span class="math display">\[\mathrm{PathVars}_0(F, \rho, a) = (x_{i_1}, \dots, x_{i_s}, x_{i_{s+1}}, \dots, x_{i_t}).\]</span> Assume the first <span class="math inline">\(s\)</span> variables come from <span class="math inline">\(F_1\)</span> and the remaining <span class="math inline">\(t-s\)</span> from <span class="math inline">\(F_2\)</span>, and factor: <span class="math display">\[\Pr[\mathcal{E}_t] = \sum_s \Pr[\mathcal{E}_{\mathrm{left}}(s)] \cdot \Pr[\mathcal{E}_{\mathrm{right}}(t-s) \mid \mathcal{E}_{\mathrm{left}}(s)].\]</span></p>
-<p><strong>Why It Got Stuck</strong>:<br>
-The conditioning event <span class="math inline">\(\Delta_t\)</span> depends on the entire sequence of variables <span class="math inline">\(x_{i_1}, \dots, x_{i_t}\)</span>. When unravelling the conditional probability: <span class="math display">\[\Delta_{t-1} \text{ depends on } \ell_t \text{ and } x_{i_1}, \dots, x_{i_t},\]</span> the conditioning introduces statistical dependence across restriction steps, preventing clean product factorization without an exponential loss.</p>
+<p><strong>Primary Sources</strong>: Obsidian (<code>Indcutive approach.md</code>, <code>New Inductive proof.md</code>), Overleaf (<code>old proofs/inductive_proof.tex</code>).<br>
+<strong>Status</strong>: <span class="badge-status badge-stuck">Stuck / Abandoned</span></p>
+<section id="the-mathematical-formulation" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="the-mathematical-formulation"><span class="header-section-number">5.1</span> The Mathematical Formulation</h3>
+<p>Let <span class="math inline">\(\mathrm{PathVars}_0(F, \rho, a) = (x_{i_1}, \dots, x_{i_t})\)</span>. Split into left and right subformulas: - Left: <span class="math inline">\(\mathrm{PathVars}_0(F_1, \rho, b) = (x_{i_1}, \dots, x_{i_s})\)</span> - Right: <span class="math inline">\(\mathrm{PathVars}_0(F_2, \rho, a_{&gt;s}) = (x_{i_{s+1}}, \dots, x_{i_t})\)</span> - Association: <span class="math inline">\(\mathrm{Assoc}_1(F_1, \rho, a_{\le s}) = b\)</span></p>
+<p>Attempted induction claim: <span class="math display">\[\Pr_{\rho \sim \mathcal{R}_p}[\mathrm{PathVars}_0(F, \rho, a) = \bar{x} \mid \Delta] \le p^t \prod_{k=1}^t \sqrt{L(x_{i_k})} \mu(\bar{x})\]</span></p>
+</section>
+<section id="the-exact-failure-mode-conditioning-breakdown" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="the-exact-failure-mode-conditioning-breakdown"><span class="header-section-number">5.2</span> The Exact Failure Mode (Conditioning Breakdown)</h3>
+<p>The note dates this breakdown directly to <strong>22 Aug 2025</strong>: &gt; <em>“Making this proof inductive is leading it into requiring ideas from restriction trees; it might be simpler to do the non-inductive proof. Because of the above reason this approach is abandoned.”</em></p>
+<p>When conditioning on intermediate partial assignments: <span class="math display">\[\Pr[\mathcal{E}_0 \wedge \mathcal{E}_1 \wedge \mathcal{E}_2 \mid \Delta] = \Pr[\mathcal{E}_0 \mid \Delta] \cdot \Pr[\mathcal{E}_1 \mid \Delta, \mathcal{E}_0] \cdot \Pr[\mathcal{E}_2 \mid \Delta, \mathcal{E}_0, \mathcal{E}_1]\]</span> - <span class="math inline">\(\Delta_t\)</span> depends on all variables <span class="math inline">\((x_{i_1}, \dots, x_{i_t})\)</span>. - <span class="math inline">\(\Delta_{t-1}\)</span> depends on <span class="math inline">\(\ell_t\)</span> and <span class="math inline">\((x_{i_1}, \dots, x_{i_{t-1}})\)</span>. - Because <span class="math inline">\(\Delta_t\)</span> and <span class="math inline">\(\Delta_{t-1}\)</span> share variables, the conditioning events are not mutually independent across stages, introducing covariance terms that break the product <span class="math inline">\(\prod_{k=1}^t \sqrt{L(x_{i_k})}\)</span>.</p>
 <hr>
 </section>
-<section id="bottom-up-vs.-top-open-kw-protocol-matrix" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="bottom-up-vs.-top-open-kw-protocol-matrix"><span class="header-section-number">6</span> 5. Bottom-Up vs.&nbsp;Top-Open KW Protocol Matrix</h2>
-<p><strong>Sources</strong>: Notion (<code>Hastads Base case proof.md</code>), Overleaf (<code>old proofs/bottom_open.tex</code>, <code>old proofs/top_open.tex</code>, <code>old proofs/communication_game.tex</code>).<br>
-<strong>Status</strong>: <span class="badge-status badge-partial">Partial Success (Base Case Only)</span><br>
-<strong>Key Idea</strong>:<br>
-Represent the formula as a communication game matrix <span class="math inline">\(M_F\)</span> with monochromatic rectangles <span class="math inline">\(A_\ell \times B_\ell\)</span>. - <strong>Bottom-Open</strong>: Opens the communication protocol starting from the leaves. - <strong>Top-Open</strong>: Opens the protocol starting from the root gate.</p>
-<p><strong>Outcome</strong>:<br>
-Proves the base case (<span class="math inline">\(t=1\)</span>) with optimal bound <span class="math inline">\(O(p\sqrt{L})\)</span>. However, extending to <span class="math inline">\(t \ge 2\)</span> requires composing protocols across sequential queries, where rectangle monochromaticity degrades into non-monochromatic combinatorial mixtures.</p>
+</section>
+<section id="bottom-up-vs.-top-open-kw-communication-protocols" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="bottom-up-vs.-top-open-kw-communication-protocols"><span class="header-section-number">6</span> 5. Bottom-Up vs.&nbsp;Top-Open KW Communication Protocols</h2>
+<p><strong>Primary Sources</strong>: Notion (<code>Hastads Base case proof.md</code>), Overleaf (<code>old proofs/bottom_open.tex</code>, <code>old proofs/top_open.tex</code>, <code>old proofs/communication_game.tex</code>).<br>
+<strong>Status</strong>: <span class="badge-status badge-partial">Partial Success (Base Case Only)</span></p>
+<section id="the-formulation" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="the-formulation"><span class="header-section-number">6.1</span> The Formulation</h3>
+<p>Represent <span class="math inline">\(F\)</span> as a communication game matrix <span class="math inline">\(M_F\)</span> where: <span class="math display">\[\text{Rows} = \{\rho : F|_\rho \equiv 0\}, \quad \text{Columns} = \{\rho : F|_\rho \equiv 1\}\]</span> For each leaf <span class="math inline">\(\ell \in \mathrm{Leaves}(F)\)</span>, let <span class="math inline">\(A_\ell \times B_\ell\)</span> be the monochromatic combinatorial rectangle in the Karchmer-Wigderson protocol.</p>
+<ul>
+<li><p><strong>Base Case (<span class="math inline">\(t=1\)</span>)</strong>: <span class="math display">\[\sum_{\ell \in \mathrm{Leaves}(F)} \sqrt{\Pr[A_\ell] \cdot \Pr[B_\ell]} \le O(p \sqrt{L(F)})\]</span> This works and yields the optimal single-step bound.</p></li>
+<li><p><strong>Why It Stalls for <span class="math inline">\(t \ge 2\)</span></strong>: Extending to sequential queries requires composing protocol rectangles: <span class="math display">\[\mathrm{prot}^{(k)}(\rho \circ \sigma_k, \rho \circ \sigma'_k) = \ell_k\]</span> Whether opening <strong>bottom-up</strong> (starting from leaves) or <strong>top-down</strong> (starting from the root), sequential conditioning causes rectangles to lose monochromaticity, leading to cross-rectangle interference.</p></li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

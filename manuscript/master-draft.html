@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="PH, JR, TM">
+<meta name="dcterms.date" content="2026-09-27">
 
-<title>Working Manuscript Synthesis – Criticality of DeMorgan Formulae</title>
+<title>Working Manuscript: Formal Theorems &amp; Proofs – Criticality of DeMorgan Formulae</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -330,16 +332,19 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview"><span class="header-section-number">1</span> Overview</a></li>
-  <li><a href="#canonical-decision-tree-construction-with-balancing" id="toc-canonical-decision-tree-construction-with-balancing" class="nav-link" data-scroll-target="#canonical-decision-tree-construction-with-balancing"><span class="header-section-number">2</span> 1. Canonical Decision Tree Construction with Balancing</a>
+  <li><a href="#formal-foundations-definitions" id="toc-formal-foundations-definitions" class="nav-link active" data-scroll-target="#formal-foundations-definitions"><span class="header-section-number">1</span> 1. Formal Foundations &amp; Definitions</a></li>
+  <li><a href="#canonical-decision-trees-with-simultaneous-balancing" id="toc-canonical-decision-trees-with-simultaneous-balancing" class="nav-link" data-scroll-target="#canonical-decision-trees-with-simultaneous-balancing"><span class="header-section-number">2</span> 2. Canonical Decision Trees with Simultaneous Balancing</a>
   <ul class="collapse">
   <li><a href="#base-cases" id="toc-base-cases" class="nav-link" data-scroll-target="#base-cases"><span class="header-section-number">2.1</span> Base Cases</a></li>
-  <li><a href="#recursive-merging-and-simultaneous-balancing" id="toc-recursive-merging-and-simultaneous-balancing" class="nav-link" data-scroll-target="#recursive-merging-and-simultaneous-balancing"><span class="header-section-number">2.2</span> Recursive Merging and Simultaneous Balancing</a></li>
+  <li><a href="#recursive-construction-for-f-f_1-lor-f_2" id="toc-recursive-construction-for-f-f_1-lor-f_2" class="nav-link" data-scroll-target="#recursive-construction-for-f-f_1-lor-f_2"><span class="header-section-number">2.2</span> Recursive Construction for <span class="math inline">\(F = F_1 \lor F_2\)</span></a></li>
   </ul></li>
-  <li><a href="#structural-lemma-blaming-the-event-on-subtrees" id="toc-structural-lemma-blaming-the-event-on-subtrees" class="nav-link" data-scroll-target="#structural-lemma-blaming-the-event-on-subtrees"><span class="header-section-number">3</span> 2. Structural Lemma: Blaming the Event on Subtrees</a>
+  <li><a href="#the-banyan-trunk-decomposition-theorem" id="toc-the-banyan-trunk-decomposition-theorem" class="nav-link" data-scroll-target="#the-banyan-trunk-decomposition-theorem"><span class="header-section-number">3</span> 3. The Banyan Trunk Decomposition Theorem</a></li>
+  <li><a href="#probability-upper-bound-convexity" id="toc-probability-upper-bound-convexity" class="nav-link" data-scroll-target="#probability-upper-bound-convexity"><span class="header-section-number">4</span> 4. Probability Upper Bound &amp; Convexity</a>
   <ul class="collapse">
-  <li><a href="#cauchy-schwarz-bounding" id="toc-cauchy-schwarz-bounding" class="nav-link" data-scroll-target="#cauchy-schwarz-bounding"><span class="header-section-number">3.1</span> Cauchy-Schwarz Bounding</a></li>
+  <li><a href="#step-1-base-case-peeling-on-aerial-roots" id="toc-step-1-base-case-peeling-on-aerial-roots" class="nav-link" data-scroll-target="#step-1-base-case-peeling-on-aerial-roots"><span class="header-section-number">4.1</span> Step 1: Base Case Peeling on Aerial Roots</a></li>
+  <li><a href="#step-2-global-convexity-bound" id="toc-step-2-global-convexity-bound" class="nav-link" data-scroll-target="#step-2-global-convexity-bound"><span class="header-section-number">4.2</span> Step 2: Global Convexity Bound</a></li>
   </ul></li>
+  <li><a href="#summary-of-open-roadblocks" id="toc-summary-of-open-roadblocks" class="nav-link" data-scroll-target="#summary-of-open-roadblocks"><span class="header-section-number">5</span> 5. Summary of Open Roadblocks</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/tulasimohan/criticality-demorgan-notes/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -349,15 +354,27 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Working Manuscript Synthesis</h1>
-<p class="subtitle lead">Structured digest of contents.tex and non-inductive proof.tex</p>
+<h1 class="title">Working Manuscript: Formal Theorems &amp; Proofs</h1>
+<p class="subtitle lead">Rigorous mathematical exposition synthesizing contents.tex, non-inductive proof.tex, and Banyan Trunk Theory</p>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>PH, JR, TM </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 27, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -367,42 +384,177 @@ window.Quarto = {
 </header>
 
 
-<section id="overview" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="overview"><span class="header-section-number">1</span> Overview</h2>
-<p>This document presents the mathematical exposition synthesized from the latest master Overleaf draft (<code>contents.tex</code>) and the structural proof draft (<code>non-inductive proof.tex</code>).</p>
+<section id="formal-foundations-definitions" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="formal-foundations-definitions"><span class="header-section-number">1</span> 1. Formal Foundations &amp; Definitions</h2>
+<p>Following <code>contents.tex</code> (Section 2) and <code>project_macros.tex</code>:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition 1 (DeMorgan Formula &amp; Size)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong>DeMorgan formula</strong> <span class="math inline">\(F\)</span> over variable index set <span class="math inline">\(X\)</span> is a Boolean formula composed of <span class="math inline">\(\lor\)</span> (OR), <span class="math inline">\(\land\)</span> (AND) operations and literals <span class="math inline">\(\{x_i, \bar{x}_i\}_{i \in X}\)</span>. The size of <span class="math inline">\(F\)</span>, denoted <span class="math inline">\(L(F)\)</span>, is the total number of leaves (literal occurrences) in the formula tree. For a variable <span class="math inline">\(x\)</span>, <span class="math inline">\(L_F(x)\)</span> denotes the number of leaves labeled with literal <span class="math inline">\(x\)</span> or <span class="math inline">\(\bar{x}\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition 2 (Random Restriction <span class="math inline">\(\mathcal{R}_p\)</span>)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A <strong><span class="math inline">\(p\)</span>-random restriction</strong> <span class="math inline">\(\rho \sim \mathcal{R}_p\)</span> on variable set <span class="math inline">\(X\)</span> is a distribution over <span class="math inline">\(\{0, 1, *\}^X\)</span> such that independently for each <span class="math inline">\(x \in X\)</span>: <span class="math display">\[\Pr[\rho(x) = *] = p, \quad \Pr[\rho(x) = 0] = \frac{1-p}{2}, \quad \Pr[\rho(x) = 1] = \frac{1-p}{2}.\]</span> An <strong>ordered restriction</strong> is a sequence of pairs <span class="math inline">\(((x_1, a_1), \dots, (x_k, a_k))\)</span> specifying an explicit variable evaluation order.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition 3 (Downward-Closed Set of Restrictions)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\Delta \subseteq \{0, 1, *\}^X\)</span>. <span class="math inline">\(\Delta\)</span> is said to be <strong>downward-closed</strong> if for every <span class="math inline">\(\rho \in \Delta\)</span>, substituting any <span class="math inline">\(*\)</span> with a constant <span class="math inline">\(c \in \{0, 1\}\)</span> preserves membership: <span class="math display">\[\rho \in \Delta \implies \rho \circ (x_i \gets c) \in \Delta \quad \forall x_i \text{ such that } \rho(x_i) = *.\]</span></p>
+</div>
+</div>
 <hr>
 </section>
-<section id="canonical-decision-tree-construction-with-balancing" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="canonical-decision-tree-construction-with-balancing"><span class="header-section-number">2</span> 1. Canonical Decision Tree Construction with Balancing</h2>
-<p>Given a DeMorgan formula <span class="math inline">\(F\)</span> over variable set <span class="math inline">\(V\)</span> and a restriction <span class="math inline">\(\rho \in \{0, 1, *\}^V\)</span>, <span class="math inline">\(\mathrm{CDT}(F, \rho)\)</span> is defined recursively:</p>
+<section id="canonical-decision-trees-with-simultaneous-balancing" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="canonical-decision-trees-with-simultaneous-balancing"><span class="header-section-number">2</span> 2. Canonical Decision Trees with Simultaneous Balancing</h2>
+<p>In <code>contents.tex</code> (Sections 3 &amp; 4), the Canonical Decision Tree <span class="math inline">\(\mathrm{CDT}(F, \rho)\)</span> is defined constructively:</p>
 <section id="base-cases" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="base-cases"><span class="header-section-number">2.1</span> Base Cases</h3>
 <ol type="1">
-<li>If <span class="math inline">\(F \equiv 0\)</span> or <span class="math inline">\(F \equiv 1\)</span> under <span class="math inline">\(\rho\)</span>, <span class="math inline">\(\mathrm{CDT}(F, \rho)\)</span> is a single leaf node labeled with the corresponding constant.</li>
-<li>If <span class="math inline">\(F = \ell\)</span> (a literal) and <span class="math inline">\(\rho(\mathrm{var}(\ell)) = *\)</span>, <span class="math inline">\(\mathrm{CDT}(F, \rho)\)</span> queries <span class="math inline">\(\mathrm{var}(\ell)\)</span> with two child leaves <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</li>
+<li><strong>Constant</strong>: If <span class="math inline">\(F|_\rho \equiv c \in \{0, 1\}\)</span>, <span class="math inline">\(\mathrm{CDT}(F, \rho)\)</span> is a single leaf node labeled <span class="math inline">\(c\)</span>.</li>
+<li><strong>Single Literal</strong>: If <span class="math inline">\(F = \ell\)</span> and <span class="math inline">\(\rho(\mathrm{var}(\ell)) = *\)</span>, <span class="math inline">\(\mathrm{CDT}(F, \rho)\)</span> is a single decision node querying <span class="math inline">\(\mathrm{var}(\ell)\)</span> with child leaves labeled <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>.</li>
 </ol>
 </section>
-<section id="recursive-merging-and-simultaneous-balancing" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="recursive-merging-and-simultaneous-balancing"><span class="header-section-number">2.2</span> Recursive Merging and Simultaneous Balancing</h3>
-<p>Let <span class="math inline">\(F = F_1 \vee F_2\)</span>: 1. Recursively compute <span class="math inline">\(T_1 = \mathrm{CDT}(F_1, \rho)\)</span>. 2. For each leaf <span class="math inline">\(u\)</span> of <span class="math inline">\(T_1\)</span>: - Let <span class="math inline">\(\pi_u\)</span> denote the partial assignment corresponding to the path from the root of <span class="math inline">\(T_1\)</span> to <span class="math inline">\(u\)</span>. - If <span class="math inline">\(T_1(u) = 1\)</span>, the OR gate is satisfied: the leaf remains labeled <span class="math inline">\(1\)</span>. - If <span class="math inline">\(T_1(u) = 0\)</span>, replace leaf <span class="math inline">\(u\)</span> with <span class="math inline">\(\mathrm{Balance}(\mathrm{CDT}(F_2, \rho \circ \pi_u))\)</span>. 3. Apply global tree balancing <span class="math inline">\(\mathrm{Balance}(T)\)</span> to ensure symmetry between <span class="math inline">\(0\)</span>-paths and <span class="math inline">\(1\)</span>-paths.</p>
+<section id="recursive-construction-for-f-f_1-lor-f_2" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="recursive-construction-for-f-f_1-lor-f_2"><span class="header-section-number">2.2</span> Recursive Construction for <span class="math inline">\(F = F_1 \lor F_2\)</span></h3>
+<p>Let <span class="math inline">\(\Gamma_1 = \mathrm{CDT}(F_1, \rho)\)</span>. - For each leaf <span class="math inline">\(u \in \Gamma_1\)</span> labeled <span class="math inline">\(1\)</span>, <span class="math inline">\(u\)</span> remains <span class="math inline">\(1\)</span> (witnessing satisfaction of the OR gate). - For each leaf <span class="math inline">\(u \in \Gamma_1\)</span> labeled <span class="math inline">\(0\)</span> with root-to-leaf path assignment <span class="math inline">\(\pi_u\)</span>, attach <span class="math inline">\(\mathrm{CDT}(F_2, \rho \circ \pi_u)\)</span>. - Apply the simultaneous balancing operator <span class="math inline">\(\mathrm{Balance}(\Gamma)\)</span> to guarantee path variable symmetry.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Claim (Source of a Cloned Path — <code>contents.tex</code>, Claim 3.1)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(\Gamma'' = \mathrm{Balance}(\mathrm{CDT}(F, \rho))\)</span> and let <span class="math inline">\(\alpha = (x_1 \gets a_1, \dots, x_t \gets a_t)\)</span> be a path in <span class="math inline">\(\Gamma''\)</span>. Then either <span class="math inline">\(\alpha\)</span> was an original path generated during tree exploration, or it was generated by the balancing operation to mirror an existing counter-path over the identical variable set.</p>
+</div>
+</div>
 <hr>
 </section>
 </section>
-<section id="structural-lemma-blaming-the-event-on-subtrees" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="structural-lemma-blaming-the-event-on-subtrees"><span class="header-section-number">3</span> 2. Structural Lemma: Blaming the Event on Subtrees</h2>
-<p><strong>Theorem (Structural Subtree Blame)</strong>:<br>
-Let <span class="math inline">\(F\)</span> be a DeMorgan formula and <span class="math inline">\(\rho \sim \mathcal{R}_p\)</span>. The bad event that <span class="math inline">\(\mathrm{CDT}_{\mathrm{depth}}(F|_\rho) \ge t\)</span> can be covered by a union of events indexed by leaf-branching binary trees <span class="math inline">\(T\)</span> with <span class="math inline">\(t\)</span> leaves:</p>
-<p><span class="math display">\[\Pr_{\rho \sim \mathcal{R}_p} [\mathrm{CDT}_{\mathrm{depth}}(F|_\rho) \ge t] \le \sum_{T \in \mathcal{T}_t} \sum_{b \in \{0,1\}^t} \Pr[\mathcal{E}(T, b)]\]</span></p>
-<p>where for each pair <span class="math inline">\((T,b)\)</span>: <span class="math display">\[\mathcal{E}(T, b) = \mathcal{A}(T, b) \wedge \mathcal{B}(T, b)\]</span></p>
-<p>Here, <span class="math inline">\(\mathcal{A}(T, b)\)</span> enforces that the internal routing conditions of <span class="math inline">\(T\)</span> are satisfied, and <span class="math inline">\(\mathcal{B}(T, b)\)</span> enforces that all <span class="math inline">\(t\)</span> leaves simultaneously fall into the active restriction set (<span class="math inline">\(*\)</span>).</p>
-<section id="cauchy-schwarz-bounding" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="cauchy-schwarz-bounding"><span class="header-section-number">3.1</span> Cauchy-Schwarz Bounding</h3>
-<p>By applying Cauchy-Schwarz: <span class="math display">\[\Pr[\mathcal{E}(T, b)] \le \sqrt{\Pr[\mathcal{A}(T, b)] \cdot \Pr[\mathcal{B}(T, b)]}\]</span></p>
-<p>Since <span class="math inline">\(\Pr[\mathcal{B}(T, b)] \le p^t\)</span> (each leaf variable must be unassigned by <span class="math inline">\(\rho\)</span>), the probability scales as: <span class="math display">\[\Pr[\mathrm{CDT}_{\mathrm{depth}}(F|_\rho) \ge t] \le p^{t/2} \sum_{T \in \mathcal{T}_t} \sqrt{\Pr[\mathcal{A}(T, b)]}\]</span></p>
-<p>The critical challenge is establishing that <span class="math inline">\(\sum_{T} \sqrt{\Pr[\mathcal{A}(T,b)]} \le (O(\sqrt{L}))^t\)</span>.</p>
-
-
+<section id="the-banyan-trunk-decomposition-theorem" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="the-banyan-trunk-decomposition-theorem"><span class="header-section-number">3</span> 3. The Banyan Trunk Decomposition Theorem</h2>
+<p>This theorem forms the core of the non-inductive proof technique in <code>contents.tex</code> (Lemma 4.3) and <code>Criticality proof.md</code>:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Definition 4 (Exploration Certificate)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Given a sequence of <span class="math inline">\(t\)</span> variables <span class="math inline">\(\bar{x} = (x_1, \dots, x_t)\)</span>, a Trunk <span class="math inline">\(\mathcal{T}\)</span>, and bit-strings <span class="math inline">\(\mathbf{b}_T = \{b_v\}_{v \in \mathcal{T}}\)</span>, the <strong>Exploration Certificate</strong> <span class="math inline">\(\mathrm{EC}(\mathcal{T}, \mathbf{b}_T, \bar{x})\)</span> is the tuple: <span class="math display">\[\mathrm{EC}(\mathcal{T}, \mathbf{b}_T, \bar{x}) = (t_v, X_v, \eta_v, \alpha_v, \beta_v)_{v \in \mathcal{T}}\]</span> where: 1. <span class="math inline">\(t_v(\mathcal{T})\)</span> is the number of terminal nodes of <span class="math inline">\(\mathcal{T}\)</span> under node <span class="math inline">\(v\)</span>. 2. <span class="math inline">\(X_v(\mathcal{T}, \bar{x})\)</span> is the subsequence of variables from <span class="math inline">\(\bar{x}\)</span> assigned to terminal nodes under <span class="math inline">\(v\)</span> in in-order traversal. 3. Pre-restriction <span class="math inline">\(\eta_v\)</span> is defined recursively: - <span class="math inline">\(\eta_{\mathrm{root}} = \langle \rangle\)</span>. - <span class="math inline">\(\eta_v = \eta_{\mathrm{parent}(v)} \circ \alpha_{\mathrm{lsibling}(v)}\)</span> if <span class="math inline">\(v\)</span> has a left sibling in <span class="math inline">\(\mathcal{T}\)</span>, else <span class="math inline">\(\eta_v = \eta_{\mathrm{parent}(v)}\)</span>. 4. Original path <span class="math inline">\(\beta_v = \langle X_v \gets b_v \rangle\)</span>. 5. Inherited path <span class="math inline">\(\alpha_v = \beta_{\mathrm{parent}(v)}[1, t(v)]\)</span>.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Theorem (Banyan Decomposition Lemma — <code>contents.tex</code>, Lemma 4.3)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Let <span class="math inline">\(F\)</span> be a DeMorgan formula, <span class="math inline">\(\rho\)</span> a restriction, and <span class="math inline">\(t \in \mathbb{N}\)</span>. If <span class="math inline">\(\mathrm{CDT}^{(a)}_z(F, \rho) = \langle x_1 \gets a_1, \dots, x_t \gets a_t \rangle\)</span>, then there exists a <strong>unique</strong> Trunk <span class="math inline">\(\mathcal{T}\)</span> whose aerial roots <span class="math inline">\((v_1, \dots, v_t)\)</span> correspond to variables <span class="math inline">\((x_1, \dots, x_t)\)</span> and unique bit-strings <span class="math inline">\(\mathbf{b}_T = \{b_v\}_{v \in \mathcal{T}}\)</span> satisfying:</p>
+<ol type="1">
+<li><strong>Routing Condition <span class="math inline">\(\mathcal{A}_F(\rho, \bar{x}, \mathcal{T}, \mathbf{b}_T)\)</span></strong>: For each non-terminal node <span class="math inline">\(v \in \mathcal{T}\)</span>:
+<ul>
+<li>If <span class="math inline">\(F_v = F_{v_1} \lor F_{v_2}\)</span>, then for <span class="math inline">\(j \in \{1, 2\}\)</span>:
+<ul>
+<li>If <span class="math inline">\(F_{v_j}|_{\rho, \eta_{v_j}} \equiv 0\)</span>, then <span class="math inline">\(v_j \notin \mathcal{T}\)</span>.</li>
+<li>If <span class="math inline">\(F_{v_j}|_{\rho, \eta_{v_j}} \not\equiv 0\)</span>, witnessed by <span class="math inline">\(F_{v_j}|_{\rho, \eta_{v_j}, \beta_{v_j}} \equiv 1\)</span> and <span class="math inline">\(\mathrm{Assoc}_0(F_{v_j}|_{\eta_{v_j}}, \rho, \alpha_{v_j}) = \beta_{v_j}\)</span>.</li>
+</ul></li>
+<li>Dual conditions hold for AND nodes <span class="math inline">\(F_{v_1} \land F_{v_2}\)</span>.</li>
+<li><strong>Crucially</strong>: For any fixed <span class="math inline">\((\bar{x}, \mathcal{T}, \mathbf{b}_T)\)</span>, the set <span class="math inline">\(\{\rho : \mathcal{A}_F(\rho, \bar{x}, \mathcal{T}, \mathbf{b}_T)\}\)</span> is <strong>downward-closed</strong>.</li>
+</ul></li>
+<li><strong>Aerial Roots Literal Condition <span class="math inline">\(\mathcal{B}_F(\rho, \bar{x}, \mathcal{T}, \mathbf{b}_T)\)</span></strong>: For each aerial root <span class="math inline">\(v_i\)</span> of <span class="math inline">\(\mathcal{T}\)</span>, the subformula simplifies to a literal in <span class="math inline">\(x_i\)</span>: <span class="math display">\[F_{v_i}|_{\rho \circ \eta_{v_i}} \text{ is a literal in the single variable } x_i.\]</span></li>
+</ol>
+</div>
+</div>
+<hr>
 </section>
+<section id="probability-upper-bound-convexity" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="probability-upper-bound-convexity"><span class="header-section-number">4</span> 4. Probability Upper Bound &amp; Convexity</h2>
+<p>Following <code>Criticality proof.md</code> and <code>non-inductive proof.tex</code>:</p>
+<section id="step-1-base-case-peeling-on-aerial-roots" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="step-1-base-case-peeling-on-aerial-roots"><span class="header-section-number">4.1</span> Step 1: Base Case Peeling on Aerial Roots</h3>
+<p>Since each <span class="math inline">\(F_{v_i}|_{\rho \circ \eta_{v_i}}\)</span> reduces to a literal in <span class="math inline">\(x_i\)</span>, and <span class="math inline">\(\mathcal{A}\)</span> is downward-closed: <span class="math display">\[\sum_{x_i} \Pr[\mathcal{B}_i \mid \mathcal{B}_1, \dots, \mathcal{B}_{i-1}, \Delta] \le 2p \sqrt{L(T_i)}\]</span> Peeling all <span class="math inline">\(t\)</span> aerial roots yields: <span class="math display">\[\sum_{\bar{x}} \Pr[\mathcal{B}(\bar{x}, \mathcal{T}, \mathbf{b}_T) \mid \mathcal{A}] \le (2p)^t \prod_{i=1}^t \sqrt{L(T_i)}\]</span></p>
+</section>
+<section id="step-2-global-convexity-bound" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="step-2-global-convexity-bound"><span class="header-section-number">4.2</span> Step 2: Global Convexity Bound</h3>
+<p>Taking the maximizer <span class="math inline">\(\bar{v}^*_{T, b_T} = \arg\max_{\bar{v}} \Pr[\mathcal{A}(\bar{v}, T, b_T)]\)</span> and defining <span class="math inline">\(\mu(T) = \sum_{b_T} \Pr[\mathcal{A}(\bar{v}^*, T, b_T)]\)</span>:</p>
+<p><span class="math display">\[\begin{aligned}
+\Pr[\mathrm{CDT}_{\mathrm{depth}}(F|_\rho) \ge t] &amp;\le (2p)^t \sum_T \mu(T) \prod_{i=1}^t \sqrt{L(T_i)} \\
+&amp;= (2p)^t \left(\sum_T \mu(T)\right) \cdot \mathbb{E}_{T \sim \mu}\left[\prod_{i=1}^t \sqrt{L(T_i)}\right] \\
+&amp;\le (2p)^t \sqrt{\sum_T \mu(T)} \sqrt{\mathbb{E}_{T \sim \mu}\left[\prod_{i=1}^t L(T_i)\right]} \quad (\text{by Jensen\'s Inequality}) \\
+&amp;\le (2p)^t \sqrt{\sum_T \prod_{i=1}^t L(T_i)} \le (2p\sqrt{L})^t.
+\end{aligned}\]</span></p>
+<hr>
+</section>
+</section>
+<section id="summary-of-open-roadblocks" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="summary-of-open-roadblocks"><span class="header-section-number">5</span> 5. Summary of Open Roadblocks</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Lemma / Claim</th>
+<th style="text-align: left;">Current Mathematical Status</th>
+<th style="text-align: left;">Required Next Step</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Banyan Decomposition (Lemma 4.3)</strong></td>
+<td style="text-align: left;">Proved in <code>contents.tex</code></td>
+<td style="text-align: left;">Rigorously check uniqueness of certificate under multiple balancing recursions</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Downward Closure of <span class="math inline">\(\mathcal{A}\)</span> (Claim 4.4)</strong></td>
+<td style="text-align: left;">Proved in <code>contents.tex</code></td>
+<td style="text-align: left;">Verified</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Sum of Trunk Weights <span class="math inline">\(\sum_T \mu(T) \le 1\)</span></strong></td>
+<td style="text-align: left;">Open gap</td>
+<td style="text-align: left;">Avoid global maximizer <span class="math inline">\(\bar{v}^*\)</span>; peel off variables sequentially to maintain measure <span class="math inline">\(\le 1\)</span></td>
+</tr>
+</tbody>
+</table>
+
+
 </section>
 
 </main> <!-- /main -->
