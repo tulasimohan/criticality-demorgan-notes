@@ -1,51 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <research_dossier subject="Criticality of DeMorgan Formulae" authors="JR, PH, TM" date="2026-09-27">
   <system_prompt_instruction>
+    <![CDATA[
     You are an expert theoretical computer scientist specializing in Boolean circuit complexity,
     switching lemmas, and random restrictions. This dossier contains all working proof notes,
     formal manuscript drafts, counterexamples, and meeting records regarding Tal Conjecture on the
     Criticality of DeMorgan Formulae. Analyze the arguments, evaluate active vs refuted approaches,
     and identify rigorous strategies to close the open bottlenecks.
+    ]]>
   </system_prompt_instruction>
   <problem_statement>
     <conjecture name="Tal Conjecture on DeMorgan Criticality">
+      <![CDATA[
       Let F be a DeMorgan formula of size L (number of leaves) computing f: {0,1}^n -> {0,1}.
       Under a p-random restriction rho ~ R_p (where each variable is * with prob p, and 0 or 1 with prob (1-p)/2):
       Pr_{rho ~ R_p}[ DT_{depth}(F|_rho) >= t ] <= (O(p * lambda))^t
       where lambda = O(sqrt{L(F)}). Consequently, the criticality / average sensitivity satisfies:
       Gamma(F) = O(p * sqrt{L}).
+      ]]>
     </conjecture>
   </problem_statement>
   <approaches_summary>
     <approach id="cdt-balancing" status="ACTIVE">
-      <name>Canonical Decision Tree with Simultaneous 0- and 1-Balancing</name>
-      <description>Enforcing symmetry between 0- and 1-paths by immediately pruning non-influential variables (JKR suggestion) and balancing upon subtree creation.</description>
-      <mathematical_mechanism>Let F = F1 \lor F2. For every 0-leaf u of CDT(F1, \rho) with path \pi_u, attach Balance(CDT(F2, \rho \circ \pi_u)). Balance ensures for every 0-path \alpha, there exists an equivalent 1-path \beta on the same variable set.</mathematical_mechanism>
-      <open_hurdle_or_failure>Tracking the preservation of downward closure and establishing that \sum_T \mu(T) \le 1 across nested recursive balancing operations without exponential entropy loss.</open_hurdle_or_failure>
+      <name><![CDATA[Canonical Decision Tree with Simultaneous 0- and 1-Balancing]]></name>
+      <description><![CDATA[Enforcing symmetry between 0- and 1-paths by immediately pruning non-influential variables (JKR suggestion) and balancing upon subtree creation.]]></description>
+      <mathematical_mechanism><![CDATA[Let F = F1 \lor F2. For every 0-leaf u of CDT(F1, \rho) with path \pi_u, attach Balance(CDT(F2, \rho \circ \pi_u)). Balance ensures for every 0-path \alpha, there exists an equivalent 1-path \beta on the same variable set.]]></mathematical_mechanism>
+      <open_hurdle_or_failure><![CDATA[Tracking the preservation of downward closure and establishing that \sum_T \mu(T) \le 1 across nested recursive balancing operations without exponential entropy loss.]]></open_hurdle_or_failure>
     </approach>
     <approach id="non-inductive-structural" status="ACTIVE">
-      <name>Non-Inductive Structural Lemma (Banyan Trunk Decomposition)</name>
-      <description>Blaming high-depth exploration paths on leaf-branching binary trees (Trunks) and decomposing into downward-closed routing (A) and aerial root reduction (B).</description>
-      <mathematical_mechanism>Decompose bad event \mathcal{E} into \mathcal{A}(\mathcal{T}, b_T) \wedge \mathcal{B}(\mathcal{T}, b_T). Peel aerial roots using Hastad base case: \sum_{x_i} \Pr[\mathcal{B}_i | \dots] \le 2p\sqrt{L(T_i)}. Apply Jensen / Cauchy-Schwarz: \Pr[CDT_{depth} \ge t] \le (2p)^t \sqrt{\sum_T \mu(T)} \sqrt{\mathbb{E}[\prod L(T_i)]} \le (2p\sqrt{L})^t.</mathematical_mechanism>
-      <open_hurdle_or_failure>Proving that \sum_{T, b_T} \Pr[\mathcal{A}(\bar{v}^*_{T, b_T}, T, b_T)] \le 1 without global argmax cross-variable correlation. Requires peeling variables sequentially.</open_hurdle_or_failure>
+      <name><![CDATA[Non-Inductive Structural Lemma (Banyan Trunk Decomposition)]]></name>
+      <description><![CDATA[Blaming high-depth exploration paths on leaf-branching binary trees (Trunks) and decomposing into downward-closed routing (A) and aerial root reduction (B).]]></description>
+      <mathematical_mechanism><![CDATA[Decompose bad event \mathcal{E} into \mathcal{A}(\mathcal{T}, b_T) \wedge \mathcal{B}(\mathcal{T}, b_T). Peel aerial roots using Hastad base case: \sum_{x_i} \Pr[\mathcal{B}_i | \dots] \le 2p\sqrt{L(T_i)}. Apply Jensen / Cauchy-Schwarz: \Pr[CDT_{depth} \ge t] \le (2p)^t \sqrt{\sum_T \mu(T)} \sqrt{\mathbb{E}[\prod L(T_i)]} \le (2p\sqrt{L})^t.]]></mathematical_mechanism>
+      <open_hurdle_or_failure><![CDATA[Proving that \sum_{T, b_T} \Pr[\mathcal{A}(\bar{v}^*_{T, b_T}, T, b_T)] \le 1 without global argmax cross-variable correlation. Requires peeling variables sequentially.]]></open_hurdle_or_failure>
     </approach>
     <approach id="naive-cdt" status="REFUTED">
-      <name>Naive Canonical Decision Tree (No Balancing)</name>
-      <description>Standard recursive concatenation of subformula decision trees without balancing.</description>
-      <mathematical_mechanism>On F1 \lor F2, evaluate F1; on 0-leaves, evaluate F2.</mathematical_mechanism>
-      <open_hurdle_or_failure>REFUTED BY JAIKUMAR RADHAKRISHNAN: On F = (X \lor Y) \land \bar{Y}, evaluating X first causes Y to lose influence on branch X=0 (formula simplifies to 0). This branches on irrelevant variables, creating asymmetric paths that violate downward closure.</open_hurdle_or_failure>
+      <name><![CDATA[Naive Canonical Decision Tree (No Balancing)]]></name>
+      <description><![CDATA[Standard recursive concatenation of subformula decision trees without balancing.]]></description>
+      <mathematical_mechanism><![CDATA[On F1 \lor F2, evaluate F1; on 0-leaves, evaluate F2.]]></mathematical_mechanism>
+      <open_hurdle_or_failure><![CDATA[REFUTED BY JAIKUMAR RADHAKRISHNAN: On F = (X \lor Y) \land \bar{Y}, evaluating X first causes Y to lose influence on branch X=0 (formula simplifies to 0). This branches on irrelevant variables, creating asymmetric paths that violate downward closure.]]></open_hurdle_or_failure>
     </approach>
     <approach id="inductive-path-factoring" status="STUCK">
-      <name>Inductive Path-Variable Factoring</name>
-      <description>Attempting to induct on path length t by splitting into left segment (length s) and right segment (length t - s).</description>
-      <mathematical_mechanism>Factor \Pr[\mathcal{E}_0 \land \mathcal{E}_1 \land \mathcal{E}_2 | \Delta] into \Pr[\mathcal{E}_0 | \Delta] \cdot \Pr[\mathcal{E}_1 | \Delta, \mathcal{E}_0] \cdot \Pr[\mathcal{E}_2 | \Delta, \mathcal{E}_0, \mathcal{E}_1].</mathematical_mechanism>
-      <open_hurdle_or_failure>STUCK (22 Aug 2025): Condition \Delta_t depends on (x_{i_1}, \dots, x_{i_t}), while \Delta_{t-1} depends on \ell_t and prior variables. Conditioning introduces statistical dependence across restriction steps, preventing clean product factorization.</open_hurdle_or_failure>
+      <name><![CDATA[Inductive Path-Variable Factoring]]></name>
+      <description><![CDATA[Attempting to induct on path length t by splitting into left segment (length s) and right segment (length t - s).]]></description>
+      <mathematical_mechanism><![CDATA[Factor \Pr[\mathcal{E}_0 \land \mathcal{E}_1 \land \mathcal{E}_2 | \Delta] into \Pr[\mathcal{E}_0 | \Delta] \cdot \Pr[\mathcal{E}_1 | \Delta, \mathcal{E}_0] \cdot \Pr[\mathcal{E}_2 | \Delta, \mathcal{E}_0, \mathcal{E}_1].]]></mathematical_mechanism>
+      <open_hurdle_or_failure><![CDATA[STUCK (22 Aug 2025): Condition \Delta_t depends on (x_{i_1}, \dots, x_{i_t}), while \Delta_{t-1} depends on \ell_t and prior variables. Conditioning introduces statistical dependence across restriction steps, preventing clean product factorization.]]></open_hurdle_or_failure>
     </approach>
     <approach id="bottom-up-top-open-kw" status="PARTIAL">
-      <name>Bottom-Up vs. Top-Open KW Protocol Matrix</name>
-      <description>Matrix game formulation M_F (rows = 0-inputs, cols = 1-inputs) and leaf rectangles A_\ell \times B_\ell.</description>
-      <mathematical_mechanism>Base case t=1 is optimal: \sum_\ell \sqrt{\Pr[A_\ell] \Pr[B_\ell]} \le O(p\sqrt{L}).</mathematical_mechanism>
-      <open_hurdle_or_failure>Extending to t \ge 2 requires sequential rectangle composition. Conditioning on intermediate answers causes combinatorial rectangles to leak non-monochromatic elements.</open_hurdle_or_failure>
+      <name><![CDATA[Bottom-Up vs. Top-Open KW Protocol Matrix]]></name>
+      <description><![CDATA[Matrix game formulation M_F (rows = 0-inputs, cols = 1-inputs) and leaf rectangles A_\ell \times B_\ell.]]></description>
+      <mathematical_mechanism><![CDATA[Base case t=1 is optimal: \sum_\ell \sqrt{\Pr[A_\ell] \Pr[B_\ell]} \le O(p\sqrt{L}).]]></mathematical_mechanism>
+      <open_hurdle_or_failure><![CDATA[Extending to t \ge 2 requires sequential rectangle composition. Conditioning on intermediate answers causes combinatorial rectangles to leak non-monochromatic elements.]]></open_hurdle_or_failure>
     </approach>
   </approaches_summary>
   <primary_sources>
