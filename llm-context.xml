@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xml-style.xsl"?>
 <research_dossier subject="Criticality of DeMorgan Formulae" authors="JR, PH, TM" date="2026-09-27">
   <system_prompt_instruction>
     You are an expert theoretical computer scientist specializing in Boolean circuit complexity,
