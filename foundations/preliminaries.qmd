@@ -1,0 +1,44 @@
+---
+title: "Preliminaries & Foundations"
+subtitle: "Notation, DeMorgan formulae, random restrictions, and Canonical Decision Trees"
+format: html
+---
+
+## 1. DeMorgan Formulae & Random Restrictions
+
+A **DeMorgan formula** $F$ over variable set $V = \{x_1, \dots, x_n\}$ is a binary tree where internal nodes are labeled with $\wedge$ (AND) or $\vee$ (OR) gates and leaves are labeled with literals from $\{x_1, \dots, x_n, \bar{x}_1, \dots, \bar{x}_n\}$. 
+
+The size of $F$, denoted $L(F)$, is the number of leaves in $F$.
+
+### Random Restrictions $\mathcal{R}_p$
+A restriction $\rho \in \{0, 1, *\}^V$ assigns each variable $x_i$ independently:
+$$\rho(x_i) = \begin{cases} * & \text{with probability } p, \\ 0 & \text{with probability } \frac{1-p}{2}, \\ 1 & \text{with probability } \frac{1-p}{2}. \end{cases}$$
+
+The restricted formula $F|_\rho$ is obtained by substituting values assigned by $\rho$ and applying standard Boolean simplifications ($0 \wedge y = 0$, $1 \vee y = 1$, etc.).
+
+---
+
+## 2. Canonical Decision Trees (CDT)
+
+Given a formula $F$ and a restriction $\rho$, a Decision Tree $\mathrm{DT}(F|_\rho)$ deterministically queries variables until the function value is determined. 
+
+A **Canonical Decision Tree** $\mathrm{CDT}(F, \rho)$ provides a canonical exploration order for $F|_\rho$:
+
+1. **Leaf / Literal base case**: If $F = x_i$ and $\rho(x_i) = *$, the tree queries $x_i$. If $\rho(x_i) \in \{0,1\}$, it returns a leaf labeled with that constant.
+2. **Recursive combination**: For $F = F_1 \vee F_2$:
+   - First construct $\mathrm{CDT}(F_1, \rho)$.
+   - For every leaf of $\mathrm{CDT}(F_1, \rho)$ reaching output $0$, attach $\mathrm{CDT}(F_2, \rho \circ \pi)$, where $\pi$ is the path assignment from the root to that leaf.
+   - For leaves reaching output $1$, the OR gate is satisfied and evaluation terminates.
+
+---
+
+## 3. Håstad's Base Case Proof
+
+In Notion (`Hastads Base case proof.md`), the base case ($t=1$) is handled via the Karchmer-Wigderson communication matrix:
+
+Let $M_F$ be the communication matrix of the game where:
+$$\text{Rows} = \{\rho : F|_\rho \equiv 0\}, \quad \text{Columns} = \{\rho : F|_\rho \equiv 1\}.$$
+
+For each leaf $\ell \in F$, let $A_\ell \times B_\ell$ denote the monochromatic combinatorial rectangle in the KW protocol for $F$.
+The set of bad restrictions is bounded by:
+$$\sum_{\ell \in \mathrm{Leaves}(F)} \sqrt{\Pr[A_\ell] \cdot \Pr[B_\ell]} \le O(p \sqrt{L(F)}).$$

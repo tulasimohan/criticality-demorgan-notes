@@ -1,0 +1,22 @@
+/* Research Badge Styles */
+.badge-status {
+  display: inline-block;
+  padding: 0.25em 0.6em;
+  font-size: 85%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  margin-right: 0.4rem;
+}
+.badge-active { background-color: #0d6efd; color: white; }
+.badge-stuck { background-color: #fd7e14; color: white; }
+.badge-refuted { background-color: #dc3545; color: white; }
+.badge-partial { background-color: #6f42c1; color: white; }
+.badge-resolved { background-color: #198754; color: white; }
+
+.callout-hurdle {
+  border-left-color: #fd7e14 !important;
+}

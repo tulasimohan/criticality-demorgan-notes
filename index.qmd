@@ -1,0 +1,44 @@
+---
+title: "Criticality of DeMorgan Formulae: Research Compilation"
+subtitle: "Unified synthesis of meeting notes, proof attempts, counterexamples, and manuscript drafts"
+author: "Tulasi Mohan & Collaborators"
+date: last-modified
+format: html
+---
+
+## Executive Summary & Mission
+
+This repository unifies and categorizes all working notes, proof attempts, counterexamples, and drafts from **Obsidian**, **Notion**, and **Overleaf** regarding the **Criticality of DeMorgan Formulae**.
+
+The primary objective is to prove **Tal's Conjecture** on the average sensitivity / decision tree depth of DeMorgan formulae under random restrictions:
+
+::: {.callout-note icon=true}
+### Tal's Conjecture
+Let $F$ be a DeMorgan formula of size $L$ computing a Boolean function $f: \{0,1\}^n \to \{0,1\}$. Under a $p$-random restriction $\rho \sim \mathcal{R}_p$, does the decision tree depth of the restricted formula satisfy:
+$$\Pr_{\rho \sim \mathcal{R}_p} [\mathrm{DT}_{\mathrm{depth}}(F|_\rho) \ge t] \le (O(p \cdot \lambda))^t$$
+for some factor $\lambda$ depending on formula structure (conjectured $\lambda = O(\sqrt{L})$), implying an average sensitivity / criticality bound of $\Gamma(F) = O(p \sqrt{L})$?
+:::
+
+---
+
+## Proof Approaches Taxonomy & Status Matrix
+
+Below is a bird's-eye view of every proof technique explored across Notion, Obsidian, and Overleaf, tagged by current status and primary hurdles:
+
+| Approach | Notion / Obsidian Source | Overleaf Source | Status | Core Bottleneck / Hurdle |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. CDT with Simultaneous Balancing** | Notion `New CDT`, `CDT with balancing` | `contents.tex` | <span class="badge-status badge-active">Active</span> | Tracking path variables when balancing transforms tree structure |
+| **2. Non-Inductive Structural Lemma** | Notion `New Proof`, `Rigorous proof` | `non-inductive proof.tex` | <span class="badge-status badge-active">Active</span> | Blaming high depth on leaf-branching subtrees; Cauchy-Schwarz factor control |
+| **3. Naive CDT (No Balancing)** | Notion `CDT No balancing...` | `old proofs/proof_old.tex` | <span class="badge-status badge-refuted">Refuted</span> | **Jaikumar's counterexample**: 0-paths with no corresponding 1-paths |
+| **4. Inductive Path-Variable Factoring** | Obsidian `Indcutive approach.md` | `old proofs/inductive_proof.tex` | <span class="badge-status badge-stuck">Stuck</span> | Conditioning breakdown: $\Delta_t$ depends on $x_{i_1}, \dots, x_{i_t}$, introducing inter-step correlation |
+| **5. Bottom-Up / Top-Open Matrix Protocols** | Notion `Hastads Base case proof` | `old proofs/bottom_open.tex`, `top_open.tex` | <span class="badge-status badge-partial">Partial</span> | Base case solved via KW rectangles ($M_F$), but composition / concatenation across depth encounters non-monochromatic leakage |
+
+---
+
+## Directory Navigation
+
+- [**Foundations & Preliminaries**](foundations/preliminaries.qmd): Definitions of DeMorgan formulae, random restrictions $\mathcal{R}_p$, Canonical Decision Trees (CDTs), and Håstad's base case.
+- [**Proof Approaches Catalog**](approaches/index.qmd): Detailed walkthroughs of all explored approaches with mathematical formulations and where the arguments break down.
+- [**Counterexamples & Hurdles**](counterexamples-and-hurdles/jaikumar-counterexample.qmd): In-depth autopsy of Jaikumar's counterexample and why subformula simplification $\neq$ CDT depth 1.
+- [**Working Manuscript Draft**](manuscript/master-draft.qmd): Compiled synthesis of the master paper draft (`contents.tex`).
+- [**Meeting Notes & Chronology**](meetings/index.qmd): Dated notes and transcripts from collaborative discussions.

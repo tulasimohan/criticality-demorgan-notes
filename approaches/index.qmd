@@ -1,0 +1,90 @@
+---
+title: "Taxonomy of Proof Approaches"
+subtitle: "In-depth breakdown of all 5 approaches tried across Notion, Obsidian, and Overleaf"
+format: html
+---
+
+## Overview
+
+This section catalogs every proof approach formulated across your notes, tagged with their mathematical mechanisms, current status, and known failure modes or open bottlenecks.
+
+---
+
+## 1. CDT with Simultaneous Balancing
+
+**Sources**: Notion (`New CDT.md`, `CDT with balancing.md`), Overleaf (`contents.tex`, lines 240–350).  
+**Status**: <span class="badge-status badge-active">Active</span>  
+**Key Idea**: 
+A primary flaw of naive Canonical Decision Trees is path asymmetry: a $0$-path in $F_1$ may explore variables without guaranteeing a corresponding $1$-path over the same variable set. The **Balancing** operation ensures that for every explored node, the tree is balanced so that both $0$ and $1$ outcomes explore symmetric sets of variables or terminate simultaneously.
+
+::: {.callout-note icon=true}
+### Simultaneous 0- and 1-Balancing
+Given a decision tree $T$, $\mathrm{Balance}(T)$ recursively aligns branches:
+- If a subformula simplifies to a constant under path $\pi$, redundant branches are pruned.
+- When merging $\mathrm{CDT}(F_1, \rho)$ with $\mathrm{CDT}(F_2, \rho \circ \pi)$, balancing is applied immediately *at the point of creation* rather than lazily when attached.
+:::
+
+**Current Hurdle**:  
+Tracking path variables $\mathrm{PathVars}(T)$ through multiple nested balancing steps complicates the inductive distribution under random restrictions $\mathcal{R}_p$.
+
+---
+
+## 2. Non-Inductive Structural Lemma (Blaming Bad Events on Subtrees)
+
+**Sources**: Notion (`New Proof.md`, `Rigorous proof.md`), Overleaf (`non-inductive proof.tex`).  
+**Status**: <span class="badge-status badge-active">Active</span>  
+**Key Idea**: 
+Rather than inducting step-by-step on $t$, we bound $\Pr[\mathrm{CDT}_{\mathrm{depth}}(F|_\rho) \ge t]$ globally:
+1. Partition the bad event into $\mathcal{E}(\bar{x}, a) = \{\rho : \mathrm{CDT}^{(a)}(F, \rho) = (x_{i_1}, \dots, x_{i_t})\}$.
+2. Blame each bad sequence on a **leaf-branching subtree** $(T, b)$.
+3. Factor the probability into $\mathcal{E}(T, b) = \mathcal{A}(T, b) \wedge \mathcal{B}(T, b)$, where $\mathcal{A}$ and $\mathcal{B}$ represent independent or quasi-independent boundary conditions.
+4. Apply Cauchy-Schwarz:
+   $$\Pr[\mathcal{E}(\bar{x}, a)] \le \sum_{(T,b)} \sqrt{\Pr[\mathcal{A}(T,b)] \cdot \Pr[\mathcal{B}(T,b)]}.$$
+
+**Current Hurdle**:  
+Summing over all possible leaf-branching tree topologies $(T,b)$ introduces combinatorial entropy that must be offset by the decay factor $p^t$. Tight control of the constant $\lambda$ requires bounding overlap between subtrees.
+
+---
+
+## 3. Naive CDT (No Balancing, No Tree Restriction)
+
+**Sources**: Notion (`CDT No balancing No tree restriction.md`), Overleaf (`old proofs/proof_old.tex`).  
+**Status**: <span class="badge-status badge-refuted">Refuted by Counterexample</span>  
+**Key Idea**:  
+Construct $\mathrm{CDT}(F_1 \vee F_2, \rho)$ by simply evaluating $F_1$, and on every $0$-leaf, appending $\mathrm{CDT}(F_2, \rho \circ \pi)$ without balancing.
+
+::: {.callout-important icon=true}
+### Why It Failed: Jaikumar's Counterexample
+Consider $F = (X \vee Y) \wedge \bar{Y}$. Under a restriction leaving variables unassigned, the naive construction queries $X$, and upon branches where $Y$ loses influence, the tree creates asymmetric paths that fail downward closure and break Cauchy-Schwarz factorization.
+:::
+
+---
+
+## 4. Inductive Approach via Path-Variable Factoring
+
+**Sources**: Obsidian (`Indcutive approach.md`, `New Inductive proof.md`), Overleaf (`old proofs/inductive_proof.tex`).  
+**Status**: <span class="badge-status badge-stuck">Stuck / Gap</span>  
+**Key Idea**:  
+Decompose path variables into left and right subformula segments:
+$$\mathrm{PathVars}_0(F, \rho, a) = (x_{i_1}, \dots, x_{i_s}, x_{i_{s+1}}, \dots, x_{i_t}).$$
+Assume the first $s$ variables come from $F_1$ and the remaining $t-s$ from $F_2$, and factor:
+$$\Pr[\mathcal{E}_t] = \sum_s \Pr[\mathcal{E}_{\mathrm{left}}(s)] \cdot \Pr[\mathcal{E}_{\mathrm{right}}(t-s) \mid \mathcal{E}_{\mathrm{left}}(s)].$$
+
+**Why It Got Stuck**:  
+The conditioning event $\Delta_t$ depends on the entire sequence of variables $x_{i_1}, \dots, x_{i_t}$. When unravelling the conditional probability:
+$$\Delta_{t-1} \text{ depends on } \ell_t \text{ and } x_{i_1}, \dots, x_{i_t},$$
+the conditioning introduces statistical dependence across restriction steps, preventing clean product factorization without an exponential loss.
+
+---
+
+## 5. Bottom-Up vs. Top-Open KW Protocol Matrix
+
+**Sources**: Notion (`Hastads Base case proof.md`), Overleaf (`old proofs/bottom_open.tex`, `old proofs/top_open.tex`, `old proofs/communication_game.tex`).  
+**Status**: <span class="badge-status badge-partial">Partial Success (Base Case Only)</span>  
+**Key Idea**:  
+Represent the formula as a communication game matrix $M_F$ with monochromatic rectangles $A_\ell \times B_\ell$. 
+- **Bottom-Open**: Opens the communication protocol starting from the leaves.
+- **Top-Open**: Opens the protocol starting from the root gate.
+
+**Outcome**:  
+Proves the base case ($t=1$) with optimal bound $O(p\sqrt{L})$. However, extending to $t \ge 2$ requires composing protocols across sequential queries, where rectangle monochromaticity degrades into non-monochromatic combinatorial mixtures.

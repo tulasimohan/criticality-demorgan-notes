@@ -1,0 +1,51 @@
+---
+title: "Working Manuscript Synthesis"
+subtitle: "Structured digest of contents.tex and non-inductive proof.tex"
+format: html
+---
+
+## Overview
+
+This document presents the mathematical exposition synthesized from the latest master Overleaf draft (`contents.tex`) and the structural proof draft (`non-inductive proof.tex`).
+
+---
+
+## 1. Canonical Decision Tree Construction with Balancing
+
+Given a DeMorgan formula $F$ over variable set $V$ and a restriction $\rho \in \{0, 1, *\}^V$, $\mathrm{CDT}(F, \rho)$ is defined recursively:
+
+### Base Cases
+1. If $F \equiv 0$ or $F \equiv 1$ under $\rho$, $\mathrm{CDT}(F, \rho)$ is a single leaf node labeled with the corresponding constant.
+2. If $F = \ell$ (a literal) and $\rho(\mathrm{var}(\ell)) = *$, $\mathrm{CDT}(F, \rho)$ queries $\mathrm{var}(\ell)$ with two child leaves $0$ and $1$.
+
+### Recursive Merging and Simultaneous Balancing
+Let $F = F_1 \vee F_2$:
+1. Recursively compute $T_1 = \mathrm{CDT}(F_1, \rho)$.
+2. For each leaf $u$ of $T_1$:
+   - Let $\pi_u$ denote the partial assignment corresponding to the path from the root of $T_1$ to $u$.
+   - If $T_1(u) = 1$, the OR gate is satisfied: the leaf remains labeled $1$.
+   - If $T_1(u) = 0$, replace leaf $u$ with $\mathrm{Balance}(\mathrm{CDT}(F_2, \rho \circ \pi_u))$.
+3. Apply global tree balancing $\mathrm{Balance}(T)$ to ensure symmetry between $0$-paths and $1$-paths.
+
+---
+
+## 2. Structural Lemma: Blaming the Event on Subtrees
+
+**Theorem (Structural Subtree Blame)**:  
+Let $F$ be a DeMorgan formula and $\rho \sim \mathcal{R}_p$. The bad event that $\mathrm{CDT}_{\mathrm{depth}}(F|_\rho) \ge t$ can be covered by a union of events indexed by leaf-branching binary trees $T$ with $t$ leaves:
+
+$$\Pr_{\rho \sim \mathcal{R}_p} [\mathrm{CDT}_{\mathrm{depth}}(F|_\rho) \ge t] \le \sum_{T \in \mathcal{T}_t} \sum_{b \in \{0,1\}^t} \Pr[\mathcal{E}(T, b)]$$
+
+where for each pair $(T,b)$:
+$$\mathcal{E}(T, b) = \mathcal{A}(T, b) \wedge \mathcal{B}(T, b)$$
+
+Here, $\mathcal{A}(T, b)$ enforces that the internal routing conditions of $T$ are satisfied, and $\mathcal{B}(T, b)$ enforces that all $t$ leaves simultaneously fall into the active restriction set ($*$).
+
+### Cauchy-Schwarz Bounding
+By applying Cauchy-Schwarz:
+$$\Pr[\mathcal{E}(T, b)] \le \sqrt{\Pr[\mathcal{A}(T, b)] \cdot \Pr[\mathcal{B}(T, b)]}$$
+
+Since $\Pr[\mathcal{B}(T, b)] \le p^t$ (each leaf variable must be unassigned by $\rho$), the probability scales as:
+$$\Pr[\mathrm{CDT}_{\mathrm{depth}}(F|_\rho) \ge t] \le p^{t/2} \sum_{T \in \mathcal{T}_t} \sqrt{\Pr[\mathcal{A}(T, b)]}$$
+
+The critical challenge is establishing that $\sum_{T} \sqrt{\Pr[\mathcal{A}(T,b)]} \le (O(\sqrt{L}))^t$.

@@ -1,0 +1,38 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Criticality of DeMorgan Formulae"
+  description: "Comprehensive Research Dossier, Proof Approaches, Counterexamples & Notes"
+  site-url: "https://tulasimohan.github.io/criticality-demorgan-notes/"
+  repo-url: "https://github.com/tulasimohan/criticality-demorgan-notes"
+  repo-actions: [issue]
+  navbar:
+    background: primary
+    left:
+      - href: index.qmd
+        text: Overview & Status
+      - href: foundations/preliminaries.qmd
+        text: Foundations
+      - href: approaches/index.qmd
+        text: Proof Approaches
+      - href: counterexamples-and-hurdles/jaikumar-counterexample.qmd
+        text: Counterexamples & Hurdles
+      - href: manuscript/master-draft.qmd
+        text: Working Manuscript
+      - href: meetings/index.qmd
+        text: Meeting Notes
+
+format:
+  html:
+    theme:
+      light: cosmo
+      dark: darkly
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    code-copy: true
+    smooth-scroll: true
+    html-math-method: mathjax

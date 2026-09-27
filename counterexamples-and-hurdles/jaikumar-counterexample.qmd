@@ -1,0 +1,60 @@
+---
+title: "Counterexamples & Theoretical Hurdles"
+subtitle: "An autopsy of known obstacles, counterexamples, and subtleties"
+format: html
+---
+
+## 1. Jaikumar's Counterexample
+
+**Source**: Notion (`Jaikumars counter example.md`), Correspondence with Jaikumar Radhakrishnan (JKR).
+
+### The Formula
+Consider the DeMorgan formula:
+$$F = (X \vee Y) \wedge \bar{Y}$$
+
+### The Failure of Naive CDTs
+When evaluating $F$ under a restriction $\rho$ where variables remain unassigned ($*$):
+1. In a naive CDT construction, one first queries $X$.
+2. If $X = 0$, the formula simplifies to $Y \wedge \bar{Y} \equiv 0$.
+3. If $X = 1$, the formula becomes $(1 \vee Y) \wedge \bar{Y} = 1 \wedge \bar{Y} = \bar{Y}$.
+4. Under naive concatenation, a path may branch on a variable that has *no remaining influence* on the output of the full formula, producing asymmetric paths:
+   - A $0$-path might explore $\{X, Y\}$, while the corresponding $1$-path explores a completely disjoint or asymmetric set of variables.
+   - This destroys the **downward closure** property essential for switching lemma style encoding arguments.
+
+### JKR's Proposed Ad-Hoc Repair
+> *"As we build our decision trees, we set variables and consider the remaining formula subject to the setting of variables under the current path. If at some point while building the decision tree, we notice that a variable $x$ has no influence on the final output, then set $x$ to $0$ in the formula. For the rest proceed as before, that is, implement the purple line with no collapsing."*
+
+This insight motivated the modern **simultaneous balancing algorithm** developed in `New CDT.md` and `contents.tex`.
+
+---
+
+## 2. Subformula Simplification vs. CDT Depth 1
+
+**Source**: Obsidian (`July 28 Criticality Meeting.md`).
+
+::: {.callout-warning icon=true}
+### Crucial Meeting Remark (July 28)
+A subformula simplifying to a single literal and its CDT having depth 1 are **not** the same thing!
+:::
+
+### Example
+Let:
+$$F = (x_1 \vee x_2) \wedge (x_3 \vee x_4)$$
+Under a restriction $\rho$, suppose the subformula $F_1 = (x_1 \vee x_2)$ simplifies to a literal $x_1$ (e.g., $x_2 \to 0$).
+However, the decision tree for $F$ must still evaluate the relation between $F_1$ and $F_2$:
+- $\mathrm{CDT}(F_1|_\rho)$ has depth 1.
+- But $\mathrm{CDT}(F|_\rho)$ depends on the outcome of $F_1$: if $x_1 = 0$, the AND gate evaluates to $0$ immediately; if $x_1 = 1$, it must proceed to evaluate $(x_3 \vee x_4)$.
+- Conflating literal reduction with decision tree termination leads to inaccurate depth accounting in inductive steps.
+
+---
+
+## 3. The Inter-Step Conditioning Barrier
+
+**Source**: Obsidian (`Indcutive approach.md`), Notion (`Criticality of DeMorgan formulae.md`).
+
+When expressing the probability of high CDT depth as a sum over path variables:
+$$\sum_{x_{i_1}, \dots, x_{i_t}} \sum_{\ell_1, \dots, \ell_t} \sqrt{\Pr[A_{F_{-i}} \mid \Delta_i] \cdot \Pr[B_{F_{-i}} \mid \Delta_i]}$$
+
+- The condition $\Delta_t$ depends on $(x_{i_1}, \dots, x_{i_t})$.
+- The prior condition $\Delta_{t-1}$ depends on $\ell_t$ and $(x_{i_1}, \dots, x_{i_{t-1}})$.
+- Because $\Delta_t$ and $\Delta_{t-1}$ share dependencies through the chosen variables, one **cannot factor** the expectation $\mathbb{E}[\cdot \mid \Delta_t]$ without accumulating cross-variable covariance terms.

@@ -1,0 +1,41 @@
+---
+title: "Meeting Notes & Collaborative Discussions"
+subtitle: "Chronology of discussions, insights, and action items"
+format: html
+---
+
+## 1. Meeting with PH (September 27, 2026)
+
+**Context**: Latest review session on status of DeMorgan Criticality proof approaches.
+
+### Agenda & Key Points:
+1. **Compilation of Approaches**: Unifying fragmented notes across Overleaf, Notion, and Obsidian into a single accessible reference.
+2. **Current Status of Non-Inductive Proof**:
+   - Leaf-branching tree decomposition remains the most promising path forward.
+   - Need to rigorously resolve the sum over topologies $\sum_{T} \sqrt{\Pr[\mathcal{A}(T,b)]}$.
+3. **Action Items**:
+   - Establish live web documentation accessible by collaborators.
+   - Tag all prior failed attempts with clear explanations of their failure modes (e.g., Jaikumar's counterexample, conditioning dependence).
+
+---
+
+## 2. Criticality Meeting (July 28)
+
+**Source**: Obsidian (`July 28 Criticality Meeting.md`).
+
+### Key Takeaway: Subformula Simplification vs. CDT Depth
+- A subformula simplifying to a single literal and its CDT having depth 1 are **not the same thing**.
+- Consider:
+  $$F = (x_1 \vee x_2) \wedge (x_3 \vee x_4)$$
+  If $x_2 = 0$, the subformula $F_1 = (x_1 \vee x_2)$ becomes $x_1$. 
+  Its CDT has depth 1. But for the full formula $F$, evaluating $x_1$ does not terminate evaluation if $x_1 = 1$; it forces exploration into $F_2$.
+- **Impact**: Any inductive hypothesis that assumes depth scales additively with subformula depth must account for the gate connective and whether the subformula's value determines the parent gate.
+
+---
+
+## 3. Discussion on Random Projections & Shrinkage
+
+**Source**: Obsidian (`Shrinkage under random projections.md`).
+
+- **Håstad [1998]**: Established $O(p^2)$ shrinkage under random restrictions for DeMorgan formulae, proving an $\tilde{\Omega}(n^3)$ formula size lower bound for Andreev's function.
+- **Connection to Criticality**: Proving $\Gamma(F) = O(p\sqrt{L})$ would give tight average sensitivity bounds, improving Fourier concentration and learning algorithms for DeMorgan formulae.
